@@ -1,65 +1,73 @@
 import Image from "next/image";
+import { ContactSection } from "@/components/home/contact-section";
 import {
+  ArrowRight,
   Award,
   BadgeCheck,
-  Beaker,
-  CakeSlice,
-  Cog,
-  Cpu,
-  CupSoda,
-  Leaf,
-  Layers3,
-  Milk,
+  Box,
+  Briefcase,
+  Building2,
+  CheckCircle2,
+  ClipboardList,
+  Clock3,
+  Factory,
+  Globe,
+  Handshake,
+  Layers,
   Package,
-  PencilRuler,
-  ShoppingBag,
+  Sparkles,
   ShieldCheck,
-  Tv,
   Truck,
-  Zap,
+  Users,
 } from "lucide-react";
 
 const trustStats = [
-  "25+ Years Experience",
-  "500+ Clients Served",
-  "ISO Certified",
-  "Bulk Production Ready",
+  { label: "25+ Years Experience", icon: Clock3 },
+  { label: "500+ Clients Served", icon: Users },
+  { label: "ISO Certified", icon: BadgeCheck },
+  { label: "Bulk Production Ready", icon: Factory },
 ];
 
 const homeProducts = [
   {
     name: "Plastic Rigid Sheets",
     description: "Durable rigid sheets built for high-performance industrial packaging.",
+    icon: Layers,
     image:
       "https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=1600&q=80",
   },
   {
     name: "Food Packaging Containers",
     description: "Hygienic food-grade containers engineered for freshness and safety.",
+    icon: Box,
     image:
       "https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=1600&q=80",
   },
   {
     name: "Laminated Packaging",
     description: "Multi-layer laminated formats for superior barrier protection needs.",
+    icon: Package,
     image:
       "https://images.unsplash.com/photo-1635865165118-917ed9e20936?auto=format&fit=crop&w=1600&q=80",
   },
   {
     name: "Dairy & Yogurt Containers",
     description: "Precision-molded dairy containers for clean filling and shelf appeal.",
+    icon: ShieldCheck,
     image:
       "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1600&q=80",
   },
   {
     name: "MAP & Retort Packaging",
     description: "Advanced packs optimized for extended shelf life and heat stability.",
+    icon: BadgeCheck,
     image:
       "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80",
   },
   {
     name: "Injection Moulded Containers",
     description: "Robust injection moulded containers for scalable industrial output.",
+    icon: Factory,
     image:
       "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80",
   },
@@ -70,49 +78,49 @@ const industries = [
     title: "Dairy",
     description:
       "Reliable dairy packaging designed for hygiene, freshness retention, and high-volume processing lines.",
-    icon: Milk,
+    icon: Box,
   },
   {
     title: "FMCG",
     description:
       "Scalable FMCG packaging formats built for speed, shelf impact, and consistent supply fulfillment.",
-    icon: Package,
+    icon: Briefcase,
   },
   {
     title: "Bakery",
     description:
       "Protective bakery packaging that maintains product integrity from production to point-of-sale display.",
-    icon: CakeSlice,
+    icon: BadgeCheck,
   },
   {
     title: "Food & Beverage",
     description:
       "Food-safe, performance-tested packaging systems suited for varied beverage and processed food applications.",
-    icon: CupSoda,
+    icon: Globe,
   },
   {
     title: "Retail",
     description:
       "Consumer-ready retail packaging crafted for durability, branding appeal, and efficient logistics handling.",
-    icon: ShoppingBag,
+    icon: Building2,
   },
   {
     title: "Pharmaceuticals",
     description:
       "Compliance-focused pharmaceutical packaging engineered for protection, traceability, and secure distribution.",
-    icon: Beaker,
+    icon: ShieldCheck,
   },
   {
     title: "Electronics",
     description:
       "Precision packaging solutions for electronics that reduce transit damage and improve component safety.",
-    icon: Tv,
+    icon: Layers,
   },
   {
     title: "Ready-to-Eat Food",
     description:
       "Convenient, durable packaging for ready-to-eat products with dependable sealing and shelf-life support.",
-    icon: BadgeCheck,
+    icon: Handshake,
   },
 ];
 
@@ -121,29 +129,29 @@ const whyChooseUsFeatures = [
     title: "Advanced Manufacturing Technology",
     description:
       "State-of-the-art production infrastructure ensures precision, consistency, and high-volume delivery for complex packaging requirements.",
-    icon: Cpu,
-    iconBoxClassName: "border-blue-200/70 bg-blue-50 text-blue-600",
+    icon: Factory,
+    iconBoxClassName: "border-orange-200/70 bg-orange-50 text-[#f26a21]",
   },
   {
     title: "Custom Packaging Design",
     description:
       "Our design specialists create tailored packaging formats aligned with your product, branding, and operational workflows.",
-    icon: PencilRuler,
-    iconBoxClassName: "border-purple-200/70 bg-purple-50 text-purple-600",
+    icon: ClipboardList,
+    iconBoxClassName: "border-orange-200/70 bg-orange-50 text-[#f26a21]",
   },
   {
     title: "Sustainable Materials",
     description:
       "Eco-conscious material choices and responsible sourcing help reduce environmental impact without compromising performance.",
-    icon: Leaf,
-    iconBoxClassName: "border-green-200/70 bg-green-50 text-green-600",
+    icon: Sparkles,
+    iconBoxClassName: "border-orange-200/70 bg-orange-50 text-[#f26a21]",
   },
   {
     title: "Global Quality Standards",
     description:
       "Strict quality controls and industry-aligned processes deliver dependable packaging trusted by clients across global markets.",
     icon: Award,
-    iconBoxClassName: "border-orange-200/70 bg-orange-50 text-orange-600",
+    iconBoxClassName: "border-orange-200/70 bg-orange-50 text-[#f26a21]",
   },
 ];
 
@@ -158,25 +166,25 @@ const manufacturingProcessSteps = [
     step: "02",
     title: "Extrusion",
     description: "Advanced extrusion process for optimal material properties.",
-    icon: Zap,
+    icon: Layers,
   },
   {
     step: "03",
     title: "Thermoforming",
     description: "Precision thermoforming for exact specifications.",
-    icon: Layers3,
+    icon: Factory,
   },
   {
     step: "04",
     title: "Injection Moulding",
     description: "High-precision injection moulding for complex shapes.",
-    icon: Cog,
+    icon: Briefcase,
   },
   {
     step: "05",
     title: "Quality Testing",
     description: "Rigorous quality control at every stage.",
-    icon: ShieldCheck,
+    icon: CheckCircle2,
   },
   {
     step: "06",
@@ -233,11 +241,13 @@ export function HomeSections() {
             <div className="grid gap-3 pt-2 sm:grid-cols-2">
               {trustStats.map((item) => (
                 <div
-                  key={item}
+                  key={item.label}
                   className="rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3 text-sm font-medium text-slate-800 shadow-sm transition-all duration-300 hover:border-[#2f8f83]/40 hover:shadow-md"
                 >
-                  <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[#2f8f83]" />
-                  {item}
+                  <span className="inline-flex items-center gap-2">
+                    <item.icon className="h-[18px] w-[18px] text-[#f26a21]" />
+                    {item.label}
+                  </span>
                 </div>
               ))}
             </div>
@@ -276,13 +286,18 @@ export function HomeSections() {
                   />
                 </div>
                 <div className="space-y-3 p-6">
-                  <h3 className="text-xl font-semibold text-slate-900">{product.name}</h3>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#f26a21]/10 text-[#f26a21]">
+                      <product.icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="text-xl font-semibold text-slate-900">{product.name}</h3>
+                  </div>
                   <p className="line-clamp-1 text-sm text-slate-600">{product.description}</p>
                   <button
                     type="button"
                     className="inline-flex items-center text-sm font-semibold text-[#f26a21] transition-colors duration-200 hover:text-[#2f8f83]"
                   >
-                    Learn More <span aria-hidden="true" className="ml-1">→</span>
+                    Learn More <ArrowRight className="ml-1 h-4 w-4" />
                   </button>
                 </div>
               </article>
@@ -367,7 +382,7 @@ export function HomeSections() {
 
       <section
         id="manufacturing-process"
-        className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden bg-gradient-to-br from-[#1450c8] via-[#1c57d1] to-[#0f3ea8] py-24 lg:py-28"
+        className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden bg-linear-to-br from-[#1450c8] via-[#1c57d1] to-[#0f3ea8] py-24 lg:py-28"
       >
         <div className="mx-auto w-full max-w-[1800px] space-y-16 px-6 md:px-10 xl:px-14">
           <div className="mx-auto max-w-2xl space-y-5 text-center">
@@ -409,6 +424,8 @@ export function HomeSections() {
           </div>
         </div>
       </section>
+
+      <ContactSection />
     </>
   );
 }

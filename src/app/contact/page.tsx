@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Mail, MapPin, MessageSquare, Phone, Users } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -60,46 +61,60 @@ export default function ContactPage() {
           <h2 className="mb-4 text-2xl font-semibold tracking-tight">Send an Enquiry</h2>
           <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-2">
-              <label htmlFor="contact-name" className="text-sm font-medium">
+              <label htmlFor="contact-name" className="inline-flex items-center gap-1.5 text-sm font-medium">
+                <Users className="h-4 w-4 text-[#f26a21]" />
                 Name
               </label>
-              <Input
-                id="contact-name"
-                placeholder="Your full name"
-                aria-invalid={Boolean(errors.name)}
-                {...register("name")}
-              />
+              <div className="relative">
+                <Users className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  id="contact-name"
+                  placeholder="Your full name"
+                  className="pl-9"
+                  aria-invalid={Boolean(errors.name)}
+                  {...register("name")}
+                />
+              </div>
               {errors.name ? (
                 <p className="text-sm text-destructive">{errors.name.message}</p>
               ) : null}
             </div>
 
             <div className="grid gap-2">
-              <label htmlFor="contact-phone" className="text-sm font-medium">
+              <label htmlFor="contact-phone" className="inline-flex items-center gap-1.5 text-sm font-medium">
+                <Phone className="h-4 w-4 text-[#f26a21]" />
                 Phone
               </label>
-              <Input
-                id="contact-phone"
-                placeholder="+91 98765 43210"
-                aria-invalid={Boolean(errors.phone)}
-                {...register("phone")}
-              />
+              <div className="relative">
+                <Phone className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  id="contact-phone"
+                  placeholder="+91 98765 43210"
+                  className="pl-9"
+                  aria-invalid={Boolean(errors.phone)}
+                  {...register("phone")}
+                />
+              </div>
               {errors.phone ? (
                 <p className="text-sm text-destructive">{errors.phone.message}</p>
               ) : null}
             </div>
 
             <div className="grid gap-2">
-              <label htmlFor="contact-message" className="text-sm font-medium">
+              <label htmlFor="contact-message" className="inline-flex items-center gap-1.5 text-sm font-medium">
+                <MessageSquare className="h-4 w-4 text-[#f26a21]" />
                 Message
               </label>
-              <Textarea
-                id="contact-message"
-                placeholder="Share your product requirements, quantity, and timeline."
-                className="min-h-28"
-                aria-invalid={Boolean(errors.message)}
-                {...register("message")}
-              />
+              <div className="relative">
+                <MessageSquare className="pointer-events-none absolute top-3 left-3 h-4 w-4 text-muted-foreground" />
+                <Textarea
+                  id="contact-message"
+                  placeholder="Share your product requirements, quantity, and timeline."
+                  className="min-h-28 pl-9"
+                  aria-invalid={Boolean(errors.message)}
+                  {...register("message")}
+                />
+              </div>
               {errors.message ? (
                 <p className="text-sm text-destructive">{errors.message.message}</p>
               ) : null}
@@ -118,7 +133,10 @@ export default function ContactPage() {
             <h2 className="mb-4 text-2xl font-semibold tracking-tight">Company Info</h2>
             <div className="grid gap-4 text-sm">
               <div>
-                <p className="font-semibold text-foreground">Address</p>
+                <p className="inline-flex items-center gap-2 font-semibold text-foreground">
+                  <MapPin className="h-4 w-4 text-[#f26a21]" />
+                  Address
+                </p>
                 <p className="text-muted-foreground">
                   GDK Packaging Pvt. Ltd.
                   <br />
@@ -128,13 +146,19 @@ export default function ContactPage() {
                 </p>
               </div>
               <div>
-                <p className="font-semibold text-foreground">Phone</p>
+                <p className="inline-flex items-center gap-2 font-semibold text-foreground">
+                  <Phone className="h-4 w-4 text-[#f26a21]" />
+                  Phone
+                </p>
                 <a href="tel:+919876543210" className="text-muted-foreground hover:text-primary">
                   +91 98765 43210
                 </a>
               </div>
               <div>
-                <p className="font-semibold text-foreground">Email</p>
+                <p className="inline-flex items-center gap-2 font-semibold text-foreground">
+                  <Mail className="h-4 w-4 text-[#f26a21]" />
+                  Email
+                </p>
                 <a
                   href="mailto:sales@gdkpackaging.com"
                   className="text-muted-foreground hover:text-primary"

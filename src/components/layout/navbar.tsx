@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Heart, Menu, Search, X } from "lucide-react";
+import { ChevronDown, Globe, Package, Sparkles, Star } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -15,12 +16,72 @@ const navLinks = [
   { href: "/#why-choose-us", hash: "#why-choose-us", label: "Why Us" },
 ];
 
+const aboutHighlights = [
+  "About GDK Packaging",
+  "Trusted manufacturer",
+  "25+ Years Experience",
+  "ISO Standards",
+];
+
+const aboutMegaCards = [
+  {
+    href: "/about",
+    title: "GDK Solution",
+    description: "Discover our complete packaging capabilities and engineered product line.",
+    icon: Sparkles,
+  },
+  {
+    href: "/about#kb-ropes",
+    title: "K.B. Ropes Pvt Ltd",
+    description: "Explore our group strength and the extended manufacturing ecosystem.",
+    icon: Globe,
+  },
+  {
+    href: "/about#vision-mission",
+    title: "Vision & Mission",
+    description: "Read the principles guiding quality, innovation, and long-term partnerships.",
+    icon: Star,
+  },
+];
+
+const productMegaCategories = [
+  {
+    key: "esd-trays",
+    title: "ESD Trays",
+    description: "Electrostatic-safe trays engineered for sensitive electronics handling.",
+    icon: Package,
+    items: ["Conductive Trays", "Anti Static Trays", "PCB Trays"],
+  },
+  {
+    key: "thermoforming",
+    title: "Thermoforming",
+    description: "High-precision thermoformed packaging for food and industrial products.",
+    icon: Globe,
+    items: ["PP Containers", "PET Containers", "IML Sweet Box", "Food Grade Trays", "Custom Molds"],
+  },
+  {
+    key: "printed-products",
+    title: "Printed Products",
+    description: "Premium print-finish packaging solutions for brand-forward applications.",
+    icon: Sparkles,
+    items: ["Printed Boxes", "Printed Films", "Labels", "Branding Sleeves"],
+  },
+] as const;
+
 type NavbarProps = {
   overlayOnTop?: boolean;
 };
 
 export function Navbar({ overlayOnTop = false }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
+  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
+  const [activeMobileProductKey, setActiveMobileProductKey] = useState<
+    (typeof productMegaCategories)[number]["key"] | null
+  >(null);
+  const [activeDesktopProductKey, setActiveDesktopProductKey] = useState<
+    (typeof productMegaCategories)[number]["key"]
+  >("thermoforming");
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
 
@@ -102,7 +163,17 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
 
   const isRouteActive = (hash: string) => activeSection === hash.replace("#", "");
 
-  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setIsMobileAboutOpen(false);
+    setIsMobileProductsOpen(false);
+    setActiveMobileProductKey(null);
+  };
+
+  const activeDesktopProductCategory =
+    productMegaCategories.find((category) => category.key === activeDesktopProductKey) ??
+    productMegaCategories[1];
+
   return (
     <header
       className={cn(
@@ -115,55 +186,193 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
           "mx-auto flex h-[72px] w-full max-w-[1450px] items-center justify-between rounded-full px-4 backdrop-blur-2xl transition-all duration-300 sm:px-6 lg:px-7",
           scrolled
             ? "border border-slate-200/85 bg-white/95 shadow-[0_16px_36px_rgba(15,23,42,0.12)]"
-            : "border border-white/28 bg-[#06162f]/44 shadow-[0_24px_60px_rgba(2,8,23,0.34)]"
+            : "border border-slate-200 bg-white/85 shadow-sm backdrop-blur-xl"
         )}
       >
-        <Link
-          href="/#home"
-          className={cn(
-            "inline-flex h-11 items-center gap-3 text-base font-semibold tracking-tight sm:text-lg transition-colors duration-300",
-            scrolled ? "text-slate-900" : "text-white"
-          )}
-          onClick={closeMobileMenu}
-        >
-          <span className="inline-flex size-10 items-center justify-center rounded-xl border border-[#f26a21]/70 bg-[#f26a21]/14 text-sm font-extrabold tracking-wider text-[#f26a21] shadow-[0_12px_30px_rgba(242,106,33,0.38)]">
-            GDK
-          </span>
-          <span
-            className={cn(
-              "text-[0.95em] leading-none transition-colors duration-300",
-              scrolled ? "text-slate-900" : "text-white"
-            )}
-          >
-            Packaging
-          </span>
+        <Link href="/#home" className="flex items-center" onClick={closeMobileMenu}>
+          <Image
+            src="/logo-white.png"
+            alt="GDK Packaging"
+            width={220}
+            height={60}
+            className="h-10 w-auto object-contain drop-shadow-[0_1px_2px_rgba(15,23,42,0.45)] lg:h-11"
+            priority
+          />
         </Link>
 
         <div className="hidden h-11 flex-1 items-center justify-center gap-2 lg:flex">
           {navLinks.map((link) => {
             const isActive = isRouteActive(link.hash);
+            const isAboutLink = link.label === "About";
+            const isProductsLink = link.label === "Products";
             return (
               <div key={link.href} className="group relative">
-                <Link
-                  href={link.href}
-                  aria-current={isActive ? "page" : undefined}
-                  onClick={() => {
-                    setActiveSection(link.hash.replace("#", ""));
-                    closeMobileMenu();
-                  }}
-                  className={cn(
-                    "relative inline-flex h-10 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
-                    scrolled
-                      ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                      : "text-white/95 hover:bg-white/16 hover:text-white",
-                    isActive &&
-                      (scrolled
-                        ? "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]"
-                        : "bg-white/14 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.18)]")
-                  )}
-                >
-                  {link.label}
-                </Link>
+                {isAboutLink ? (
+                  <>
+                    <Link
+                      href={link.href}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={() => {
+                        setActiveSection(link.hash.replace("#", ""));
+                        closeMobileMenu();
+                      }}
+                      className={cn(
+                        "relative inline-flex h-10 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
+                        scrolled
+                          ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                          : "text-slate-800 hover:bg-slate-100 hover:text-slate-900",
+                        isActive &&
+                          (scrolled
+                            ? "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]"
+                            : "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]")
+                      )}
+                    >
+                      {link.label}
+                      <ChevronDown className="size-3.5 transition-transform duration-300 group-hover:rotate-180" />
+                    </Link>
+                    <div className="pointer-events-none absolute left-1/2 top-full z-40 w-[720px] -translate-x-1/2 pt-4">
+                      <div className="translate-y-2 scale-[0.98] rounded-2xl border border-slate-200 bg-white p-6 opacity-0 shadow-xl transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
+                        <div className="grid grid-cols-[1fr_1.6fr] gap-6">
+                          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#f26a21]">
+                              About GDK
+                            </p>
+                            <ul className="mt-3 space-y-2">
+                              {aboutHighlights.map((item) => (
+                                <li key={item} className="text-sm font-medium text-slate-800">
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                            <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                              Premium packaging partner delivering precision manufacturing with
+                              consistency, compliance, and scale.
+                            </p>
+                          </div>
+                          <div className="grid grid-cols-1 gap-3">
+                            {aboutMegaCards.map((card) => (
+                              <Link
+                                key={card.title}
+                                href={card.href}
+                                className="group/card flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f26a21] hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]"
+                              >
+                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-[#f26a21] to-[#c44f12] text-white">
+                                  <card.icon className="h-5 w-5" />
+                                </div>
+                                <div>
+                                  <p className="text-sm font-semibold text-slate-900">{card.title}</p>
+                                  <p className="mt-1 text-xs leading-relaxed text-slate-600">
+                                    {card.description}
+                                  </p>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : isProductsLink ? (
+                  <>
+                    <Link
+                      href={link.href}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={() => {
+                        setActiveSection(link.hash.replace("#", ""));
+                        closeMobileMenu();
+                      }}
+                      className={cn(
+                        "relative inline-flex h-10 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
+                        scrolled
+                          ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                          : "text-slate-800 hover:bg-slate-100 hover:text-slate-900",
+                        isActive &&
+                          (scrolled
+                            ? "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]"
+                            : "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]")
+                      )}
+                    >
+                      {link.label}
+                      <ChevronDown className="size-3.5 transition-transform duration-300 group-hover:rotate-180" />
+                    </Link>
+                    <div className="pointer-events-none absolute left-1/2 top-full z-40 w-[860px] -translate-x-1/2 pt-4">
+                      <div className="translate-y-2 scale-[0.98] rounded-2xl border border-slate-200 bg-white p-6 opacity-0 shadow-xl transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
+                        <div className="grid grid-cols-[1.05fr_1fr] gap-6">
+                          <div className="grid grid-cols-1 gap-3">
+                            {productMegaCategories.map((category) => {
+                              const isCategoryActive = activeDesktopProductKey === category.key;
+                              return (
+                                <button
+                                  key={category.key}
+                                  type="button"
+                                  onMouseEnter={() => setActiveDesktopProductKey(category.key)}
+                                  onFocus={() => setActiveDesktopProductKey(category.key)}
+                                  className={cn(
+                                    "group/category flex items-start gap-3 rounded-2xl border bg-white p-3 text-left transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]",
+                                    isCategoryActive
+                                      ? "border-[#f26a21] shadow-[0_10px_24px_rgba(242,106,33,0.2)]"
+                                      : "border-slate-200 hover:border-[#f26a21]/70"
+                                  )}
+                                >
+                                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-slate-100">
+                                    <category.icon className="h-6 w-6 text-[#f26a21]" />
+                                  </div>
+                                  <div>
+                                    <p className="text-sm font-semibold text-slate-900">{category.title}</p>
+                                    <p className="mt-1 text-xs leading-relaxed text-slate-600">
+                                      {category.description}
+                                    </p>
+                                  </div>
+                                </button>
+                              );
+                            })}
+                          </div>
+                          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#f26a21]">
+                              {activeDesktopProductCategory.title}
+                            </p>
+                            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                              Product sub-categories crafted for performance, consistency, and scalable
+                              manufacturing.
+                            </p>
+                            <div className="mt-4 grid grid-cols-1 gap-2">
+                              {activeDesktopProductCategory.items.map((item) => (
+                                <Link
+                                  key={item}
+                                  href="/products"
+                                  className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition-all duration-200 hover:border-[#f26a21] hover:text-[#f26a21]"
+                                >
+                                  {item}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <Link
+                    href={link.href}
+                    aria-current={isActive ? "page" : undefined}
+                    onClick={() => {
+                      setActiveSection(link.hash.replace("#", ""));
+                      closeMobileMenu();
+                    }}
+                    className={cn(
+                      "relative inline-flex h-10 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
+                      scrolled
+                        ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                        : "text-slate-800 hover:bg-slate-100 hover:text-slate-900",
+                      isActive &&
+                        (scrolled
+                          ? "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]"
+                          : "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]")
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                )}
               </div>
             );
           })}
@@ -178,10 +387,10 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
               "inline-flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-0.5",
               scrolled
                 ? "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-                : "border border-white/35 bg-white/12 text-white/95 hover:border-white/50 hover:bg-white/20 hover:text-white"
+                : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
             )}
           >
-            <Search className="size-4 shrink-0" />
+            <Globe className="size-4 shrink-0" />
           </button>
           <button
             type="button"
@@ -191,10 +400,10 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
               "inline-flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-0.5",
               scrolled
                 ? "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-                : "border border-white/35 bg-white/12 text-white/95 hover:border-white/50 hover:bg-white/20 hover:text-white"
+                : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
             )}
           >
-            <Heart className="size-4 shrink-0" />
+            <Star className="size-4 shrink-0" />
           </button>
           <Button
             asChild
@@ -218,10 +427,10 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
               "rounded-full transition-all duration-300",
               scrolled
                 ? "border border-slate-200 bg-white text-slate-800 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-                : "border border-white/30 bg-white/12 text-white hover:border-white/45 hover:bg-white/20 hover:text-white"
+                : "border border-slate-200 bg-white text-slate-800 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
             )}
           >
-            {isMobileMenuOpen ? <X /> : <Menu />}
+            <span className="px-1 text-xs font-semibold">{isMobileMenuOpen ? "Close" : "Menu"}</span>
           </Button>
         </div>
       </nav>
@@ -232,37 +441,206 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
             "mx-auto mt-3 w-full max-w-[1450px] rounded-[28px] px-4 py-4 backdrop-blur-2xl transition-all duration-300 md:hidden",
             scrolled
               ? "border border-slate-200/85 bg-white/95 shadow-[0_16px_36px_rgba(15,23,42,0.12)]"
-              : "border border-white/30 bg-[#06162f]/90 shadow-[0_22px_52px_rgba(2,8,23,0.4)]"
+              : "border border-slate-200 bg-white/95 shadow-sm"
           )}
         >
           <div className="flex flex-col gap-2">
             {navLinks.map((link) => {
               const isActive = isRouteActive(link.hash);
+              const isAboutLink = link.label === "About";
+              const isProductsLink = link.label === "Products";
               return (
                 <div
                   key={link.href}
                   className={cn(
                     "rounded-2xl p-1 transition-colors duration-300",
-                    scrolled ? "border border-slate-200" : "border border-white/15"
+                    "border border-slate-200"
                   )}
                 >
-                  <Link
-                    href={link.href}
-                    aria-current={isActive ? "page" : undefined}
-                    className={cn(
-                      "block rounded-xl px-3 py-2 text-sm font-medium transition-colors duration-200",
-                      scrolled
-                        ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                        : "text-white/95 hover:bg-white/16 hover:text-white",
-                      isActive && (scrolled ? "bg-slate-100 text-slate-900" : "bg-white/14 text-white")
-                    )}
-                    onClick={() => {
-                      setActiveSection(link.hash.replace("#", ""));
-                      closeMobileMenu();
-                    }}
-                  >
-                    {link.label}
-                  </Link>
+                  {isAboutLink ? (
+                    <div>
+                      <button
+                        type="button"
+                        aria-expanded={isMobileAboutOpen}
+                        className={cn(
+                          "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-medium transition-colors duration-200",
+                          scrolled
+                            ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                            : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
+                          isActive &&
+                            "bg-slate-100 text-slate-900"
+                        )}
+                        onClick={() => setIsMobileAboutOpen((previous) => !previous)}
+                      >
+                        <span>About</span>
+                        <ChevronDown
+                          className={cn(
+                            "size-4 transition-transform duration-300",
+                            isMobileAboutOpen ? "rotate-180" : ""
+                          )}
+                        />
+                      </button>
+                      <div
+                        className={cn(
+                          "grid overflow-hidden px-2 transition-all duration-300",
+                          isMobileAboutOpen ? "mt-2 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                        )}
+                      >
+                        <div className="min-h-0">
+                          <div
+                            className={cn(
+                              "space-y-1 rounded-xl border p-2",
+                              "border-slate-200 bg-slate-50"
+                            )}
+                          >
+                            {aboutMegaCards.map((card) => (
+                              <Link
+                                key={card.title}
+                                href={card.href}
+                                className={cn(
+                                  "block rounded-lg px-3 py-2 text-xs font-medium transition-colors duration-200",
+                                  scrolled
+                                    ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                                )}
+                                onClick={() => {
+                                  setActiveSection("about");
+                                  closeMobileMenu();
+                                }}
+                              >
+                                {card.title}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : isProductsLink ? (
+                    <div>
+                      <button
+                        type="button"
+                        aria-expanded={isMobileProductsOpen}
+                        className={cn(
+                          "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-medium transition-colors duration-200",
+                          scrolled
+                            ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                            : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
+                          isActive &&
+                            "bg-slate-100 text-slate-900"
+                        )}
+                        onClick={() => setIsMobileProductsOpen((previous) => !previous)}
+                      >
+                        <span>Products</span>
+                        <ChevronDown
+                          className={cn(
+                            "size-4 transition-transform duration-300",
+                            isMobileProductsOpen ? "rotate-180" : ""
+                          )}
+                        />
+                      </button>
+                      <div
+                        className={cn(
+                          "grid overflow-hidden px-2 transition-all duration-300",
+                          isMobileProductsOpen
+                            ? "mt-2 grid-rows-[1fr] opacity-100"
+                            : "grid-rows-[0fr] opacity-0"
+                        )}
+                      >
+                        <div className="min-h-0">
+                          <div
+                            className={cn(
+                              "space-y-2 rounded-xl border p-2",
+                              "border-slate-200 bg-slate-50"
+                            )}
+                          >
+                            {productMegaCategories.map((category) => {
+                              const isCategoryOpen = activeMobileProductKey === category.key;
+                              return (
+                                <div
+                                  key={category.key}
+                                  className={cn(
+                                    "rounded-lg border transition-colors duration-200",
+                                    "border-slate-200 bg-white"
+                                  )}
+                                >
+                                  <button
+                                    type="button"
+                                    className={cn(
+                                      "flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs font-semibold transition-colors duration-200",
+                                      scrolled
+                                        ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                                        : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
+                                      isCategoryOpen && "bg-slate-100 text-slate-900"
+                                    )}
+                                    onClick={() =>
+                                      setActiveMobileProductKey((previous) =>
+                                        previous === category.key ? null : category.key
+                                      )
+                                    }
+                                  >
+                                    <span>{category.title}</span>
+                                    <ChevronDown
+                                      className={cn(
+                                        "size-3.5 transition-transform duration-300",
+                                        isCategoryOpen ? "rotate-180" : ""
+                                      )}
+                                    />
+                                  </button>
+                                  <div
+                                    className={cn(
+                                      "grid overflow-hidden px-2 transition-all duration-300",
+                                      isCategoryOpen
+                                        ? "pb-2 grid-rows-[1fr] opacity-100"
+                                        : "grid-rows-[0fr] opacity-0"
+                                    )}
+                                  >
+                                    <div className="min-h-0 space-y-1">
+                                      {category.items.map((item) => (
+                                        <Link
+                                          key={item}
+                                          href="/products"
+                                          className={cn(
+                                            "block rounded-md px-2 py-1.5 text-xs font-medium transition-colors duration-200",
+                                            scrolled
+                                              ? "text-slate-600 hover:bg-slate-100 hover:text-[#f26a21]"
+                                              : "text-slate-600 hover:bg-slate-100 hover:text-[#f26a21]"
+                                          )}
+                                          onClick={() => {
+                                            setActiveSection("products");
+                                            closeMobileMenu();
+                                          }}
+                                        >
+                                          {item}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "block rounded-xl px-3 py-2 text-sm font-medium transition-colors duration-200",
+                        scrolled
+                          ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                          : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
+                        isActive && "bg-slate-100 text-slate-900"
+                      )}
+                      onClick={() => {
+                        setActiveSection(link.hash.replace("#", ""));
+                        closeMobileMenu();
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </div>
               );
             })}
@@ -274,10 +652,10 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                   "inline-flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200",
                   scrolled
                     ? "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50 hover:text-slate-900"
-                    : "border border-white/35 bg-white/14 text-white/95 hover:bg-white/22 hover:text-white"
+                    : "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50 hover:text-slate-900"
                 )}
               >
-                <Search className="size-4" />
+                <Globe className="size-4" />
               </button>
               <button
                 type="button"
@@ -286,10 +664,10 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                   "inline-flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200",
                   scrolled
                     ? "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50 hover:text-slate-900"
-                    : "border border-white/35 bg-white/14 text-white/95 hover:bg-white/22 hover:text-white"
+                    : "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50 hover:text-slate-900"
                 )}
               >
-                <Heart className="size-4" />
+                <Star className="size-4" />
               </button>
               <Link
                 href="/#contact"

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Box, Package, ShieldCheck, Truck } from "lucide-react";
+import { ArrowRight, Box, Globe, Package, ShieldCheck, Truck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,9 +9,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const trustStats = [
-  { value: "500+", label: "Bulk Orders Monthly" },
-  { value: "24-48h", label: "Fast Dispatch" },
-  { value: "Pan India", label: "Supply Coverage" },
+  { value: "500+", label: "Bulk Orders Monthly", icon: Package },
+  { value: "24-48h", label: "Fast Dispatch", icon: Truck },
+  { value: "Pan India", label: "Supply Coverage", icon: Globe },
 ];
 
 const productRows = [
@@ -47,7 +47,7 @@ const productRows = [
 
 export function Hero() {
   return (
-    <section className="group relative min-h-screen overflow-hidden px-6 pt-24 pb-12 sm:px-8 sm:pt-28 lg:px-10 lg:pt-32">
+    <section className="group relative min-h-screen overflow-hidden bg-linear-to-br from-white via-slate-50 to-orange-50 px-6 pt-24 pb-12 sm:px-8 sm:pt-28 lg:px-10 lg:pt-32">
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2400&q=80"
@@ -55,31 +55,27 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
+          className="object-cover object-center opacity-100 brightness-[0.95] contrast-[1.08] saturate-[1.05] transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
         />
       </div>
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-b from-[#031227]/92 via-[#031227]/52 to-[#02060f]/76" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-r from-[#06162f]/88 via-[#06162f]/44 to-[#06162f]/60" />
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-0 w-[58%] bg-linear-to-r from-[#041225]/72 via-[#041225]/48 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-56 bg-linear-to-t from-[#030813]/95 to-transparent" />
-      <div className="pointer-events-none absolute -left-20 top-24 z-0 h-72 w-72 rounded-full bg-[#1450c8]/22 blur-3xl" />
-      <div className="pointer-events-none absolute -right-14 bottom-20 z-0 h-72 w-72 rounded-full bg-[#f26a21]/20 blur-3xl" />
-      <div className="pointer-events-none absolute left-[12%] top-[28%] z-0 h-2.5 w-2.5 rounded-full bg-white/65 shadow-[0_0_24px_rgba(255,255,255,0.8)] motion-safe:animate-pulse" />
-      <div className="pointer-events-none absolute right-[22%] top-[22%] z-0 h-2 w-2 rounded-full bg-[#f26a21]/80 shadow-[0_0_20px_rgba(242,106,33,0.75)] motion-safe:animate-pulse" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-white/38 backdrop-blur-[0.5px]" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-br from-white/52 via-white/26 to-white/40" />
+      <div className="pointer-events-none absolute -left-20 top-24 z-0 h-72 w-72 rounded-full bg-[#1450c8]/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-14 bottom-20 z-0 h-72 w-72 rounded-full bg-[#f26a21]/12 blur-3xl" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-[1450px] items-center gap-12 pt-2 lg:-translate-y-[10px] lg:grid-cols-[1fr_520px] lg:gap-16 lg:pt-4">
         <div className="max-w-[600px] space-y-8 motion-safe:animate-[fade-in_0.7s_ease-out]">
-          <div className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[11px] font-semibold tracking-[0.14em] text-white/92 uppercase backdrop-blur-md">
+          <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.14em] text-slate-700 uppercase shadow-[0_10px_24px_rgba(15,23,42,0.1)]">
             Trusted Packaging Manufacturer Since 2012
           </div>
 
-          <h1 className="text-shadow-[0_2px_14px_rgba(0,0,0,0.45)] text-[2.4rem] leading-[1.03] font-black tracking-tight text-white sm:text-[3rem] lg:text-[4.05rem]">
+          <h1 className="text-[2.4rem] leading-[1.03] font-black tracking-tight text-slate-950 sm:text-[3rem] lg:text-[4.05rem]">
             Modern Packaging
             <br />
             Built for <span className="text-[#f26a21]">Growth</span>
           </h1>
 
-          <p className="max-w-[60ch] text-base leading-7 text-white/88 sm:text-lg sm:leading-8">
+          <p className="max-w-[60ch] text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
             High-quality corrugated boxes, films, tapes and custom industrial
             packaging solutions for modern businesses.
           </p>
@@ -102,14 +98,14 @@ export function Hero() {
               asChild
               variant="outline"
               size="lg"
-              className="group/quote rounded-full border-white/45 bg-white/10 px-7 text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/70 hover:bg-white/20 hover:text-white"
+              className="group/quote rounded-full border-slate-300 bg-white px-7 text-slate-800 transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900"
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 text-white! no-underline hover:text-white!"
+                className="inline-flex items-center justify-center gap-2 text-slate-800! no-underline hover:text-slate-900!"
               >
-                <span className="text-white!">Get Quote</span>
-                <ArrowRight className="size-4 text-white transition-transform duration-300 group-hover/quote:translate-x-1" />
+                <span className="text-slate-800!">Get Quote</span>
+                <ArrowRight className="size-4 text-slate-700 transition-transform duration-300 group-hover/quote:translate-x-1" />
               </Link>
             </Button>
           </div>
@@ -118,20 +114,23 @@ export function Hero() {
             {trustStats.map((stat, index) => (
               <Card
                 key={stat.label}
-                className="border-white/30 bg-slate-900/35 shadow-[0_12px_30px_rgba(2,8,23,0.28)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/45 hover:bg-slate-900/65"
+                className="border-slate-200 bg-white/88 shadow-md backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:bg-white"
                 style={{ animationDelay: `${index * 90}ms` }}
               >
                 <CardContent className="px-4 py-4">
-                  <p className="text-lg font-extrabold text-white">{stat.value}</p>
-                  <p className="text-xs text-white/72">{stat.label}</p>
+                  <span className="mb-2 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#f26a21]/10 text-[#f26a21]">
+                    <stat.icon className="h-[18px] w-[18px]" />
+                  </span>
+                  <p className="text-lg font-extrabold text-slate-900">{stat.value}</p>
+                  <p className="text-xs text-slate-500">{stat.label}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
 
-        <Card className="relative mx-auto w-full max-w-[520px] border-white/30 bg-white/14 p-2.5 shadow-[0_30px_90px_rgba(2,8,23,0.45)] backdrop-blur-2xl transition-all duration-500 hover:-translate-y-1">
-          <CardContent className="rounded-[22px] border border-slate-200/70 bg-[#f8fafc]/95 p-3.5">
+        <Card className="relative mx-auto w-full max-w-[520px] border-slate-200 bg-white p-2.5 shadow-xl transition-all duration-500 hover:-translate-y-1">
+          <CardContent className="rounded-[22px] border border-slate-200/80 bg-white p-3.5">
             <CardHeader className="space-y-2 p-0">
               <CardTitle className="text-xl font-bold tracking-tight text-slate-900">
                 Premium Product Range
@@ -146,7 +145,7 @@ export function Hero() {
               {productRows.map((item) => (
                 <div
                   key={item.title}
-                  className="group/row flex items-start justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-3.5 py-2.5 shadow-[0_8px_20px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_16px_26px_rgba(15,23,42,0.1)]"
+                  className="group/row flex items-start justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_16px_26px_rgba(15,23,42,0.08)]"
                 >
                   <div className="flex min-w-0 items-start gap-3">
                     <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#06162f]/8 text-[#1450c8]">

@@ -1,130 +1,219 @@
 import Link from "next/link";
-import { Briefcase, Camera, Mail, MapPin, Phone, Send } from "lucide-react";
+import Image from "next/image";
+import {
+  ArrowRight,
+  Briefcase,
+  Globe,
+  Layers,
+  Mail,
+  MapPin,
+  Package,
+  Phone,
+} from "lucide-react";
 
 const quickLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/products", label: "Products" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#about", label: "About" },
+  { href: "/#products", label: "Products" },
+  { href: "/#industries", label: "Industries" },
+  { href: "/#contact", label: "Contact" },
 ];
 
-const productLinks = [
-  { href: "/products", label: "LDPE Bags" },
-  { href: "/products", label: "HDPE Rolls" },
-  { href: "/products", label: "Packaging Films" },
-  { href: "/products", label: "Industrial Packaging" },
+const products = [
+  { href: "/#products", label: "LDPE Bags" },
+  { href: "/#products", label: "HDPE Rolls" },
+  { href: "/#products", label: "Packaging Films" },
+  { href: "/#products", label: "Industrial Packaging" },
+];
+
+const companyLinks = [
+  { href: "/", label: "Gdk Solutions" },
+  { href: "/", label: "K.B.Ropes Pvt Ltd" },
+  { href: "/#contact", label: "Enquiry" },
+];
+
+const legalLinks = [
+  { href: "/", label: "Privacy" },
+  { href: "/", label: "Terms" },
+  { href: "/", label: "Sitemap" },
 ];
 
 const socialLinks = [
-  { href: "#", label: "Twitter", icon: Send },
-  { href: "#", label: "LinkedIn", icon: Briefcase },
-  { href: "#", label: "Instagram", icon: Camera },
+  { href: "https://www.facebook.com", label: "Facebook", icon: Globe },
+  { href: "https://www.instagram.com", label: "Instagram", icon: Globe },
+  { href: "https://www.linkedin.com", label: "LinkedIn", icon: Globe },
 ];
 
 export function Footer() {
   return (
-    <footer
-      id="contact"
-      className="mt-auto border-t border-white/15 bg-[#12171c] text-slate-100"
-      aria-label="Site footer"
-    >
-      <div className="mx-auto grid w-full max-w-7xl gap-y-12 px-6 py-12 sm:px-8 md:gap-x-12 lg:grid-cols-4 lg:gap-x-14 lg:px-10 lg:py-14">
-        <div className="space-y-6">
-          <Link href="/" className="inline-flex items-center gap-3">
-            <span className="inline-flex h-10 min-w-10 items-center justify-center rounded-md border border-[#f26a21]/45 bg-[#f26a21]/10 px-2 text-sm font-extrabold tracking-[0.18em] text-[#f26a21]">
-              GDK
-            </span>
-            <span className="text-base font-semibold tracking-tight text-white">Packaging</span>
+    <footer id="site-footer" className="bg-[#f8f8f6] text-slate-900" aria-label="Site footer">
+      <div className="border-y border-slate-200 bg-white">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-5 px-6 py-4 sm:px-8 lg:px-10">
+          <Link href="/" className="inline-flex items-center">
+            <Image
+              src="/logo-white.png"
+              alt="GDK Packaging"
+              width={190}
+              height={52}
+              priority
+              className="h-10 w-auto object-contain"
+            />
           </Link>
-          <p className="max-w-xs text-sm leading-7 text-slate-300/95">
-            Delivering reliable industrial packaging solutions engineered for strength, consistency,
-            and long-term supply confidence.
+          <p className="text-sm text-slate-600">
+            Built for quality and industrial growth
           </p>
-          <div className="flex items-center gap-3">
-            {socialLinks.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  aria-label={item.label}
-                  className="inline-flex size-9 items-center justify-center rounded-md border border-white/20 bg-white/10 text-slate-200 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#f26a21]/55 hover:bg-[#f26a21]/14 hover:text-[#f26a21]"
-                >
-                  <Icon className="size-4" />
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-white">Quick Links</h3>
-          <ul className="space-y-4 text-sm">
-            {quickLinks.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  className="text-slate-300/95 transition-colors duration-200 hover:text-[#f26a21]"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="space-y-6">
-          <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-white">Products</h3>
-          <ul className="space-y-4 text-sm">
-            {productLinks.map((product) => (
-              <li key={product.label}>
-                <Link
-                  href={product.href}
-                  className="text-slate-300/95 transition-colors duration-200 hover:text-[#f26a21]"
-                >
-                  {product.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="space-y-6">
-          <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-white">Contact Info</h3>
-          <ul className="space-y-4.5 text-sm leading-7 text-slate-300/95">
-            <li className="flex items-start gap-3">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-[#2f8f83]" />
-              <span>Plot 18, Industrial Estate, Howrah, West Bengal 711101</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Phone className="mt-0.5 size-4 shrink-0 text-[#f26a21]" />
-              <a className="text-slate-300/95 transition-colors duration-200 hover:text-[#f26a21]" href="tel:+919876543210">
-                +91 98765 43210
-              </a>
-            </li>
-            <li className="flex items-start gap-3">
-              <Mail className="mt-0.5 size-4 shrink-0 text-[#2f8f83]" />
-              <a
-                className="text-slate-300/95 transition-colors duration-200 hover:text-[#f26a21]"
-                href="mailto:sales@gdkpackaging.com"
-              >
-                sales@gdkpackaging.com
-              </a>
-            </li>
-          </ul>
         </div>
       </div>
 
-      <div className="border-t border-white/12">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 py-5 text-xs leading-6 text-slate-300/80 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-10">
-          <p className="m-0">© {new Date().getFullYear()} GDK Packaging. All rights reserved.</p>
-          <div className="flex items-center gap-6 text-slate-400">
-            <Link href="#" className="transition-colors duration-200 hover:text-[#f26a21]">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="transition-colors duration-200 hover:text-[#f26a21]">
-              Terms
-            </Link>
+      <div className="mx-auto w-full max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5 lg:gap-8">
+          <div className="space-y-4">
+            <h3 className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-slate-900">
+              <Briefcase className="h-[18px] w-[18px] text-[#f26a21]" />
+              Company Info
+            </h3>
+            <div className="space-y-2 text-sm leading-7 text-slate-600">
+              <p className="text-base font-semibold text-slate-900">GDK Packaging</p>
+              <p>26/59 Birhana Road</p>
+              <p>Kanpur - 208001</p>
+            </div>
+            <div className="space-y-2 text-sm text-slate-600">
+              <a
+                href="mailto:info@gdk.co.in"
+                className="inline-flex items-center gap-2 transition-colors hover:text-slate-900"
+              >
+                <Mail className="size-4" />
+                info@gdk.co.in
+              </a>
+              <a
+                href="tel:+919889271007"
+                className="inline-flex items-center gap-2 transition-colors hover:text-slate-900"
+              >
+                <Phone className="size-4 text-[#f26a21]" />
+                +91 9889271007
+              </a>
+              <a
+                href="tel:+919889449000"
+                className="inline-flex items-center gap-2 transition-colors hover:text-slate-900"
+              >
+                <Phone className="size-4 text-[#f26a21]" />
+                +91 9889449000
+              </a>
+            </div>
+            <div className="text-sm leading-7 text-slate-600">
+              <p className="font-medium text-slate-900">Business Hours:</p>
+              <p>Mon - Sat : 10AM - 7PM</p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-slate-900">
+              <Layers className="h-[18px] w-[18px] text-[#f26a21]" />
+              Quick Links
+            </h3>
+            <ul className="space-y-3 text-sm text-slate-600">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="group inline-flex items-center gap-1.5 transition-colors hover:text-slate-900"
+                  >
+                    {link.label}
+                    <ArrowRight className="h-3.5 w-3.5 text-[#f26a21] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-slate-900">
+              <Package className="h-[18px] w-[18px] text-[#f26a21]" />
+              Products
+            </h3>
+            <ul className="space-y-3 text-sm text-slate-600">
+              {products.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="group inline-flex items-center gap-1.5 transition-colors hover:text-slate-900"
+                  >
+                    {link.label}
+                    <ArrowRight className="h-3.5 w-3.5 text-[#f26a21] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-slate-900">
+              <Globe className="h-[18px] w-[18px] text-[#f26a21]" />
+              Company
+            </h3>
+            <ul className="space-y-3 text-sm text-slate-600">
+              {companyLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="group inline-flex items-center gap-1.5 transition-colors hover:text-slate-900"
+                  >
+                    {link.label}
+                    <ArrowRight className="h-3.5 w-3.5 text-[#f26a21] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-slate-900">
+              <MapPin className="h-[18px] w-[18px] text-[#f26a21]" />
+              Google Map
+            </h3>
+            <div className="overflow-hidden rounded-xl border border-slate-200">
+              <iframe
+                title="GDK Office Location"
+                src="https://www.google.com/maps?q=26/59%20Birhana%20Road,%20Kanpur%20-%20208001&output=embed"
+                className="h-56 w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-slate-200">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-6 px-6 py-8 sm:px-8 md:flex-row lg:px-10">
+          <p className="text-sm text-slate-600">© 2024 GDK Packaging</p>
+
+          <div className="flex items-center gap-3">
+            {socialLinks.map(({ href, label, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="inline-flex size-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-slate-600 transition-colors hover:text-slate-900"
+              >
+                <Icon className="size-4" />
+              </a>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-5 text-sm text-slate-600">
+            {legalLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="transition-colors hover:text-slate-900"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

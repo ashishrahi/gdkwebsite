@@ -232,6 +232,18 @@ select:focus {
   outline-offset: 1px;
 }
 
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #64748b !important;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
