@@ -50,21 +50,21 @@ const productMegaCategories = [
     title: "ESD Trays",
     description: "Electrostatic-safe trays engineered for sensitive electronics handling.",
     icon: Package,
-    items: ["Conductive Trays", "Anti Static Trays", "PCB Trays"],
+    items: ["ESD Trays"],
   },
   {
     key: "thermoforming",
     title: "Thermoforming",
     description: "High-precision thermoformed packaging for food and industrial products.",
     icon: Globe,
-    items: ["PP Containers", "PET Containers", "IML Sweet Box", "Food Grade Trays", "Custom Molds"],
+    items: ["PP Containers", "PET Containers", "IML Sweet Box"],
   },
   {
     key: "printed-products",
     title: "Printed Products",
     description: "Premium print-finish packaging solutions for brand-forward applications.",
     icon: Sparkles,
-    items: ["Printed Boxes", "Printed Films", "Labels", "Branding Sleeves"],
+    items: ["Printed Boxes"],
   },
 ] as const;
 
@@ -200,7 +200,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
           />
         </Link>
 
-        <div className="hidden h-11 flex-1 items-center justify-center gap-2 lg:flex">
+        <div className="hidden h-11 flex-1 items-center justify-center gap-5 lg:flex">
           {navLinks.map((link) => {
             const isActive = isRouteActive(link.hash);
             const isAboutLink = link.label === "About";
@@ -217,7 +217,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                         closeMobileMenu();
                       }}
                       className={cn(
-                        "relative inline-flex h-10 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
+                        "relative inline-flex h-10 items-center gap-1 rounded-full px-5 py-2 text-sm font-medium transition-all duration-300",
                         scrolled
                           ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                           : "text-slate-800 hover:bg-slate-100 hover:text-slate-900",
@@ -230,10 +230,12 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       {link.label}
                       <ChevronDown className="size-3.5 transition-transform duration-300 group-hover:rotate-180" />
                     </Link>
-                    <div className="pointer-events-none absolute left-1/2 top-full z-40 w-[720px] -translate-x-1/2 pt-4">
-                      <div className="translate-y-2 scale-[0.98] rounded-2xl border border-slate-200 bg-white p-6 opacity-0 shadow-xl transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
-                        <div className="grid grid-cols-[1fr_1.6fr] gap-6">
-                          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                    <div className="absolute top-full left-1/2 z-40 h-4 w-[720px] -translate-x-[58%]" />
+                    <div className="pointer-events-none absolute top-full left-1/2 mt-5 z-50 w-[720px] -translate-x-[58%] opacity-0 invisible translate-y-2 transition-all duration-300 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0">
+                      <div className="relative rounded-3xl border border-gray-200 bg-white p-7 shadow-2xl">
+                        <div className="absolute top-[-10px] left-[58%] z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-gray-200 bg-white shadow-md" />
+                        <div className="grid grid-cols-[1fr_1.6fr] gap-8">
+                          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
                             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#f26a21]">
                               About GDK
                             </p>
@@ -249,19 +251,19 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                               consistency, compliance, and scale.
                             </p>
                           </div>
-                          <div className="grid grid-cols-1 gap-3">
+                          <div className="grid grid-cols-1 gap-4.5">
                             {aboutMegaCards.map((card) => (
                               <Link
                                 key={card.title}
                                 href={card.href}
-                                className="group/card flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f26a21] hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]"
+                                className="group/card flex items-start gap-3.5 rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f26a21] hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]"
                               >
                                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-[#f26a21] to-[#c44f12] text-white">
                                   <card.icon className="h-5 w-5" />
                                 </div>
                                 <div>
-                                  <p className="text-sm font-semibold text-slate-900">{card.title}</p>
-                                  <p className="mt-1 text-xs leading-relaxed text-slate-600">
+                                  <p className="text-sm leading-5 font-semibold text-slate-900">{card.title}</p>
+                                  <p className="mt-1.5 text-xs leading-[1.55] text-slate-600">
                                     {card.description}
                                   </p>
                                 </div>
@@ -282,7 +284,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                         closeMobileMenu();
                       }}
                       className={cn(
-                        "relative inline-flex h-10 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
+                        "relative inline-flex h-10 items-center gap-1 rounded-full px-5 py-2 text-sm font-medium transition-all duration-300",
                         scrolled
                           ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                           : "text-slate-800 hover:bg-slate-100 hover:text-slate-900",
@@ -295,10 +297,12 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       {link.label}
                       <ChevronDown className="size-3.5 transition-transform duration-300 group-hover:rotate-180" />
                     </Link>
-                    <div className="pointer-events-none absolute left-1/2 top-full z-40 w-[860px] -translate-x-1/2 pt-4">
-                      <div className="translate-y-2 scale-[0.98] rounded-2xl border border-slate-200 bg-white p-6 opacity-0 shadow-xl transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
-                        <div className="grid grid-cols-[1.05fr_1fr] gap-6">
-                          <div className="grid grid-cols-1 gap-3">
+                    <div className="absolute top-full left-1/2 z-40 h-4 w-[860px] -translate-x-[50%]" />
+                    <div className="pointer-events-none absolute top-full left-1/2 mt-5 z-50 w-[860px] -translate-x-[50%] opacity-0 invisible translate-y-2 transition-all duration-300 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0">
+                      <div className="relative rounded-3xl border border-gray-200 bg-white p-7 shadow-2xl">
+                        <div className="absolute top-[-10px] left-[50%] z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-gray-200 bg-white shadow-md" />
+                        <div className="grid grid-cols-[1.05fr_1fr] gap-8">
+                          <div className="grid grid-cols-1 gap-4.5">
                             {productMegaCategories.map((category) => {
                               const isCategoryActive = activeDesktopProductKey === category.key;
                               return (
@@ -308,7 +312,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                                   onMouseEnter={() => setActiveDesktopProductKey(category.key)}
                                   onFocus={() => setActiveDesktopProductKey(category.key)}
                                   className={cn(
-                                    "group/category flex items-start gap-3 rounded-2xl border bg-white p-3 text-left transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]",
+                                    "group/category flex items-start gap-3.5 rounded-2xl border bg-white p-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]",
                                     isCategoryActive
                                       ? "border-[#f26a21] shadow-[0_10px_24px_rgba(242,106,33,0.2)]"
                                       : "border-slate-200 hover:border-[#f26a21]/70"
@@ -318,8 +322,8 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                                     <category.icon className="h-6 w-6 text-[#f26a21]" />
                                   </div>
                                   <div>
-                                    <p className="text-sm font-semibold text-slate-900">{category.title}</p>
-                                    <p className="mt-1 text-xs leading-relaxed text-slate-600">
+                                    <p className="text-sm leading-5 font-semibold text-slate-900">{category.title}</p>
+                                    <p className="mt-1.5 text-xs leading-[1.55] text-slate-600">
                                       {category.description}
                                     </p>
                                   </div>
@@ -327,7 +331,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                               );
                             })}
                           </div>
-                          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
                             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#f26a21]">
                               {activeDesktopProductCategory.title}
                             </p>
@@ -335,7 +339,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                               Product sub-categories crafted for performance, consistency, and scalable
                               manufacturing.
                             </p>
-                            <div className="mt-4 grid grid-cols-1 gap-2">
+                            <div className="mt-4 grid grid-cols-1 gap-2.5">
                               {activeDesktopProductCategory.items.map((item) => (
                                 <Link
                                   key={item}
@@ -360,7 +364,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       closeMobileMenu();
                     }}
                     className={cn(
-                      "relative inline-flex h-10 items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
+                      "relative inline-flex h-10 items-center gap-1 rounded-full px-5 py-2 text-sm font-medium transition-all duration-300",
                       scrolled
                         ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                         : "text-slate-800 hover:bg-slate-100 hover:text-slate-900",
