@@ -254,7 +254,7 @@ export function HomeSections() {
             <h2 className="text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               Comprehensive Packaging Solutions
             </h2>
-            <p className="text-base leading-7 text-slate-600 sm:text-lg">
+            <p className="text-base leading-7 text-slate-700 sm:text-lg">
               Discover our wide range of industrial packaging products designed for
               modern businesses.
             </p>
@@ -300,7 +300,7 @@ export function HomeSections() {
             <h2 className="text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               Trusted Across Multiple Sectors
             </h2>
-            <p className="text-base leading-7 text-slate-600 sm:text-lg">
+            <p className="text-base leading-7 text-slate-700 sm:text-lg">
               Our packaging solutions serve diverse industries with quality, safety,
               and scalability.
             </p>
@@ -336,7 +336,7 @@ export function HomeSections() {
             <h2 className="text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
               Your Trusted Packaging Partner
             </h2>
-            <p className="text-base leading-7 text-slate-600 sm:text-lg">
+            <p className="text-base leading-7 text-slate-700 sm:text-lg">
               Discover what sets us apart in the packaging industry through innovation,
               quality, and reliability.
             </p>
@@ -377,7 +377,7 @@ export function HomeSections() {
             <h2 className="text-4xl font-black tracking-tight text-white md:text-6xl">
               Manufacturing Excellence
             </h2>
-            <p className="mx-auto max-w-2xl text-lg text-white/80 md:text-xl">
+            <p className="mx-auto max-w-2xl text-lg text-white/85 md:text-xl">
               A streamlined process ensuring quality at every step
             </p>
           </div>
@@ -399,7 +399,7 @@ export function HomeSections() {
                     <h3 className="mx-auto mt-4 max-w-[180px] text-center text-xl font-bold leading-tight text-white xl:text-2xl">
                       {processStep.title}
                     </h3>
-                    <p className="mt-4 text-center text-sm leading-7 text-white/80 xl:text-base">
+                    <p className="mt-4 text-center text-sm leading-7 text-white/85 xl:text-base">
                       {processStep.description}
                     </p>
                   </div>

@@ -1,20 +1,12 @@
 "use client";
 
-import { ArrowRight, Box, Menu, Package, Search, ShieldCheck, Truck } from "lucide-react";
+import { ArrowRight, Box, Package, ShieldCheck, Truck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/products", label: "Products" },
-  { href: "/industries", label: "Industries" },
-];
 
 const trustStats = [
   { value: "500+", label: "Bulk Orders Monthly" },
@@ -55,7 +47,7 @@ const productRows = [
 
 export function Hero() {
   return (
-    <section className="group relative min-h-screen overflow-hidden px-6 pt-6 pb-12 sm:px-8 sm:pt-8 lg:px-10 lg:pt-10">
+    <section className="group relative min-h-screen overflow-hidden px-6 pt-24 pb-12 sm:px-8 sm:pt-28 lg:px-10 lg:pt-32">
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2400&q=80"
@@ -66,105 +58,22 @@ export function Hero() {
           className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
         />
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#031227]/88 via-[#031227]/38 to-[#02060f]/70" />
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-[#06162f]/82 via-[#06162f]/32 to-[#06162f]/55" />
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-[58%] bg-linear-to-r from-[#041225]/85 via-[#041225]/52 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-linear-to-t from-[#030813]/95 to-transparent" />
-      <div className="pointer-events-none absolute -left-20 top-24 h-72 w-72 rounded-full bg-[#1450c8]/22 blur-3xl" />
-      <div className="pointer-events-none absolute -right-14 bottom-20 h-72 w-72 rounded-full bg-[#f26a21]/20 blur-3xl" />
-      <div className="pointer-events-none absolute left-[12%] top-[28%] h-2.5 w-2.5 rounded-full bg-white/65 shadow-[0_0_24px_rgba(255,255,255,0.8)] motion-safe:animate-pulse" />
-      <div className="pointer-events-none absolute right-[22%] top-[22%] h-2 w-2 rounded-full bg-[#f26a21]/80 shadow-[0_0_20px_rgba(242,106,33,0.75)] motion-safe:animate-pulse" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-b from-[#031227]/92 via-[#031227]/52 to-[#02060f]/76" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-r from-[#06162f]/88 via-[#06162f]/44 to-[#06162f]/60" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-0 w-[58%] bg-linear-to-r from-[#041225]/72 via-[#041225]/48 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-56 bg-linear-to-t from-[#030813]/95 to-transparent" />
+      <div className="pointer-events-none absolute -left-20 top-24 z-0 h-72 w-72 rounded-full bg-[#1450c8]/22 blur-3xl" />
+      <div className="pointer-events-none absolute -right-14 bottom-20 z-0 h-72 w-72 rounded-full bg-[#f26a21]/20 blur-3xl" />
+      <div className="pointer-events-none absolute left-[12%] top-[28%] z-0 h-2.5 w-2.5 rounded-full bg-white/65 shadow-[0_0_24px_rgba(255,255,255,0.8)] motion-safe:animate-pulse" />
+      <div className="pointer-events-none absolute right-[22%] top-[22%] z-0 h-2 w-2 rounded-full bg-[#f26a21]/80 shadow-[0_0_20px_rgba(242,106,33,0.75)] motion-safe:animate-pulse" />
 
-      <header className="relative z-40 mx-auto w-full max-w-[1450px]">
-        <nav className="flex items-center justify-between rounded-full border border-white/25 bg-[#081a34]/45 px-3 py-2.5 shadow-[0_18px_44px_rgba(3,9,23,0.34)] backdrop-blur-2xl">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-3 rounded-full px-2.5 py-1.5 transition-transform duration-300 hover:-translate-y-0.5"
-          >
-            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#f26a21]/65 bg-white/95 text-sm font-black text-[#f26a21] shadow-[0_10px_22px_rgba(242,106,33,0.3)]">
-              GDK
-            </span>
-            <span className="hidden text-sm font-semibold tracking-wide text-white sm:inline">
-              GDK Packaging
-            </span>
-          </Link>
-
-          <div className="hidden items-center gap-2 lg:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="group/nav relative rounded-full px-4 py-2 text-sm font-medium text-white/90 transition-colors duration-300 hover:text-white"
-              >
-                {link.label}
-                <span className="absolute inset-x-4 -bottom-0.5 h-0.5 scale-x-0 rounded-full bg-[#f26a21] transition-transform duration-300 group-hover/nav:scale-x-100" />
-              </Link>
-            ))}
-          </div>
-
-          <div className="hidden items-center gap-2 sm:flex">
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              className="rounded-full border border-white/25 bg-white/10 text-white hover:bg-white/20 hover:text-white"
-              aria-label="Search"
-            >
-              <Search className="size-4" />
-            </Button>
-            <Button
-              asChild
-              className="rounded-full bg-[#f26a21] px-5 text-white shadow-[0_14px_30px_rgba(242,106,33,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#df5c17]"
-            >
-              <Link href="/contact">Contact</Link>
-            </Button>
-          </div>
-
-          <Dialog>
-            <DialogTrigger
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon-sm"
-                  className="rounded-full border border-white/25 bg-white/10 text-white hover:bg-white/20 hover:text-white lg:hidden"
-                  aria-label="Open menu"
-                >
-                  <Menu className="size-5" />
-                </Button>
-              }
-            />
-            <DialogContent
-              showCloseButton={false}
-              className="left-auto right-3 top-20 z-50 w-[min(92vw,420px)] translate-x-0 translate-y-0 rounded-3xl border border-white/30 bg-[#071a35]/88 p-4 text-white backdrop-blur-2xl"
-            >
-              <div className="space-y-1">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="block rounded-2xl px-4 py-3 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <Link
-                  href="/contact"
-                  className="mt-2 block rounded-2xl bg-[#f26a21] px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[#df5c17]"
-                >
-                  Contact
-                </Link>
-              </div>
-            </DialogContent>
-          </Dialog>
-        </nav>
-      </header>
-
-      <div className="relative z-10 mx-auto grid w-full max-w-[1450px] items-center gap-12 pt-6 lg:-translate-y-[10px] lg:grid-cols-[1fr_520px] lg:gap-16 lg:pt-8">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1450px] items-center gap-12 pt-2 lg:-translate-y-[10px] lg:grid-cols-[1fr_520px] lg:gap-16 lg:pt-4">
         <div className="max-w-[600px] space-y-8 motion-safe:animate-[fade-in_0.7s_ease-out]">
-          <div className="inline-flex items-center rounded-full border border-white/35 bg-white/12 px-4 py-2 text-[11px] font-semibold tracking-[0.14em] text-white/95 uppercase backdrop-blur-md">
+          <div className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[11px] font-semibold tracking-[0.14em] text-white/92 uppercase backdrop-blur-md">
             Trusted Packaging Manufacturer Since 2012
           </div>
 
-          <h1 className="text-[2.4rem] leading-[1.03] font-black tracking-tight text-white sm:text-[3rem] lg:text-[4.05rem]">
+          <h1 className="text-shadow-[0_2px_14px_rgba(0,0,0,0.45)] text-[2.4rem] leading-[1.03] font-black tracking-tight text-white sm:text-[3rem] lg:text-[4.05rem]">
             Modern Packaging
             <br />
             Built for <span className="text-[#f26a21]">Growth</span>
@@ -181,9 +90,12 @@ export function Hero() {
               size="lg"
               className="group/primary rounded-full bg-[#f26a21] px-7 text-white shadow-[0_16px_34px_rgba(242,106,33,0.45)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#de5b17]"
             >
-              <Link href="/products" className="inline-flex items-center gap-2">
-                Explore Products
-                <ArrowRight className="size-4 transition-transform duration-300 group-hover/primary:translate-x-1" />
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center gap-2 text-white! no-underline hover:text-white!"
+              >
+                <span className="text-white!">Explore Products</span>
+                <ArrowRight className="size-4 text-white transition-transform duration-300 group-hover/primary:translate-x-1" />
               </Link>
             </Button>
             <Button
@@ -192,9 +104,12 @@ export function Hero() {
               size="lg"
               className="group/quote rounded-full border-white/45 bg-white/10 px-7 text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/70 hover:bg-white/20 hover:text-white"
             >
-              <Link href="/contact" className="inline-flex items-center gap-2">
-                Get Quote
-                <ArrowRight className="size-4 transition-transform duration-300 group-hover/quote:translate-x-1" />
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 text-white! no-underline hover:text-white!"
+              >
+                <span className="text-white!">Get Quote</span>
+                <ArrowRight className="size-4 text-white transition-transform duration-300 group-hover/quote:translate-x-1" />
               </Link>
             </Button>
           </div>
@@ -203,12 +118,12 @@ export function Hero() {
             {trustStats.map((stat, index) => (
               <Card
                 key={stat.label}
-                className="border-white/30 bg-white/12 shadow-[0_12px_30px_rgba(2,8,23,0.28)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/45 hover:bg-white/18"
+                className="border-white/30 bg-slate-900/35 shadow-[0_12px_30px_rgba(2,8,23,0.28)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/45 hover:bg-slate-900/65"
                 style={{ animationDelay: `${index * 90}ms` }}
               >
                 <CardContent className="px-4 py-4">
                   <p className="text-lg font-extrabold text-white">{stat.value}</p>
-                  <p className="text-xs text-white/78">{stat.label}</p>
+                  <p className="text-xs text-white/72">{stat.label}</p>
                 </CardContent>
               </Card>
             ))}

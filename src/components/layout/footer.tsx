@@ -36,7 +36,7 @@ export function Footer() {
             </span>
             <span className="text-base font-semibold tracking-tight text-white">Packaging</span>
           </Link>
-          <p className="max-w-xs text-sm leading-7 text-slate-400">
+          <p className="max-w-xs text-sm leading-7 text-slate-300/95">
             Delivering reliable industrial packaging solutions engineered for strength, consistency,
             and long-term supply confidence.
           </p>
@@ -48,7 +48,7 @@ export function Footer() {
                   key={item.label}
                   href={item.href}
                   aria-label={item.label}
-                  className="inline-flex size-9 items-center justify-center rounded-md border border-white/15 bg-white/6 text-slate-300 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#f26a21]/55 hover:bg-[#f26a21]/14 hover:text-[#f26a21]"
+                  className="inline-flex size-9 items-center justify-center rounded-md border border-white/20 bg-white/10 text-slate-200 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#f26a21]/55 hover:bg-[#f26a21]/14 hover:text-[#f26a21]"
                 >
                   <Icon className="size-4" />
                 </Link>
@@ -91,7 +91,7 @@ export function Footer() {
 
         <div className="space-y-6">
           <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-white">Contact Info</h3>
-          <ul className="space-y-4.5 text-sm leading-7 text-slate-400">
+          <ul className="space-y-4.5 text-sm leading-7 text-slate-300/95">
             <li className="flex items-start gap-3">
               <MapPin className="mt-0.5 size-4 shrink-0 text-[#2f8f83]" />
               <span>Plot 18, Industrial Estate, Howrah, West Bengal 711101</span>
@@ -116,7 +116,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/12">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 py-5 text-xs leading-6 text-slate-500 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-10">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 py-5 text-xs leading-6 text-slate-300/80 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-10">
           <p className="m-0">© {new Date().getFullYear()} GDK Packaging. All rights reserved.</p>
           <div className="flex items-center gap-6 text-slate-400">
             <Link href="#" className="transition-colors duration-200 hover:text-[#f26a21]">

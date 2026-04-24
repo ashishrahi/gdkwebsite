@@ -6,7 +6,7 @@
 
 :root {
   --surface: #ffffff;
-  --muted-foreground: #5b6570;
+  --muted-foreground: #475569;
   --primary: #f26a21;
   --primary-hover: #dd5f1d;
   --secondary: #2f8f83;
@@ -90,7 +90,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --surface: #151b21;
-    --muted-foreground: #b2bcc8;
+    --muted-foreground: #d1d5db;
     --primary: #f26a21;
     --primary-hover: #f18955;
     --secondary: #2f8f83;
@@ -117,6 +117,10 @@ html,
 body {
   width: 100%;
   overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 main {
@@ -146,9 +150,8 @@ h2 {
 }
 
 p {
-  color: var(--muted-foreground);
+  color: inherit;
   margin: 0 0 1rem;
-  max-width: 70ch;
 }
 
 a {
