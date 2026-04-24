@@ -48,6 +48,7 @@ const productMegaCategories = [
   {
     key: "esd-trays",
     title: "ESD Trays",
+    href: "/products/esd-trays",
     description: "Electrostatic-safe trays engineered for sensitive electronics handling.",
     icon: Package,
     items: ["ESD Trays"],
@@ -55,6 +56,7 @@ const productMegaCategories = [
   {
     key: "thermoforming",
     title: "Thermoforming",
+    href: "/products/thermoforming",
     description: "High-precision thermoformed packaging for food and industrial products.",
     icon: Globe,
     items: ["PP Containers", "PET Containers", "IML Sweet Box"],
@@ -62,11 +64,24 @@ const productMegaCategories = [
   {
     key: "printed-products",
     title: "Printed Products",
+    href: "/products/printed-products",
     description: "Premium print-finish packaging solutions for brand-forward applications.",
     icon: Sparkles,
     items: ["Printed Boxes"],
   },
 ] as const;
+
+const mobileProductSubmenuHrefMap: Record<string, string> = {
+  "PP Container": "/products/pp-container",
+  "PP Containers": "/products/pp-container",
+  "PP Box": "/products/pp-box",
+  "Meal Box": "/products/meal-box",
+  "Round Container": "/products/round-container",
+  "Pasta Tray": "/products/pasta-tray",
+};
+
+const getMobileProductSubmenuHref = (label: string) =>
+  mobileProductSubmenuHrefMap[label] ?? "/products";
 
 type NavbarProps = {
   overlayOnTop?: boolean;
@@ -331,7 +346,10 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                               );
                             })}
                           </div>
-                          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                          <Link
+                            href={activeDesktopProductCategory.href}
+                            className="group/panel block rounded-2xl border border-slate-200 bg-slate-50 p-6 transition-all duration-200 hover:border-[#f26a21]"
+                          >
                             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#f26a21]">
                               {activeDesktopProductCategory.title}
                             </p>
@@ -341,16 +359,15 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                             </p>
                             <div className="mt-4 grid grid-cols-1 gap-2.5">
                               {activeDesktopProductCategory.items.map((item) => (
-                                <Link
+                                <div
                                   key={item}
-                                  href="/products"
                                   className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition-all duration-200 hover:border-[#f26a21] hover:text-[#f26a21]"
                                 >
                                   {item}
-                                </Link>
+                                </div>
                               ))}
                             </div>
-                          </div>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -602,7 +619,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                                       {category.items.map((item) => (
                                         <Link
                                           key={item}
-                                          href="/products"
+                                          href={getMobileProductSubmenuHref(item)}
                                           className={cn(
                                             "block rounded-md px-2 py-1.5 text-xs font-medium transition-colors duration-200",
                                             scrolled

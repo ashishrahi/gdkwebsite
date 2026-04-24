@@ -1,11 +1,9 @@
 import { Hero } from "@/components/home/hero";
 import { HomeSections } from "@/components/home/home-sections";
-import { Navbar } from "@/components/layout/navbar";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
       <section id="home">
         <Hero />
       </section>
