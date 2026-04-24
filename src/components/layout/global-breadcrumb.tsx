@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { LucideIcon } from "lucide-react";
+import { House, Package } from "lucide-react";
 
 const toLabel = (value: string) =>
   value
@@ -17,15 +19,16 @@ export function GlobalBreadcrumb() {
     return null;
   }
 
-  const crumbs = [
-    { href: "/", label: "Home" },
-    { href: "/products", label: "Products" },
+  const crumbs: { href: string; label: string; icon: LucideIcon | null }[] = [
+    { href: "/", label: "Home", icon: House },
+    { href: "/products", label: "Products", icon: Package },
   ];
 
   if (parts[1]) {
     crumbs.push({
       href: `/products/${parts[1]}`,
       label: toLabel(parts[1]),
+      icon: null,
     });
   }
 
@@ -37,11 +40,12 @@ export function GlobalBreadcrumb() {
           return (
             <li key={crumb.href} className="flex items-center gap-2">
               {isLast ? (
-                <span aria-current="page" className="font-medium text-slate-900">
+                <span aria-current="page" className="inline-flex items-center gap-1.5 font-medium text-slate-900">
                   {crumb.label}
                 </span>
               ) : (
-                <Link href={crumb.href} className="hover:text-slate-900">
+                <Link href={crumb.href} className="inline-flex items-center gap-1.5 hover:text-slate-900">
+                  {crumb.icon ? <crumb.icon size={14} strokeWidth={2} className="shrink-0" aria-hidden="true" /> : null}
                   {crumb.label}
                 </Link>
               )}

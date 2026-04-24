@@ -56,7 +56,7 @@ const productMegaCategories = [
   {
     key: "thermoforming",
     title: "Thermoforming",
-    href: "/products/thermoforming",
+    href: "/products",
     description: "High-precision thermoformed packaging for food and industrial products.",
     icon: Globe,
     items: ["PP Containers", "PET Containers", "IML Sweet Box"],
