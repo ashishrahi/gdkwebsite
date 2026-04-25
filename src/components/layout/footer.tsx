@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import {
   ArrowRight,
   Briefcase,
@@ -9,9 +10,6 @@ import {
   MapPin,
   Package,
   Phone,
-  Users,
-  Camera,
-  Building2,
 } from "lucide-react";
 
 const quickLinks = [
@@ -42,9 +40,11 @@ const legalLinks = [
 ];
 
 const socialLinks = [
-  { href: "https://www.facebook.com", label: "Facebook", icon: Users },
-  { href: "https://www.instagram.com", label: "Instagram", icon: Camera },
-  { href: "https://www.linkedin.com", label: "LinkedIn", icon: Building2 },
+  { href: "https://www.facebook.com", label: "Facebook", icon: FaFacebookF, hoverClass: "hover:text-[#1877F2]" },
+  { href: "https://www.instagram.com", label: "Instagram", icon: FaInstagram, hoverClass: "hover:text-[#E4405F]" },
+  { href: "https://www.linkedin.com", label: "LinkedIn", icon: FaLinkedinIn, hoverClass: "hover:text-[#0A66C2]" },
+  { href: "https://www.youtube.com", label: "YouTube", icon: FaYoutube, hoverClass: "hover:text-[#FF0000]" },
+  { href: "https://wa.me/919889271007", label: "WhatsApp", icon: FaWhatsapp, hoverClass: "hover:text-[#25D366]" },
 ];
 
 export function Footer() {
@@ -193,16 +193,16 @@ export function Footer() {
           <p className="text-sm text-slate-600">© 2024 GDK Packaging</p>
 
           <div className="flex items-center gap-3">
-            {socialLinks.map(({ href, label, icon: Icon }) => (
+            {socialLinks.map(({ href, label, icon: Icon, hoverClass }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={label}
-                className="inline-flex size-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-slate-600 transition-colors hover:text-slate-900"
+                className={`inline-flex size-9 sm:size-10 items-center justify-center rounded-full border border-slate-200/90 bg-white text-slate-600 shadow-sm transition-all duration-300 hover:scale-105 hover:border-slate-300 ${hoverClass}`}
               >
-                <Icon className="size-4" />
+                <Icon className="size-4 sm:size-[17px]" />
               </a>
             ))}
           </div>

@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -23,6 +24,12 @@ const contactRows = [
     value: "26/59 Birhana Road, Kanpur - 208001",
     href: "https://maps.google.com/?q=26/59%20Birhana%20Road,%20Kanpur%20-%20208001",
     icon: MapPin,
+  },
+  {
+    title: "WhatsApp",
+    value: "+91 9889271007",
+    href: "https://wa.me/919889271007",
+    icon: FaWhatsapp,
   },
 ];
 
@@ -62,7 +69,8 @@ export function ContactSection() {
   });
 
   const onSubmit = (data: ContactFormValues) => {
-    console.log(data);
+    void data;
+    // Form submission integration can be wired here.
   };
 
   const getFieldClassName = (hasError: boolean, sizeClass: string) =>

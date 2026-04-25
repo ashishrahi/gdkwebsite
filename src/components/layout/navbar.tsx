@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Globe, Menu, Package, Sparkles, Star, X } from "lucide-react";
+import { ChevronDown, ChevronUp, Globe, Menu, Package, Sparkles, Star, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -267,12 +267,11 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       )}
                     >
                       {link.label}
-                      <ChevronDown
-                        className={cn(
-                          "size-3.5 transition-transform duration-300",
-                          activeDesktopMenu === "about" ? "rotate-180" : ""
-                        )}
-                      />
+                      {activeDesktopMenu === "about" ? (
+                        <ChevronUp className="size-3.5" />
+                      ) : (
+                        <ChevronDown className="size-3.5" />
+                      )}
                     </Link>
                     <div
                       className={cn(
@@ -345,12 +344,11 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       )}
                     >
                       {link.label}
-                      <ChevronDown
-                        className={cn(
-                          "size-3.5 transition-transform duration-300",
-                          activeDesktopMenu === "products" ? "rotate-180" : ""
-                        )}
-                      />
+                      {activeDesktopMenu === "products" ? (
+                        <ChevronUp className="size-3.5" />
+                      ) : (
+                        <ChevronDown className="size-3.5" />
+                      )}
                     </Link>
                     <div
                       className={cn(
@@ -557,12 +555,11 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                         onClick={() => setIsMobileAboutOpen((previous) => !previous)}
                       >
                         <span>About</span>
-                        <ChevronDown
-                          className={cn(
-                            "size-4 transition-transform duration-300",
-                            isMobileAboutOpen ? "rotate-180" : ""
-                          )}
-                        />
+                        {isMobileAboutOpen ? (
+                          <ChevronUp className="size-4" />
+                        ) : (
+                          <ChevronDown className="size-4" />
+                        )}
                       </button>
                       <div
                         className={cn(
@@ -615,12 +612,11 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                         onClick={() => setIsMobileProductsOpen((previous) => !previous)}
                       >
                         <span>Products</span>
-                        <ChevronDown
-                          className={cn(
-                            "size-4 transition-transform duration-300",
-                            isMobileProductsOpen ? "rotate-180" : ""
-                          )}
-                        />
+                        {isMobileProductsOpen ? (
+                          <ChevronUp className="size-4" />
+                        ) : (
+                          <ChevronDown className="size-4" />
+                        )}
                       </button>
                       <div
                         className={cn(
@@ -663,12 +659,11 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                                     }
                                   >
                                     <span>{category.title}</span>
-                                    <ChevronDown
-                                      className={cn(
-                                        "size-3.5 transition-transform duration-300",
-                                        isCategoryOpen ? "rotate-180" : ""
-                                      )}
-                                    />
+                                    {isCategoryOpen ? (
+                                      <ChevronUp className="size-3.5" />
+                                    ) : (
+                                      <ChevronDown className="size-3.5" />
+                                    )}
                                   </button>
                                   <div
                                     className={cn(

@@ -51,10 +51,8 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
   });
 
   const onSubmit = (values: EnquiryFormValues) => {
-    console.log({
-      productName,
-      ...values,
-    });
+    void values;
+    void productName;
 
     toast.success("Enquiry submitted");
     reset();

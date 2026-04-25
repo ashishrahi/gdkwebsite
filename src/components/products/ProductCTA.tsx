@@ -1,6 +1,7 @@
 import { EnquiryModal } from "@/components/product/enquiry-modal";
 import type { ProductCta } from "@/lib/products-data";
 import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
 
 type ProductCTAProps = {
   productTitle: string;
@@ -40,8 +41,9 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
             href={`https://wa.me/?text=${whatsappMessage}`}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-9 items-center rounded-lg border border-green-400 bg-white px-4 text-sm font-semibold text-green-700 transition-colors hover:bg-green-50"
+            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-[#25D366] bg-white px-4 text-sm font-semibold text-[#25D366] transition-colors hover:bg-[#25D366] hover:text-white"
           >
+            <FaWhatsapp className="size-4 shrink-0" />
             {cta.whatsappLabel}
           </a>
           <EnquiryModal productName={productTitle} />

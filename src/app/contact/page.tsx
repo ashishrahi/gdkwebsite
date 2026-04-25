@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -39,10 +40,7 @@ export default function ContactPage() {
   });
 
   const onSubmit = (values: ContactFormValues) => {
-    console.log({
-      type: "contact-enquiry",
-      ...values,
-    });
+    void values;
     toast.success("Message sent successfully");
     reset();
   };
@@ -113,6 +111,25 @@ export default function ContactPage() {
                       <br />
                       Pune, Maharashtra 411001
                     </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-[28px] border border-neutral-200 bg-white px-7 py-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+                <div className="flex items-center gap-5">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#25D366] text-white">
+                    <FaWhatsapp className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-neutral-500">WhatsApp</p>
+                    <a
+                      href="https://wa.me/919889271007"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-2xl font-semibold text-neutral-900 hover:text-[#25D366]"
+                    >
+                      +91 98892 71007
+                    </a>
                   </div>
                 </div>
               </div>
