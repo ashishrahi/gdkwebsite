@@ -214,13 +214,25 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
     >
       <nav
         className={cn(
-          "mx-auto flex h-[72px] w-full max-w-[1450px] items-center justify-between rounded-full px-4 backdrop-blur-2xl transition-all duration-300 sm:px-6 lg:px-7",
+          "mx-auto grid h-[72px] w-full max-w-[1450px] grid-cols-[1fr_auto_1fr] items-center rounded-full px-4 backdrop-blur-2xl transition-all duration-300 sm:px-6 lg:px-7",
           scrolled
             ? "border border-slate-200/85 bg-white/95 shadow-[0_16px_36px_rgba(15,23,42,0.12)]"
             : "border border-slate-200 bg-white/85 shadow-sm backdrop-blur-xl"
         )}
       >
-        <Link href="/#home" className="flex items-center" onClick={closeMobileMenu}>
+        <div className="hidden items-center justify-start lg:flex">
+          <Link href="/#home" className="flex items-center" onClick={closeMobileMenu}>
+            <Image
+              src="/logo-white.png"
+              alt="GDK Packaging"
+              width={220}
+              height={60}
+              className="h-10 w-auto object-contain drop-shadow-[0_1px_2px_rgba(15,23,42,0.45)] lg:h-11"
+              priority
+            />
+          </Link>
+        </div>
+        <Link href="/#home" className="flex items-center justify-start lg:hidden" onClick={closeMobileMenu}>
           <Image
             src="/logo-white.png"
             alt="GDK Packaging"
@@ -231,7 +243,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
           />
         </Link>
 
-        <div className="hidden h-11 flex-1 items-center justify-center gap-5 lg:flex">
+        <div className="hidden h-11 items-center justify-center gap-5 lg:flex">
           {navLinks.map((link) => {
             const isActive = isRouteActive(link.hash);
             const isAboutLink = link.label === "About";
@@ -275,13 +287,13 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                     </Link>
                     <div
                       className={cn(
-                        "pointer-events-none absolute top-full left-1/2 mt-1 z-50 w-[720px] -translate-x-[58%] opacity-0 invisible translate-y-2 transition-all duration-300",
+                        "pointer-events-none absolute top-full left-1/2 z-50 mt-8 w-[740px] -translate-x-1/2 opacity-0 invisible translate-y-4 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
                         activeDesktopMenu === "about" &&
                           "pointer-events-auto opacity-100 visible translate-y-0"
                       )}
                     >
-                      <div className="relative rounded-3xl border border-gray-200 bg-white p-7 shadow-2xl">
-                        <div className="absolute top-[-10px] left-[58%] z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-gray-200 bg-white shadow-md" />
+                      <div className="relative rounded-3xl border border-gray-200/90 bg-white p-7 shadow-[0_32px_70px_rgba(15,23,42,0.22)]">
+                        <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-gray-200 bg-white shadow-[0_12px_28px_rgba(15,23,42,0.16)]" />
                         <div className="grid grid-cols-[1fr_1.6fr] gap-8">
                           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
                             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brand-accent)]">
@@ -352,13 +364,13 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                     </Link>
                     <div
                       className={cn(
-                        "pointer-events-none absolute top-full left-1/2 mt-1 z-50 w-[860px] -translate-x-[50%] opacity-0 invisible translate-y-2 transition-all duration-300",
+                        "pointer-events-none absolute top-full left-1/2 z-50 mt-8 w-[860px] -translate-x-1/2 opacity-0 invisible translate-y-4 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
                         activeDesktopMenu === "products" &&
                           "pointer-events-auto opacity-100 visible translate-y-0"
                       )}
                     >
-                      <div className="relative rounded-3xl border border-gray-200 bg-white p-7 shadow-2xl">
-                        <div className="absolute top-[-10px] left-[50%] z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-gray-200 bg-white shadow-md" />
+                      <div className="relative rounded-3xl border border-gray-200/90 bg-white p-7 shadow-[0_32px_70px_rgba(15,23,42,0.22)]">
+                        <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-gray-200 bg-white shadow-[0_12px_28px_rgba(15,23,42,0.16)]" />
                         <div className="grid grid-cols-[1.05fr_1fr] gap-8">
                           <div className="grid grid-cols-1 gap-4.5">
                             {PRODUCT_MEGA_MENU_CATEGORIES.map((category) => {
@@ -447,32 +459,19 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
           })}
         </div>
 
-        <div className="hidden h-11 items-center gap-2.5 md:flex">
-          <button
-            type="button"
-            aria-label="Search"
-            style={{ padding: 0, minHeight: 0 }}
-            className={cn(
-              "inline-flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-0.5",
-              scrolled
-                ? "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-                : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-            )}
-          >
-            <Globe className="size-4 shrink-0" />
-          </button>
+        <div className="hidden h-11 items-center justify-end gap-3 lg:flex">
           <button
             type="button"
             aria-label="Wishlist"
             style={{ padding: 0, minHeight: 0 }}
             className={cn(
-              "inline-flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-0.5",
+              "group inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[color:color-mix(in_srgb,var(--brand-accent)_18%,#e2e8f0)] bg-white/95 text-[var(--brand-accent)] shadow-[0_8px_18px_rgba(15,23,42,0.08)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--brand-accent)] hover:bg-[color:color-mix(in_srgb,var(--brand-accent)_8%,white)] hover:shadow-[0_14px_26px_color-mix(in_srgb,var(--brand-accent)_24%,transparent)]",
               scrolled
-                ? "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-                : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+                ? "ring-1 ring-slate-100/80"
+                : "ring-1 ring-white/80"
             )}
           >
-            <Star className="size-4 shrink-0" />
+            <Star className="size-[18px] shrink-0 transition-transform duration-300 group-hover:scale-110" />
           </button>
           <Button
             asChild
@@ -724,18 +723,6 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
               );
             })}
             <div className="mt-3 flex items-center gap-3">
-              <button
-                type="button"
-                aria-label="Search"
-                className={cn(
-                  "inline-flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200",
-                  scrolled
-                    ? "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50 hover:text-slate-900"
-                    : "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50 hover:text-slate-900"
-                )}
-              >
-                <Globe className="size-4" />
-              </button>
               <button
                 type="button"
                 aria-label="Wishlist"
