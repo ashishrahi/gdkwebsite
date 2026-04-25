@@ -1,31 +1,25 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
-import { getProductsByCategory } from "@/lib/products-data";
+import { NAVIGATION_CATEGORIES } from "@/lib/catalog";
 
 export const metadata: Metadata = {
-  title: "PP Products | GDK Packaging",
+  title: "Products | GDK Packaging",
   description:
-    "Discover premium PP food packaging products from GDK Packaging, including PP Box, PP Container, Meal Box, Round Container, and Pasta Tray.",
-  keywords: [
-    "pp products",
-    "food packaging products",
-    "meal box manufacturer",
-    "pp container supplier",
-    "bulk packaging",
-  ],
+    "Explore our packaging product categories including Thermoforming, Printed Products, and ESD Trays.",
   openGraph: {
-    title: "PP Products | GDK Packaging",
+    title: "Products | GDK Packaging",
     description:
-      "Explore scalable PP product solutions with premium design, reliable quality, and bulk supply support.",
+      "Explore our packaging product categories including Thermoforming, Printed Products, and ESD Trays.",
     type: "website",
     url: "/products",
   },
 };
 
 export default function ProductsPage() {
-  const products = getProductsByCategory("PP Products");
+  const featuredCategories = ["thermoforming", "printed-products", "esd-trays"]
+    .map((key) => NAVIGATION_CATEGORIES.find((category) => category.key === key))
+    .filter((category): category is (typeof NAVIGATION_CATEGORIES)[number] => Boolean(category));
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-10 px-6 py-10">
@@ -35,16 +29,12 @@ export default function ProductsPage() {
             GDK Product Range
           </p>
           <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-            PP Products
+            Products
           </h1>
           <p className="max-w-3xl text-base leading-7 text-slate-600">
-            Scalable polypropylene packaging portfolio for food brands, cloud kitchens, restaurants,
-            and bulk distributors. Each product page is data-driven and ready for future category
-            expansion.
+            Explore our complete packaging portfolio by top-level category. Choose a category to
+            discover subcategories and detailed product pages.
           </p>
-          <div className="inline-flex rounded-full border border-orange-200 bg-white px-4 py-2 text-sm text-slate-700">
-            Search and filter structure is modular and category-ready.
-          </div>
         </div>
       </section>
 
@@ -53,43 +43,33 @@ export default function ProductsPage() {
           <div>
             <h2 className="text-lg font-semibold text-slate-900">Category Overview</h2>
             <p className="text-sm text-slate-600">
-              Showing {products.length} PP products. Additional categories can be enabled via
-              `products-data.ts`.
+              Browse the three primary product categories available in our catalog.
             </p>
           </div>
           <div className="rounded-lg bg-orange-50 px-3 py-2 text-xs font-semibold text-orange-700">
-            Filter-ready architecture
+            Category-first navigation
           </div>
         </div>
       </section>
 
       <section className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        {products.map((product) => (
+        {featuredCategories.map((category) => (
           <article
-            key={product.slug}
+            key={category.key}
             className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
           >
-            <div className="relative h-48 w-full">
-              <Image
-                src={product.heroImage}
-                alt={product.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
             <div className="space-y-3 p-5">
               <p className="text-xs font-semibold tracking-wider text-orange-600 uppercase">
-                {product.category}
+                Product Category
               </p>
-              <h2 className="text-xl font-semibold tracking-tight text-slate-900">{product.title}</h2>
-              <p className="text-sm leading-6 text-slate-600">{product.shortDescription}</p>
-              <p className="text-xs text-slate-500">{product.variants.length} sizes / variants</p>
+              <h2 className="text-xl font-semibold tracking-tight text-slate-900">{category.title}</h2>
+              <p className="text-sm leading-6 text-slate-600">{category.description}</p>
+              <p className="text-xs text-slate-500">{category.subcategories.length} subcategories</p>
               <Link
-                href={`/products/${product.slug}`}
+                href={category.href}
                 className="inline-flex text-sm font-semibold text-[#1450c8] hover:underline"
               >
-                Explore Product
+                Explore Category
               </Link>
             </div>
           </article>
