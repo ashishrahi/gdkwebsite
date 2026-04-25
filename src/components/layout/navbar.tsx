@@ -214,7 +214,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
     >
       <nav
         className={cn(
-          "mx-auto grid h-[72px] w-full max-w-[1450px] grid-cols-[1fr_auto_1fr] items-center rounded-full px-4 backdrop-blur-2xl transition-all duration-300 sm:px-6 lg:px-7",
+          "mx-auto flex h-[72px] w-full max-w-[1450px] items-center justify-between rounded-full px-4 backdrop-blur-2xl transition-all duration-300 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-7",
           scrolled
             ? "border border-slate-200/85 bg-white/95 shadow-[0_16px_36px_rgba(15,23,42,0.12)]"
             : "border border-slate-200 bg-white/85 shadow-sm backdrop-blur-xl"
@@ -499,14 +499,10 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
 
       {isMobileMenuOpen ? (
         <div
-          className={cn(
-            "mx-auto mt-3 w-full max-w-[1450px] rounded-[28px] px-4 py-4 backdrop-blur-2xl transition-all duration-300 md:hidden",
-            scrolled
-              ? "border border-slate-200/85 bg-white/95 shadow-[0_16px_36px_rgba(15,23,42,0.12)]"
-              : "border border-slate-200 bg-white/95 shadow-sm"
-          )}
+          className="absolute top-full left-0 right-0 z-50 w-full px-4 pt-3 md:hidden"
         >
-          <div className="flex flex-col gap-2">
+          <div className="w-full rounded-[32px] bg-white px-4 py-4 shadow-xl">
+            <div className="flex flex-col gap-2">
             <div className="mb-1 flex items-center justify-between px-1">
               <Link href="/#home" className="flex items-center" onClick={closeMobileMenu}>
                 <Image
@@ -741,11 +737,13 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                   setActiveSection("home");
                   closeMobileMenu();
                 }}
+                style={{ color: "#fff" }}
                 className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--primary)] px-7 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[var(--primary-hover)] hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
               >
                 Get Quote
               </Link>
             </div>
+          </div>
           </div>
         </div>
       ) : null}
