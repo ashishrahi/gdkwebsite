@@ -40,7 +40,7 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 const fieldBaseClass =
-  "w-full rounded-xl !bg-white text-black placeholder:text-slate-500 border border-slate-300 px-5 shadow-sm appearance-none focus:!bg-white focus:text-black focus:border-[#f26a21] focus:ring-4 focus:ring-orange-100 outline-none";
+  "w-full rounded-xl !bg-white text-black placeholder:text-slate-500 border border-slate-300 px-5 shadow-sm appearance-none focus:!bg-white focus:text-black focus:border-[var(--secondary)] focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--secondary)_20%,white)] outline-none";
 
 export function ContactSection() {
   const {
@@ -76,7 +76,7 @@ export function ContactSection() {
     >
       <div className="mx-auto w-full max-w-7xl space-y-14 px-6 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-3xl space-y-4 text-center">
-          <span className="inline-flex rounded-full border border-[#f26a21]/25 bg-[#f26a21]/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[#f26a21]">
+          <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)]">
             GET IN TOUCH
           </span>
           <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
@@ -111,11 +111,11 @@ export function ContactSection() {
                     rel={item.title === "Address" ? "noreferrer" : undefined}
                     className="flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
                   >
-                    <span className="inline-flex rounded-xl bg-[#1450c8] p-3 text-white">
+                    <span className="inline-flex rounded-xl bg-[var(--secondary)] p-3 text-white">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <span className="space-y-1">
-                      <span className="block text-base font-semibold text-[#1450c8]">
+                      <span className="block text-base font-semibold text-[var(--secondary)]">
                         {item.title}
                       </span>
                       <span className="block text-sm leading-6 text-slate-600 sm:text-base">
@@ -143,7 +143,7 @@ export function ContactSection() {
             <form className="contact-form space-y-5" noValidate onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-2">
                 <label htmlFor="contact-name" className="text-slate-800 font-semibold text-sm mb-2">
-                  Name <span className="text-orange-500">*</span>
+                  Name <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <input
                   id="contact-name"
@@ -160,7 +160,7 @@ export function ContactSection() {
 
               <div className="space-y-2">
                 <label htmlFor="contact-address" className="text-slate-800 font-semibold text-sm mb-2">
-                  Address <span className="text-orange-500">*</span>
+                  Address <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <textarea
                   id="contact-address"
@@ -178,7 +178,7 @@ export function ContactSection() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
                   <label htmlFor="contact-city" className="text-slate-800 font-semibold text-sm mb-2">
-                    City <span className="text-orange-500">*</span>
+                    City <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
                     id="contact-city"
@@ -194,7 +194,7 @@ export function ContactSection() {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="contact-zip" className="text-slate-800 font-semibold text-sm mb-2">
-                    Zip Code <span className="text-orange-500">*</span>
+                    Zip Code <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
                     id="contact-zip"
@@ -213,7 +213,7 @@ export function ContactSection() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
                   <label htmlFor="contact-mobile" className="text-slate-800 font-semibold text-sm mb-2">
-                    Mobile <span className="text-orange-500">*</span>
+                    Mobile <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
                     id="contact-mobile"
@@ -229,7 +229,7 @@ export function ContactSection() {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="contact-email" className="text-slate-800 font-semibold text-sm mb-2">
-                    Email <span className="text-orange-500">*</span>
+                    Email <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
                     id="contact-email"
@@ -247,7 +247,7 @@ export function ContactSection() {
 
               <div className="space-y-2">
                 <label htmlFor="contact-product" className="text-slate-800 font-semibold text-sm mb-2">
-                  Select Product <span className="text-orange-500">*</span>
+                  Select Product <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <select
                   id="contact-product"
@@ -274,7 +274,7 @@ export function ContactSection() {
 
               <div className="space-y-2">
                 <label htmlFor="contact-comments" className="text-slate-800 font-semibold text-sm mb-2">
-                  Comments <span className="text-orange-500">*</span>
+                  Comments <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <textarea
                   id="contact-comments"
@@ -292,7 +292,7 @@ export function ContactSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex w-full items-center justify-center rounded-xl bg-[#f26a21] px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#dc5b16] disabled:cursor-not-allowed disabled:opacity-70"
+                className="inline-flex w-full items-center justify-center rounded-xl bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[var(--primary-hover)] disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>

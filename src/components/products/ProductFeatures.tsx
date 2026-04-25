@@ -1,17 +1,20 @@
+import { BadgeCheck, Droplets, PackageCheck, Recycle, Shield, Snowflake, UtensilsCrossed, Waves } from "lucide-react";
+
 type ProductFeaturesProps = {
   features: string[];
 };
 
 export function ProductFeatures({ features }: ProductFeaturesProps) {
-  const featureIcons: Record<string, string> = {
-    "Food Grade": "FG",
-    "Leak Resistant": "LR",
-    Durable: "DU",
-    Reusable: "RE",
-    "Microwave Safe": "MW",
-    "Freezer Safe": "FZ",
-    "Custom Branding Available": "CB",
-    "Bulk Supply Ready": "BS",
+  const featureIcons = {
+    "Food Grade": UtensilsCrossed,
+    "Leak Resistant": Droplets,
+    Durable: Shield,
+    Reusable: Recycle,
+    "Microwave Safe": Waves,
+    "Freezer Safe": Snowflake,
+    "Custom Branding Available": BadgeCheck,
+    "Bulk Supply Ready": PackageCheck,
+    default: BadgeCheck,
   };
 
   return (
@@ -28,8 +31,11 @@ export function ProductFeatures({ features }: ProductFeaturesProps) {
             key={feature}
             className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-4 text-sm leading-6 text-slate-700 shadow-sm"
           >
-            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-orange-50 text-xs font-bold text-orange-700">
-              {featureIcons[feature] ?? "OK"}
+            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[color:color-mix(in_srgb,var(--brand-accent)_14%,white)] text-[var(--brand-accent)]">
+              {(() => {
+                const Icon = featureIcons[feature as keyof typeof featureIcons] ?? featureIcons.default;
+                return <Icon className="h-4 w-4" aria-hidden="true" />;
+              })()}
             </span>
             {feature}
           </li>

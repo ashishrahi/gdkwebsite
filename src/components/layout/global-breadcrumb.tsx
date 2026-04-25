@@ -5,51 +5,56 @@ import { usePathname } from "next/navigation";
 import type { LucideIcon } from "lucide-react";
 import { House, Package } from "lucide-react";
 
-const toLabel = (value: string) =>
-  value
-    .split("-")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
+import { cn } from "@/lib/utils";
+import type { CatalogBreadcrumbCrumb } from "@/lib/catalog";
+import { getProductsBreadcrumbCrumbs } from "@/lib/catalog";
 
-export function GlobalBreadcrumb() {
+function iconForCrumbIndex(index: number): LucideIcon | null {
+  if (index === 0) {
+    return House;
+  }
+  if (index === 1) {
+    return Package;
+  }
+  return null;
+}
+
+type GlobalBreadcrumbProps = {
+  crumbs?: CatalogBreadcrumbCrumb[];
+  className?: string;
+};
+
+export function GlobalBreadcrumb({ crumbs: providedCrumbs, className }: GlobalBreadcrumbProps = {}) {
   const pathname = usePathname();
-  const parts = pathname.split("/").filter(Boolean);
+  const segmentCrumbs = providedCrumbs ?? getProductsBreadcrumbCrumbs(pathname);
 
-  if (!parts.length || parts[0] !== "products") {
+  if (!segmentCrumbs.length) {
     return null;
   }
 
-  const crumbs: { href: string; label: string; icon: LucideIcon | null }[] = [
-    { href: "/", label: "Home", icon: House },
-    { href: "/products", label: "Products", icon: Package },
-  ];
-
-  if (parts[1]) {
-    crumbs.push({
-      href: `/products/${parts[1]}`,
-      label: toLabel(parts[1]),
-      icon: null,
-    });
-  }
+  const crumbs = segmentCrumbs.map((crumb, index) => ({
+    ...crumb,
+    icon: iconForCrumbIndex(index),
+  }));
 
   return (
-    <nav aria-label="Breadcrumb" className="mx-auto w-full max-w-7xl px-6 pt-28 pb-2">
+    <nav aria-label="Breadcrumb" className={cn("mx-auto w-full max-w-7xl px-6 pt-28 pb-2", className)}>
       <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
         {crumbs.map((crumb, index) => {
           const isLast = index === crumbs.length - 1;
           return (
             <li key={crumb.href} className="flex items-center gap-2">
               {isLast ? (
-                <span aria-current="page" className="inline-flex items-center gap-1.5 font-medium text-slate-900">
+                <span aria-current="page" className="inline-flex items-center gap-1.5 font-medium text-[var(--primary)]">
                   {crumb.label}
                 </span>
               ) : (
-                <Link href={crumb.href} className="inline-flex items-center gap-1.5 hover:text-slate-900">
+                <Link href={crumb.href} className="inline-flex items-center gap-1.5 hover:text-[var(--primary)]">
                   {crumb.icon ? <crumb.icon size={14} strokeWidth={2} className="shrink-0" aria-hidden="true" /> : null}
                   {crumb.label}
                 </Link>
               )}
-              {!isLast ? <span className="text-slate-400">/</span> : null}
+              {!isLast ? <span className="text-[color:color-mix(in_srgb,var(--secondary)_45%,#94a3b8)]">/</span> : null}
             </li>
           );
         })}

@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail, MapPin, MessageSquare, Phone, Users } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -48,132 +48,149 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-6 py-10">
-      <section className="space-y-2">
-        <h1 className="text-4xl font-semibold tracking-tight">Contact Us</h1>
-        <p className="text-muted-foreground">
-          Tell us about your packaging requirements and our team will get back to you.
-        </p>
-      </section>
-
-      <section className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
-          <h2 className="mb-4 text-2xl font-semibold tracking-tight">Send an Enquiry</h2>
-          <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid gap-2">
-              <label htmlFor="contact-name" className="inline-flex items-center gap-1.5 text-sm font-medium">
-                <Users className="h-4 w-4 text-[#f26a21]" />
-                Name
-              </label>
-              <div className="relative">
-                <Users className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  id="contact-name"
-                  placeholder="Your full name"
-                  className="pl-9"
-                  aria-invalid={Boolean(errors.name)}
-                  {...register("name")}
-                />
-              </div>
-              {errors.name ? (
-                <p className="text-sm text-destructive">{errors.name.message}</p>
-              ) : null}
-            </div>
-
-            <div className="grid gap-2">
-              <label htmlFor="contact-phone" className="inline-flex items-center gap-1.5 text-sm font-medium">
-                <Phone className="h-4 w-4 text-[#f26a21]" />
-                Phone
-              </label>
-              <div className="relative">
-                <Phone className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  id="contact-phone"
-                  placeholder="+91 98765 43210"
-                  className="pl-9"
-                  aria-invalid={Boolean(errors.phone)}
-                  {...register("phone")}
-                />
-              </div>
-              {errors.phone ? (
-                <p className="text-sm text-destructive">{errors.phone.message}</p>
-              ) : null}
-            </div>
-
-            <div className="grid gap-2">
-              <label htmlFor="contact-message" className="inline-flex items-center gap-1.5 text-sm font-medium">
-                <MessageSquare className="h-4 w-4 text-[#f26a21]" />
-                Message
-              </label>
-              <div className="relative">
-                <MessageSquare className="pointer-events-none absolute top-3 left-3 h-4 w-4 text-muted-foreground" />
-                <Textarea
-                  id="contact-message"
-                  placeholder="Share your product requirements, quantity, and timeline."
-                  className="min-h-28 pl-9"
-                  aria-invalid={Boolean(errors.message)}
-                  {...register("message")}
-                />
-              </div>
-              {errors.message ? (
-                <p className="text-sm text-destructive">{errors.message.message}</p>
-              ) : null}
-            </div>
-
-            <div className="pt-1">
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </Button>
-            </div>
-          </form>
+    <main className="bg-[#f8fafc] pt-36 pb-20 md:pt-44">
+      <section className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
+        <div className="text-center">
+          <p className="inline-flex rounded-full border border-neutral-800 px-6 py-2 text-xs font-semibold tracking-[0.35em] uppercase">
+            Get In Touch
+          </p>
+          <h1 className="mt-6 text-5xl font-bold tracking-tight md:text-6xl">Contact Us Today</h1>
+          <p className="mx-auto mt-6 max-w-2xl text-xl text-neutral-600">
+            Let&apos;s discuss how we can help with your packaging needs.
+          </p>
         </div>
 
-        <div className="space-y-6">
-          <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
-            <h2 className="mb-4 text-2xl font-semibold tracking-tight">Company Info</h2>
-            <div className="grid gap-4 text-sm">
-              <div>
-                <p className="inline-flex items-center gap-2 font-semibold text-foreground">
-                  <MapPin className="h-4 w-4 text-[#f26a21]" />
-                  Address
-                </p>
-                <p className="text-muted-foreground">
-                  GDK Packaging Pvt. Ltd.
-                  <br />
-                  42 Industrial Estate Road
-                  <br />
-                  Pune, Maharashtra 411001
-                </p>
+        <div className="mt-20 grid items-start gap-14 lg:grid-cols-2">
+          <div>
+            <h2 className="text-4xl font-bold tracking-tight">Let&apos;s Start a Conversation</h2>
+            <p className="mt-5 max-w-xl text-lg leading-8 text-neutral-600">
+              Our team is ready to help you find the perfect packaging solution for your business.
+            </p>
+
+            <div className="mt-10 space-y-6">
+              <div className="rounded-[28px] border border-neutral-200 bg-white px-7 py-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+                <div className="flex items-center gap-5">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-600 text-white">
+                    <Mail className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-neutral-500">Email</p>
+                    <a
+                      href="mailto:sales@gdkpackaging.com"
+                      className="text-2xl font-semibold text-neutral-900 hover:text-orange-500"
+                    >
+                      sales@gdkpackaging.com
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="inline-flex items-center gap-2 font-semibold text-foreground">
-                  <Phone className="h-4 w-4 text-[#f26a21]" />
-                  Phone
-                </p>
-                <a href="tel:+919876543210" className="text-muted-foreground hover:text-primary">
-                  +91 98765 43210
-                </a>
+
+              <div className="rounded-[28px] border border-neutral-200 bg-white px-7 py-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+                <div className="flex items-center gap-5">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-600 text-white">
+                    <Phone className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-neutral-500">Phone</p>
+                    <a href="tel:+919876543210" className="text-2xl font-semibold text-neutral-900 hover:text-orange-500">
+                      +91 98765 43210
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="inline-flex items-center gap-2 font-semibold text-foreground">
-                  <Mail className="h-4 w-4 text-[#f26a21]" />
-                  Email
-                </p>
-                <a
-                  href="mailto:sales@gdkpackaging.com"
-                  className="text-muted-foreground hover:text-primary"
-                >
-                  sales@gdkpackaging.com
-                </a>
+
+              <div className="rounded-[28px] border border-neutral-200 bg-white px-7 py-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+                <div className="flex items-center gap-5">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-600 text-white">
+                    <MapPin className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-neutral-500">Address</p>
+                    <p className="text-xl leading-8 font-semibold text-neutral-900">
+                      GDK Packaging Pvt. Ltd.
+                      <br />
+                      42 Industrial Estate Road
+                      <br />
+                      Pune, Maharashtra 411001
+                    </p>
+                  </div>
+                </div>
               </div>
+            </div>
+
+            <div className="mt-8 h-[340px] overflow-hidden rounded-[28px] border border-neutral-200 shadow-sm">
+              <iframe
+                src="https://www.google.com/maps?q=26/59%20Birhana%20Road%20Kanpur%20208001&output=embed"
+                className="h-full w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                title="GDK Packaging location map"
+              />
             </div>
           </div>
 
-          <div className="rounded-xl border border-dashed border-border bg-card p-6 shadow-sm">
-            <h3 className="mb-2 text-lg font-semibold">Google Map</h3>
-            <div className="flex h-48 items-center justify-center rounded-lg bg-muted text-sm text-muted-foreground">
-              Map placeholder (embed Google Map here)
-            </div>
+          <div className="rounded-[32px] border border-neutral-200 bg-white p-8 shadow-[0_20px_60px_rgba(0,0,0,0.08)] md:p-10">
+            <h2 className="text-3xl font-bold tracking-tight">Send an Enquiry</h2>
+            <form className="mt-8 grid gap-6" onSubmit={handleSubmit(onSubmit)}>
+              <div>
+                <label htmlFor="contact-name" className="mb-3 block text-base font-semibold text-neutral-800">
+                  Name
+                </label>
+                <Input
+                  id="contact-name"
+                  placeholder="Your full name"
+                  className="h-14 rounded-2xl px-5 text-lg !bg-white !text-neutral-900 bg-white text-neutral-900 placeholder:text-neutral-400 border border-neutral-300 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10"
+                  aria-invalid={Boolean(errors.name)}
+                  {...register("name")}
+                />
+                {errors.name ? (
+                  <p className="mt-2 text-sm text-destructive">{errors.name.message}</p>
+                ) : null}
+              </div>
+
+              <div>
+                <label htmlFor="contact-phone" className="mb-3 block text-base font-semibold text-neutral-800">
+                  Phone
+                </label>
+                <Input
+                  id="contact-phone"
+                  placeholder="+91 98765 43210"
+                  className="h-14 rounded-2xl px-5 text-lg !bg-white !text-neutral-900 bg-white text-neutral-900 placeholder:text-neutral-400 border border-neutral-300 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10"
+                  aria-invalid={Boolean(errors.phone)}
+                  {...register("phone")}
+                />
+                {errors.phone ? (
+                  <p className="mt-2 text-sm text-destructive">{errors.phone.message}</p>
+                ) : null}
+              </div>
+
+              <div>
+                <label htmlFor="contact-message" className="mb-3 block text-base font-semibold text-neutral-800">
+                  Message
+                </label>
+                <Textarea
+                  id="contact-message"
+                  placeholder="Share your product requirements, quantity, and timeline."
+                  className="min-h-[160px] rounded-2xl px-5 pt-4 text-lg !bg-white !text-neutral-900 bg-white text-neutral-900 placeholder:text-neutral-400 border border-neutral-300 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10"
+                  aria-invalid={Boolean(errors.message)}
+                  {...register("message")}
+                />
+                {errors.message ? (
+                  <p className="mt-2 text-sm text-destructive">{errors.message.message}</p>
+                ) : null}
+              </div>
+
+              <div className="pt-1">
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="mt-6 h-16 w-full rounded-2xl bg-orange-500 text-lg font-semibold text-white shadow-[0_16px_35px_rgba(249,115,22,0.35)] transition-all hover:-translate-y-0.5 hover:bg-orange-600"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
+              </div>
+            </form>
           </div>
         </div>
       </section>

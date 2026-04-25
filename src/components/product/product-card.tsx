@@ -48,7 +48,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <CardHeader>
           <div className="flex items-start justify-between gap-3">
             <div className="space-y-2">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#f26a21]/10 text-[#f26a21]">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[color:color-mix(in_srgb,var(--brand-accent)_14%,white)] text-[var(--brand-accent)]">
                 <ProductIcon className="h-5 w-5" />
               </span>
               <CardTitle>{product.name}</CardTitle>

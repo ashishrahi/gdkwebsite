@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/layout/footer";
+import { FloatingActions } from "@/components/layout/floating-actions";
 import { SiteShell } from "@/components/layout/site-shell";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
@@ -16,8 +17,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GDK Packaging",
+  title: "GDK Group",
   description: "Industrial packaging website built with Next.js and shadcn/ui.",
+  icons: {
+    icon: "/logo-white.png",
+    shortcut: "/logo-white.png",
+    apple: "/logo-white.png",
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +38,7 @@ export default function RootLayout({
       >
         <SiteShell>{children}</SiteShell>
         <Footer />
+        <FloatingActions />
         <Toaster richColors />
       </body>
     </html>

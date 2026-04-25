@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { getProductRouteBySlug } from "@/lib/catalog";
 import type { ProductData } from "@/lib/products-data";
 
 type RelatedProductsProps = {
@@ -25,8 +26,8 @@ export function RelatedProducts({ products }: RelatedProductsProps) {
             <h3 className="text-lg font-semibold text-slate-900">{product.title}</h3>
             <p className="mt-2 text-sm leading-6 text-slate-600">{product.shortDescription}</p>
             <Link
-              href={`/products/${product.slug}`}
-              className="mt-3 inline-flex text-sm font-semibold text-[#1450c8] hover:underline"
+              href={getProductRouteBySlug(product.slug) ?? `/products/${product.slug}`}
+              className="mt-3 inline-flex text-sm font-semibold text-[var(--secondary)] hover:underline"
             >
               View details
             </Link>

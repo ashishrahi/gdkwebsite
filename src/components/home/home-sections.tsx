@@ -130,28 +130,32 @@ const whyChooseUsFeatures = [
     description:
       "State-of-the-art production infrastructure ensures precision, consistency, and high-volume delivery for complex packaging requirements.",
     icon: Factory,
-    iconBoxClassName: "border-orange-200/70 bg-orange-50 text-[#f26a21]",
+    iconBoxClassName:
+      "border-[color:color-mix(in_srgb,var(--brand-accent)_32%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] text-[var(--brand-accent)]",
   },
   {
     title: "Custom Packaging Design",
     description:
       "Our design specialists create tailored packaging formats aligned with your product, branding, and operational workflows.",
     icon: ClipboardList,
-    iconBoxClassName: "border-orange-200/70 bg-orange-50 text-[#f26a21]",
+    iconBoxClassName:
+      "border-[color:color-mix(in_srgb,var(--brand-accent)_32%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] text-[var(--brand-accent)]",
   },
   {
     title: "Sustainable Materials",
     description:
       "Eco-conscious material choices and responsible sourcing help reduce environmental impact without compromising performance.",
     icon: Sparkles,
-    iconBoxClassName: "border-orange-200/70 bg-orange-50 text-[#f26a21]",
+    iconBoxClassName:
+      "border-[color:color-mix(in_srgb,var(--brand-accent)_32%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] text-[var(--brand-accent)]",
   },
   {
     title: "Global Quality Standards",
     description:
       "Strict quality controls and industry-aligned processes deliver dependable packaging trusted by clients across global markets.",
     icon: Award,
-    iconBoxClassName: "border-orange-200/70 bg-orange-50 text-[#f26a21]",
+    iconBoxClassName:
+      "border-[color:color-mix(in_srgb,var(--brand-accent)_32%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] text-[var(--brand-accent)]",
   },
 ];
 
@@ -199,7 +203,7 @@ export function HomeSections() {
     <>
       <section
         id="about"
-        className="mt-8 rounded-2xl bg-linear-to-br from-orange-50 via-white to-emerald-50 p-4 shadow-sm sm:p-6 lg:mt-12 lg:p-10"
+        className="mt-8 rounded-2xl bg-linear-to-br from-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] via-white to-[color:color-mix(in_srgb,var(--primary)_12%,white)] p-4 shadow-sm sm:p-6 lg:mt-12 lg:p-10"
       >
         <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
           <div className="group relative overflow-hidden rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -215,7 +219,7 @@ export function HomeSections() {
           </div>
 
           <div className="space-y-5 lg:space-y-6">
-            <span className="inline-flex rounded-full border border-[#f26a21]/20 bg-[#f26a21]/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[#f26a21]">
+            <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)]">
               ABOUT GDK PACKAGING
             </span>
 
@@ -242,10 +246,10 @@ export function HomeSections() {
               {trustStats.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3 text-sm font-medium text-slate-800 shadow-sm transition-all duration-300 hover:border-[#2f8f83]/40 hover:shadow-md"
+                  className="rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3 text-sm font-medium text-slate-800 shadow-sm transition-all duration-300 hover:border-[color:color-mix(in_srgb,var(--secondary)_40%,transparent)] hover:shadow-md"
                 >
                   <span className="inline-flex items-center gap-2">
-                    <item.icon className="h-[18px] w-[18px] text-[#f26a21]" />
+                    <item.icon className="h-[18px] w-[18px] text-[var(--brand-accent)]" />
                     {item.label}
                   </span>
                 </div>
@@ -258,7 +262,7 @@ export function HomeSections() {
       <section id="products" className="bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl space-y-4 text-center">
-            <span className="inline-flex rounded-full border border-[#f26a21]/20 bg-[#f26a21]/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[#f26a21]">
+            <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)]">
               OUR PRODUCTS
             </span>
             <h2 className="text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
@@ -287,7 +291,7 @@ export function HomeSections() {
                 </div>
                 <div className="space-y-3 p-6">
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#f26a21]/10 text-[#f26a21]">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[color:color-mix(in_srgb,var(--brand-accent)_14%,white)] text-[var(--brand-accent)]">
                       <product.icon className="h-5 w-5" />
                     </span>
                     <h3 className="text-xl font-semibold text-slate-900">{product.name}</h3>
@@ -295,7 +299,7 @@ export function HomeSections() {
                   <p className="line-clamp-1 text-sm text-slate-600">{product.description}</p>
                   <button
                     type="button"
-                    className="inline-flex items-center text-sm font-semibold text-[#f26a21] transition-colors duration-200 hover:text-[#2f8f83]"
+                    className="inline-flex items-center text-sm font-semibold text-[var(--brand-accent)] transition-colors duration-200 hover:text-[var(--secondary)]"
                   >
                     Learn More <ArrowRight className="ml-1 h-4 w-4" />
                   </button>
@@ -309,7 +313,7 @@ export function HomeSections() {
       <section id="industries" className="bg-white py-20">
         <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl space-y-4 text-center">
-            <span className="inline-flex rounded-full border border-[#f26a21]/20 bg-[#f26a21]/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[#f26a21]">
+            <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)]">
               INDUSTRIES WE SERVE
             </span>
             <h2 className="text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
@@ -330,7 +334,7 @@ export function HomeSections() {
                   key={industry.title}
                   className="rounded-2xl border border-slate-200/80 bg-white p-7 shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(15,23,42,0.12)]"
                 >
-                  <div className="mb-5 inline-flex rounded-xl border border-[#2f8f83]/20 bg-[#2f8f83]/10 p-3 text-[#2f8f83]">
+                  <div className="mb-5 inline-flex rounded-xl border border-[color:color-mix(in_srgb,var(--secondary)_26%,transparent)] bg-[color:color-mix(in_srgb,var(--secondary)_12%,white)] p-3 text-[var(--secondary)]">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <h3 className="text-xl font-semibold text-slate-900">{industry.title}</h3>
@@ -345,7 +349,7 @@ export function HomeSections() {
       <section id="why-choose-us" className="bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl space-y-4 text-center">
-            <span className="inline-flex rounded-full border border-[#f26a21]/20 bg-[#f26a21]/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[#f26a21]">
+            <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)]">
               WHY CHOOSE US
             </span>
             <h2 className="text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
@@ -382,11 +386,11 @@ export function HomeSections() {
 
       <section
         id="manufacturing-process"
-        className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden bg-linear-to-br from-[#1450c8] via-[#1c57d1] to-[#0f3ea8] py-24 lg:py-28"
+        className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden bg-linear-to-br from-[#0079a8] via-[var(--secondary)] to-[#005b80] py-24 lg:py-28"
       >
         <div className="mx-auto w-full max-w-[1800px] space-y-16 px-6 md:px-10 xl:px-14">
           <div className="mx-auto max-w-2xl space-y-5 text-center">
-            <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-orange-300">
+            <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[color:color-mix(in_srgb,var(--brand-accent)_80%,white)]">
               OUR PROCESS
             </span>
             <h2 className="text-4xl font-black tracking-tight text-white md:text-6xl">
@@ -404,11 +408,11 @@ export function HomeSections() {
               return (
                 <article key={processStep.step} className="relative w-full max-w-none pt-14">
                   <div className="absolute -top-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-2xl">
-                    <Icon className="h-9 w-9 text-[#1450c8]" aria-hidden="true" />
+                    <Icon className="h-9 w-9 text-[var(--secondary)]" aria-hidden="true" />
                   </div>
 
                   <div className="relative w-full min-h-[300px] rounded-3xl border border-white/15 bg-white/10 px-6 pt-14 pb-8 backdrop-blur-xl">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-orange-300">
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-[color:color-mix(in_srgb,var(--brand-accent)_80%,white)]">
                       Step {processStep.step}
                     </p>
                     <h3 className="mx-auto mt-4 max-w-[180px] text-center text-xl font-bold leading-tight text-white xl:text-2xl">

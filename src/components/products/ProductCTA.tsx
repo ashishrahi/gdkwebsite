@@ -1,5 +1,6 @@
 import { EnquiryModal } from "@/components/product/enquiry-modal";
 import type { ProductCta } from "@/lib/products-data";
+import Link from "next/link";
 
 type ProductCTAProps = {
   productTitle: string;
@@ -12,7 +13,7 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
   );
 
   return (
-    <section className="rounded-2xl border border-orange-100 bg-white p-6 shadow-sm sm:p-8">
+    <section className="rounded-2xl border border-[color:color-mix(in_srgb,var(--brand-accent)_22%,var(--border))] bg-white p-6 shadow-sm sm:p-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-2">
           <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
@@ -23,23 +24,23 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <a
+          <Link
             href="/contact"
-            className="inline-flex h-9 items-center rounded-lg bg-orange-500 px-4 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+            className="inline-flex h-9 items-center rounded-lg bg-orange-500 px-4 text-sm font-semibold text-white! transition-colors hover:bg-orange-600"
           >
             {cta.primaryLabel}
-          </a>
-          <a
+          </Link>
+          <Link
             href="/contact"
-            className="inline-flex h-9 items-center rounded-lg border border-slate-300 px-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+            className="inline-flex h-9 items-center rounded-lg border border-neutral-300 bg-white px-4 text-sm font-semibold text-orange-600 transition-colors hover:border-orange-400"
           >
             {cta.secondaryLabel}
-          </a>
+          </Link>
           <a
             href={`https://wa.me/?text=${whatsappMessage}`}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-9 items-center rounded-lg border border-emerald-300 px-4 text-sm font-semibold text-emerald-700 transition-colors hover:bg-emerald-50"
+            className="inline-flex h-9 items-center rounded-lg border border-green-400 bg-white px-4 text-sm font-semibold text-green-700 transition-colors hover:bg-green-50"
           >
             {cta.whatsappLabel}
           </a>

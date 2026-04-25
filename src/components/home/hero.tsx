@@ -20,62 +20,61 @@ const productRows = [
     description: "3/5 ply heavy-duty packaging",
     tag: "Top Seller",
     icon: Box,
-    tagClass: "border-[#1450c8]/20 bg-[#1450c8]/10 text-[#1450c8]",
+    tagClass: "border-[color:color-mix(in_srgb,var(--secondary)_28%,transparent)] bg-[color:color-mix(in_srgb,var(--secondary)_12%,white)] text-[var(--secondary)]",
   },
   {
     title: "BOPP Tape Rolls",
     description: "Machine and manual grades",
     tag: "Industrial",
     icon: Package,
-    tagClass: "border-[#f26a21]/25 bg-[#f26a21]/15 text-[#f26a21]",
+    tagClass: "border-[color:color-mix(in_srgb,var(--brand-accent)_30%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_14%,white)] text-[var(--brand-accent)]",
   },
   {
     title: "Courier Bags",
     description: "Tamper-safe e-commerce dispatch",
     tag: "Secure",
     icon: ShieldCheck,
-    tagClass: "border-[#1450c8]/20 bg-[#1450c8]/10 text-[#1450c8]",
+    tagClass: "border-[color:color-mix(in_srgb,var(--secondary)_28%,transparent)] bg-[color:color-mix(in_srgb,var(--secondary)_12%,white)] text-[var(--secondary)]",
   },
   {
     title: "Stretch Films",
     description: "High clarity wrap protection",
     tag: "Bulk",
     icon: Truck,
-    tagClass: "border-[#f26a21]/25 bg-[#f26a21]/15 text-[#f26a21]",
+    tagClass: "border-[color:color-mix(in_srgb,var(--brand-accent)_30%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_14%,white)] text-[var(--brand-accent)]",
   },
 ];
 
 export function Hero() {
   return (
-    <section className="group relative min-h-screen overflow-hidden bg-linear-to-br from-white via-slate-50 to-orange-50 px-6 pt-24 pb-12 sm:px-8 sm:pt-28 lg:px-10 lg:pt-32">
+    <section className="group relative min-h-screen overflow-hidden bg-linear-to-br from-white via-slate-50 to-[color:color-mix(in_srgb,var(--secondary)_11%,white)] px-6 pt-24 pb-12 sm:px-8 sm:pt-28 lg:px-10 lg:pt-32">
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2400&q=80"
-          alt="Industrial packaging warehouse with stacked boxes and production operations"
+          src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=2600&q=90"
+          alt="Bright premium industrial logistics warehouse with organized shelving, conveyor flow and cartons"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-100 brightness-[0.95] contrast-[1.08] saturate-[1.05] transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
+          className="scale-[1.05] object-cover object-center opacity-100 brightness-[1.12] contrast-[1.03] saturate-[1.02]"
         />
       </div>
-      <div className="pointer-events-none absolute inset-0 z-0 bg-white/38 backdrop-blur-[0.5px]" />
-      <div className="pointer-events-none absolute inset-0 z-0 bg-linear-to-br from-white/52 via-white/26 to-white/40" />
-      <div className="pointer-events-none absolute -left-20 top-24 z-0 h-72 w-72 rounded-full bg-[#1450c8]/10 blur-3xl" />
-      <div className="pointer-events-none absolute -right-14 bottom-20 z-0 h-72 w-72 rounded-full bg-[#f26a21]/12 blur-3xl" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-0 w-[62%] bg-gradient-to-r from-white/88 via-white/72 to-transparent" />
+      <div className="pointer-events-none absolute -left-20 top-24 z-0 h-72 w-72 rounded-full bg-[color:color-mix(in_srgb,var(--secondary)_14%,transparent)] blur-3xl" />
+      <div className="pointer-events-none absolute -right-14 bottom-20 z-0 h-72 w-72 rounded-full bg-[color:color-mix(in_srgb,var(--brand-accent)_16%,transparent)] blur-3xl" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-[1450px] items-center gap-12 pt-2 lg:-translate-y-[10px] lg:grid-cols-[1fr_520px] lg:gap-16 lg:pt-4">
         <div className="max-w-[600px] space-y-8 motion-safe:animate-[fade-in_0.7s_ease-out]">
-          <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-[11px] font-semibold tracking-[0.14em] text-slate-700 uppercase shadow-[0_10px_24px_rgba(15,23,42,0.1)]">
+          <div className="inline-flex items-center rounded-full border border-white/60 bg-white/90 px-4 py-2 text-[11px] font-semibold tracking-[0.14em] text-slate-900 uppercase shadow-[0_12px_28px_rgba(15,23,42,0.2)] backdrop-blur-sm">
             Trusted Packaging Manufacturer Since 2012
           </div>
 
-          <h1 className="text-[2.4rem] leading-[1.03] font-black tracking-tight text-slate-950 sm:text-[3rem] lg:text-[4.05rem]">
+          <h1 className="text-[2.4rem] leading-[1.03] font-extrabold tracking-tight text-slate-900 sm:text-[3rem] lg:text-[4.05rem]">
             Modern Packaging
             <br />
-            Built for <span className="text-[#f26a21]">Growth</span>
+            Built for <span className="text-[var(--primary)]">Growth</span>
           </h1>
 
-          <p className="max-w-[60ch] text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
+          <p className="max-w-[56ch] text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
             High-quality corrugated boxes, films, tapes and custom industrial
             packaging solutions for modern businesses.
           </p>
@@ -84,7 +83,7 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="group/primary rounded-full bg-[#f26a21] px-7 text-white shadow-[0_16px_34px_rgba(242,106,33,0.45)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#de5b17]"
+              className="group/primary rounded-full bg-[var(--primary)] px-7 text-white shadow-[0_16px_34px_color-mix(in_srgb,var(--primary)_42%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--primary-hover)]"
             >
               <Link
                 href="/products"
@@ -98,7 +97,7 @@ export function Hero() {
               asChild
               variant="outline"
               size="lg"
-              className="group/quote rounded-full border-slate-300 bg-white px-7 text-slate-800 transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900"
+              className="group/quote rounded-full border-white/80 bg-white/95 px-7 text-slate-900 shadow-[0_14px_30px_rgba(15,23,42,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-slate-900"
             >
               <Link
                 href="/contact"
@@ -114,11 +113,11 @@ export function Hero() {
             {trustStats.map((stat, index) => (
               <Card
                 key={stat.label}
-                className="border-slate-200 bg-white/88 shadow-md backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:bg-white"
+                className="border-white/40 bg-white/92 shadow-[0_14px_26px_rgba(15,23,42,0.2)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/70 hover:bg-white"
                 style={{ animationDelay: `${index * 90}ms` }}
               >
                 <CardContent className="px-4 py-4">
-                  <span className="mb-2 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#f26a21]/10 text-[#f26a21]">
+                  <span className="mb-2 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[color:color-mix(in_srgb,var(--brand-accent)_14%,white)] text-[var(--brand-accent)]">
                     <stat.icon className="h-[18px] w-[18px]" />
                   </span>
                   <p className="text-lg font-extrabold text-slate-900">{stat.value}</p>
@@ -129,8 +128,8 @@ export function Hero() {
           </div>
         </div>
 
-        <Card className="relative mx-auto w-full max-w-[520px] border-slate-200 bg-white p-2.5 shadow-xl transition-all duration-500 hover:-translate-y-1">
-          <CardContent className="rounded-[22px] border border-slate-200/80 bg-white p-3.5">
+        <Card className="relative mx-auto w-full max-w-[520px] border-white/70 bg-white/96 p-2.5 shadow-[0_26px_64px_rgba(15,23,42,0.32)] backdrop-blur-[1.5px] transition-all duration-500 hover:-translate-y-1">
+          <CardContent className="rounded-[22px] border border-slate-200/70 bg-white p-3.5">
             <CardHeader className="space-y-2 p-0">
               <CardTitle className="text-xl font-bold tracking-tight text-slate-900">
                 Premium Product Range
@@ -148,7 +147,7 @@ export function Hero() {
                   className="group/row flex items-start justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_16px_26px_rgba(15,23,42,0.08)]"
                 >
                   <div className="flex min-w-0 items-start gap-3">
-                    <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#06162f]/8 text-[#1450c8]">
+                    <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[color:color-mix(in_srgb,var(--secondary)_10%,white)] text-[var(--secondary)]">
                       <item.icon className="size-4" />
                     </span>
                     <div>

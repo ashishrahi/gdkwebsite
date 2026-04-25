@@ -9,6 +9,9 @@ import {
   MapPin,
   Package,
   Phone,
+  Users,
+  Camera,
+  Building2,
 } from "lucide-react";
 
 const quickLinks = [
@@ -39,9 +42,9 @@ const legalLinks = [
 ];
 
 const socialLinks = [
-  { href: "https://www.facebook.com", label: "Facebook", icon: Globe },
-  { href: "https://www.instagram.com", label: "Instagram", icon: Globe },
-  { href: "https://www.linkedin.com", label: "LinkedIn", icon: Globe },
+  { href: "https://www.facebook.com", label: "Facebook", icon: Users },
+  { href: "https://www.instagram.com", label: "Instagram", icon: Camera },
+  { href: "https://www.linkedin.com", label: "LinkedIn", icon: Building2 },
 ];
 
 export function Footer() {
@@ -69,7 +72,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5 lg:gap-8">
           <div className="space-y-4">
             <h3 className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-slate-900">
-              <Briefcase className="h-[18px] w-[18px] text-[#f26a21]" />
+              <Briefcase className="h-[18px] w-[18px] text-[var(--brand-accent)]" />
               Company Info
             </h3>
             <div className="space-y-2 text-sm leading-7 text-slate-600">
@@ -89,14 +92,14 @@ export function Footer() {
                 href="tel:+919889271007"
                 className="inline-flex items-center gap-2 transition-colors hover:text-slate-900"
               >
-                <Phone className="size-4 text-[#f26a21]" />
+                <Phone className="size-4 text-[var(--brand-accent)]" />
                 +91 9889271007
               </a>
               <a
                 href="tel:+919889449000"
                 className="inline-flex items-center gap-2 transition-colors hover:text-slate-900"
               >
-                <Phone className="size-4 text-[#f26a21]" />
+                <Phone className="size-4 text-[var(--brand-accent)]" />
                 +91 9889449000
               </a>
             </div>
@@ -108,7 +111,7 @@ export function Footer() {
 
           <div className="space-y-4">
             <h3 className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-slate-900">
-              <Layers className="h-[18px] w-[18px] text-[#f26a21]" />
+              <Layers className="h-[18px] w-[18px] text-[var(--brand-accent)]" />
               Quick Links
             </h3>
             <ul className="space-y-3 text-sm text-slate-600">
@@ -119,7 +122,7 @@ export function Footer() {
                     className="group inline-flex items-center gap-1.5 transition-colors hover:text-slate-900"
                   >
                     {link.label}
-                    <ArrowRight className="h-3.5 w-3.5 text-[#f26a21] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                    <ArrowRight className="h-3.5 w-3.5 text-[var(--brand-accent)] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                   </Link>
                 </li>
               ))}
@@ -128,7 +131,7 @@ export function Footer() {
 
           <div className="space-y-4">
             <h3 className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-slate-900">
-              <Package className="h-[18px] w-[18px] text-[#f26a21]" />
+              <Package className="h-[18px] w-[18px] text-[var(--brand-accent)]" />
               Products
             </h3>
             <ul className="space-y-3 text-sm text-slate-600">
@@ -139,7 +142,7 @@ export function Footer() {
                     className="group inline-flex items-center gap-1.5 transition-colors hover:text-slate-900"
                   >
                     {link.label}
-                    <ArrowRight className="h-3.5 w-3.5 text-[#f26a21] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                    <ArrowRight className="h-3.5 w-3.5 text-[var(--brand-accent)] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                   </Link>
                 </li>
               ))}
@@ -148,7 +151,7 @@ export function Footer() {
 
           <div className="space-y-4">
             <h3 className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-slate-900">
-              <Globe className="h-[18px] w-[18px] text-[#f26a21]" />
+              <Globe className="h-[18px] w-[18px] text-[var(--brand-accent)]" />
               Company
             </h3>
             <ul className="space-y-3 text-sm text-slate-600">
@@ -159,7 +162,7 @@ export function Footer() {
                     className="group inline-flex items-center gap-1.5 transition-colors hover:text-slate-900"
                   >
                     {link.label}
-                    <ArrowRight className="h-3.5 w-3.5 text-[#f26a21] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+                    <ArrowRight className="h-3.5 w-3.5 text-[var(--brand-accent)] opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                   </Link>
                 </li>
               ))}
@@ -168,7 +171,7 @@ export function Footer() {
 
           <div className="space-y-4">
             <h3 className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-slate-900">
-              <MapPin className="h-[18px] w-[18px] text-[#f26a21]" />
+              <MapPin className="h-[18px] w-[18px] text-[var(--brand-accent)]" />
               Google Map
             </h3>
             <div className="overflow-hidden rounded-xl border border-slate-200">

@@ -20,7 +20,7 @@ export function ProductGallery({ title, items }: ProductGalleryProps) {
         {items.map((item, index) => (
           <figure
             key={`${item.label}-${index}`}
-            className="group overflow-hidden rounded-2xl border border-orange-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+            className="group overflow-hidden rounded-2xl border border-[color:color-mix(in_srgb,var(--brand-accent)_20%,var(--border))] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
           >
             <div className="relative h-52 bg-slate-100">
             <Image
@@ -33,7 +33,7 @@ export function ProductGallery({ title, items }: ProductGalleryProps) {
             </div>
             <figcaption className="flex items-center justify-between gap-3 px-4 py-3">
               <span className="text-sm font-semibold text-slate-800">{item.label}</span>
-              <span className="text-xs text-orange-600">Available</span>
+              <span className="text-xs text-[var(--brand-accent)]">Available</span>
             </figcaption>
           </figure>
         ))}

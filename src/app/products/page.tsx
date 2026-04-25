@@ -23,9 +23,9 @@ export default function ProductsPage() {
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-10 px-6 py-10">
-      <section className="relative overflow-hidden rounded-3xl border border-orange-100 bg-linear-to-br from-white via-orange-50/40 to-white p-8 shadow-sm sm:p-10">
+      <section className="relative overflow-hidden rounded-3xl border border-[color:color-mix(in_srgb,var(--brand-accent)_20%,var(--border))] bg-linear-to-br from-white via-[color:color-mix(in_srgb,var(--secondary)_10%,white)] to-white p-8 shadow-sm sm:p-10">
         <div className="relative z-10 space-y-4">
-          <p className="text-xs font-semibold tracking-[0.16em] text-orange-600 uppercase">
+          <p className="text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)] uppercase">
             GDK Product Range
           </p>
           <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
@@ -46,7 +46,7 @@ export default function ProductsPage() {
               Browse the three primary product categories available in our catalog.
             </p>
           </div>
-          <div className="rounded-lg bg-orange-50 px-3 py-2 text-xs font-semibold text-orange-700">
+          <div className="rounded-lg bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-3 py-2 text-xs font-semibold text-[var(--brand-accent)]">
             Category-first navigation
           </div>
         </div>
@@ -59,7 +59,7 @@ export default function ProductsPage() {
             className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
           >
             <div className="space-y-3 p-5">
-              <p className="text-xs font-semibold tracking-wider text-orange-600 uppercase">
+              <p className="text-xs font-semibold tracking-wider text-[var(--brand-accent)] uppercase">
                 Product Category
               </p>
               <h2 className="text-xl font-semibold tracking-tight text-slate-900">{category.title}</h2>
@@ -67,7 +67,7 @@ export default function ProductsPage() {
               <p className="text-xs text-slate-500">{category.subcategories.length} subcategories</p>
               <Link
                 href={category.href}
-                className="inline-flex text-sm font-semibold text-[#1450c8] hover:underline"
+                className="inline-flex text-sm font-semibold text-[var(--secondary)] hover:underline"
               >
                 Explore Category
               </Link>

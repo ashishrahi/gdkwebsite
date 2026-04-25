@@ -63,7 +63,7 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
   return (
     <Dialog>
       <DialogTrigger
-        className="inline-flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-[0_10px_22px_rgba(242,106,33,0.25)] transition-colors hover:bg-(--primary-hover) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="inline-flex h-9 items-center justify-center rounded-lg bg-orange-400 px-4 text-sm font-semibold text-white! shadow-[0_10px_22px_rgba(242,106,33,0.25)] transition-colors hover:bg-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         Enquire Now
       </DialogTrigger>

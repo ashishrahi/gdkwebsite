@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Globe, Package, Sparkles, Star } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ChevronDown, Globe, Menu, Package, Sparkles, Star, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import {
+  DEFAULT_PRODUCT_MEGA_MENU_CATEGORY_KEY,
+  PRODUCT_MEGA_MENU_CATEGORIES,
+  getMegaMenuCategoryByKey,
+} from "@/lib/data/product-mega-menu";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -44,61 +50,31 @@ const aboutMegaCards = [
   },
 ];
 
-const productMegaCategories = [
-  {
-    key: "esd-trays",
-    title: "ESD Trays",
-    href: "/products/esd-trays",
-    description: "Electrostatic-safe trays engineered for sensitive electronics handling.",
-    icon: Package,
-    items: ["ESD Trays"],
-  },
-  {
-    key: "thermoforming",
-    title: "Thermoforming",
-    href: "/products",
-    description: "High-precision thermoformed packaging for food and industrial products.",
-    icon: Globe,
-    items: ["PP Containers", "PET Containers", "IML Sweet Box"],
-  },
-  {
-    key: "printed-products",
-    title: "Printed Products",
-    href: "/products/printed-products",
-    description: "Premium print-finish packaging solutions for brand-forward applications.",
-    icon: Sparkles,
-    items: ["Printed Boxes"],
-  },
-] as const;
-
-const mobileProductSubmenuHrefMap: Record<string, string> = {
-  "PP Container": "/products/pp-container",
-  "PP Containers": "/products/pp-container",
-  "PP Box": "/products/pp-box",
-  "Meal Box": "/products/meal-box",
-  "Round Container": "/products/round-container",
-  "Pasta Tray": "/products/pasta-tray",
-};
-
-const getMobileProductSubmenuHref = (label: string) =>
-  mobileProductSubmenuHrefMap[label] ?? "/products";
+const productMegaCategoryIcons = {
+  "esd-trays": Package,
+  thermoforming: Globe,
+  "printed-products": Sparkles,
+} as const;
 
 type NavbarProps = {
   overlayOnTop?: boolean;
 };
 
 export function Navbar({ overlayOnTop = false }: NavbarProps) {
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
   const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
   const [activeMobileProductKey, setActiveMobileProductKey] = useState<
-    (typeof productMegaCategories)[number]["key"] | null
+    (typeof PRODUCT_MEGA_MENU_CATEGORIES)[number]["key"] | null
   >(null);
   const [activeDesktopProductKey, setActiveDesktopProductKey] = useState<
-    (typeof productMegaCategories)[number]["key"]
-  >("thermoforming");
+    (typeof PRODUCT_MEGA_MENU_CATEGORIES)[number]["key"]
+  >(DEFAULT_PRODUCT_MEGA_MENU_CATEGORY_KEY);
+  const [activeDesktopMenu, setActiveDesktopMenu] = useState<"about" | "products" | null>(null);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const desktopMenuCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const sectionIds = navLinks.map((link) => link.hash.replace("#", ""));
@@ -176,7 +152,21 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
     };
   }, []);
 
-  const isRouteActive = (hash: string) => activeSection === hash.replace("#", "");
+  const isRouteActive = (hash: string) => {
+    if (pathname.startsWith("/products")) {
+      return hash === "#products";
+    }
+
+    if (pathname.startsWith("/about")) {
+      return hash === "#about";
+    }
+
+    if (pathname !== "/") {
+      return false;
+    }
+
+    return activeSection === hash.replace("#", "");
+  };
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
@@ -185,9 +175,35 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
     setActiveMobileProductKey(null);
   };
 
+  const clearDesktopMenuCloseTimeout = () => {
+    if (desktopMenuCloseTimeoutRef.current) {
+      clearTimeout(desktopMenuCloseTimeoutRef.current);
+      desktopMenuCloseTimeoutRef.current = null;
+    }
+  };
+
+  const openDesktopMenu = (menu: "about" | "products") => {
+    clearDesktopMenuCloseTimeout();
+    setActiveDesktopMenu(menu);
+  };
+
+  const closeDesktopMenuWithDelay = () => {
+    clearDesktopMenuCloseTimeout();
+    desktopMenuCloseTimeoutRef.current = setTimeout(() => {
+      setActiveDesktopMenu(null);
+    }, 180);
+  };
+
+  useEffect(() => {
+    return () => {
+      clearDesktopMenuCloseTimeout();
+    };
+  }, []);
+
   const activeDesktopProductCategory =
-    productMegaCategories.find((category) => category.key === activeDesktopProductKey) ??
-    productMegaCategories[1];
+    getMegaMenuCategoryByKey(activeDesktopProductKey) ??
+    getMegaMenuCategoryByKey(DEFAULT_PRODUCT_MEGA_MENU_CATEGORY_KEY) ??
+    PRODUCT_MEGA_MENU_CATEGORIES[0];
 
   return (
     <header
@@ -221,7 +237,14 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
             const isAboutLink = link.label === "About";
             const isProductsLink = link.label === "Products";
             return (
-              <div key={link.href} className="group relative">
+              <div
+                key={link.href}
+                className="group relative"
+                onMouseEnter={
+                  isAboutLink ? () => openDesktopMenu("about") : isProductsLink ? () => openDesktopMenu("products") : undefined
+                }
+                onMouseLeave={isAboutLink || isProductsLink ? closeDesktopMenuWithDelay : undefined}
+              >
                 {isAboutLink ? (
                   <>
                     <Link
@@ -229,6 +252,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       aria-current={isActive ? "page" : undefined}
                       onClick={() => {
                         setActiveSection(link.hash.replace("#", ""));
+                        setActiveDesktopMenu(null);
                         closeMobileMenu();
                       }}
                       className={cn(
@@ -243,15 +267,25 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       )}
                     >
                       {link.label}
-                      <ChevronDown className="size-3.5 transition-transform duration-300 group-hover:rotate-180" />
+                      <ChevronDown
+                        className={cn(
+                          "size-3.5 transition-transform duration-300",
+                          activeDesktopMenu === "about" ? "rotate-180" : ""
+                        )}
+                      />
                     </Link>
-                    <div className="absolute top-full left-1/2 z-40 h-4 w-[720px] -translate-x-[58%]" />
-                    <div className="pointer-events-none absolute top-full left-1/2 mt-5 z-50 w-[720px] -translate-x-[58%] opacity-0 invisible translate-y-2 transition-all duration-300 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0">
+                    <div
+                      className={cn(
+                        "pointer-events-none absolute top-full left-1/2 mt-1 z-50 w-[720px] -translate-x-[58%] opacity-0 invisible translate-y-2 transition-all duration-300",
+                        activeDesktopMenu === "about" &&
+                          "pointer-events-auto opacity-100 visible translate-y-0"
+                      )}
+                    >
                       <div className="relative rounded-3xl border border-gray-200 bg-white p-7 shadow-2xl">
                         <div className="absolute top-[-10px] left-[58%] z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-gray-200 bg-white shadow-md" />
                         <div className="grid grid-cols-[1fr_1.6fr] gap-8">
                           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#f26a21]">
+                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brand-accent)]">
                               About GDK
                             </p>
                             <ul className="mt-3 space-y-2">
@@ -271,9 +305,9 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                               <Link
                                 key={card.title}
                                 href={card.href}
-                                className="group/card flex items-start gap-3.5 rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f26a21] hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]"
+                                className="group/card flex items-start gap-3.5 rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--brand-accent)] hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]"
                               >
-                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-[#f26a21] to-[#c44f12] text-white">
+                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-[var(--brand-accent)] to-[var(--brand-accent-hover)] text-white">
                                   <card.icon className="h-5 w-5" />
                                 </div>
                                 <div>
@@ -296,6 +330,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       aria-current={isActive ? "page" : undefined}
                       onClick={() => {
                         setActiveSection(link.hash.replace("#", ""));
+                        setActiveDesktopMenu(null);
                         closeMobileMenu();
                       }}
                       className={cn(
@@ -310,31 +345,46 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       )}
                     >
                       {link.label}
-                      <ChevronDown className="size-3.5 transition-transform duration-300 group-hover:rotate-180" />
+                      <ChevronDown
+                        className={cn(
+                          "size-3.5 transition-transform duration-300",
+                          activeDesktopMenu === "products" ? "rotate-180" : ""
+                        )}
+                      />
                     </Link>
-                    <div className="absolute top-full left-1/2 z-40 h-4 w-[860px] -translate-x-[50%]" />
-                    <div className="pointer-events-none absolute top-full left-1/2 mt-5 z-50 w-[860px] -translate-x-[50%] opacity-0 invisible translate-y-2 transition-all duration-300 group-hover:pointer-events-auto group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0">
+                    <div
+                      className={cn(
+                        "pointer-events-none absolute top-full left-1/2 mt-1 z-50 w-[860px] -translate-x-[50%] opacity-0 invisible translate-y-2 transition-all duration-300",
+                        activeDesktopMenu === "products" &&
+                          "pointer-events-auto opacity-100 visible translate-y-0"
+                      )}
+                    >
                       <div className="relative rounded-3xl border border-gray-200 bg-white p-7 shadow-2xl">
                         <div className="absolute top-[-10px] left-[50%] z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-gray-200 bg-white shadow-md" />
                         <div className="grid grid-cols-[1.05fr_1fr] gap-8">
                           <div className="grid grid-cols-1 gap-4.5">
-                            {productMegaCategories.map((category) => {
+                            {PRODUCT_MEGA_MENU_CATEGORIES.map((category) => {
                               const isCategoryActive = activeDesktopProductKey === category.key;
+                              const CategoryIcon =
+                                productMegaCategoryIcons[
+                                  category.key as keyof typeof productMegaCategoryIcons
+                                ] ?? Package;
                               return (
                                 <button
                                   key={category.key}
                                   type="button"
                                   onMouseEnter={() => setActiveDesktopProductKey(category.key)}
                                   onFocus={() => setActiveDesktopProductKey(category.key)}
+                                  onClick={() => setActiveDesktopProductKey(category.key)}
                                   className={cn(
                                     "group/category flex items-start gap-3.5 rounded-2xl border bg-white p-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]",
                                     isCategoryActive
-                                      ? "border-[#f26a21] shadow-[0_10px_24px_rgba(242,106,33,0.2)]"
-                                      : "border-slate-200 hover:border-[#f26a21]/70"
+                                      ? "border-[var(--brand-accent)] shadow-[0_10px_24px_color-mix(in_srgb,var(--brand-accent)_24%,transparent)]"
+                                      : "border-slate-200 hover:border-[color:color-mix(in_srgb,var(--brand-accent)_70%,transparent)]"
                                   )}
                                 >
                                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-slate-100">
-                                    <category.icon className="h-6 w-6 text-[#f26a21]" />
+                                    <CategoryIcon className="h-6 w-6 text-[var(--brand-accent)]" />
                                   </div>
                                   <div>
                                     <p className="text-sm leading-5 font-semibold text-slate-900">{category.title}</p>
@@ -346,28 +396,28 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                               );
                             })}
                           </div>
-                          <Link
-                            href={activeDesktopProductCategory.href}
-                            className="group/panel block rounded-2xl border border-slate-200 bg-slate-50 p-6 transition-all duration-200 hover:border-[#f26a21]"
-                          >
-                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#f26a21]">
-                              {activeDesktopProductCategory.title}
-                            </p>
+                          <div className="group/panel block rounded-2xl border border-slate-200 bg-slate-50 p-6 transition-all duration-200 hover:border-[var(--brand-accent)]">
+                            <Link href={activeDesktopProductCategory.href}>
+                              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brand-accent)]">
+                                {activeDesktopProductCategory.title}
+                              </p>
+                            </Link>
                             <p className="mt-2 text-sm leading-relaxed text-slate-600">
                               Product sub-categories crafted for performance, consistency, and scalable
                               manufacturing.
                             </p>
                             <div className="mt-4 grid grid-cols-1 gap-2.5">
-                              {activeDesktopProductCategory.items.map((item) => (
-                                <div
-                                  key={item}
-                                  className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition-all duration-200 hover:border-[#f26a21] hover:text-[#f26a21]"
+                            {activeDesktopProductCategory.subcategories.map((product) => (
+                                <Link
+                                  href={product.href}
+                                  key={product.slug}
+                                  className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition-all duration-200 hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
                                 >
-                                  {item}
-                                </div>
+                                  {product.title}
+                                </Link>
                               ))}
                             </div>
-                          </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -429,7 +479,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
           <Button
             asChild
             size="lg"
-            className="h-11 rounded-full bg-[#f26a21] px-7 py-3 text-white shadow-[0_16px_34px_rgba(242,106,33,0.45)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#de5b17] hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
+            className="h-11 rounded-full bg-[var(--primary)] px-7 py-3 text-white shadow-[0_16px_34px_color-mix(in_srgb,var(--primary)_42%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--primary-hover)] hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
           >
             <Link href="/#contact" style={{ color: "#fff" }}>
               Get Quote
@@ -440,18 +490,12 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
         <div className="md:hidden">
           <Button
             variant="ghost"
-            size="icon-sm"
-            onClick={() => setIsMobileMenuOpen((previous) => !previous)}
-            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open navigation menu"
             aria-expanded={isMobileMenuOpen}
-            className={cn(
-              "rounded-full transition-all duration-300",
-              scrolled
-                ? "border border-slate-200 bg-white text-slate-800 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-                : "border border-slate-200 bg-white text-slate-800 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-            )}
+            className="h-11 w-11 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-400 text-white shadow-md flex items-center justify-center transition-all duration-200 hover:scale-[1.03] active:scale-[0.96]"
           >
-            <span className="px-1 text-xs font-semibold">{isMobileMenuOpen ? "Close" : "Menu"}</span>
+            <Menu className="h-5 w-5" />
           </Button>
         </div>
       </nav>
@@ -466,6 +510,25 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
           )}
         >
           <div className="flex flex-col gap-2">
+            <div className="mb-1 flex items-center justify-between px-1">
+              <Link href="/#home" className="flex items-center" onClick={closeMobileMenu}>
+                <Image
+                  src="/logo-white.png"
+                  alt="GDK Packaging"
+                  width={220}
+                  height={60}
+                  className="h-10 w-auto object-contain drop-shadow-[0_1px_2px_rgba(15,23,42,0.45)]"
+                />
+              </Link>
+              <button
+                type="button"
+                onClick={closeMobileMenu}
+                aria-label="Close menu"
+                className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-500 shadow-lg hover:bg-orange-600"
+              >
+                <X className="h-6 w-6 text-white stroke-[2.5]" />
+              </button>
+            </div>
             {navLinks.map((link) => {
               const isActive = isRouteActive(link.hash);
               const isAboutLink = link.label === "About";
@@ -574,7 +637,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                               "border-slate-200 bg-slate-50"
                             )}
                           >
-                            {productMegaCategories.map((category) => {
+                            {PRODUCT_MEGA_MENU_CATEGORIES.map((category) => {
                               const isCategoryOpen = activeMobileProductKey === category.key;
                               return (
                                 <div
@@ -616,22 +679,22 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                                     )}
                                   >
                                     <div className="min-h-0 space-y-1">
-                                      {category.items.map((item) => (
+                                      {category.subcategories.map((product) => (
                                         <Link
-                                          key={item}
-                                          href={getMobileProductSubmenuHref(item)}
+                                          key={product.slug}
+                                          href={product.href}
                                           className={cn(
                                             "block rounded-md px-2 py-1.5 text-xs font-medium transition-colors duration-200",
                                             scrolled
-                                              ? "text-slate-600 hover:bg-slate-100 hover:text-[#f26a21]"
-                                              : "text-slate-600 hover:bg-slate-100 hover:text-[#f26a21]"
+                                              ? "text-slate-600 hover:bg-slate-100 hover:text-[var(--brand-accent)]"
+                                              : "text-slate-600 hover:bg-slate-100 hover:text-[var(--brand-accent)]"
                                           )}
                                           onClick={() => {
                                             setActiveSection("products");
                                             closeMobileMenu();
                                           }}
                                         >
-                                          {item}
+                                          {product.title}
                                         </Link>
                                       ))}
                                     </div>
@@ -696,7 +759,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                   setActiveSection("home");
                   closeMobileMenu();
                 }}
-                className="inline-flex flex-1 items-center justify-center rounded-full bg-[#f26a21] px-7 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#df5c17] hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
+                className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--primary)] px-7 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[var(--primary-hover)] hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
               >
                 Get Quote
               </Link>
