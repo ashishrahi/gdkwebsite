@@ -33,7 +33,7 @@ export function ProductGallery({ title, items }: ProductGalleryProps) {
             </div>
             <figcaption className="flex items-center justify-between gap-3 px-4 py-3">
               <span className="text-sm font-semibold text-slate-800">{item.label}</span>
-              <span className="text-xs text-[var(--brand-accent)]">Available</span>
+              <span className="text-xs text-[var(--color-success)]">Available</span>
             </figcaption>
           </figure>
         ))}

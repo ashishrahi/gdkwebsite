@@ -98,18 +98,7 @@ const industries = [
       "Food-safe, performance-tested packaging systems suited for varied beverage and processed food applications.",
     icon: Globe,
   },
-  {
-    title: "Retail",
-    description:
-      "Consumer-ready retail packaging crafted for durability, branding appeal, and efficient logistics handling.",
-    icon: Building2,
-  },
-  {
-    title: "Pharmaceuticals",
-    description:
-      "Compliance-focused pharmaceutical packaging engineered for protection, traceability, and secure distribution.",
-    icon: ShieldCheck,
-  },
+    
   {
     title: "Electronics",
     description:

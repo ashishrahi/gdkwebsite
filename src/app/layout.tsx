@@ -33,14 +33,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`bg-white ${geistSans.variable} ${geistMono.variable} scroll-smooth antialiased`}
-      >
-        <SiteShell>{children}</SiteShell>
-        <Footer />
-        <FloatingActions />
-        <Toaster richColors />
-      </body>
+ <body
+  className={`bg-white ${geistSans.variable} ${geistMono.variable} scroll-smooth antialiased`}
+>
+  <div className="min-h-screen flex flex-col">
+
+    <div className="flex-1">
+      <SiteShell>{children}</SiteShell>
+    </div>
+
+    <Footer />
+
+  </div>
+
+  <FloatingActions />
+  <Toaster richColors />
+</body>
     </html>
   );
 }
