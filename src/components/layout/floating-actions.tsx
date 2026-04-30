@@ -37,14 +37,14 @@ export function FloatingActions() {
             : "translate-y-3 opacity-0 pointer-events-none"
         } max-md:left-4 max-md:bottom-4`}
       >
-        <button
-          type="button"
-          onClick={scrollToTop}
-          aria-label="Scroll to top"
-          className="h-12 w-12 rounded-full border border-neutral-200 bg-white text-neutral-800 shadow-lg transition-all duration-300 hover:scale-105 max-md:h-11 max-md:w-11 flex items-center justify-center"
-        >
-          <ArrowUp size={20} />
-        </button>
+     <button
+  type="button"
+  onClick={scrollToTop}
+  aria-label="Scroll to top"
+  className="h-14 w-14 rounded-full border border-neutral-200 bg-white text-neutral-800 shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center"
+>
+  <ArrowUp className="h-6 w-6 stroke-[2.5]" />
+</button>
       </div>
 
       <div className="fixed right-5 bottom-6 z-50 max-md:right-4 max-md:bottom-4">
