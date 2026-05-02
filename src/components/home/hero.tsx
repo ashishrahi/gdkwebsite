@@ -128,7 +128,7 @@ export function Hero() {
           </div>
         </div>
 
-        <Card className="relative mx-auto w-full max-w-[520px] border-white/70 bg-white/96 p-2.5 shadow-[0_26px_64px_rgba(15,23,42,0.32)] backdrop-blur-[1.5px] transition-all duration-500 hover:-translate-y-1">
+        <Card className="relative mx-auto w-full md:-translate-y-4 lg:-translate-y-7 max-w-[520px] border-white/70 bg-white/96 p-2.5 shadow-[0_26px_64px_rgba(15,23,42,0.32)] backdrop-blur-[1.5px]">
           <CardContent className="rounded-[22px] border border-slate-200/70 bg-white p-3.5">
             <CardHeader className="space-y-2 p-0">
               <CardTitle className="text-xl font-bold tracking-tight text-slate-900">

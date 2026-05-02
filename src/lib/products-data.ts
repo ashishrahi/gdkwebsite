@@ -112,10 +112,10 @@ export const productsData: ProductData[] = [
       { label: "Lid Type", value: "Snap-fit transparent lid" },
       { label: "Print Option", value: "Sticker + IML compatible" },
     ],
-    heroImage: "/images/sweetbox/1250.jpg",
+    heroImage: "/images/sweetbox/1250.webp",
     gallery: [
-      { label: "1250 ml", image: "/images/sweetbox/1250.jpg" },
-      { label: "1000 ml", image: "/images/sweetbox/1000.jpg" },
+      { label: "1250 ml", image: "/images/sweetbox/1250.webp" },
+      { label: "1000 ml", image: "/images/sweetbox/1000.webp" },
       { label: "750 ml", image: "/images/sweetbox/750.jpg" },
     ],
     variants: ["400 ml", "500 ml", "750 ml", "1000 ml", "1250 ml"],
@@ -698,37 +698,100 @@ export const productsData: ProductData[] = [
   }),
   buildProduct({
     slug: "pcb-tray",
-    title: "PCB Tray",
-    shortDescription: "Anti-static PCB tray designed for circuit board handling and assembly flow.",
-    heroText: "Dimensional stability and ESD protection for high-value PCB movement.",
+    title: "Customised ESD Trays",
+    shortDescription:
+      "High-precision ESD trays designed for safe handling of sensitive electronic components.",
+  
+    heroText:
+      "Engineered for structural integrity, tight tolerances, and reliable ESD protection.",
+  
     description:
-      "PCB Tray variants are engineered for safe handling of bare and assembled boards with repeatable cavity precision and stackable workflow compatibility.",
+      "At GDK Solutions, we excel in creating high-precision ESD trays tailored to your specific needs, blending innovation with sustainability. Armed with advanced thermoforming machines and a skilled engineering team, we produce trays that support complex designs, tight tolerances, integrated markings, and more. Our designs ensure structural integrity, nesting capabilities, and stacking features to optimize performance. After rigorous in-house R&D and quality checks, we proudly use sustainable PCR rPET material, delivering eco-friendly solutions without compromising quality or functionality.",
+  
     category: "ESD Trays",
-    material: "APET / HIPS conductive blend",
-    badges: ["ESD Certified", "Automation Friendly", "Custom Cavity"],
+    material: "APET / PCR rPET / HIPS",
+  
+    badges: [
+      "ESD Safe",
+      "Sustainable Material",
+      "Custom Design",
+    ],
+  
     specifications: [
-      { label: "Surface Resistivity", value: "10^6 to 10^9 Ohm/sq" },
-      { label: "Gauge", value: "0.4 mm to 1.2 mm" },
-      { label: "Stacking", value: "Interlock and anti-slip design" },
-      { label: "Tooling", value: "In-house tool room support" },
+      {
+        label: "Surface Resistivity",
+        value: "10^6 to 10^9 Ohm/sq (ASTM D618)",
+      },
+      {
+        label: "Material Options",
+        value: "APET / PCR rPET / HIPS",
+      },
+      {
+        label: "Gauge Range",
+        value: "0.3 mm to 1.5 mm",
+      },
+      {
+        label: "Manufacturing",
+        value: "In-house extrusion lines and tool room",
+      },
     ],
+  
     heroImage: "/images/esdtray/esdtray.jpg",
+  
     gallery: [
-      { label: "Bare board tray", image: "/images/esdtray/esdtray.jpg" },
-      { label: "Assembly tray", image: "/images/esdtray/esdtray.jpg" },
-      { label: "Interlock tray", image: "/images/esdtray/esdtray.jpg" },
+      { label: "ESD tray design", image: "/images/esdtray/esdtray.jpg" },
+      { label: "Precision tray structure", image: "/images/esdtray/esdtray.jpg" },
+      { label: "Stackable tray system", image: "/images/esdtray/esdtray.jpg" },
     ],
-    variants: ["Standard PCB", "Deep PCB", "Interlock PCB"],
-    features: [...commonTrayFeatures],
-    applications: ["PCB Assembly", "SMT Line Feeding", "Quality Hold", "Inter-plant Transport"],
-    applicationsDescription: "Used in high-control electronics environments where static damage risk must stay minimal.",
+  
+    variants: [
+      "Standard ESD Tray",
+      "Stackable ESD Tray",
+      "Custom Molded Tray",
+    ],
+  
+    features: [
+      "Static-free protection for sensitive electronics",
+      "Sustainable and recyclable material options",
+      "Custom cavity design with high precision",
+      "Stacking and nesting capabilities",
+      "Integrated markings and labeling options",
+      "Reliable structural integrity for transport",
+    ],
+  
+    applications: [
+      "Printed circuit boards",
+      "Micro-processors",
+      "Semi-conductors",
+      "Computer hard disks",
+      "Memory modules",
+      "Mobile components",
+      "Assembly kits",
+    ],
+  
+    applicationsDescription:
+      "Widely used in electronics manufacturing environments where ESD safety, precision handling, and component protection are critical.",
+  
     seo: {
-      title: "PCB ESD Tray Manufacturer | GDK Packaging",
-      description: "Custom anti-static PCB trays for assembly, storage, and secure movement of sensitive boards.",
-      keywords: ["pcb tray", "esd pcb tray", "anti static pcb packaging", "electronics tray"],
+      title: "Custom ESD Tray Manufacturer | GDK Solutions",
+      description:
+        "High-precision customised ESD trays for electronics, ensuring safety, durability, and sustainability.",
+      keywords: [
+        "esd trays",
+        "custom esd tray",
+        "anti static tray",
+        "electronics packaging tray",
+        "pcb tray esd",
+      ],
     },
+  
     cta: defaultCta,
-    relatedProducts: ["component-tray", "ic-tray", "stackable-esd-tray"],
+  
+    relatedProducts: [
+      "component-tray",
+      "ic-tray",
+      "stackable-esd-tray",
+    ],
   }),
   // buildProduct({
   //   slug: "component-tray",
