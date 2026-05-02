@@ -60,19 +60,21 @@ export function ClienteleSection() {
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-40 bg-linear-to-r from-background via-background/90 to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-40 bg-linear-to-l from-background via-background/90 to-transparent" />
 
-        <motion.div
-          className="flex w-max gap-8"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            repeat: Infinity,
-            duration: 38,
-            ease: "linear",
-          }}
-        >
-          {loop.map((src, i) => (
-            <LogoTile key={`${src}-${i}`} src={src} />
-          ))}
-        </motion.div>
+        <div className="py-3">
+          <motion.div
+            className="flex w-max gap-8"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              repeat: Infinity,
+              duration: 38,
+              ease: "linear",
+            }}
+          >
+            {loop.map((src, i) => (
+              <LogoTile key={`${src}-${i}`} src={src} />
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
