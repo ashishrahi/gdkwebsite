@@ -97,7 +97,7 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
             </label>
             <Input
               id="enquiry-phone"
-              placeholder="+91 98765 43210"
+              placeholder="+91 98894 71453"
               aria-invalid={Boolean(errors.phone)}
               {...register("phone")}
             />

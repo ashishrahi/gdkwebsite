@@ -74,6 +74,11 @@ export function Hero() {
             Built for <span className="text-[var(--primary)]">Growth</span>
           </h1>
 
+          <p className="max-w-[56ch] text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
+            From Concept to Solution.{" "}
+            <span className="text-[var(--primary)]">With Sustainability Built In.</span>
+          </p>
+
           <p className="max-w-[56ch] text-base leading-7 text-slate-700 sm:text-lg sm:leading-8">
             High-quality corrugated boxes, films, tapes and custom industrial
             packaging solutions for modern businesses.

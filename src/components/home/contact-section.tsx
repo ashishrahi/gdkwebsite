@@ -1,12 +1,26 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { LucideIcon } from "lucide-react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const contactRows = [
+type ContactRow =
+  | {
+      title: string;
+      value: string;
+      href: string;
+      icon: LucideIcon | typeof FaWhatsapp;
+    }
+  | {
+      title: "Phone";
+      phoneLines: { href: string; text: string }[];
+      icon: typeof Phone;
+    };
+
+const contactRows: ContactRow[] = [
   {
     title: "Email",
     value: "sales@gdkpackaging.com",
@@ -15,8 +29,11 @@ const contactRows = [
   },
   {
     title: "Phone",
-    value: "+91 9889271007",
-    href: "tel:+919889271007",
+    phoneLines: [
+      { href: "tel:+919889471453", text: "+91 98894 71453 (CRM)" },
+      { href: "tel:+919889471454", text: "+91 98894 71454 (Sales Executive)" },
+      { href: "tel:+919889471452", text: "+91 98894 71452 (Senior Sales Executive)" },
+    ],
     icon: Phone,
   },
   {
@@ -27,8 +44,8 @@ const contactRows = [
   },
   {
     title: "WhatsApp",
-    value: "+91 9889271007",
-    href: "https://wa.me/919889271007",
+    value: "+91 98894 71453 (CRM)",
+    href: "https://wa.me/919889471453",
     icon: FaWhatsapp,
   },
 ];
@@ -111,12 +128,40 @@ export function ContactSection() {
               {contactRows.map((item) => {
                 const Icon = item.icon;
 
+                if ("phoneLines" in item) {
+                  return (
+                    <div
+                      key={item.title}
+                      className="flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
+                    >
+                      <span className="inline-flex rounded-xl bg-[var(--secondary)] p-3 text-white">
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <span className="space-y-1">
+                        <span className="block text-base font-semibold text-[var(--secondary)]">
+                          {item.title}
+                        </span>
+                        {item.phoneLines.map((line) => (
+                          <a
+                            key={line.href}
+                            href={line.href}
+                            className="block text-sm leading-6 text-slate-600 sm:text-base"
+                          >
+                            {line.text}
+                          </a>
+                        ))}
+                      </span>
+                    </div>
+                  );
+                }
+
+                const linkItem = item;
                 return (
                   <a
-                    key={item.title}
-                    href={item.href}
-                    target={item.title === "Address" ? "_blank" : undefined}
-                    rel={item.title === "Address" ? "noreferrer" : undefined}
+                    key={linkItem.title}
+                    href={linkItem.href}
+                    target={linkItem.title === "Address" ? "_blank" : undefined}
+                    rel={linkItem.title === "Address" ? "noreferrer" : undefined}
                     className="flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
                   >
                     <span className="inline-flex rounded-xl bg-[var(--secondary)] p-3 text-white">
@@ -124,10 +169,10 @@ export function ContactSection() {
                     </span>
                     <span className="space-y-1">
                       <span className="block text-base font-semibold text-[var(--secondary)]">
-                        {item.title}
+                        {linkItem.title}
                       </span>
                       <span className="block text-sm leading-6 text-slate-600 sm:text-base">
-                        {item.value}
+                        {linkItem.value}
                       </span>
                     </span>
                   </a>

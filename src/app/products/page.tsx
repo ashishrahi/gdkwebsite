@@ -31,6 +31,10 @@ export default function ProductsPage() {
           <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
             Products
           </h1>
+          <p className="max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
+            From Concept to Solution.{" "}
+            <span className="text-[var(--primary)]">With Sustainability Built In.</span>
+          </p>
           <p className="max-w-3xl text-base leading-7 text-slate-600">
             Explore our complete packaging portfolio by top-level category. Choose a category to
             discover subcategories and detailed product pages.

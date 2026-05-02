@@ -719,7 +719,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
               );
             })}
             <div className="mt-3 flex items-center gap-3">
-              <button
+              {/* <button
                 type="button"
                 aria-label="Wishlist"
                 className={cn(
@@ -730,7 +730,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                 )}
               >
                 <Star className="size-4" />
-              </button>
+              </button> */}
               <Link
                 href="/#contact"
                 onClick={() => {

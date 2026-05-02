@@ -24,7 +24,7 @@ const products = [
   { href: "/#products", label: "ESD Trays" },
   { href: "/#products", label: "PP Containers" },
   { href: "/#products", label: "PET Containers" },
-  { href: "/#products", label: "IML Sweet Boxes" },
+  { href: "/#products", label: "IML Containers" },
   { href: "/#products", label: "Printed Products" },
 ];
 
@@ -45,7 +45,7 @@ const socialLinks = [
   { href: "https://www.instagram.com", label: "Instagram", icon: FaInstagram },
   { href: "https://www.linkedin.com", label: "LinkedIn", icon: FaLinkedinIn },
   { href: "https://www.youtube.com", label: "YouTube", icon: FaYoutube },
-  { href: "https://wa.me/919889271007", label: "WhatsApp", icon: FaWhatsapp },
+  { href: "https://wa.me/919889471453", label: "WhatsApp", icon: FaWhatsapp },
 ];
 
 export function Footer() {
@@ -65,8 +65,9 @@ export function Footer() {
               className="h-10 w-auto object-contain"
             />
           </Link>
-          <p className="text-base text-white">
-            Built for quality and industrial growth
+          <p className="max-w-[56ch] text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
+            From Concept to Solution.{" "}
+            <span className="text-[var(--primary)]">With Sustainability Built In.</span>
           </p>
         </div>
       </div>
@@ -80,16 +81,22 @@ export function Footer() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-10 py-5">
 
-        <div className="grid grid-cols-2 items-center gap-6 lg:flex lg:flex-row lg:justify-between">
+          <div className="grid grid-cols-2 items-center gap-6 lg:flex lg:flex-row lg:justify-between">
 
             {/* LOGO */}
-            <Image
-              src="/logo-white1.webp"
-              alt="GDK Packaging"
-              width={250}
-              height={170}
-              className="object-contain w-[180px] sm:w-[220px] md:w-[250px] h-auto"
-            />
+            <div className="flex flex-col gap-1.5">
+              <Image
+                src="/logo-white1.webp"
+                alt="GDK Packaging"
+                width={250}
+                height={170}
+                className="object-contain w-[180px] sm:w-[220px] md:w-[250px] h-auto"
+              />
+              <p className="max-w-[56ch] text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
+                From Concept to Solution.{" "}
+                <span className="text-[var(--primary)]">With Sustainability Built In.</span>
+              </p>
+            </div>
 
             {/* TEXT */}
             <div className="flex-1 flex justify-end mt-20">

@@ -100,6 +100,13 @@ const easePremium = [0.16, 1, 0.3, 1] as const;
 const easeTimeline = [0.25, 1, 0.5, 1] as const;
 const easeHeroY = [0.22, 1, 0.36, 1] as const;
 
+const certifications = [
+  "/images/certifications/cert1.png",
+  "/images/certifications/cert2.png",
+  "/images/certifications/cert3.png",
+  "/images/certifications/cert4.png",
+] as const;
+
 export default function AboutPage() {
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-12 px-6 py-10">
@@ -120,7 +127,7 @@ export default function AboutPage() {
               alt="Kankani Manufacturing Facility"
               width={1400}
               height={500}
-              className="h-56 w-full object-cover object-center md:h-72"
+              className="w-full h-auto object-contain object-center bg-white md:h-72 md:object-cover"
               priority
             />
           </div>
@@ -128,6 +135,10 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
               K.B. Ropes Pvt Ltd
             </h2>
+            <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
+              From Concept to Solution.{" "}
+              <span className="text-primary">With Sustainability Built In.</span>
+            </p>
             <p className="text-base leading-relaxed text-foreground/75 md:text-lg">
               {heroSubtitle}
             </p>
@@ -252,6 +263,69 @@ export default function AboutPage() {
             );
           })}
         </ul>
+      </section>
+
+      <section
+        id="md-message"
+        className="mb-24 scroll-mt-28 space-y-8 md:scroll-mt-32"
+      >
+        <motion.div
+          {...headingInView}
+          transition={{ duration: 0.5, ease: easePremium }}
+        >
+          <h2 className="text-center text-3xl font-semibold tracking-tight text-foreground">
+            Message from the Managing Director
+          </h2>
+        </motion.div>
+
+        <motion.div
+          {...cardInView}
+          transition={{ duration: 0.55, ease: easePremium }}
+          className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-10 text-center lg:grid-cols-2 lg:items-center lg:gap-14"
+        >
+          <figure className="relative mx-auto aspect-4/5 w-full max-w-[280px] shrink-0 overflow-hidden rounded-2xl shadow-[0_20px_50px_-12px_rgba(15,23,42,0.15)] lg:col-start-2 lg:row-start-1 lg:aspect-3/4 lg:max-w-[300px]">
+            <Image
+              src="/images/about/managing-director.jpg"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 280px, 300px"
+            />
+          </figure>
+
+          <div className="flex w-full flex-1 flex-col items-center gap-5 text-center lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:max-w-xl lg:justify-self-center">
+            <p className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
+              Driving innovation, quality, and trust
+            </p>
+            <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
+              We are committed to delivering high-quality packaging solutions that
+              empower businesses to scale with confidence. Our focus on innovation,
+              sustainability, and customer satisfaction drives everything we do.
+            </p>
+          </div>
+
+          <div className="mx-auto w-full max-w-xl lg:col-start-2 lg:row-start-2 lg:max-w-[300px] lg:justify-self-center">
+            <h3 className="mb-4 text-lg font-semibold text-foreground">
+              Certifications
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              {certifications.map((src, index) => (
+                <div
+                  key={src}
+                  className="rounded-xl border border-border bg-white p-4 shadow-sm transition-all duration-300 hover:scale-105"
+                >
+                  <Image
+                    src={src}
+                    alt={`Certification ${index + 1}`}
+                    width={280}
+                    height={80}
+                    className="h-[80px] w-full object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </section>
     </main>
   );

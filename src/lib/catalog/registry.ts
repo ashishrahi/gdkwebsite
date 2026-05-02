@@ -80,7 +80,7 @@ export const NAVIGATION_CATEGORIES: readonly NavigationCategory[] = [
         ],
       },
       {
-        title: "IML Sweet Box",
+        title: "IML Container",
         description: "Premium in-mold labeled packaging for festive sweets and dry fruit assortments.",
         href: "/products/thermoforming/iml-sweet-box",
         slug: "iml-sweet-box",

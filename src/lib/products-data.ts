@@ -434,11 +434,11 @@ export const productsData: ProductData[] = [
   // }),
   buildProduct({
     slug: "premium-sweet-box",
-    title: "Premium Sweet Box",
-    shortDescription: "Decorative IML sweet box for festive and premium confectionery assortments.",
+    title: "IML Container",
+    shortDescription: "Decorative IML container for festive and premium confectionery assortments.",
     heroText: "High shelf appeal packaging designed for gifting and premium sweet brands.",
     description:
-      "Premium Sweet Box combines rigid structure and premium in-mold visual finish, ideal for festive launches, seasonal offers, and high-value mithai assortments.",
+      "IML Container combines rigid structure and premium in-mold visual finish, ideal for festive launches, seasonal offers, and high-value mithai assortments.",
     category: "Thermoforming",
     material: "PP with IML finish",
     badges: ["IML Print", "Festive Edition", "Premium Segment"],
@@ -458,9 +458,9 @@ export const productsData: ProductData[] = [
     features: [...commonFoodFeatures, "Premium IML Surface"],
     applications: ["Festive Sweet Packs", "Premium Gift Boxes", "Retail Mithai Counter", "Corporate Gifting"],
     seo: {
-      title: "Premium IML Sweet Box | GDK Packaging",
-      description: "Premium IML sweet box range for festive gifting and high-value confectionery packaging.",
-      keywords: ["iml sweet box", "premium mithai box", "festive sweet packaging", "printed sweet container"],
+      title: "Premium IML Container | GDK Packaging",
+      description: "Premium IML container range for festive gifting and high-value confectionery packaging.",
+      keywords: ["iml container", "premium mithai box", "festive sweet packaging", "printed sweet container"],
     },
     cta: defaultCta,
     relatedProducts: ["dry-fruit-box", "mithai-tray", "pp-box"],

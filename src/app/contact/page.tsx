@@ -90,9 +90,19 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-neutral-500">Phone</p>
-                    <a href="tel:+919876543210" className="text-2xl font-semibold text-neutral-900 hover:text-orange-500">
-                      +91 98765 43210
-                    </a>
+                    <p className="text-2xl font-semibold text-neutral-900">
+                      <a href="tel:+919889471453" className="hover:text-neutral-700">
+                        +91 98894 71453 (CRM)
+                      </a>
+                      <br />
+                      <a href="tel:+919889471454" className="hover:text-neutral-700">
+                        +91 98894 71454 (Sales Executive)
+                      </a>
+                      <br />
+                      <a href="tel:+919889471452" className="hover:text-neutral-700">
+                        +91 98894 71452 (Senior Sales Executive)
+                      </a>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -123,12 +133,12 @@ export default function ContactPage() {
                   <div>
                     <p className="text-sm font-medium text-neutral-500">WhatsApp</p>
                     <a
-                      href="https://wa.me/919889271007"
+                      href="https://wa.me/919889471453"
                       target="_blank"
                       rel="noreferrer"
                       className="text-2xl font-semibold text-neutral-900 hover:text-[#25D366]"
                     >
-                      +91 98892 71007
+                      +91 98894 71453 (CRM)
                     </a>
                   </div>
                 </div>
@@ -172,7 +182,7 @@ export default function ContactPage() {
                 </label>
                 <Input
                   id="contact-phone"
-                  placeholder="+91 98765 43210"
+                  placeholder="+91 98894 71453"
                   className="h-14 rounded-2xl px-5 text-lg !bg-white !text-neutral-900 bg-white text-neutral-900 placeholder:text-neutral-400 border border-neutral-300 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10"
                   aria-invalid={Boolean(errors.phone)}
                   {...register("phone")}

@@ -41,6 +41,10 @@ export function ProductHero({
         <h1 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
           {title}
         </h1>
+        <p className="max-w-3xl text-xs font-medium leading-relaxed text-slate-300 sm:text-sm">
+          From Concept to Solution.{" "}
+          <span className="text-[var(--primary)]">With Sustainability Built In.</span>
+        </p>
         <p className="max-w-2xl text-sm leading-7 text-slate-200 sm:text-base">
           {shortDescription}
         </p>

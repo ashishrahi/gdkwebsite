@@ -1,0 +1,42 @@
+.wrap {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  gap: 2rem;
+  animation: clientele-marquee 50s linear infinite;
+}
+
+@media (min-width: 768px) {
+  .track {
+    gap: 2rem;
+  }
+}
+
+.wrap:hover .track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes clientele-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
