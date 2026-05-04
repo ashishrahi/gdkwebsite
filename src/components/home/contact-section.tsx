@@ -4,7 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { LucideIcon } from "lucide-react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import { useSendLead } from "@/hooks/useSendLead";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 type ContactRow =
@@ -64,12 +66,14 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 const fieldBaseClass =
-  "w-full rounded-xl !bg-white text-black placeholder:text-slate-500 border border-slate-300 px-5 shadow-sm appearance-none focus:!bg-white focus:text-black focus:border-[var(--secondary)] focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--secondary)_20%,white)] outline-none";
+  "w-full rounded-xl !bg-white text-neutral-900 placeholder:text-neutral-400 border border-slate-300 px-5 shadow-sm appearance-none focus:!bg-white focus:text-neutral-900 focus:border-[var(--secondary)] focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--secondary)_20%,white)] outline-none";
 
 export function ContactSection() {
+  const { sendLead } = useSendLead();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -85,9 +89,17 @@ export function ContactSection() {
     },
   });
 
-  const onSubmit = (data: ContactFormValues) => {
-    void data;
-    // Form submission integration can be wired here.
+  const onSubmit = async (data: ContactFormValues) => {
+    try {
+      await sendLead({
+        ...data,
+        type: "QUOTE",
+      });
+      toast.success("Message sent successfully");
+      reset();
+    } catch (error: any) {
+      toast.error(error?.message || "Something went wrong");
+    }
   };
 
   const getFieldClassName = (hasError: boolean, sizeClass: string) =>
@@ -101,13 +113,13 @@ export function ContactSection() {
     >
       <div className="mx-auto w-full max-w-7xl space-y-14 px-6 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-3xl space-y-4 text-center">
-          <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)]">
+          <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-neutral-500">
             GET IN TOUCH
           </span>
-          <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl">
             Contact Us Today
           </h2>
-          <p className="text-base leading-7 text-slate-600 sm:text-lg">
+          <p className="text-base leading-7 text-neutral-600 sm:text-lg">
             Let&apos;s discuss how we can help with your packaging needs
           </p>
         </div>
@@ -115,10 +127,10 @@ export function ContactSection() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-12">
           <div className="space-y-8">
             <div className="space-y-3">
-              <h3 className="text-2xl font-semibold tracking-tight text-slate-900">
+              <h3 className="text-2xl font-semibold tracking-tight text-neutral-900">
                 Let&apos;s Start a Conversation
               </h3>
-              <p className="max-w-xl text-base leading-7 text-slate-600">
+              <p className="max-w-xl text-base leading-7 text-neutral-600">
                 Our team is ready to help you find the perfect packaging solution for
                 your business.
               </p>
@@ -138,14 +150,14 @@ export function ContactSection() {
                         <Icon className="h-5 w-5" aria-hidden="true" />
                       </span>
                       <span className="space-y-1">
-                        <span className="block text-base font-semibold text-[var(--secondary)]">
+                        <span className="block text-base font-semibold text-neutral-500">
                           {item.title}
                         </span>
                         {item.phoneLines.map((line) => (
                           <a
                             key={line.href}
                             href={line.href}
-                            className="block text-sm leading-6 text-slate-600 sm:text-base"
+                            className="block text-sm leading-6 text-neutral-900 hover:text-neutral-700 sm:text-base"
                           >
                             {line.text}
                           </a>
@@ -162,16 +174,16 @@ export function ContactSection() {
                     href={linkItem.href}
                     target={linkItem.title === "Address" ? "_blank" : undefined}
                     rel={linkItem.title === "Address" ? "noreferrer" : undefined}
-                    className="flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
+                    className="group flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
                   >
                     <span className="inline-flex rounded-xl bg-[var(--secondary)] p-3 text-white">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <span className="space-y-1">
-                      <span className="block text-base font-semibold text-[var(--secondary)]">
+                      <span className="block text-base font-semibold text-neutral-500">
                         {linkItem.title}
                       </span>
-                      <span className="block text-sm leading-6 text-slate-600 sm:text-base">
+                      <span className="block text-sm leading-6 text-neutral-900 group-hover:text-neutral-700 sm:text-base">
                         {linkItem.value}
                       </span>
                     </span>
@@ -195,7 +207,7 @@ export function ContactSection() {
           <div className="rounded-3xl border border-white/70 bg-white/90 p-8 shadow-xl backdrop-blur sm:p-10">
             <form className="contact-form space-y-5" noValidate onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-2">
-                <label htmlFor="contact-name" className="text-slate-800 font-semibold text-sm mb-2">
+                <label htmlFor="contact-name" className="text-neutral-500 font-semibold text-sm mb-2">
                   Name <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <input
@@ -212,7 +224,7 @@ export function ContactSection() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="contact-address" className="text-slate-800 font-semibold text-sm mb-2">
+                <label htmlFor="contact-address" className="text-neutral-500 font-semibold text-sm mb-2">
                   Address <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <textarea
@@ -230,7 +242,7 @@ export function ContactSection() {
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="contact-city" className="text-slate-800 font-semibold text-sm mb-2">
+                  <label htmlFor="contact-city" className="text-neutral-500 font-semibold text-sm mb-2">
                     City <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
@@ -246,7 +258,7 @@ export function ContactSection() {
                   ) : null}
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="contact-zip" className="text-slate-800 font-semibold text-sm mb-2">
+                  <label htmlFor="contact-zip" className="text-neutral-500 font-semibold text-sm mb-2">
                     Zip Code <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
@@ -265,7 +277,7 @@ export function ContactSection() {
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="contact-mobile" className="text-slate-800 font-semibold text-sm mb-2">
+                  <label htmlFor="contact-mobile" className="text-neutral-500 font-semibold text-sm mb-2">
                     Mobile <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
@@ -281,7 +293,7 @@ export function ContactSection() {
                   ) : null}
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="contact-email" className="text-slate-800 font-semibold text-sm mb-2">
+                  <label htmlFor="contact-email" className="text-neutral-500 font-semibold text-sm mb-2">
                     Email <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
@@ -299,7 +311,7 @@ export function ContactSection() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="contact-product" className="text-slate-800 font-semibold text-sm mb-2">
+                <label htmlFor="contact-product" className="text-neutral-500 font-semibold text-sm mb-2">
                   Select Product <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <select
@@ -326,7 +338,7 @@ export function ContactSection() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="contact-comments" className="text-slate-800 font-semibold text-sm mb-2">
+                <label htmlFor="contact-comments" className="text-neutral-500 font-semibold text-sm mb-2">
                   Comments <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <textarea

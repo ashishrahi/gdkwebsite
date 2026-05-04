@@ -114,7 +114,7 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="mt-2 grid gap-3 sm:grid-cols-3">
+          <div className="mt-1 mb-7 grid gap-3 sm:grid-cols-3">
             {trustStats.map((stat, index) => (
               <Card
                 key={stat.label}

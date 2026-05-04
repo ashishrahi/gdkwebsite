@@ -460,19 +460,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
         </div>
 
         <div className="hidden h-11 items-center justify-end gap-3 lg:flex">
-          <button
-            type="button"
-            aria-label="Wishlist"
-            style={{ padding: 0, minHeight: 0 }}
-            className={cn(
-              "group inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[color:color-mix(in_srgb,var(--brand-accent)_18%,#e2e8f0)] bg-white/95 text-[var(--brand-accent)] shadow-[0_8px_18px_rgba(15,23,42,0.08)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--brand-accent)] hover:bg-[color:color-mix(in_srgb,var(--brand-accent)_8%,white)] hover:shadow-[0_14px_26px_color-mix(in_srgb,var(--brand-accent)_24%,transparent)]",
-              scrolled
-                ? "ring-1 ring-slate-100/80"
-                : "ring-1 ring-white/80"
-            )}
-          >
-            <Star className="size-[18px] shrink-0 transition-transform duration-300 group-hover:scale-110" />
-          </button>
+         
           <Button
             asChild
             size="lg"

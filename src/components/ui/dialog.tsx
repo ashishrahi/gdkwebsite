@@ -65,8 +65,8 @@ function DialogContent({
             render={
               <Button
                 variant="ghost"
-                className="absolute top-2 right-2"
-                size="icon-sm"
+                className="absolute top-2 right-2 border-0 bg-transparent text-slate-500 shadow-none hover:bg-transparent hover:text-slate-600 focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-slate-300/60 focus-visible:ring-offset-0 dark:hover:bg-transparent"
+                size="icon"
               >
                 <XIcon />
                 <span className="sr-only">Close</span>

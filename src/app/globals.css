@@ -173,7 +173,7 @@ a:hover {
   color: var(--primary-hover);
 }
 
-section,
+section:not([aria-live="polite"][aria-relevant="additions text"][aria-atomic="false"]),
 article,
 aside {
   margin-bottom: 2rem;

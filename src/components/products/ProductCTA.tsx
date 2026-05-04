@@ -1,7 +1,47 @@
+"use client";
+
 import { EnquiryModal } from "@/components/product/enquiry-modal";
 import type { ProductCta } from "@/lib/products-data";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
+
+const CONTACT_PRIMARY_HREF = "/contact#contact-form";
+
+function getContactFormSectionEl(): HTMLElement | null {
+  return (
+    document.getElementById("contact-form") ??
+    document.querySelector<HTMLElement>("main form.contact-form")
+  );
+}
+
+function scheduleScrollToContactForm(): void {
+  let attempts = 0;
+  const maxAttempts = 80;
+  const id = window.setInterval(() => {
+    attempts += 1;
+    const el = getContactFormSectionEl();
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.clearInterval(id);
+      return;
+    }
+    if (attempts >= maxAttempts) {
+      window.clearInterval(id);
+    }
+  }, 50);
+}
+
+function isModifiedClick(e: React.MouseEvent<HTMLAnchorElement>) {
+  const native = e.nativeEvent;
+  return (
+    e.metaKey ||
+    e.ctrlKey ||
+    e.shiftKey ||
+    e.altKey ||
+    native.button === 1 ||
+    (typeof native.which === "number" && native.which === 2)
+  );
+}
 
 type ProductCTAProps = {
   productTitle: string;
@@ -26,7 +66,12 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
         </div>
         <div className="flex flex-wrap gap-2">
           <Link
-            href="/contact"
+            href={CONTACT_PRIMARY_HREF}
+            scroll={false}
+            onClick={(e) => {
+              if (isModifiedClick(e)) return;
+              scheduleScrollToContactForm();
+            }}
             className="inline-flex h-9 items-center rounded-lg bg-orange-500 px-4 text-sm font-semibold text-white! transition-colors hover:bg-orange-600"
           >
             {cta.primaryLabel}
