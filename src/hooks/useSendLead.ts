@@ -71,12 +71,12 @@ export function useSendLead(options?: UseSendLeadOptions) {
         NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: publicKey ? "set" : "missing",
       });
 
-      const missing: string[] = [];
-      if (!serviceId) missing.push("NEXT_PUBLIC_EMAILJS_SERVICE_ID");
-      if (!templateId) missing.push("NEXT_PUBLIC_EMAILJS_TEMPLATE_ID");
-      if (!publicKey) missing.push("NEXT_PUBLIC_EMAILJS_PUBLIC_KEY");
+      if (!serviceId || !templateId || !publicKey) {
+        const missing: string[] = [];
+        if (!serviceId) missing.push("NEXT_PUBLIC_EMAILJS_SERVICE_ID");
+        if (!templateId) missing.push("NEXT_PUBLIC_EMAILJS_TEMPLATE_ID");
+        if (!publicKey) missing.push("NEXT_PUBLIC_EMAILJS_PUBLIC_KEY");
 
-      if (missing.length > 0) {
         const err = new Error(
           `EmailJS is not configured. Missing: ${missing.join(", ")}. Add these to .env.local in the project root, then restart the Next.js dev server (env is baked in at build/start).`,
         );
