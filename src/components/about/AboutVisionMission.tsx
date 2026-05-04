@@ -1,0 +1,103 @@
+"use client";
+
+import { Award, ShieldCheck, Target } from "lucide-react";
+import { motion } from "framer-motion";
+
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+const visionMission = [
+  {
+    title: "Vision",
+    description:
+      "Build a future-ready packaging ecosystem with long-term customer partnerships.",
+    icon: Award,
+  },
+  {
+    title: "Mission",
+    description:
+      "Deliver dependable packaging systems that improve safety and operational speed.",
+    icon: Target,
+  },
+  {
+    title: "Quality",
+    description:
+      "Maintain strict quality standards across material selection and production.",
+    icon: ShieldCheck,
+  },
+] as const;
+
+const headingInView = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+};
+
+const cardInView = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+};
+
+const easePremium = [0.16, 1, 0.3, 1] as const;
+
+export function AboutVisionMission() {
+  return (
+    <section
+      id="vision-mission"
+      className="mb-24 scroll-mt-28 space-y-8 md:scroll-mt-32"
+    >
+      <motion.div
+        {...headingInView}
+        transition={{ duration: 0.5, ease: easePremium }}
+      >
+        <h2 className="text-3xl font-semibold tracking-tight text-foreground">
+          Our Vision & Mission
+        </h2>
+      </motion.div>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        {visionMission.map((item, index) => (
+          <motion.div
+            key={item.title}
+            {...cardInView}
+            whileHover={{ scale: 1.02 }}
+            transition={{
+              y: {
+                duration: 0.55,
+                delay: index * 0.08,
+                ease: easePremium,
+              },
+              opacity: {
+                duration: 0.55,
+                delay: index * 0.08 + 0.06,
+                ease: easePremium,
+              },
+            }}
+          >
+            <Card className="group h-full rounded-2xl border border-border bg-card p-6 text-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <CardHeader className="flex flex-row items-start gap-3 space-y-0 p-0">
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+                  <item.icon className="h-5 w-5" aria-hidden />
+                </span>
+                <div className="min-w-0 flex-1 space-y-0">
+                  <CardTitle className="font-heading text-xl font-semibold leading-snug text-foreground">
+                    {item.title}
+                  </CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent className="p-0 pt-4">
+                <p className="text-base leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}

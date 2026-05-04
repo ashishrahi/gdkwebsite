@@ -1,9 +1,21 @@
 "use client";
 
-import { Award, ShieldCheck, Target } from "lucide-react";
+import {
+  Award,
+  Bot,
+  Building2,
+  Cpu,
+  Expand,
+  FlaskConical,
+  ShieldCheck,
+  Sprout,
+  Target,
+  TrendingUp,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import { CertificationsGrid } from "@/components/about/CertificationsGrid";
 import {
   Card,
   CardContent,
@@ -101,10 +113,10 @@ const easeTimeline = [0.25, 1, 0.5, 1] as const;
 const easeHeroY = [0.22, 1, 0.36, 1] as const;
 
 const certifications = [
-  "/images/certifications/cert1.png",
-  "/images/certifications/cert2.png",
-  "/images/certifications/cert3.png",
-  "/images/certifications/cert4.png",
+  {
+    image: "/images/certifications/gdk-thumbnail.webp",
+    pdf: "/images/certifications/gdk.pdf",
+  },
 ] as const;
 
 export default function AboutPage() {
@@ -155,56 +167,52 @@ export default function AboutPage() {
       </section>
 
       <section
-        id="vision-mission"
-        className="mb-24 scroll-mt-28 space-y-8 md:scroll-mt-32"
+        id="md-message"
+        className="mb-24 scroll-mt-36 space-y-12 md:scroll-mt-40"
       >
         <motion.div
           {...headingInView}
           transition={{ duration: 0.5, ease: easePremium }}
         >
-          <h2 className="text-3xl font-semibold tracking-tight text-foreground">
-            Our Vision & Mission
+          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+            Message from the Managing Director
           </h2>
         </motion.div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {visionMission.map((item, index) => (
-            <motion.div
-              key={item.title}
-              {...cardInView}
-              whileHover={{ scale: 1.02 }}
-              transition={{
-                y: {
-                  duration: 0.55,
-                  delay: index * 0.08,
-                  ease: easePremium,
-                },
-                opacity: {
-                  duration: 0.55,
-                  delay: index * 0.08 + 0.06,
-                  ease: easePremium,
-                },
-              }}
-            >
-              <Card className="group h-full rounded-2xl border border-border bg-card p-6 text-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                <CardHeader className="flex flex-row items-start gap-3 space-y-0 p-0">
-                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
-                    <item.icon className="h-5 w-5" aria-hidden />
-                  </span>
-                  <div className="min-w-0 flex-1 space-y-0">
-                    <CardTitle className="font-heading text-xl font-semibold leading-snug text-foreground">
-                      {item.title}
-                    </CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent className="p-0 pt-4">
-                  <p className="text-base leading-relaxed text-muted-foreground">
-                    {item.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+
+        <div className="overflow-hidden rounded-xl border border-border bg-card">
+          <motion.div
+            className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-6 text-left md:gap-10 md:px-10 md:py-8"
+            {...heroMotion}
+            transition={{
+              y: { duration: 0.6, ease: easeHeroY },
+              opacity: { duration: 0.78, ease: easePremium },
+            }}
+          >
+            <div className="space-y-5 md:space-y-6">
+              <div className="space-y-1">
+                <p className="text-base font-semibold text-foreground md:text-lg">
+                  Mr. Ramesh Kankani
+                </p>
+                <p className="text-base text-muted-foreground md:text-lg">
+                  Managing Director, GDK Solutions
+                </p>
+              </div>
+
+              <div className="space-y-5 text-base leading-relaxed text-foreground/75 md:text-lg md:leading-relaxed">
+                <p>
+                  Ramesh Kankani, a technocrat with decades of experience in packaging manufacturing, has been the driving force behind GDK Solutions’ steady growth and reliability in the industry. His approach has always been grounded in building strong systems, maintaining process discipline, and delivering consistent quality to customers.
+                </p>
+                <p>
+                  Over the years, he has guided GDK from a conventional setup to an integrated manufacturing unit with capabilities across extrusion, thermoforming, and an in-house tool room. This has enabled faster development, better control over production, and the ability to meet evolving customer requirements with confidence.
+                </p>
+                <p>
+                  His leadership is centered on execution, ensuring that every commitment made to the customer is delivered with precision and consistency. With a clear focus on continuous improvement and technology adoption, he continues to strengthen GDK’s position as a dependable partner for leading FMCG and dairy brands.
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
+
       </section>
 
       <section className="mb-24 space-y-10">
@@ -266,67 +274,79 @@ export default function AboutPage() {
       </section>
 
       <section
-        id="md-message"
+        id="vision-mission"
         className="mb-24 scroll-mt-28 space-y-8 md:scroll-mt-32"
       >
         <motion.div
           {...headingInView}
           transition={{ duration: 0.5, ease: easePremium }}
         >
-          <h2 className="text-center text-3xl font-semibold tracking-tight text-foreground">
-            Message from the Managing Director
+          <h2 className="text-3xl font-semibold tracking-tight text-foreground">
+            Our Vision & Mission
           </h2>
         </motion.div>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {visionMission.map((item, index) => (
+            <motion.div
+              key={item.title}
+              {...cardInView}
+              whileHover={{ scale: 1.02 }}
+              transition={{
+                y: {
+                  duration: 0.55,
+                  delay: index * 0.08,
+                  ease: easePremium,
+                },
+                opacity: {
+                  duration: 0.55,
+                  delay: index * 0.08 + 0.06,
+                  ease: easePremium,
+                },
+              }}
+            >
+              <Card className="group h-full rounded-2xl border border-border bg-card p-6 text-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <CardHeader className="flex flex-row items-start gap-3 space-y-0 p-0">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+                    <item.icon className="h-5 w-5" aria-hidden />
+                  </span>
+                  <div className="min-w-0 flex-1 space-y-0">
+                    <CardTitle className="font-heading text-xl font-semibold leading-snug text-foreground">
+                      {item.title}
+                    </CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="p-0 pt-4">
+                  <p className="text-base leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
 
-        <motion.div
-          {...cardInView}
-          transition={{ duration: 0.55, ease: easePremium }}
-          className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-10 text-center lg:grid-cols-2 lg:items-center lg:gap-14"
-        >
-          <figure className="relative mx-auto aspect-4/5 w-full max-w-[280px] shrink-0 overflow-hidden rounded-2xl shadow-[0_20px_50px_-12px_rgba(15,23,42,0.15)] lg:col-start-2 lg:row-start-1 lg:aspect-3/4 lg:max-w-[300px]">
-            <Image
-              src="/images/about/managing-director.jpg"
-              alt=""
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 280px, 300px"
-            />
-          </figure>
-
-          <div className="flex w-full flex-1 flex-col items-center gap-5 text-center lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:max-w-xl lg:justify-self-center">
-            <p className="text-lg font-semibold tracking-tight text-foreground md:text-xl">
-              Driving innovation, quality, and trust
-            </p>
-            <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
-              We are committed to delivering high-quality packaging solutions that
-              empower businesses to scale with confidence. Our focus on innovation,
-              sustainability, and customer satisfaction drives everything we do.
-            </p>
-          </div>
-
-          <div className="mx-auto w-full max-w-xl lg:col-start-2 lg:row-start-2 lg:max-w-[300px] lg:justify-self-center">
-            <h3 className="mb-4 text-lg font-semibold text-foreground">
+        
+        <div className="space-y-8">
+          <motion.div
+            {...headingInView}
+            transition={{ duration: 0.5, ease: easePremium }}
+          >
+            <h2 className="text-3xl font-semibold tracking-tight text-foreground">
               Certifications
-            </h3>
-            <div className="grid grid-cols-2 gap-4">
-              {certifications.map((src, index) => (
-                <div
-                  key={src}
-                  className="rounded-xl border border-border bg-white p-4 shadow-sm transition-all duration-300 hover:scale-105"
-                >
-                  <Image
-                    src={src}
-                    alt={`Certification ${index + 1}`}
-                    width={280}
-                    height={80}
-                    className="h-[80px] w-full object-contain"
-                  />
-                </div>
-              ))}
+            </h2>
+          </motion.div>
+          <motion.div
+            {...cardInView}
+            transition={{ duration: 0.55, ease: easePremium }}
+            className="w-full"
+          >
+            <div className="w-full flex justify-start">
+              <CertificationsGrid certifications={certifications} />
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
+
     </main>
   );
 }
