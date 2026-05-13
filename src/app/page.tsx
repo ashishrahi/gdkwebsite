@@ -5,13 +5,13 @@ import { HomeSections } from "@/components/home/home-sections";
 export default function Home() {
   return (
     <>
-      <section id="home">
+      <section id="home" className="scroll-mt-(--ds-layout-navbar-h) mb-0!">
         <Hero />
       </section>
 
       <ClienteleSection />
 
-      <main className="mx-auto mt-12 w-full max-w-6xl px-6 pb-10 lg:px-10">
+      <main className="w-full max-w-none! bg-background p-0!">
         <HomeSections />
       </main>
     </>

@@ -6,8 +6,10 @@ export default function ProductsLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Navbar />
-      <GlobalBreadcrumb />
-      {children}
+      <div className="ds-container flex flex-col gap-6 pt-(--ds-space-page-top) pb-ds-section-y lg:gap-8">
+        <GlobalBreadcrumb contained={false} />
+        {children}
+      </div>
     </>
   );
 }

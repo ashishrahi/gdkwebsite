@@ -4,7 +4,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { LucideIcon } from "lucide-react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import {
+  cardIconClassNames,
+  cardSurfaceVariants,
+} from "@/design-system/shadcn/card.variants";
+import {
+  SectionHeader,
+  homeContentSpacingClassName,
+} from "@/components/home/home-card-system";
 import { useSendLead } from "@/hooks/useSendLead";
+import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -66,7 +75,13 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 const fieldBaseClass =
-  "w-full rounded-xl !bg-white text-neutral-900 placeholder:text-neutral-400 border border-slate-300 px-5 shadow-sm appearance-none focus:!bg-white focus:text-neutral-900 focus:border-[var(--secondary)] focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--secondary)_20%,white)] outline-none";
+  "w-full rounded-xl !bg-white text-ds-text-strong placeholder:text-ds-text-subtle border border-input px-5 leading-6 shadow-sm appearance-none focus:!bg-white focus:text-ds-text-strong focus:border-ring focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--ring)_22%,transparent)] outline-none";
+
+const fieldLabelClass = "block text-sm font-semibold leading-5 text-ds-text-muted";
+const contactCardTitleClass =
+  "block m-0 max-w-full wrap-break-word text-base font-semibold leading-snug text-ds-text-muted";
+const contactCardValueClass =
+  "block m-0 max-w-full wrap-break-word text-sm leading-6 text-ds-text-strong sm:text-base";
 
 export function ContactSection() {
   const { sendLead } = useSendLead();
@@ -97,46 +112,38 @@ export function ContactSection() {
       });
       toast.success("Message sent successfully");
       reset();
-    } catch (error: any) {
-      toast.error(error?.message || "Something went wrong");
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : "Something went wrong");
     }
   };
 
   const getFieldClassName = (hasError: boolean, sizeClass: string) =>
-    `${fieldBaseClass} ${sizeClass} ${hasError ? "border-red-400" : ""}`;
+    `${fieldBaseClass} ${sizeClass} ${hasError ? "border-[var(--brand-red)]" : ""}`;
 
   return (
     <section
       id="contact"
-      className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 bg-slate-50 py-24"
+      className="mb-0 bg-ds-surface-muted py-ds-section-y"
       aria-label="Contact section"
     >
-      <div className="mx-auto w-full max-w-7xl space-y-14 px-6 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-3xl space-y-4 text-center">
-          <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-neutral-500">
-            GET IN TOUCH
-          </span>
-          <h2 className="text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl">
-            Contact Us Today
-          </h2>
-          <p className="text-base leading-7 text-neutral-600 sm:text-lg">
-            Let&apos;s discuss how we can help with your packaging needs
-          </p>
-        </div>
+      <div className="ds-container">
+        <SectionHeader
+          eyebrow="Get In Touch"
+          title="Contact Us Today"
+          description="Let's discuss how we can help with your packaging needs"
+        />
 
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-12">
-          <div className="space-y-8">
-            <div className="space-y-3">
-              <h3 className="text-2xl font-semibold tracking-tight text-neutral-900">
-                Let&apos;s Start a Conversation
-              </h3>
-              <p className="max-w-xl text-base leading-7 text-neutral-600">
-                Our team is ready to help you find the perfect packaging solution for
-                your business.
-              </p>
-            </div>
+        <div className={`grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-14 ${homeContentSpacingClassName}`}>
+          <div className="flex flex-col gap-9 lg:gap-10">
+            <SectionHeader
+              eyebrow="Contact Details"
+              title="Let's Start a Conversation"
+              description="Our team is ready to help you find the perfect packaging solution for your business."
+              align="left"
+              titleLevel="h3"
+            />
 
-            <div className="space-y-4">
+            <div className="flex flex-col gap-6 sm:gap-7 lg:gap-8">
               {contactRows.map((item) => {
                 const Icon = item.icon;
 
@@ -144,20 +151,23 @@ export function ContactSection() {
                   return (
                     <div
                       key={item.title}
-                      className="flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
+                      className={cn(
+                        cardSurfaceVariants({ variant: "minimal", padding: "default" }),
+                        "mb-0 flex items-start gap-5 bg-white shadow-ds-card-medium hover:shadow-ds-card-medium"
+                      )}
                     >
-                      <span className="inline-flex rounded-xl bg-[var(--secondary)] p-3 text-white">
+                      <span className={cn(cardIconClassNames.inverse, "p-3")}>
                         <Icon className="h-5 w-5" aria-hidden="true" />
                       </span>
-                      <span className="space-y-1">
-                        <span className="block text-base font-semibold text-neutral-500">
+                      <span className="flex min-w-0 flex-1 flex-col gap-1.5">
+                        <span className={contactCardTitleClass}>
                           {item.title}
                         </span>
                         {item.phoneLines.map((line) => (
                           <a
                             key={line.href}
                             href={line.href}
-                            className="block text-sm leading-6 text-neutral-900 hover:text-neutral-700 sm:text-base"
+                            className={cn(contactCardValueClass, "hover:text-[var(--primary)]")}
                           >
                             {line.text}
                           </a>
@@ -174,16 +184,19 @@ export function ContactSection() {
                     href={linkItem.href}
                     target={linkItem.title === "Address" ? "_blank" : undefined}
                     rel={linkItem.title === "Address" ? "noreferrer" : undefined}
-                    className="group flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow duration-200 hover:shadow-md"
+                    className={cn(
+                      cardSurfaceVariants({ variant: "minimal", padding: "default" }),
+                      "group mb-0 flex items-start gap-5 bg-white shadow-ds-card-medium hover:shadow-ds-card-medium"
+                    )}
                   >
-                    <span className="inline-flex rounded-xl bg-[var(--secondary)] p-3 text-white">
+                    <span className={cn(cardIconClassNames.inverse, "p-3")}>
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
-                    <span className="space-y-1">
-                      <span className="block text-base font-semibold text-neutral-500">
+                    <span className="flex min-w-0 flex-1 flex-col gap-1.5">
+                      <span className={contactCardTitleClass}>
                         {linkItem.title}
                       </span>
-                      <span className="block text-sm leading-6 text-neutral-900 group-hover:text-neutral-700 sm:text-base">
+                      <span className={cn(contactCardValueClass, "group-hover:text-[var(--primary)]")}>
                         {linkItem.value}
                       </span>
                     </span>
@@ -192,7 +205,7 @@ export function ContactSection() {
               })}
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-md">
+            <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "rounded-ds-card-lg bg-white")}>
               <iframe
                 title="GDK Packaging location map"
                 src="https://www.google.com/maps?q=26/59%20Birhana%20Road,%20Kanpur%20-%20208001&output=embed"
@@ -204,27 +217,27 @@ export function ContactSection() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-white/70 bg-white/90 p-8 shadow-xl backdrop-blur sm:p-10">
-            <form className="contact-form space-y-5" noValidate onSubmit={handleSubmit(onSubmit)}>
-              <div className="space-y-2">
-                <label htmlFor="contact-name" className="text-neutral-500 font-semibold text-sm mb-2">
+          <div id="contact-form" className={cn(cardSurfaceVariants({ variant: "elevated", padding: "xl" }), "scroll-mt-28 rounded-ds-card-lg bg-white backdrop-blur")}>
+            <form className="contact-form space-y-6" noValidate onSubmit={handleSubmit(onSubmit)}>
+              <div className="space-y-2.5">
+                <label htmlFor="contact-name" className={fieldLabelClass}>
                   Name <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <input
                   id="contact-name"
                   type="text"
                   aria-invalid={!!errors.name}
-                  className={getFieldClassName(!!errors.name, "h-14")}
+                  className={getFieldClassName(!!errors.name, "h-[52px]")}
                   placeholder="Enter your name"
                   {...register("name")}
                 />
                 {errors.name?.message ? (
-                  <p className="mt-1 text-sm text-red-500 font-medium">{errors.name.message}</p>
+                  <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.name.message}</p>
                 ) : null}
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="contact-address" className="text-neutral-500 font-semibold text-sm mb-2">
+              <div className="space-y-2.5">
+                <label htmlFor="contact-address" className={fieldLabelClass}>
                   Address <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <textarea
@@ -236,88 +249,88 @@ export function ContactSection() {
                   {...register("address")}
                 />
                 {errors.address?.message ? (
-                  <p className="mt-1 text-sm text-red-500 font-medium">{errors.address.message}</p>
+                  <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.address.message}</p>
                 ) : null}
               </div>
 
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <label htmlFor="contact-city" className="text-neutral-500 font-semibold text-sm mb-2">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div className="space-y-2.5">
+                  <label htmlFor="contact-city" className={fieldLabelClass}>
                     City <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
                     id="contact-city"
                     type="text"
                     aria-invalid={!!errors.city}
-                    className={getFieldClassName(!!errors.city, "h-14")}
+                  className={getFieldClassName(!!errors.city, "h-[52px]")}
                     placeholder="Enter city"
                     {...register("city")}
                   />
                   {errors.city?.message ? (
-                    <p className="mt-1 text-sm text-red-500 font-medium">{errors.city.message}</p>
+                    <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.city.message}</p>
                   ) : null}
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="contact-zip" className="text-neutral-500 font-semibold text-sm mb-2">
+                <div className="space-y-2.5">
+                  <label htmlFor="contact-zip" className={fieldLabelClass}>
                     Zip Code <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
                     id="contact-zip"
                     type="text"
                     aria-invalid={!!errors.zipCode}
-                    className={getFieldClassName(!!errors.zipCode, "h-14")}
+                  className={getFieldClassName(!!errors.zipCode, "h-[52px]")}
                     placeholder="Enter zip code"
                     {...register("zipCode")}
                   />
                   {errors.zipCode?.message ? (
-                    <p className="mt-1 text-sm text-red-500 font-medium">{errors.zipCode.message}</p>
+                    <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.zipCode.message}</p>
                   ) : null}
                 </div>
               </div>
 
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <label htmlFor="contact-mobile" className="text-neutral-500 font-semibold text-sm mb-2">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div className="space-y-2.5">
+                  <label htmlFor="contact-mobile" className={fieldLabelClass}>
                     Mobile <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
                     id="contact-mobile"
                     type="tel"
                     aria-invalid={!!errors.mobile}
-                    className={getFieldClassName(!!errors.mobile, "h-14")}
+                  className={getFieldClassName(!!errors.mobile, "h-[52px]")}
                     placeholder="Enter mobile number"
                     {...register("mobile")}
                   />
                   {errors.mobile?.message ? (
-                    <p className="mt-1 text-sm text-red-500 font-medium">{errors.mobile.message}</p>
+                    <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.mobile.message}</p>
                   ) : null}
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="contact-email" className="text-neutral-500 font-semibold text-sm mb-2">
+                <div className="space-y-2.5">
+                  <label htmlFor="contact-email" className={fieldLabelClass}>
                     Email <span className="text-[var(--brand-red)]">*</span>
                   </label>
                   <input
                     id="contact-email"
                     type="email"
                     aria-invalid={!!errors.email}
-                    className={getFieldClassName(!!errors.email, "h-14")}
+                  className={getFieldClassName(!!errors.email, "h-[52px]")}
                     placeholder="Enter email address"
                     {...register("email")}
                   />
                   {errors.email?.message ? (
-                    <p className="mt-1 text-sm text-red-500 font-medium">{errors.email.message}</p>
+                    <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.email.message}</p>
                   ) : null}
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="contact-product" className="text-neutral-500 font-semibold text-sm mb-2">
+              <div className="space-y-2.5">
+                <label htmlFor="contact-product" className={fieldLabelClass}>
                   Select Product <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <select
                   id="contact-product"
                   aria-invalid={!!errors.product}
-                  className={getFieldClassName(!!errors.product, "h-14")}
+                  className={getFieldClassName(!!errors.product, "h-[52px]")}
                   {...register("product")}
                 >
                   <option value="" disabled>
@@ -333,12 +346,12 @@ export function ContactSection() {
                   <option value="Printed Products">Printed Products</option>
                 </select>
                 {errors.product?.message ? (
-                  <p className="mt-1 text-sm text-red-500 font-medium">{errors.product.message}</p>
+                  <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.product.message}</p>
                 ) : null}
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="contact-comments" className="text-neutral-500 font-semibold text-sm mb-2">
+              <div className="space-y-2.5">
+                <label htmlFor="contact-comments" className={fieldLabelClass}>
                   Comments <span className="text-[var(--brand-red)]">*</span>
                 </label>
                 <textarea
@@ -350,14 +363,14 @@ export function ContactSection() {
                   {...register("comments")}
                 />
                 {errors.comments?.message ? (
-                  <p className="mt-1 text-sm text-red-500 font-medium">{errors.comments.message}</p>
+                  <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.comments.message}</p>
                 ) : null}
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex w-full items-center justify-center rounded-xl bg-[var(--primary)] px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[var(--primary-hover)] disabled:cursor-not-allowed disabled:opacity-70"
+                className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-[var(--brand-accent)] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[var(--brand-accent-hover)] disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>

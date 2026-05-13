@@ -7,6 +7,7 @@ import { ProductFeatures } from "@/components/products/ProductFeatures";
 import { ProductGallery } from "@/components/products/ProductGallery";
 import { ProductHero } from "@/components/products/ProductHero";
 import { RelatedProducts } from "@/components/products/RelatedProducts";
+import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
 import { getNavigationProductDetailMatch, NAVIGATION_CATEGORIES } from "@/lib/catalog";
 import { getProductBySlug, getRelatedProducts } from "@/lib/products-data";
 
@@ -79,7 +80,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
   const relatedProducts = getRelatedProducts(productData.slug);
 
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-6 py-10">
+    <main className="flex w-full flex-1 flex-col gap-10 lg:gap-12">
       <ProductHero
         category={productData.category}
         material={productData.material}
@@ -90,16 +91,16 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
         heroImage={productData.heroImage}
       />
 
-      <section aria-labelledby="product-overview" className="space-y-3">
-        <h2 id="product-overview" className="text-2xl font-semibold tracking-tight text-slate-900">
+      <section aria-labelledby="product-overview" className="space-y-5">
+        <h2 id="product-overview" className="text-h3 text-ds-text-strong">
           Product Details
         </h2>
-        <p className="max-w-4xl text-base leading-7 text-slate-700">{productData.description}</p>
-        <div className="flex flex-wrap gap-2 pt-2">
+        <p className="max-w-4xl text-base leading-7 text-ds-text-body">{productData.description}</p>
+        <div className="flex flex-wrap gap-2.5 pt-1">
           {productData.variants.map((variant) => (
             <span
               key={variant}
-              className="rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,var(--border))] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-3 py-1 text-xs font-semibold text-[var(--brand-accent)]"
+              className="rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,var(--border))] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-3.5 py-1.5 text-xs font-semibold leading-none text-[var(--brand-accent)]"
             >
               {variant}
             </span>
@@ -107,43 +108,43 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
         </div>
       </section>
 
-      <section aria-labelledby="product-specifications" className="space-y-4">
-        <h2 id="product-specifications" className="text-2xl font-semibold tracking-tight text-slate-900">
+      <section aria-labelledby="product-specifications" className="space-y-5">
+        <h2 id="product-specifications" className="text-h3 text-ds-text-strong">
           Specifications
         </h2>
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {productData.specifications.map((spec) => (
             <article
               key={spec.label}
-              className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm"
+              className={`${cardSurfaceVariants({ variant: "minimal" })} rounded-xl px-5 py-4`}
             >
-              <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">{spec.label}</p>
-              <p className="mt-1 text-sm leading-6 text-slate-800">{spec.value}</p>
+              <p className="text-xs font-semibold tracking-wide text-ds-text-subtle uppercase">{spec.label}</p>
+              <p className="mt-2 text-sm leading-6 text-ds-text-strong">{spec.value}</p>
             </article>
           ))}
         </div>
       </section>
 
       {productData.detailSections?.length ? (
-        <section aria-labelledby="product-detail-sections" className="space-y-4">
+        <section aria-labelledby="product-detail-sections" className="space-y-5">
           <h2
             id="product-detail-sections"
-            className="text-2xl font-semibold tracking-tight text-slate-900"
+            className="text-h3 text-ds-text-strong"
           >
             Manufacturing Excellence
           </h2>
-          <div className="grid gap-4 lg:grid-cols-2">
+          <div className="grid gap-5 lg:grid-cols-2 lg:gap-6">
             {productData.detailSections.map((section) => (
               <article
                 key={section.id}
-                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                className={cardSurfaceVariants({ variant: "default", padding: "default" })}
               >
-                <h3 className="text-xl font-semibold tracking-tight text-slate-900">{section.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-slate-600">{section.description}</p>
+                <h3 className="text-h4 text-ds-text-strong">{section.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-ds-text-muted">{section.description}</p>
                 {section.points?.length ? (
-                  <ul className="mt-4 space-y-2">
+                  <ul className="mt-5 space-y-3">
                     {section.points.map((point) => (
-                      <li key={point} className="flex gap-2 text-sm leading-6 text-slate-700">
+                      <li key={point} className="flex gap-2 text-sm leading-6 text-ds-text-body">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-accent)]" />
                         <span>{point}</span>
                       </li>

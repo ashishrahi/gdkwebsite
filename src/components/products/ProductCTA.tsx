@@ -1,7 +1,9 @@
 "use client";
 
 import { EnquiryModal } from "@/components/product/enquiry-modal";
+import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
 import type { ProductCta } from "@/lib/products-data";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -54,17 +56,17 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
   );
 
   return (
-    <section className="rounded-2xl border border-[color:color-mix(in_srgb,var(--brand-accent)_22%,var(--border))] bg-white p-6 shadow-sm sm:p-8">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+    <section className={cn(cardSurfaceVariants({ variant: "gradient" }), "p-6 sm:p-7")}>
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+        <div className="space-y-3">
+          <h2 className="text-h3 text-ds-text-strong">
             {cta.title}
           </h2>
-          <p className="max-w-2xl text-sm leading-6 text-slate-600">
+          <p className="max-w-2xl text-sm leading-6 text-ds-text-muted">
             {cta.description}
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-3">
           <Link
             href={CONTACT_PRIMARY_HREF}
             scroll={false}
@@ -72,13 +74,13 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
               if (isModifiedClick(e)) return;
               scheduleScrollToContactForm();
             }}
-            className="inline-flex h-9 items-center rounded-lg bg-orange-500 px-4 text-sm font-semibold text-white! transition-colors hover:bg-orange-600"
+            className="inline-flex h-11 items-center rounded-lg bg-[var(--brand-accent)] px-5 text-sm font-semibold text-white! transition-colors hover:bg-[var(--brand-accent-hover)]"
           >
             {cta.primaryLabel}
           </Link>
           <Link
             href="/contact"
-            className="inline-flex h-9 items-center rounded-lg border border-neutral-300 bg-white px-4 text-sm font-semibold text-orange-600 transition-colors hover:border-orange-400"
+            className="inline-flex h-11 items-center rounded-lg border border-[color:color-mix(in_srgb,var(--brand-blue-500)_34%,var(--border))] bg-white px-5 text-sm font-semibold text-[var(--primary)] transition-colors hover:border-brand-blue hover:bg-accent"
           >
             {cta.secondaryLabel}
           </Link>
@@ -86,7 +88,7 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
             href={`https://wa.me/?text=${whatsappMessage}`}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-[#25D366] bg-white px-4 text-sm font-semibold text-[#25D366] transition-colors hover:bg-[#25D366] hover:text-white"
+            className="inline-flex h-11 items-center gap-2 rounded-lg border border-[var(--ds-color-whatsapp)] bg-white px-5 text-sm font-semibold text-[var(--ds-color-whatsapp)] transition-colors hover:bg-[var(--ds-color-whatsapp)] hover:text-white"
           >
             <FaWhatsapp className="size-4 shrink-0" />
             {cta.whatsappLabel}

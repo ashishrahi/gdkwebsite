@@ -62,7 +62,7 @@ const easeTimeline = [0.25, 1, 0.5, 1] as const;
 
 export function AboutJourney() {
   return (
-    <section className="mb-24 space-y-10">
+    <section className="mb-28 space-y-12">
       <motion.div
         {...headingInView}
         transition={{ duration: 0.5, ease: easePremium }}
@@ -71,13 +71,13 @@ export function AboutJourney() {
           Our Journey of Growth & Innovation
         </h2>
       </motion.div>
-      <ul className="space-y-10">
+      <ul className="space-y-11">
         {journey.map((entry, index) => {
           const isLast = index === journey.length - 1;
           return (
             <motion.li
               key={entry.year}
-              className="flex gap-6 rounded-xl px-2 py-1 transition-colors duration-300 hover:bg-linear-to-r hover:from-primary/6 hover:to-transparent md:gap-8"
+              className="flex gap-6 rounded-xl px-2 py-2 transition-colors duration-300 hover:bg-linear-to-r hover:from-primary/6 hover:to-transparent md:gap-8"
               {...timelineInView}
               transition={{
                 duration: 0.6,
@@ -97,7 +97,7 @@ export function AboutJourney() {
                   />
                 ) : null}
               </div>
-              <div className="min-w-0 flex-1 space-y-3">
+              <div className="min-w-0 flex-1 space-y-4">
                 <p className="text-2xl font-semibold tabular-nums text-primary">
                   {entry.year}
                 </p>
@@ -105,7 +105,7 @@ export function AboutJourney() {
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2, ease: easePremium }}
                 >
-                  <Card className="rounded-2xl border border-border bg-card p-6 text-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  <Card variant="interactive" className="p-6 sm:p-7 text-foreground">
                     <CardContent className="p-0">
                       <p className="text-base leading-relaxed text-muted-foreground">
                         {entry.description}

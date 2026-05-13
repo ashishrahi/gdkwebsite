@@ -1,0 +1,26 @@
+export const shadowTokens = {
+  global: "0 14px 34px color-mix(in srgb, var(--brand-green-950) 10%, transparent)",
+  globalDark: "0 12px 28px color-mix(in srgb, var(--brand-green-950) 35%, transparent)",
+  xs: "0 1px 2px color-mix(in srgb, var(--brand-green-950) 5%, transparent)",
+  sm: "0 8px 18px color-mix(in srgb, var(--brand-green-950) 6%, transparent)",
+  buttonPrimary: "0 12px 24px color-mix(in srgb, var(--brand-accent) 28%, transparent)",
+  buttonPrimaryStrong: "0 18px 38px color-mix(in srgb, var(--brand-accent) 34%, transparent)",
+  buttonSecondary: "0 12px 24px color-mix(in srgb, var(--secondary) 24%, transparent)",
+  submit: "0 10px 24px color-mix(in srgb, var(--brand-accent) 24%, transparent)",
+  submitHover: "0 14px 30px color-mix(in srgb, var(--brand-accent) 30%, transparent)",
+  focus: "0 0 0 4px color-mix(in srgb, var(--ring) 24%, transparent)",
+  cardSubtle: "0 8px 18px color-mix(in srgb, var(--brand-green-950) 6%, transparent)",
+  cardMedium: "0 14px 34px color-mix(in srgb, var(--brand-green-950) 8%, transparent)",
+  cardElevated: "0 18px 44px color-mix(in srgb, var(--brand-green-950) 7%, transparent)",
+  cardHoverElevation: "0 26px 58px color-mix(in srgb, var(--brand-green-950) 12%, transparent)",
+  card: "0 14px 34px color-mix(in srgb, var(--brand-green-950) 8%, transparent)",
+  cardSoft: "0 18px 44px color-mix(in srgb, var(--brand-green-950) 7%, transparent)",
+  cardHover: "0 26px 58px color-mix(in srgb, var(--brand-green-950) 12%, transparent)",
+  nav: "0 16px 40px color-mix(in srgb, var(--brand-green-950) 12%, transparent)",
+  megaMenu: "0 32px 72px color-mix(in srgb, var(--brand-green-950) 20%, transparent)",
+  heroPanel: "0 30px 70px color-mix(in srgb, var(--brand-green-950) 28%, transparent)",
+  heroBadge: "0 12px 28px color-mix(in srgb, var(--brand-green-950) 18%, transparent)",
+  floatingAction: "0 20px 44px color-mix(in srgb, var(--brand-green-700) 32%, transparent)",
+} as const;
+
+export type ShadowTokens = typeof shadowTokens;

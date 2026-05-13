@@ -11,10 +11,11 @@ export function SiteShell({
 }) {
   const pathname = usePathname();
   const isProductsRoute = pathname.startsWith("/products");
+  const isHomeRoute = pathname === "/";
 
   return (
-    <div className="w-full bg-white text-slate-900">
-      {!isProductsRoute ? <Navbar /> : null}
+    <div className="w-full bg-background text-foreground">
+      {!isProductsRoute ? <Navbar homeVariant={isHomeRoute} /> : null}
       {children}
     </div>
   );

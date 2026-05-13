@@ -3,6 +3,12 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import {
+  SectionHeader,
+  homeContentSpacingClassName,
+} from "@/components/home/home-card-system";
+import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
+import { cn } from "@/lib/utils";
 
 function altFromPath(path: string): string {
   const base = path.split("/").pop()?.replace(/\.[^.]+$/, "") ?? "";
@@ -11,7 +17,7 @@ function altFromPath(path: string): string {
 
 function LogoTile({ src }: { src: string }) {
   return (
-    <div className="group relative flex h-23 w-[180px] shrink-0 items-center justify-center rounded-2xl border border-border bg-card px-6 shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(15,23,42,0.12)]">
+    <div className={cn("group flex h-24 w-[176px] shrink-0 items-center justify-center px-6", cardSurfaceVariants({ variant: "minimal" }))}>
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent opacity-0 transition group-hover:opacity-100" />
 
       <Image
@@ -19,7 +25,7 @@ function LogoTile({ src }: { src: string }) {
         alt={altFromPath(src)}
         width={160}
         height={72}
-        className="max-h-[3.2rem] w-auto object-contain opacity-80 transition-all duration-300 group-hover:scale-[1.06] group-hover:opacity-100"
+        className="max-h-12 w-auto object-contain opacity-80 transition-all duration-200 group-hover:opacity-100"
       />
     </div>
   );
@@ -42,27 +48,24 @@ export function ClienteleSection() {
   if (loop.length === 0) return null;
 
   return (
-    <section className="relative w-full bg-background py-20">
+    <section className="relative mb-0 w-full bg-background py-ds-section-y">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent" />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl space-y-4 text-center">
-          <h2 className="text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            Our Clientele
-          </h2>
-          <p className="mx-auto max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg">
-            Trusted by leading brands across FMCG, dairy, and food & beverage.
-          </p>
-        </div>
+      <div className="ds-container">
+        <SectionHeader
+          eyebrow="Trusted Brands"
+          title="Our Clientele"
+          description="Trusted by leading brands across FMCG, dairy, and food & beverage."
+        />
       </div>
 
-      <div className="relative mt-12 overflow-hidden">
+      <div className={`relative overflow-hidden ${homeContentSpacingClassName}`}>
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-40 bg-linear-to-r from-background via-background/90 to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-40 bg-linear-to-l from-background via-background/90 to-transparent" />
 
-        <div className="py-3">
+        <div className="py-4">
           <motion.div
-            className="flex w-max gap-8"
+            className="flex w-max gap-6"
             animate={{ x: ["0%", "-50%"] }}
             transition={{
               repeat: Infinity,

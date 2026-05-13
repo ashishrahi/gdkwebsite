@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Box, Factory, Layers, Package } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { cardIconClassNames } from "@/design-system/shadcn/card.variants";
+import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
 
 type ProductCardProps = {
@@ -13,63 +17,137 @@ const categoryIcons = [
   { key: "tray", icon: Layers },
   { key: "container", icon: Box },
   { key: "film", icon: Package },
+  { key: "print", icon: Package },
+  { key: "box", icon: Box },
   { key: "industrial", icon: Factory },
+  { key: "thermo", icon: Factory },
   { key: "default", icon: Package },
 ] as const;
 
-export function ProductCard({ product }: ProductCardProps) {
-  const stockStyles = product.inStock
-    ? "bg-secondary/15 text-secondary"
-    : "bg-muted text-muted-foreground";
-  const productHref = `/products/${product.slug}`;
+const DefaultProductIcon = Package;
+
+type BaseProductCardProps = {
+  href: string;
+  ariaLabel: string;
+  title: string;
+  description?: string;
+  meta?: string;
+  imageSrc: string;
+  imageAlt: string;
+  icon?: LucideIcon;
+  badges?: readonly string[];
+  footerLeading?: ReactNode;
+  ctaLabel: string;
+  imageSizes?: string;
+};
+
+const productCardBadgeClassName =
+  "rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,var(--border))] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-3 py-1.5 text-[11px] font-semibold leading-none text-[var(--brand-accent)]";
+
+export function getProductCardIcon(label: string): LucideIcon {
   const matchedCategory = categoryIcons.find((entry) =>
-    entry.key === "default"
-      ? false
-      : product.category.toLowerCase().includes(entry.key)
+    entry.key === "default" ? false : label.toLowerCase().includes(entry.key)
   );
-  const ProductIcon = matchedCategory?.icon ?? categoryIcons.find((entry) => entry.key === "default")!.icon;
+
+  return matchedCategory?.icon ?? categoryIcons.find((entry) => entry.key === "default")!.icon;
+}
+
+export function ProductCardBadge({ children }: { children: ReactNode }) {
+  return <span className={productCardBadgeClassName}>{children}</span>;
+}
+
+export function BaseProductCard({
+  href,
+  ariaLabel,
+  title,
+  description,
+  meta,
+  imageSrc,
+  imageAlt,
+  icon,
+  badges,
+  footerLeading,
+  ctaLabel,
+  imageSizes = "(max-width: 768px) 100vw, 33vw",
+}: BaseProductCardProps) {
+  const ProductIcon = icon ?? DefaultProductIcon;
+  const visibleBadges = badges?.slice(0, 2) ?? [];
 
   return (
     <Link
-      href={productHref}
-      className="block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      aria-label={`View details for ${product.name}`}
+      href={href}
+      className="group/product-card block h-full rounded-ds-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      aria-label={ariaLabel}
     >
-      <Card className="overflow-hidden transition-transform duration-200 hover:-translate-y-0.5">
-        <div className="relative h-44 w-full">
+      <Card variant="interactive" className="h-full">
+        <div className="relative h-44 w-full overflow-hidden bg-ds-surface-muted">
           <Image
-            src={product.imageUrl}
-            alt={product.name}
+            src={imageSrc}
+            alt={imageAlt}
             fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover transition-transform duration-500 ease-ds-out group-hover/product-card:scale-[1.03]"
+            sizes={imageSizes}
           />
         </div>
         <CardHeader>
           <div className="flex items-start justify-between gap-3">
-            <div className="space-y-2">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[color:color-mix(in_srgb,var(--brand-accent)_14%,white)] text-[var(--brand-accent)]">
-                <ProductIcon className="h-5 w-5" />
+            <div className="space-y-3">
+              <span className={cn(cardIconClassNames.brand, "h-9 w-9 rounded-lg")}>
+                <ProductIcon className="h-5 w-5" aria-hidden="true" />
               </span>
-              <CardTitle>{product.name}</CardTitle>
+              <CardTitle>{title}</CardTitle>
             </div>
-            <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${stockStyles}`}>
-              {product.inStock ? "In stock" : "Out of stock"}
-            </span>
+            {visibleBadges.length ? (
+              <div className="flex max-w-36 flex-wrap justify-end gap-2">
+                {visibleBadges.map((badge) => (
+                  <ProductCardBadge key={badge}>{badge}</ProductCardBadge>
+                ))}
+              </div>
+            ) : null}
           </div>
-          <CardDescription>{product.category}</CardDescription>
+          {meta ? <CardDescription>{meta}</CardDescription> : null}
         </CardHeader>
-        <CardContent>
-          <p>{product.description}</p>
-        </CardContent>
-        <CardFooter className="justify-between">
-          <span className="text-base font-semibold text-foreground">${product.price.toFixed(2)}</span>
-          <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
-            View details
-            <ArrowRight className="h-4 w-4" />
+        {description ? (
+          <CardContent className="flex-1">
+            <p>{description}</p>
+          </CardContent>
+        ) : (
+          <CardContent className="flex-1" />
+        )}
+        <CardFooter className="mt-auto justify-between gap-4">
+          {footerLeading ? (
+            <span className="min-w-0 text-sm font-semibold text-foreground sm:text-base">
+              {footerLeading}
+            </span>
+          ) : (
+            <span aria-hidden="true" />
+          )}
+          <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary">
+            {ctaLabel}
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </span>
         </CardFooter>
       </Card>
     </Link>
+  );
+}
+
+export function ProductCard({ product }: ProductCardProps) {
+  const productHref = `/products/${product.slug}`;
+
+  return (
+    <BaseProductCard
+      href={productHref}
+      ariaLabel={`View details for ${product.name}`}
+      title={product.name}
+      description={product.description}
+      meta={product.category}
+      imageSrc={product.imageUrl}
+      imageAlt={product.name}
+      icon={getProductCardIcon(product.category)}
+      badges={[product.inStock ? "In stock" : "Out of stock"]}
+      footerLeading={`$${product.price.toFixed(2)}`}
+      ctaLabel="View details"
+    />
   );
 }

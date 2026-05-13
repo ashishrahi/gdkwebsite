@@ -9,6 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { cardIconClassNames } from "@/design-system/shadcn/card.variants";
+import { cn } from "@/lib/utils";
 
 const visionMission = [
   {
@@ -49,7 +51,7 @@ export function AboutVisionMission() {
   return (
     <section
       id="vision-mission"
-      className="mb-24 scroll-mt-28 space-y-8 md:scroll-mt-32"
+      className="mb-28 scroll-mt-28 space-y-10 md:scroll-mt-32"
     >
       <motion.div
         {...headingInView}
@@ -59,7 +61,7 @@ export function AboutVisionMission() {
           Our Vision & Mission
         </h2>
       </motion.div>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-10">
         {visionMission.map((item, index) => (
           <motion.div
             key={item.title}
@@ -78,9 +80,9 @@ export function AboutVisionMission() {
               },
             }}
           >
-            <Card className="group h-full rounded-2xl border border-border bg-card p-6 text-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <CardHeader className="flex flex-row items-start gap-3 space-y-0 p-0">
-                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+            <Card variant="feature" className="h-full p-6 sm:p-7 text-foreground">
+              <CardHeader className="flex flex-row items-start gap-4 space-y-0 p-0">
+                <span className={cn(cardIconClassNames.brand, "h-11 w-11")}>
                   <item.icon className="h-5 w-5" aria-hidden />
                 </span>
                 <div className="min-w-0 flex-1 space-y-0">
@@ -89,7 +91,7 @@ export function AboutVisionMission() {
                   </CardTitle>
                 </div>
               </CardHeader>
-              <CardContent className="p-0 pt-4">
+              <CardContent className="p-0 pt-5">
                 <p className="text-base leading-relaxed text-muted-foreground">
                   {item.description}
                 </p>

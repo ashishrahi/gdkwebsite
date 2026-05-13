@@ -22,9 +22,14 @@ function iconForCrumbIndex(index: number): LucideIcon | null {
 type GlobalBreadcrumbProps = {
   crumbs?: CatalogBreadcrumbCrumb[];
   className?: string;
+  contained?: boolean;
 };
 
-export function GlobalBreadcrumb({ crumbs: providedCrumbs, className }: GlobalBreadcrumbProps = {}) {
+export function GlobalBreadcrumb({
+  crumbs: providedCrumbs,
+  className,
+  contained = true,
+}: GlobalBreadcrumbProps = {}) {
   const pathname = usePathname();
   const segmentCrumbs = providedCrumbs ?? getProductsBreadcrumbCrumbs(pathname);
 
@@ -38,23 +43,26 @@ export function GlobalBreadcrumb({ crumbs: providedCrumbs, className }: GlobalBr
   }));
 
   return (
-    <nav aria-label="Breadcrumb" className={cn("mx-auto w-full max-w-7xl px-6 pt-28 pb-2", className)}>
-      <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+    <nav
+      aria-label="Breadcrumb"
+      className={cn(contained ? "ds-container pt-6 pb-0 lg:pt-8" : "w-full", className)}
+    >
+      <ol className="flex flex-wrap items-center gap-2 text-sm text-ds-text-muted">
         {crumbs.map((crumb, index) => {
           const isLast = index === crumbs.length - 1;
           return (
             <li key={crumb.href} className="flex items-center gap-2">
               {isLast ? (
-                <span aria-current="page" className="inline-flex items-center gap-1.5 font-medium text-[var(--primary)]">
+                <span aria-current="page" className="inline-flex items-center gap-1.5 font-medium text-(--primary)">
                   {crumb.label}
                 </span>
               ) : (
-                <Link href={crumb.href} className="inline-flex items-center gap-1.5 hover:text-[var(--primary)]">
+                <Link href={crumb.href} className="inline-flex items-center gap-1.5 hover:text-(--primary)">
                   {crumb.icon ? <crumb.icon size={14} strokeWidth={2} className="shrink-0" aria-hidden="true" /> : null}
                   {crumb.label}
                 </Link>
               )}
-              {!isLast ? <span className="text-[color:color-mix(in_srgb,var(--secondary)_45%,#94a3b8)]">/</span> : null}
+              {!isLast ? <span className="text-[color-mix(in_srgb,var(--brand-blue-500)_55%,var(--ds-text-subtle))]">/</span> : null}
             </li>
           );
         })}

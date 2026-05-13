@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Inter, Playfair_Display } from "next/font/google";
 import { Footer } from "@/components/layout/footer";
 import { FloatingActions } from "@/components/layout/floating-actions";
 import { SiteShell } from "@/components/layout/site-shell";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -33,22 +41,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
- <body
-  className={`bg-white ${geistSans.variable} ${geistMono.variable} scroll-smooth antialiased`}
->
-  <div className="min-h-screen flex flex-col">
+      <body
+        className={`${inter.variable} ${playfair.variable} ${geistMono.variable} scroll-smooth bg-background font-sans text-foreground antialiased`}
+      >
+        <div className="flex min-h-screen flex-col">
+          <div className="flex-1">
+            <SiteShell>{children}</SiteShell>
+          </div>
 
-    <div className="flex-1">
-      <SiteShell>{children}</SiteShell>
-    </div>
+          <Footer />
+        </div>
 
-    <Footer />
-
-  </div>
-
-  <FloatingActions />
-  <Toaster richColors />
-</body>
+        <FloatingActions />
+        <Toaster richColors />
+      </body>
     </html>
   );
 }

@@ -1,5 +1,11 @@
 import { BadgeCheck, Droplets, PackageCheck, Recycle, Shield, Snowflake, UtensilsCrossed, Waves } from "lucide-react";
 
+import {
+  cardIconClassNames,
+  cardSurfaceVariants,
+} from "@/design-system/shadcn/card.variants";
+import { cn } from "@/lib/utils";
+
 type ProductFeaturesProps = {
   features: string[];
 };
@@ -18,20 +24,23 @@ export function ProductFeatures({ features }: ProductFeaturesProps) {
   };
 
   return (
-    <section aria-labelledby="product-features" className="space-y-4">
-      <div className="space-y-1">
-        <h2 id="product-features" className="text-2xl font-semibold tracking-tight text-slate-900">
+    <section aria-labelledby="product-features" className="space-y-5">
+      <div className="space-y-2">
+        <h2 id="product-features" className="text-h3 text-ds-text-strong">
           Key Features
         </h2>
-        <p className="text-sm text-slate-600">Built for reliability, hygiene, and bulk operations.</p>
+        <p className="text-sm text-ds-text-muted">Built for reliability, hygiene, and bulk operations.</p>
       </div>
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {features.map((feature) => (
           <li
             key={feature}
-            className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-4 text-sm leading-6 text-slate-700 shadow-sm"
+            className={cn(
+              cardSurfaceVariants({ variant: "minimal" }),
+              "flex items-center gap-4 rounded-xl px-5 py-5 text-sm leading-6 text-ds-text-body"
+            )}
           >
-            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[color:color-mix(in_srgb,var(--brand-accent)_14%,white)] text-[var(--brand-accent)]">
+            <span className={cn(cardIconClassNames.brand, "h-9 w-9 rounded-lg")}>
               {(() => {
                 const Icon = featureIcons[feature as keyof typeof featureIcons] ?? featureIcons.default;
                 return <Icon className="h-4 w-4" aria-hidden="true" />;

@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
 import { useSendLead } from "@/hooks/useSendLead";
 import { cn } from "@/lib/utils";
 
@@ -38,18 +39,18 @@ const enquirySchema = z.object({
 type EnquiryFormValues = z.infer<typeof enquirySchema>;
 
 const contactFieldBase = cn(
-  "w-full rounded-xl border border-slate-300 !bg-white px-4 text-base !text-neutral-900 shadow-sm",
-  "placeholder:text-neutral-400 md:px-5 md:text-sm",
+  "w-full rounded-xl border border-input !bg-white px-4 text-base !text-ds-text-strong shadow-sm",
+  "placeholder:text-ds-text-subtle md:px-5 md:text-sm",
   "transition-[border-color,box-shadow,background-color] duration-200 ease-out",
-  "focus-visible:border-[var(--secondary)] focus-visible:!bg-white focus-visible:ring-4",
-  "focus-visible:ring-[color:color-mix(in_srgb,var(--secondary)_20%,white)]",
-  "aria-invalid:border-red-500 aria-invalid:ring-4 aria-invalid:ring-red-500/20",
-  "aria-invalid:focus-visible:border-red-500 aria-invalid:focus-visible:ring-4 aria-invalid:focus-visible:ring-red-500/25",
+  "focus-visible:border-ring focus-visible:!bg-white focus-visible:ring-4",
+  "focus-visible:ring-[color:color-mix(in_srgb,var(--ring)_22%,transparent)]",
+  "aria-invalid:border-[var(--brand-red)] aria-invalid:ring-4 aria-invalid:ring-[color:color-mix(in_srgb,var(--brand-red)_18%,transparent)]",
+  "aria-invalid:focus-visible:border-[var(--brand-red)] aria-invalid:focus-visible:ring-4 aria-invalid:focus-visible:ring-[color:color-mix(in_srgb,var(--brand-red)_22%,transparent)]",
 );
 
 const contactInputClassName = cn(
   contactFieldBase,
-  "min-h-[44px] py-3 md:h-14 md:min-h-0 md:py-0",
+  "min-h-[48px] py-3 md:h-14 md:min-h-0 md:py-0",
 );
 
 const contactTextareaClassName = cn(
@@ -82,30 +83,30 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
       });
       toast.success("Enquiry submitted");
       reset();
-    } catch (error: any) {
-      toast.error(error?.message || "Something went wrong");
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : "Something went wrong");
     }
   };
 
   return (
     <Dialog>
-      <DialogTrigger className="inline-flex h-9 items-center justify-center rounded-lg bg-orange-500 px-4 text-sm font-semibold text-white! transition-colors hover:bg-orange-600">
+      <DialogTrigger className="inline-flex h-11 items-center justify-center rounded-lg bg-brand-accent px-5 text-sm font-semibold text-white! transition-colors hover:bg-brand-accent-hover">
         Enquire Now
       </DialogTrigger>
-      <DialogContent className="min-h-0 max-w-lg gap-0 rounded-3xl border border-slate-200/90 bg-white/95 px-6 py-6 text-base text-neutral-900 shadow-md backdrop-blur-sm ring-slate-200/90 sm:max-w-lg sm:px-8 sm:py-7 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!bg-transparent [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!bg-none [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!shadow-none [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!border-0 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!text-slate-600 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:hover:!bg-transparent">
+      <DialogContent className={cn(cardSurfaceVariants({ variant: "elevated" }), "min-h-0 max-w-lg gap-0 rounded-ds-card-lg bg-white/95 px-6 py-7 text-base text-ds-text-strong backdrop-blur-sm ring-[color:color-mix(in_srgb,var(--brand-blue-500)_28%,transparent)] sm:max-w-lg sm:px-8 sm:py-8 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!bg-transparent [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!bg-none [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!shadow-none [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!border-0 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!text-ds-text-muted [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:hover:!bg-transparent")}>
 
-        <DialogHeader className="space-y-1.5 text-left">
-          <DialogTitle className="text-2xl font-semibold tracking-tight text-neutral-900">
+        <DialogHeader className="space-y-2 text-left">
+          <DialogTitle className="text-2xl font-semibold tracking-tight text-ds-text-strong">
             Enquiry for {productName}
           </DialogTitle>
-          <DialogDescription className="text-sm leading-6 text-neutral-600">
+          <DialogDescription className="text-sm leading-6 text-ds-text-muted">
             Share your details and our team will contact you shortly.
           </DialogDescription>
         </DialogHeader>
 
-        <form className="mt-4 space-y-4" onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-1.5">
-            <label htmlFor="enquiry-name" className="block text-sm font-semibold text-neutral-600">
+        <form className="mt-6 space-y-5" onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-2">
+            <label htmlFor="enquiry-name" className="block text-sm font-semibold text-ds-text-muted">
               Name
             </label>
             <Input
@@ -116,14 +117,14 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
               {...register("name")}
             />
             {errors.name ? (
-              <p className="text-sm font-medium text-red-600" role="alert">
+              <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
                 {errors.name.message}
               </p>
             ) : null}
           </div>
 
-          <div className="space-y-1.5">
-            <label htmlFor="enquiry-phone" className="block text-sm font-semibold text-neutral-600">
+          <div className="space-y-2">
+            <label htmlFor="enquiry-phone" className="block text-sm font-semibold text-ds-text-muted">
               Phone
             </label>
             <Input
@@ -134,14 +135,14 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
               {...register("phone")}
             />
             {errors.phone ? (
-              <p className="text-sm font-medium text-red-600" role="alert">
+              <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
                 {errors.phone.message}
               </p>
             ) : null}
           </div>
 
-          <div className="space-y-1.5">
-            <label htmlFor="enquiry-message" className="block text-sm font-semibold text-neutral-600">
+          <div className="space-y-2">
+            <label htmlFor="enquiry-message" className="block text-sm font-semibold text-ds-text-muted">
               Message
             </label>
             <Textarea
@@ -152,17 +153,17 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
               {...register("message")}
             />
             {errors.message ? (
-              <p className="text-sm font-medium text-red-600" role="alert">
+              <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
                 {errors.message.message}
               </p>
             ) : null}
           </div>
 
-          <DialogFooter className="mx-0 mb-0 mt-0 flex flex-col gap-0 border-0 bg-transparent p-0 pt-1 shadow-none sm:flex-row sm:justify-end">
+          <DialogFooter className="mx-0 mb-0 mt-1 flex flex-col gap-0 border-0 bg-transparent p-0 pt-2 shadow-none sm:flex-row sm:justify-end">
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="h-11 w-full rounded-xl px-6 text-sm font-semibold shadow-[0_8px_22px_color-mix(in_srgb,var(--primary)_30%,transparent)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:shadow-[0_10px_26px_color-mix(in_srgb,var(--primary)_36%,transparent)] active:translate-y-px disabled:shadow-none md:h-11"
+              className="h-12 w-full rounded-xl px-6 text-sm font-semibold shadow-[var(--ds-shadow-submit)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:shadow-[var(--ds-shadow-submit-hover)] active:translate-y-px disabled:shadow-none"
             >
               {isSubmitting ? "Sending..." : "Send Enquiry"}
             </Button>

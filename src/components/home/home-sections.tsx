@@ -1,12 +1,21 @@
 import Image from "next/image";
 import { ContactSection } from "@/components/home/contact-section";
 import {
-  ArrowRight,
+  FeatureCard,
+  HomeSection,
+  PremiumCard,
+  ProcessCard,
+  SectionHeader,
+  ServiceCard,
+  StatCard,
+  homeContentSpacingClassName,
+  homeGridClassName,
+} from "@/components/home/home-card-system";
+import {
   Award,
   BadgeCheck,
   Box,
   Briefcase,
-  Building2,
   CheckCircle2,
   ClipboardList,
   Clock3,
@@ -98,7 +107,6 @@ const industries = [
       "Food-safe, performance-tested packaging systems suited for varied beverage and processed food applications.",
     icon: Globe,
   },
-    
   {
     title: "Electronics",
     description:
@@ -119,32 +127,24 @@ const whyChooseUsFeatures = [
     description:
       "State-of-the-art production infrastructure ensures precision, consistency, and high-volume delivery for complex packaging requirements.",
     icon: Factory,
-    iconBoxClassName:
-      "border-[color:color-mix(in_srgb,var(--brand-accent)_32%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] text-[var(--brand-accent)]",
   },
   {
     title: "Custom Packaging Design",
     description:
       "Our design specialists create tailored packaging formats aligned with your product, branding, and operational workflows.",
     icon: ClipboardList,
-    iconBoxClassName:
-      "border-[color:color-mix(in_srgb,var(--brand-accent)_32%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] text-[var(--brand-accent)]",
   },
   {
     title: "Sustainable Materials",
     description:
       "Eco-conscious material choices and responsible sourcing help reduce environmental impact without compromising performance.",
     icon: Sparkles,
-    iconBoxClassName:
-      "border-[color:color-mix(in_srgb,var(--brand-accent)_32%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] text-[var(--brand-accent)]",
   },
   {
     title: "Global Quality Standards",
     description:
       "Strict quality controls and industry-aligned processes deliver dependable packaging trusted by clients across global markets.",
     icon: Award,
-    iconBoxClassName:
-      "border-[color:color-mix(in_srgb,var(--brand-accent)_32%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] text-[var(--brand-accent)]",
   },
 ];
 
@@ -190,33 +190,31 @@ const manufacturingProcessSteps = [
 export function HomeSections() {
   return (
     <>
-      <section
-        id="about"
-        className="mt-8 rounded-2xl bg-linear-to-br from-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] via-white to-[color:color-mix(in_srgb,var(--primary)_12%,white)] p-4 shadow-sm sm:p-6 lg:mt-12 lg:p-10"
-      >
-        <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
-          <div className="group relative overflow-hidden rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-            <Image
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80"
-              alt="Industrial packaging warehouse and manufacturing floor"
-              width={1200}
-              height={900}
-              className="h-[280px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[360px] lg:h-[460px]"
-              priority={false}
+      <HomeSection id="about">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
+          <PremiumCard className="overflow-hidden p-0">
+            <div className="relative h-[280px] w-full overflow-hidden rounded-ds-card sm:h-[340px] lg:h-[420px]">
+              <Image
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80"
+                alt="Industrial packaging warehouse and manufacturing floor"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition-transform duration-500 ease-ds-out group-hover/card:scale-[1.03]"
+                priority={false}
+              />
+              <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[color:color-mix(in_srgb,var(--brand-green-950)_35%,transparent)] via-transparent to-transparent" />
+            </div>
+          </PremiumCard>
+
+          <div className="space-y-7">
+            <SectionHeader
+              eyebrow="About GDK Packaging"
+              title="Engineering Reliable Packaging Solutions for Modern Industries"
+              description="Precision-built packaging systems backed by disciplined manufacturing, custom engineering, and dependable bulk supply."
+              align="left"
             />
-            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
-          </div>
 
-          <div className="space-y-5 lg:space-y-6">
-            <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)]">
-              ABOUT GDK PACKAGING
-            </span>
-
-            <h2 className="text-2xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
-              Engineering Reliable Packaging Solutions for Modern Industries
-            </h2>
-
-            <div className="space-y-3 text-sm leading-7 text-slate-700 sm:text-base">
+            <div className="space-y-5 text-body leading-8 text-ds-text-body">
               <p>
                 GDK Packaging brings decades of manufacturing expertise to deliver
                 precision-built packaging systems for high-demand industrial operations.
@@ -231,192 +229,98 @@ export function HomeSections() {
               </p>
             </div>
 
-            <div className="grid gap-3 pt-2 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               {trustStats.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl border border-slate-200/80 bg-white/90 px-4 py-3 text-sm font-medium text-slate-800 shadow-sm transition-all duration-300 hover:border-[color:color-mix(in_srgb,var(--secondary)_40%,transparent)] hover:shadow-md"
-                >
-                  <span className="inline-flex items-center gap-2">
-                    <item.icon className="h-[18px] w-[18px] text-[var(--brand-accent)]" />
-                    {item.label}
-                  </span>
-                </div>
+                <StatCard key={item.label} label={item.label} icon={item.icon} />
               ))}
             </div>
           </div>
         </div>
-      </section>
+      </HomeSection>
 
-      <section id="products" className="bg-slate-50 py-20">
-        <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl space-y-4 text-center">
-            <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)]">
-              OUR PRODUCTS
-            </span>
-            <h2 className="text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              Comprehensive Packaging Solutions
-            </h2>
-            <p className="text-base leading-7 text-slate-700 sm:text-lg">
-              Discover our wide range of industrial packaging products designed for
-              modern businesses.
-            </p>
-          </div>
+      <HomeSection id="products">
+        <SectionHeader
+          eyebrow="Our Products"
+          title="Comprehensive Packaging Solutions"
+          description="Discover our wide range of industrial packaging products designed for modern businesses."
+        />
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {homeProducts.map((product) => (
-              <article
-                key={product.name}
-                className="group overflow-hidden rounded-2xl bg-white shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(15,23,42,0.12)]"
-              >
-                <div className="relative h-56 w-full overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="space-y-3 p-6">
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[color:color-mix(in_srgb,var(--brand-accent)_14%,white)] text-[var(--brand-accent)]">
-                      <product.icon className="h-5 w-5" />
-                    </span>
-                    <h3 className="text-xl font-semibold text-slate-900">{product.name}</h3>
-                  </div>
-                  <p className="line-clamp-1 text-sm text-slate-600">{product.description}</p>
-                  <button
-                    type="button"
-                    className="inline-flex items-center text-sm font-semibold text-[var(--brand-accent)] transition-colors duration-200 hover:text-[var(--secondary)]"
-                  >
-                    Learn More <ArrowRight className="ml-1 h-4 w-4" />
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
+        <div className={`${homeGridClassName} ${homeContentSpacingClassName}`}>
+          {homeProducts.map((product) => (
+            <ServiceCard
+              key={product.name}
+              title={product.name}
+              description={product.description}
+              image={product.image}
+              icon={product.icon}
+            />
+          ))}
         </div>
-      </section>
+      </HomeSection>
 
-      <section id="industries" className="bg-white py-20">
-        <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl space-y-4 text-center">
-            <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)]">
-              INDUSTRIES WE SERVE
-            </span>
-            <h2 className="text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              Trusted Across Multiple Sectors
-            </h2>
-            <p className="text-base leading-7 text-slate-700 sm:text-lg">
-              Our packaging solutions serve diverse industries with quality, safety,
-              and scalability.
-            </p>
-          </div>
+      <HomeSection id="industries">
+        <SectionHeader
+          eyebrow="Industries We Serve"
+          title="Trusted Across Multiple Sectors"
+          description="Our packaging solutions serve diverse industries with quality, safety, and scalability."
+        />
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
-            {industries.map((industry) => {
-              const Icon = industry.icon;
-
-              return (
-                <article
-                  key={industry.title}
-                  className="rounded-2xl border border-slate-200/80 bg-white p-7 shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(15,23,42,0.12)]"
-                >
-                  <div className="mb-5 inline-flex rounded-xl border border-[color:color-mix(in_srgb,var(--secondary)_26%,transparent)] bg-[color:color-mix(in_srgb,var(--secondary)_12%,white)] p-3 text-[var(--secondary)]">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-slate-900">{industry.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">{industry.description}</p>
-                </article>
-              );
-            })}
-          </div>
+        <div className={`${homeGridClassName} ${homeContentSpacingClassName}`}>
+          {industries.map((industry) => (
+            <FeatureCard
+              key={industry.title}
+              title={industry.title}
+              description={industry.description}
+              icon={industry.icon}
+            />
+          ))}
         </div>
-      </section>
+      </HomeSection>
 
-      <section id="why-choose-us" className="bg-slate-50 py-20">
-        <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl space-y-4 text-center">
-            <span className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,transparent)] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)]">
-              WHY CHOOSE US
-            </span>
-            <h2 className="text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              Your Trusted Packaging Partner
-            </h2>
-            <p className="text-base leading-7 text-slate-700 sm:text-lg">
-              Discover what sets us apart in the packaging industry through innovation,
-              quality, and reliability.
-            </p>
-          </div>
+      <HomeSection id="why-choose-us">
+        <SectionHeader
+          eyebrow="Why Choose Us"
+          title="Your Trusted Packaging Partner"
+          description="Discover what sets us apart in the packaging industry through innovation, quality, and reliability."
+          spacing="relaxed"
+        />
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {whyChooseUsFeatures.map((feature) => {
-              const Icon = feature.icon;
-
-              return (
-                <article
-                  key={feature.title}
-                  className="rounded-2xl border border-slate-200/80 bg-white p-8 shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(15,23,42,0.14)]"
-                >
-                  <div
-                    className={`mb-6 inline-flex rounded-xl border p-3 ${feature.iconBoxClassName}`}
-                  >
-                    <Icon className="h-6 w-6" aria-hidden="true" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-slate-900">{feature.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">{feature.description}</p>
-                </article>
-              );
-            })}
-          </div>
+        <div className={`${homeGridClassName} ${homeContentSpacingClassName}`}>
+          {whyChooseUsFeatures.map((feature) => (
+            <FeatureCard
+              key={feature.title}
+              title={feature.title}
+              description={feature.description}
+              icon={feature.icon}
+            />
+          ))}
         </div>
-      </section>
+      </HomeSection>
 
-      <section
+      <HomeSection
         id="manufacturing-process"
-        className="relative left-1/2 right-1/2 w-screen -translate-x-1/2 overflow-hidden bg-linear-to-br from-[#0079a8] via-[var(--secondary)] to-[#005b80] py-24 lg:py-28"
+        tone="gradient"
+        className="py-ds-section-y"
       >
-        <div className="mx-auto w-full max-w-[1800px] space-y-16 px-6 md:px-10 xl:px-14">
-          <div className="mx-auto max-w-2xl space-y-5 text-center">
-            <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold tracking-[0.16em] text-[color:color-mix(in_srgb,var(--brand-accent)_80%,white)]">
-              OUR PROCESS
-            </span>
-            <h2 className="text-4xl font-black tracking-tight text-white md:text-6xl">
-              Manufacturing Excellence
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-white/85 md:text-xl">
-              A streamlined process ensuring quality at every step
-            </p>
-          </div>
+        <SectionHeader
+          eyebrow="Our Process"
+          title="Manufacturing Excellence"
+          description="A streamlined workflow built for consistent quality, dependable timelines, and scalable industrial output."
+          tone="gradient"
+        />
 
-          <div className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6">
-            {manufacturingProcessSteps.map((processStep) => {
-              const Icon = processStep.icon;
-
-              return (
-                <article key={processStep.step} className="relative w-full max-w-none pt-14">
-                  <div className="absolute -top-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full bg-white shadow-2xl">
-                    <Icon className="h-9 w-9 text-[var(--secondary)]" aria-hidden="true" />
-                  </div>
-
-                  <div className="relative w-full min-h-[300px] rounded-3xl border border-white/15 bg-white/10 px-6 pt-14 pb-8 backdrop-blur-xl">
-                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-[color:color-mix(in_srgb,var(--brand-accent)_80%,white)]">
-                      Step {processStep.step}
-                    </p>
-                    <h3 className="mx-auto mt-4 max-w-[180px] text-center text-xl font-bold leading-tight text-white xl:text-2xl">
-                      {processStep.title}
-                    </h3>
-                    <p className="mt-4 text-center text-sm leading-7 text-white/85 xl:text-base">
-                      {processStep.description}
-                    </p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+        <div className={`${homeGridClassName} ${homeContentSpacingClassName}`}>
+          {manufacturingProcessSteps.map((processStep) => (
+            <ProcessCard
+              key={processStep.step}
+              step={processStep.step}
+              title={processStep.title}
+              description={processStep.description}
+              icon={processStep.icon}
+            />
+          ))}
         </div>
-      </section>
+      </HomeSection>
 
       <ContactSection />
     </>

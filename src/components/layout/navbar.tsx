@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronUp, Globe, Menu, Package, Sparkles, Star, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
 import {
   DEFAULT_PRODUCT_MEGA_MENU_CATEGORY_KEY,
   PRODUCT_MEGA_MENU_CATEGORIES,
@@ -57,10 +58,10 @@ const productMegaCategoryIcons = {
 } as const;
 
 type NavbarProps = {
-  overlayOnTop?: boolean;
+  homeVariant?: boolean;
 };
 
-export function Navbar({ overlayOnTop = false }: NavbarProps) {
+export function Navbar({ homeVariant = false }: NavbarProps) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
@@ -137,9 +138,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
 
   useEffect(() => {
     const onScroll = () => {
-      const heroSection = document.getElementById("home");
-      const heroHeight = heroSection?.offsetHeight ?? window.innerHeight;
-      setScrolled(window.scrollY > heroHeight - 80);
+      setScrolled(homeVariant ? window.scrollY > 16 : window.scrollY > 0);
     };
 
     onScroll();
@@ -150,7 +149,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [homeVariant]);
 
   const isRouteActive = (hash: string) => {
     if (pathname.startsWith("/products")) {
@@ -204,46 +203,66 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
     getMegaMenuCategoryByKey(activeDesktopProductKey) ??
     getMegaMenuCategoryByKey(DEFAULT_PRODUCT_MEGA_MENU_CATEGORY_KEY) ??
     PRODUCT_MEGA_MENU_CATEGORIES[0];
+  const useHomeNavSurface = homeVariant;
+  const logoLinkClassName =
+    "flex items-center";
+  const logoImageClassName =
+    "h-9 w-auto object-contain";
+  const desktopNavLinkClassName = (isActive: boolean) =>
+    cn(
+      "relative inline-flex h-10 items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold tracking-[0.01em] transition-all duration-200",
+      "text-[#1f4d2f] hover:bg-white/75 hover:text-[#0f3f24] hover:shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18),0_6px_18px_rgb(20_83_45/0.08)]",
+      isActive &&
+        "bg-white text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.22),0_8px_22px_rgb(20_83_45/0.1)]"
+    );
 
   return (
     <header
       className={cn(
-        "fixed top-4 right-0 left-0 z-50 w-full px-4 sm:px-5 lg:px-6",
-        overlayOnTop ? "top-4" : "top-4"
+        "sticky top-0 isolate z-50 w-full shrink-0 border-b bg-[#f2faf3] px-ds-page-x transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
+        homeVariant
+          ? "border-[#cfe8d2] shadow-[0_10px_28px_rgb(20_83_45/0.12)]"
+          : "border-[#d5ead8] shadow-[0_8px_22px_rgb(20_83_45/0.08)]"
       )}
     >
       <nav
         className={cn(
-          "mx-auto flex h-[72px] w-full max-w-[1450px] items-center justify-between rounded-full px-4 backdrop-blur-2xl transition-all duration-300 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-7",
+          "mx-auto flex h-(--ds-layout-navbar-h) w-full max-w-ds-page items-center justify-between px-0 transition-all duration-200 lg:grid lg:grid-cols-[1fr_auto_1fr]",
           scrolled
-            ? "border border-slate-200/85 bg-white/95 shadow-[0_16px_36px_rgba(15,23,42,0.12)]"
-            : "border border-slate-200 bg-white/85 shadow-sm backdrop-blur-xl"
+            ? "shadow-ds-nav"
+            : "shadow-none"
         )}
       >
         <div className="hidden items-center justify-start lg:flex">
-          <Link href="/#home" className="flex items-center" onClick={closeMobileMenu}>
+          <Link href="/#home" className={logoLinkClassName} onClick={closeMobileMenu}>
             <Image
               src="/logo-white.png"
               alt="GDK Packaging"
               width={220}
               height={60}
-              className="h-10 w-auto object-contain drop-shadow-[0_1px_2px_rgba(15,23,42,0.45)] lg:h-11"
+              className={logoImageClassName}
               priority
             />
           </Link>
         </div>
-        <Link href="/#home" className="flex items-center justify-start lg:hidden" onClick={closeMobileMenu}>
+        <Link href="/#home" className={cn(logoLinkClassName, "justify-start lg:hidden")} onClick={closeMobileMenu}>
           <Image
             src="/logo-white.png"
             alt="GDK Packaging"
             width={220}
             height={60}
-            className="h-10 w-auto object-contain drop-shadow-[0_1px_2px_rgba(15,23,42,0.45)] lg:h-11"
+            className={logoImageClassName}
             priority
           />
         </Link>
 
-        <div className="hidden h-11 items-center justify-center gap-5 lg:flex">
+        <div
+          className={cn(
+            "hidden h-11 items-center justify-center gap-1.5 lg:flex",
+            useHomeNavSurface &&
+              "rounded-full border border-[#d5ead8] bg-white/55 px-1.5 shadow-[0_8px_20px_rgb(20_83_45/0.08)]"
+          )}
+        >
           {navLinks.map((link) => {
             const isActive = isRouteActive(link.hash);
             const isAboutLink = link.label === "About";
@@ -267,16 +286,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                         setActiveDesktopMenu(null);
                         closeMobileMenu();
                       }}
-                      className={cn(
-                        "relative inline-flex h-10 items-center gap-1 rounded-full px-5 py-2 text-sm font-medium transition-all duration-300",
-                        scrolled
-                          ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                          : "text-slate-800 hover:bg-slate-100 hover:text-slate-900",
-                        isActive &&
-                          (scrolled
-                            ? "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]"
-                            : "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]")
-                      )}
+                      className={desktopNavLinkClassName(isActive)}
                     >
                       {link.label}
                       {activeDesktopMenu === "about" ? (
@@ -287,43 +297,46 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                     </Link>
                     <div
                       className={cn(
-                        "pointer-events-none absolute top-full left-1/2 z-50 mt-8 w-[740px] -translate-x-1/2 opacity-0 invisible translate-y-4 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                        "pointer-events-none invisible absolute top-full left-1/2 z-50 mt-4 w-[700px] -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 ease-ds-out",
                         activeDesktopMenu === "about" &&
                           "pointer-events-auto opacity-100 visible translate-y-0"
                       )}
                     >
-                      <div className="relative rounded-3xl border border-gray-200/90 bg-white p-7 shadow-[0_32px_70px_rgba(15,23,42,0.22)]">
-                        <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-gray-200 bg-white shadow-[0_12px_28px_rgba(15,23,42,0.16)]" />
+                      <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "rounded-ds-card-lg bg-ds-surface")}>
+                        <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
                         <div className="grid grid-cols-[1fr_1.6fr] gap-8">
-                          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brand-accent)]">
+                          <div className={cn(cardSurfaceVariants({ variant: "minimal", padding: "lg" }), "bg-ds-surface-muted")}>
+                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-accent">
                               About GDK
                             </p>
-                            <ul className="mt-3 space-y-2">
+                            <ul className="mt-4 space-y-2.5">
                               {aboutHighlights.map((item) => (
-                                <li key={item} className="text-sm font-medium text-slate-800">
+                                <li key={item} className="text-sm font-medium text-ds-text-strong">
                                   {item}
                                 </li>
                               ))}
                             </ul>
-                            <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                            <p className="mt-4 text-sm leading-relaxed text-ds-text-muted">
                               Premium packaging partner delivering precision manufacturing with
                               consistency, compliance, and scale.
                             </p>
                           </div>
-                          <div className="grid grid-cols-1 gap-4.5">
+                          <div className="grid grid-cols-1 gap-5">
                             {aboutMegaCards.map((card) => (
                               <Link
                                 key={card.title}
                                 href={card.href}
-                                className="group/card flex items-start gap-3.5 rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--brand-accent)] hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]"
+                                className={cn(
+                                  "flex items-start gap-4",
+                                  cardSurfaceVariants({ variant: "interactive", padding: "sm" })
+                                )}
                               >
-                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-[var(--brand-accent)] to-[var(--brand-accent-hover)] text-white">
+                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-accent text-white">
                                   <card.icon className="h-5 w-5" />
                                 </div>
                                 <div>
-                                  <p className="text-sm leading-5 font-semibold text-slate-900">{card.title}</p>
-                                  <p className="mt-1.5 text-xs leading-[1.55] text-slate-600">
+                                  <p className="text-sm leading-5 font-semibold text-ds-text-strong">{card.title}</p>
+                                  <p className="mt-1.5 text-xs leading-[1.55] text-ds-text-muted">
                                     {card.description}
                                   </p>
                                 </div>
@@ -344,16 +357,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                         setActiveDesktopMenu(null);
                         closeMobileMenu();
                       }}
-                      className={cn(
-                        "relative inline-flex h-10 items-center gap-1 rounded-full px-5 py-2 text-sm font-medium transition-all duration-300",
-                        scrolled
-                          ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                          : "text-slate-800 hover:bg-slate-100 hover:text-slate-900",
-                        isActive &&
-                          (scrolled
-                            ? "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]"
-                            : "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]")
-                      )}
+                      className={desktopNavLinkClassName(isActive)}
                     >
                       {link.label}
                       {activeDesktopMenu === "products" ? (
@@ -364,15 +368,15 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                     </Link>
                     <div
                       className={cn(
-                        "pointer-events-none absolute top-full left-1/2 z-50 mt-8 w-[860px] -translate-x-1/2 opacity-0 invisible translate-y-4 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                        "pointer-events-none invisible absolute top-full left-1/2 z-50 mt-4 w-[820px] -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 ease-ds-out",
                         activeDesktopMenu === "products" &&
                           "pointer-events-auto opacity-100 visible translate-y-0"
                       )}
                     >
-                      <div className="relative rounded-3xl border border-gray-200/90 bg-white p-7 shadow-[0_32px_70px_rgba(15,23,42,0.22)]">
-                        <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-gray-200 bg-white shadow-[0_12px_28px_rgba(15,23,42,0.16)]" />
+                      <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "rounded-ds-card-lg bg-ds-surface")}>
+                        <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
                         <div className="grid grid-cols-[1.05fr_1fr] gap-8">
-                          <div className="grid grid-cols-1 gap-4.5">
+                          <div className="grid grid-cols-1 gap-5">
                             {PRODUCT_MEGA_MENU_CATEGORIES.map((category) => {
                               const isCategoryActive = activeDesktopProductKey === category.key;
                               const CategoryIcon =
@@ -387,18 +391,19 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                                   onFocus={() => setActiveDesktopProductKey(category.key)}
                                   onClick={() => setActiveDesktopProductKey(category.key)}
                                   className={cn(
-                                    "group/category flex items-start gap-3.5 rounded-2xl border bg-white p-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_26px_rgba(15,23,42,0.12)]",
+                                    "group/category flex items-start gap-4 text-left",
+                                    cardSurfaceVariants({ variant: "interactive", padding: "sm" }),
                                     isCategoryActive
-                                      ? "border-[var(--brand-accent)] shadow-[0_10px_24px_color-mix(in_srgb,var(--brand-accent)_24%,transparent)]"
-                                      : "border-slate-200 hover:border-[color:color-mix(in_srgb,var(--brand-accent)_70%,transparent)]"
+                                      ? "border-brand-accent shadow-[0_10px_24px_color-mix(in_srgb,var(--brand-accent)_24%,transparent)]"
+                                      : "hover:border-[color-mix(in_srgb,var(--brand-accent)_70%,transparent)]"
                                   )}
                                 >
-                                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-slate-100">
-                                    <CategoryIcon className="h-6 w-6 text-[var(--brand-accent)]" />
+                                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-accent">
+                                    <CategoryIcon className="h-6 w-6 text-brand-accent" />
                                   </div>
                                   <div>
-                                    <p className="text-sm leading-5 font-semibold text-slate-900">{category.title}</p>
-                                    <p className="mt-1.5 text-xs leading-[1.55] text-slate-600">
+                                    <p className="text-sm leading-5 font-semibold text-ds-text-strong">{category.title}</p>
+                                    <p className="mt-1.5 text-xs leading-[1.55] text-ds-text-muted">
                                       {category.description}
                                     </p>
                                   </div>
@@ -406,22 +411,25 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                               );
                             })}
                           </div>
-                          <div className="group/panel block rounded-2xl border border-slate-200 bg-slate-50 p-6 transition-all duration-200 hover:border-[var(--brand-accent)]">
+                          <div className={cn("group/panel block bg-ds-surface-muted", cardSurfaceVariants({ variant: "minimal", padding: "lg" }))}>
                             <Link href={activeDesktopProductCategory.href}>
-                              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--brand-accent)]">
+                              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-accent">
                                 {activeDesktopProductCategory.title}
                               </p>
                             </Link>
-                            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                            <p className="mt-3 text-sm leading-relaxed text-ds-text-muted">
                               Product sub-categories crafted for performance, consistency, and scalable
                               manufacturing.
                             </p>
-                            <div className="mt-4 grid grid-cols-1 gap-2.5">
+                            <div className="mt-5 grid grid-cols-1 gap-3">
                             {activeDesktopProductCategory.subcategories.map((product) => (
                                 <Link
                                   href={product.href}
                                   key={product.slug}
-                                  className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-800 transition-all duration-200 hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
+                                  className={cn(
+                                    "block rounded-xl px-4 py-2.5 text-sm font-medium text-ds-text-body hover:text-brand-accent",
+                                    cardSurfaceVariants({ variant: "bordered" })
+                                  )}
                                 >
                                   {product.title}
                                 </Link>
@@ -440,16 +448,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       setActiveSection(link.hash.replace("#", ""));
                       closeMobileMenu();
                     }}
-                    className={cn(
-                      "relative inline-flex h-10 items-center gap-1 rounded-full px-5 py-2 text-sm font-medium transition-all duration-300",
-                      scrolled
-                        ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                        : "text-slate-800 hover:bg-slate-100 hover:text-slate-900",
-                      isActive &&
-                        (scrolled
-                          ? "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]"
-                          : "bg-slate-100 text-slate-900 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]")
-                    )}
+                    className={desktopNavLinkClassName(isActive)}
                   >
                     {link.label}
                   </Link>
@@ -459,26 +458,26 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
           })}
         </div>
 
-        <div className="hidden h-11 items-center justify-end gap-3 lg:flex">
+        <div className="hidden h-11 items-center justify-end gap-4 lg:flex">
          
           <Button
             asChild
             size="lg"
-            className="h-11 rounded-full bg-[var(--primary)] px-7 py-3 text-white shadow-[0_16px_34px_color-mix(in_srgb,var(--primary)_42%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--primary-hover)] hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
+            className="h-11 rounded-full bg-brand-accent px-6 py-2.5 text-sm text-white shadow-(--ds-shadow-button-primary) transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
           >
-            <Link href="/#contact" style={{ color: "#fff" }}>
+            <Link href="/#contact" className="text-white! hover:text-white!">
               Get Quote
             </Link>
           </Button>
         </div>
 
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <Button
             variant="ghost"
             onClick={() => setIsMobileMenuOpen(true)}
             aria-label="Open navigation menu"
             aria-expanded={isMobileMenuOpen}
-            className="h-11 w-11 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-400 text-white shadow-md flex items-center justify-center transition-all duration-200 hover:scale-[1.03] active:scale-[0.96]"
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#123c24] text-white shadow-sm transition-all duration-200 hover:bg-[#0f3f24] active:scale-[0.96]"
           >
             <Menu className="h-5 w-5" />
           </Button>
@@ -487,27 +486,27 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
 
       {isMobileMenuOpen ? (
         <div
-          className="absolute top-full left-0 right-0 z-50 w-full px-4 pt-3 md:hidden"
+          className="absolute top-full left-0 right-0 z-50 w-full px-ds-page-x pt-3 lg:hidden"
         >
-          <div className="w-full rounded-[32px] bg-white px-4 py-4 shadow-xl">
-            <div className="flex flex-col gap-2">
+          <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "w-full rounded-ds-card-lg bg-[#f8fcf8] px-5 py-5")}>
+            <div className="flex flex-col gap-3">
             <div className="mb-1 flex items-center justify-between px-1">
-              <Link href="/#home" className="flex items-center" onClick={closeMobileMenu}>
+              <Link href="/#home" className={logoLinkClassName} onClick={closeMobileMenu}>
                 <Image
                   src="/logo-white.png"
                   alt="GDK Packaging"
                   width={220}
                   height={60}
-                  className="h-10 w-auto object-contain drop-shadow-[0_1px_2px_rgba(15,23,42,0.45)]"
+                  className={logoImageClassName}
                 />
               </Link>
               <button
                 type="button"
                 onClick={closeMobileMenu}
                 aria-label="Close menu"
-                className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-500 shadow-lg hover:bg-orange-600"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#123c24] shadow-sm hover:bg-[#0f3f24]"
               >
-                <X className="h-6 w-6 text-white stroke-[2.5]" />
+                <X className="h-5 w-5 text-white stroke-[2.5]" />
               </button>
             </div>
             {navLinks.map((link) => {
@@ -519,7 +518,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                   key={link.href}
                   className={cn(
                     "rounded-2xl p-1 transition-colors duration-300",
-                    "border border-slate-200"
+                    "border border-[#d5ead8] bg-white/55"
                   )}
                 >
                   {isAboutLink ? (
@@ -528,12 +527,10 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                         type="button"
                         aria-expanded={isMobileAboutOpen}
                         className={cn(
-                          "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-medium transition-colors duration-200",
-                          scrolled
-                            ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                            : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
+                          "flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200",
+                          "text-[#1f4d2f] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
                           isActive &&
-                            "bg-slate-100 text-slate-900"
+                            "bg-[#edf7ee] text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18)]"
                         )}
                         onClick={() => setIsMobileAboutOpen((previous) => !previous)}
                       >
@@ -553,8 +550,8 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                         <div className="min-h-0">
                           <div
                             className={cn(
-                              "space-y-1 rounded-xl border p-2",
-                              "border-slate-200 bg-slate-50"
+                              "space-y-1.5 rounded-xl border p-2.5",
+                              "border-[#d5ead8] bg-[#f2faf3]"
                             )}
                           >
                             {aboutMegaCards.map((card) => (
@@ -562,10 +559,8 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                                 key={card.title}
                                 href={card.href}
                                 className={cn(
-                                  "block rounded-lg px-3 py-2 text-xs font-medium transition-colors duration-200",
-                                  scrolled
-                                    ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                                  "block rounded-lg px-3 py-2.5 text-xs font-medium transition-colors duration-200",
+                                  "text-[#24583a] hover:bg-white hover:text-[#0f3f24]"
                                 )}
                                 onClick={() => {
                                   setActiveSection("about");
@@ -585,12 +580,10 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                         type="button"
                         aria-expanded={isMobileProductsOpen}
                         className={cn(
-                          "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm font-medium transition-colors duration-200",
-                          scrolled
-                            ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                            : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
+                          "flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200",
+                          "text-[#1f4d2f] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
                           isActive &&
-                            "bg-slate-100 text-slate-900"
+                            "bg-[#edf7ee] text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18)]"
                         )}
                         onClick={() => setIsMobileProductsOpen((previous) => !previous)}
                       >
@@ -612,8 +605,8 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                         <div className="min-h-0">
                           <div
                             className={cn(
-                              "space-y-2 rounded-xl border p-2",
-                              "border-slate-200 bg-slate-50"
+                              "space-y-2.5 rounded-xl border p-2.5",
+                              "border-[#d5ead8] bg-[#f2faf3]"
                             )}
                           >
                             {PRODUCT_MEGA_MENU_CATEGORIES.map((category) => {
@@ -623,17 +616,15 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                                   key={category.key}
                                   className={cn(
                                     "rounded-lg border transition-colors duration-200",
-                                    "border-slate-200 bg-white"
+                                    "border-[#d5ead8] bg-white"
                                   )}
                                 >
                                   <button
                                     type="button"
                                     className={cn(
-                                      "flex w-full items-center justify-between rounded-lg px-3 py-2 text-xs font-semibold transition-colors duration-200",
-                                      scrolled
-                                        ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                                        : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
-                                      isCategoryOpen && "bg-slate-100 text-slate-900"
+                                      "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-semibold transition-colors duration-200",
+                                      "text-[#24583a] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
+                                      isCategoryOpen && "bg-[#edf7ee] text-[#0f3f24]"
                                     )}
                                     onClick={() =>
                                       setActiveMobileProductKey((previous) =>
@@ -656,16 +647,14 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                                         : "grid-rows-[0fr] opacity-0"
                                     )}
                                   >
-                                    <div className="min-h-0 space-y-1">
+                                    <div className="min-h-0 space-y-1.5">
                                       {category.subcategories.map((product) => (
                                         <Link
                                           key={product.slug}
                                           href={product.href}
                                           className={cn(
-                                            "block rounded-md px-2 py-1.5 text-xs font-medium transition-colors duration-200",
-                                            scrolled
-                                              ? "text-slate-600 hover:bg-slate-100 hover:text-[var(--brand-accent)]"
-                                              : "text-slate-600 hover:bg-slate-100 hover:text-[var(--brand-accent)]"
+                                            "block rounded-md px-2.5 py-2 text-xs font-medium transition-colors duration-200",
+                                            "text-[#406f51] hover:bg-[#edf7ee] hover:text-[#0f3f24]"
                                           )}
                                           onClick={() => {
                                             setActiveSection("products");
@@ -689,11 +678,10 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                       href={link.href}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
-                        "block rounded-xl px-3 py-2 text-sm font-medium transition-colors duration-200",
-                        scrolled
-                          ? "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                          : "text-slate-700 hover:bg-slate-100 hover:text-slate-900",
-                        isActive && "bg-slate-100 text-slate-900"
+                        "block rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200",
+                        "text-[#1f4d2f] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
+                        isActive &&
+                          "bg-[#edf7ee] text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18)]"
                       )}
                       onClick={() => {
                         setActiveSection(link.hash.replace("#", ""));
@@ -706,7 +694,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                 </div>
               );
             })}
-            <div className="mt-3 flex items-center gap-3">
+            <div className="mt-4 flex items-center gap-3">
               {/* <button
                 type="button"
                 aria-label="Wishlist"
@@ -725,8 +713,7 @@ export function Navbar({ overlayOnTop = false }: NavbarProps) {
                   setActiveSection("home");
                   closeMobileMenu();
                 }}
-                style={{ color: "#fff" }}
-                className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--primary)] px-7 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[var(--primary-hover)] hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
+                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-brand-accent px-7 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
               >
                 Get Quote
               </Link>

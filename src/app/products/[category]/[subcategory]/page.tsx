@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
+import { BaseProductCard, getProductCardIcon } from "@/components/product/product-card";
+import {
+  cardSurfaceVariants,
+} from "@/design-system/shadcn/card.variants";
 import {
   getCategoryProductByLegacyRouteSegment,
   getNavigationCategoryByKey,
@@ -66,56 +68,40 @@ export default async function ProductSubcategoryPage({ params }: ProductSubcateg
   const products = getProductsBySlugs(subcategoryItem.productSlugs);
 
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-10 px-6 py-10">
-      <section className="space-y-4">
-        <p className="text-xs font-semibold tracking-[0.16em] text-[var(--brand-accent)] uppercase">
-          {categoryItem.title}
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-          {subcategoryItem.title}
-        </h1>
-        <p className="max-w-3xl text-base leading-7 text-slate-600">
-          {subcategoryItem.description ??
-            "Select a product to view complete specifications, variants, and application details."}
-        </p>
+    <main className="flex w-full flex-1 flex-col gap-10 lg:gap-12">
+      <section className={cardSurfaceVariants({ variant: "gradient", padding: "xl" })}>
+        <div className="flex flex-col gap-6 lg:gap-7">
+          <p className="ds-eyebrow">
+            {categoryItem.title}
+          </p>
+          <div className="flex max-w-3xl flex-col gap-4 lg:gap-5">
+            <h1 className="text-h1 text-ds-text-strong">
+              {subcategoryItem.title}
+            </h1>
+            <p className="text-body-lg text-ds-text-body">
+              {subcategoryItem.description ??
+                "Select a product to view complete specifications, variants, and application details."}
+            </p>
+          </div>
+        </div>
       </section>
 
-      <section className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+      <section className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:gap-7">
         {products.map((product) => (
-          <article
+          <BaseProductCard
             key={product.slug}
-            className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-          >
-            <div className="relative h-48 w-full">
-              <Image
-                src={product.heroImage}
-                alt={product.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="space-y-3 p-5">
-              <div className="flex flex-wrap gap-2">
-                {product.badges.slice(0, 2).map((badge) => (
-                  <span
-                    key={badge}
-                    className="rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,var(--border))] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-2.5 py-1 text-[11px] font-semibold text-[var(--brand-accent)]"
-                  >
-                    {badge}
-                  </span>
-                ))}
-              </div>
-              <h2 className="text-xl font-semibold tracking-tight text-slate-900">{product.title}</h2>
-              <p className="text-sm leading-6 text-slate-600">{product.shortDescription}</p>
-              <Link
-                href={`/products/${categoryItem.key}/${subcategoryItem.slug}/${product.slug}`}
-                className="inline-flex text-sm font-semibold text-[var(--secondary)] hover:underline"
-              >
-                Explore Product
-              </Link>
-            </div>
-          </article>
+            href={`/products/${categoryItem.key}/${subcategoryItem.slug}/${product.slug}`}
+            ariaLabel={`Explore ${product.title}`}
+            title={product.title}
+            description={product.shortDescription}
+            meta={product.category}
+            imageSrc={product.heroImage}
+            imageAlt={product.title}
+            icon={getProductCardIcon(`${product.category} ${product.title}`)}
+            badges={product.badges}
+            footerLeading={product.material}
+            ctaLabel="Explore Product"
+          />
         ))}
       </section>
     </main>

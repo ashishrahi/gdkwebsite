@@ -41,29 +41,25 @@ export function FloatingActions() {
   type="button"
   onClick={scrollToTop}
   aria-label="Scroll to top"
-  className="h-14 w-14 rounded-full border border-neutral-200 bg-white text-neutral-800 shadow-lg transition-all duration-300 hover:scale-110 flex items-center justify-center"
+  className="flex h-11 w-11 items-center justify-center rounded-full border border-ds-border-subtle bg-white text-ds-text-strong shadow-ds-card-subtle transition-all duration-200 hover:border-brand-blue hover:bg-accent"
 >
-  <ArrowUp className="h-6 w-6 stroke-[2.5]" />
+  <ArrowUp className="h-5 w-5 stroke-[2.5]" />
 </button>
       </div>
 
       <div className="fixed right-5 bottom-6 z-50 max-md:right-4 max-md:bottom-4">
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366]/35 animate-ping [animation-duration:2.4s]"
-        />
         <a
           href={`https://wa.me/${WHATSAPP_NUMBER}`}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
-          className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/40 bg-[#25D366] text-white shadow-[0_20px_44px_rgba(37,211,102,0.42)] ring-4 ring-white/80 transition-all duration-300 hover:scale-105 hover:bg-[#20ba5a] active:bg-[#1da851] max-md:h-11 max-md:w-11"
+          className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/40 bg-[var(--ds-color-whatsapp)] text-white shadow-ds-card-medium ring-4 ring-white/80 transition-colors duration-200 hover:bg-[var(--ds-color-whatsapp-hover)] active:bg-[var(--primary-hover)] max-md:h-11 max-md:w-11"
         >
           <span
             aria-hidden="true"
             className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent"
           />
-          <FaWhatsapp className="relative z-10 h-[30px] w-[30px] max-md:h-[24px] max-md:w-[24px] text-white" />
+          <FaWhatsapp className="relative z-10 h-6 w-6 text-white max-md:h-[24px] max-md:w-[24px]" />
         </a>
       </div>
     </>

@@ -10,6 +10,8 @@ import {
   useState,
   type CSSProperties,
 } from "react";
+import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
+import { cn } from "@/lib/utils";
 
 export type CertificationItem = {
   readonly image: string;
@@ -145,7 +147,10 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
     renderPreview && previewLayout ? (
       <div
         aria-hidden
-        className="pointer-events-none fixed z-50 overflow-visible rounded-xl border border-border bg-white p-4 shadow-2xl shadow-black/20 transition-opacity duration-200 ease-out"
+        className={cn(
+          cardSurfaceVariants({ variant: "elevated", padding: "sm" }),
+          "pointer-events-none fixed z-50 overflow-visible rounded-xl bg-white shadow-[color:color-mix(in_srgb,var(--brand-green-950)_20%,transparent)] transition-opacity duration-200 ease-out"
+        )}
         style={{
           ...previewLayout.box,
           opacity: previewOpaque ? 1 : 0,
@@ -179,7 +184,10 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
         href={pdf}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative block w-fit rounded-xl border border-border bg-white p-4 shadow-sm transition-all duration-300 hover:scale-105"
+        className={cn(
+          cardSurfaceVariants({ variant: "interactive", padding: "sm" }),
+          "relative block w-fit rounded-xl p-4 hover:scale-[1.03]"
+        )}
         onMouseEnter={showPreview}
         onMouseLeave={hidePreview}
       >
@@ -196,7 +204,7 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
           className="absolute top-2 right-2 z-10 rounded-md bg-white/90 p-1 shadow-sm backdrop-blur"
           aria-label="View Certificate PDF"
         >
-          <FaFilePdf  className="h-4 w-4 text-red-400" aria-hidden />
+          <FaFilePdf  className="h-4 w-4 text-[var(--brand-red)]" aria-hidden />
         </span>
       </a>
 
