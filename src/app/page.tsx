@@ -1,4 +1,3 @@
-import { ClienteleSection } from "@/components/home/clientele-section";
 import { Hero } from "@/components/home/hero";
 import { HomeSections } from "@/components/home/home-sections";
 
@@ -8,8 +7,6 @@ export default function Home() {
       <section id="home" className="scroll-mt-(--ds-layout-navbar-h) mb-0!">
         <Hero />
       </section>
-
-      <ClienteleSection />
 
       <main className="w-full max-w-none! bg-background p-0!">
         <HomeSections />

@@ -11,9 +11,9 @@ export const layoutTokens = {
     sectionCopy: "62ch",
   },
   section: {
-    defaultY: "clamp(4rem, 7vw, 6.5rem)",
-    compactY: "clamp(3.25rem, 5.5vw, 5rem)",
-    spaciousY: "clamp(5rem, 8vw, 7.5rem)",
+    defaultY: "clamp(4.5rem, 7.5vw, 7.25rem)",
+    compactY: "clamp(3.75rem, 6vw, 5.5rem)",
+    spaciousY: "clamp(5.75rem, 8.5vw, 8.5rem)",
   },
   grid: {
     heroDesktop: "1fr 460px",

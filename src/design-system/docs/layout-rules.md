@@ -4,7 +4,7 @@ These rules describe the production layout architecture for the current frontend
 
 ## Page Shell
 
-- Root layout uses tokenized background, Inter and Geist Mono font variables, `scroll-smooth`, and antialiasing.
+- Root layout uses tokenized background, the Jost font variable, `scroll-smooth`, and antialiasing.
 - `SiteShell` wraps page content.
 - Global `main` styles set `max-width: 72rem`, centered layout, and tokenized horizontal padding.
 - Several pages override `main` with Tailwind classes for full-width marketing layouts.

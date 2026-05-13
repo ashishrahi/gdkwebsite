@@ -38,18 +38,18 @@ export function AboutHero() {
             priority
           />
         </div>
-        <div className="space-y-6">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+        <div className="space-y-5">
+          <h2 className="text-h2 text-foreground">
             K.B. Ropes Pvt Ltd
           </h2>
-          <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="text-body-lg text-muted-foreground">
             From Concept to Solution.{" "}
             <span className="text-primary">With Sustainability Built In.</span>
           </p>
-          <p className="text-base leading-relaxed text-foreground/75 md:text-lg">
+          <p className="text-body-lg text-foreground/75">
             {heroSubtitle}
           </p>
-          <div className="space-y-6 text-base leading-relaxed text-foreground/75 md:text-lg">
+          <div className="space-y-5 text-body-lg text-foreground/75">
             <p>
               At our Kanpur facility, we specialize in manufacturing PP UFT containers, glasses, and cups. These products find applications in the food and other industries. Our range includes ice cream cups and glasses, as well as containers in round, octagonal, and rectangular shapes, with capacities ranging from 50 mL to 1000 ML. Not only are our containers refrigerated, but they are also microwave-safe and highly affordable. They are designed to suit a wide range of products.
             </p>

@@ -7,5 +7,5 @@ export const formPatternClassNames = {
   contactTextarea: "min-h-[140px] resize-none py-3 sm:min-h-[160px] sm:py-4",
   enquiryTextarea: "min-h-[112px] resize-none py-2.5 sm:min-h-[128px] sm:py-3",
   submitButton:
-    "h-12 w-full rounded-xl px-6 text-sm font-semibold shadow-[var(--ds-shadow-submit)] transition-[transform,box-shadow,opacity] duration-200 ease-ds-out hover:shadow-[var(--ds-shadow-submit-hover)] active:translate-y-px disabled:shadow-none",
+    "h-12.5 w-full rounded-full px-8 text-[0.8125rem] font-medium uppercase tracking-(--ds-type-label-letter-spacing) shadow-(--ds-shadow-submit) transition-[transform,box-shadow,opacity] duration-200 ease-ds-out hover:shadow-(--ds-shadow-submit-hover) active:translate-y-px disabled:shadow-none",
 } as const;

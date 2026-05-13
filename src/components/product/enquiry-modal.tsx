@@ -90,13 +90,13 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
 
   return (
     <Dialog>
-      <DialogTrigger className="inline-flex h-11 items-center justify-center rounded-lg bg-brand-accent px-5 text-sm font-semibold text-white! transition-colors hover:bg-brand-accent-hover">
+      <DialogTrigger className="inline-flex h-11.5 items-center justify-center rounded-full bg-brand-accent px-6 text-[0.8125rem] font-medium tracking-(--ds-type-label-letter-spacing) text-white! transition-colors hover:bg-brand-accent-hover">
         Enquire Now
       </DialogTrigger>
-      <DialogContent className={cn(cardSurfaceVariants({ variant: "elevated" }), "min-h-0 max-w-lg gap-0 rounded-ds-card-lg bg-white/95 px-6 py-7 text-base text-ds-text-strong backdrop-blur-sm ring-[color:color-mix(in_srgb,var(--brand-blue-500)_28%,transparent)] sm:max-w-lg sm:px-8 sm:py-8 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!bg-transparent [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!bg-none [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!shadow-none [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!border-0 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!text-ds-text-muted [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:hover:!bg-transparent")}>
+      <DialogContent className={cn(cardSurfaceVariants({ variant: "elevated" }), "min-h-0 max-w-lg gap-0 rounded-ds-card-lg bg-white/95 px-6 py-7 text-base text-ds-text-strong backdrop-blur-sm ring-[color-mix(in_srgb,var(--brand-blue-500)_28%,transparent)] sm:max-w-lg sm:px-8 sm:py-8 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:bg-transparent! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:bg-none! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:shadow-none! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:border-0! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:text-ds-text-muted! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:hover:bg-transparent!")}>
 
         <DialogHeader className="space-y-2 text-left">
-          <DialogTitle className="text-2xl font-semibold tracking-tight text-ds-text-strong">
+          <DialogTitle className="text-h3 text-ds-text-strong">
             Enquiry for {productName}
           </DialogTitle>
           <DialogDescription className="text-sm leading-6 text-ds-text-muted">
@@ -106,7 +106,7 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
 
         <form className="mt-6 space-y-5" onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-2">
-            <label htmlFor="enquiry-name" className="block text-sm font-semibold text-ds-text-muted">
+            <label htmlFor="enquiry-name" className="block text-sm font-medium tracking-[0.02em] text-ds-text-muted">
               Name
             </label>
             <Input
@@ -117,14 +117,14 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
               {...register("name")}
             />
             {errors.name ? (
-              <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+              <p className="text-sm font-medium text-(--brand-red)" role="alert">
                 {errors.name.message}
               </p>
             ) : null}
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="enquiry-phone" className="block text-sm font-semibold text-ds-text-muted">
+            <label htmlFor="enquiry-phone" className="block text-sm font-medium tracking-[0.02em] text-ds-text-muted">
               Phone
             </label>
             <Input
@@ -135,14 +135,14 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
               {...register("phone")}
             />
             {errors.phone ? (
-              <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+              <p className="text-sm font-medium text-(--brand-red)" role="alert">
                 {errors.phone.message}
               </p>
             ) : null}
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="enquiry-message" className="block text-sm font-semibold text-ds-text-muted">
+            <label htmlFor="enquiry-message" className="block text-sm font-medium tracking-[0.02em] text-ds-text-muted">
               Message
             </label>
             <Textarea
@@ -153,7 +153,7 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
               {...register("message")}
             />
             {errors.message ? (
-              <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+              <p className="text-sm font-medium text-(--brand-red)" role="alert">
                 {errors.message.message}
               </p>
             ) : null}
@@ -163,7 +163,7 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="h-12 w-full rounded-xl px-6 text-sm font-semibold shadow-[var(--ds-shadow-submit)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:shadow-[var(--ds-shadow-submit-hover)] active:translate-y-px disabled:shadow-none"
+              className="h-12.5 w-full rounded-full px-8 text-[0.8125rem] font-medium uppercase tracking-(--ds-type-label-letter-spacing) shadow-(--ds-shadow-submit) transition-[transform,box-shadow,opacity] duration-200 ease-out hover:shadow-(--ds-shadow-submit-hover) active:translate-y-px disabled:shadow-none"
             >
               {isSubmitting ? "Sending..." : "Send Enquiry"}
             </Button>

@@ -6,26 +6,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const heroSlides = [
   {
-    src: "/hero/hero1.webp",
+    src: "/images/hero/hero1.webp",
     alt: "GDK Packaging manufacturing and industrial packaging facility",
-    position: "object-center",
+    position: "object-[58%_46%] sm:object-[52%_46%] lg:object-[50%_46%]",
   },
   {
-    src: "/hero/hero2.webp",
+    src: "/images/hero/hero2.webp",
     alt: "Industrial packaging production line with premium quality control",
-    position: "object-center",
+    position: "object-[55%_42%] sm:object-[50%_42%]",
   },
-  {
-    src: "/hero/hero3.webp",
-    alt: "Modern packaging materials prepared for enterprise supply",
-    position: "object-center",
-  },
-  {
-    src: "/hero/hero4.webp",
-    alt: "High-performance packaging manufacturing environment",
-    position: "object-center",
-  },
- 
 ] as const;
 
 export function HeroSlider() {
@@ -42,27 +31,18 @@ export function HeroSlider() {
         pauseOnMouseEnter: false,
       }}
       allowTouchMove={false}
-      className="absolute inset-0 h-full w-full"
+      className="absolute inset-0 h-full w-full overflow-hidden [&_.swiper-slide]:h-full [&_.swiper-slide]:w-full [&_.swiper-wrapper]:h-full [&_.swiper-wrapper]:w-full"
     >
       {heroSlides.map((slide, index) => (
         <SwiperSlide key={slide.src} className="relative h-full w-full overflow-hidden bg-brand-green-deep">
           <Image
             src={slide.src}
-            alt=""
-            fill
-            quality={95}
-            sizes="100vw"
-            aria-hidden="true"
-            className={`scale-110 object-cover ${slide.position} blur-2xl brightness-[0.92] saturate-[1.08]`}
-          />
-          <Image
-            src={slide.src}
             alt={slide.alt}
             fill
             priority={index === 0}
-            quality={95}
+            quality={100}
             sizes="100vw"
-            className={`object-cover ${slide.position} brightness-[1.08] contrast-[1.06] saturate-[1.12]`}
+            className={`object-cover ${slide.position}`}
           />
         </SwiperSlide>
       ))}

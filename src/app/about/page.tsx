@@ -15,11 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  cardIconClassNames,
-  cardSurfaceVariants,
-} from "@/design-system/shadcn/card.variants";
-import { cn } from "@/lib/utils";
 
 const visionMission = [
   {
@@ -119,22 +114,12 @@ const certifications = [
 
 export default function AboutPage() {
   return (
-    <main className="ds-page-shell flex flex-1 flex-col gap-14 lg:gap-16">
-      <section className={cn(cardSurfaceVariants({ variant: "gradient", padding: "xl" }), "rounded-ds-card-lg")}>
-        <p className="ds-eyebrow">About GDK Packaging</p>
-        <h1 className="mt-5 max-w-3xl text-h1 text-ds-text-strong">
-          Manufacturing packaging solutions with quality, scale, and consistency.
-        </h1>
-        <p className="mt-5 max-w-3xl text-body-lg text-ds-text-body">
-          We combine disciplined production, practical engineering, and long-term customer partnerships to serve modern packaging needs.
-        </p>
-      </section>
-
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-12 px-6 py-10">
       <div id="kb-ropes" className="scroll-mt-28 h-0 md:scroll-mt-32" />
 
-      <section className={cn(cardSurfaceVariants({ variant: "default" }), "scroll-mt-36 rounded-ds-card-lg md:scroll-mt-40")}>
+      <section className="mb-24 scroll-mt-36 overflow-hidden rounded-xl border border-border bg-card md:scroll-mt-40">
         <motion.div
-          className="flex flex-col gap-8 px-6 py-6 text-left md:gap-10 md:px-8 md:py-8 lg:px-10"
+          className="flex flex-col gap-8 px-6 py-6 text-left md:gap-10 md:px-10 md:py-8"
           {...heroMotion}
           transition={{
             y: { duration: 0.6, ease: easeHeroY },
@@ -147,22 +132,22 @@ export default function AboutPage() {
               alt="Kankani Manufacturing Facility"
               width={1400}
               height={500}
-              className="h-auto w-full object-contain object-center bg-white md:h-72 md:object-cover"
+              className="w-full h-auto object-contain object-center bg-white md:h-72 md:object-cover"
               priority
             />
           </div>
-          <div className="space-y-6">
+          <div className="space-y-5">
             <h2 className="text-h2 text-ds-text-strong">
               K.B. Ropes Pvt Ltd
             </h2>
-            <p className="text-body text-ds-text-muted">
+            <p className="text-body-lg text-ds-text-muted">
               From Concept to Solution.{" "}
               <span className="text-primary">With Sustainability Built In.</span>
             </p>
-            <p className="text-body text-ds-text-body">
+            <p className="text-body-lg text-ds-text-body">
               {heroSubtitle}
             </p>
-            <div className="space-y-5 text-body text-ds-text-body">
+            <div className="space-y-5 text-body-lg text-ds-text-body">
               <p>
                 At our Kanpur facility, we specialize in manufacturing PP UFT containers, glasses, and cups. These products find applications in the food and other industries. Our range includes ice cream cups and glasses, as well as containers in round, octagonal, and rectangular shapes, with capacities ranging from 50 mL to 1000 ML. Not only are our containers refrigerated, but they are also microwave-safe and highly affordable. They are designed to suit a wide range of products.
               </p>
@@ -176,7 +161,7 @@ export default function AboutPage() {
 
       <section
         id="md-message"
-        className="scroll-mt-36 space-y-7 md:scroll-mt-40"
+        className="mb-24 scroll-mt-36 space-y-12 md:scroll-mt-40"
       >
         <motion.div
           {...headingInView}
@@ -187,26 +172,26 @@ export default function AboutPage() {
           </h2>
         </motion.div>
 
-        <div className={cn(cardSurfaceVariants({ variant: "default" }), "rounded-ds-card-lg")}>
+        <div className="overflow-hidden rounded-xl border border-border bg-card">
           <motion.div
-            className="mx-auto flex w-full flex-col gap-8 px-6 py-6 text-left md:gap-10 md:px-8 md:py-8 lg:px-10"
+            className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-6 text-left md:gap-10 md:px-10 md:py-8"
             {...heroMotion}
             transition={{
               y: { duration: 0.6, ease: easeHeroY },
               opacity: { duration: 0.78, ease: easePremium },
             }}
           >
-            <div className="space-y-6 md:space-y-7">
-              <div className="space-y-1.5">
-                <p className="text-base font-semibold text-ds-text-strong">
+            <div className="space-y-5 md:space-y-6">
+              <div className="space-y-1">
+                <p className="text-body-lg font-medium text-ds-text-strong">
                   Mr. Ramesh Kankani
                 </p>
-                <p className="text-sm text-ds-text-muted">
+                <p className="text-body text-ds-text-muted">
                   Managing Director, GDK Solutions
                 </p>
               </div>
 
-              <div className="space-y-5 text-body text-ds-text-body">
+              <div className="space-y-5 text-body-lg text-ds-text-body">
                 <p>
                   Ramesh Kankani, a technocrat with decades of experience in packaging manufacturing, has been the driving force behind GDK Solutions’ steady growth and reliability in the industry. His approach has always been grounded in building strong systems, maintaining process discipline, and delivering consistent quality to customers.
                 </p>
@@ -223,7 +208,7 @@ export default function AboutPage() {
 
       </section>
 
-      <section className="space-y-7">
+      <section className="mb-24 space-y-10">
         <motion.div
           {...headingInView}
           transition={{ duration: 0.5, ease: easePremium }}
@@ -232,13 +217,13 @@ export default function AboutPage() {
             Our Journey of Growth & Innovation
           </h2>
         </motion.div>
-        <ul className="space-y-7">
+        <ul className="space-y-10">
           {journey.map((entry, index) => {
             const isLast = index === journey.length - 1;
             return (
               <motion.li
                 key={entry.year}
-                className="flex gap-5 rounded-xl px-1 py-2 transition-colors duration-200 hover:bg-accent md:gap-6"
+                className="flex gap-6 rounded-xl px-2 py-1 transition-colors duration-300 hover:bg-linear-to-r hover:from-primary/6 hover:to-transparent md:gap-8"
                 {...timelineInView}
                 transition={{
                   duration: 0.6,
@@ -258,17 +243,17 @@ export default function AboutPage() {
                     />
                   ) : null}
                 </div>
-                <div className="min-w-0 flex-1 space-y-4">
-                  <p className="text-xl font-semibold tabular-nums text-primary">
+                <div className="min-w-0 flex-1 space-y-3">
+                  <p className="text-2xl font-medium tracking-[-0.02em] tabular-nums text-primary">
                     {entry.year}
                   </p>
                   <motion.div
-                    whileHover={{ scale: 1.005 }}
+                    whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.2, ease: easePremium }}
                   >
-                    <Card variant="interactive" className="p-6 text-foreground">
+                    <Card className="rounded-2xl border border-border bg-card p-6 text-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                       <CardContent className="p-0">
-                      <p className="text-sm leading-6 text-muted-foreground">
+                        <p className="text-body text-ds-text-muted">
                           {entry.description}
                         </p>
                       </CardContent>
@@ -283,7 +268,7 @@ export default function AboutPage() {
 
       <section
         id="vision-mission"
-        className="scroll-mt-28 space-y-7 md:scroll-mt-32"
+        className="mb-24 scroll-mt-28 space-y-8 md:scroll-mt-32"
       >
         <motion.div
           {...headingInView}
@@ -293,12 +278,12 @@ export default function AboutPage() {
             Our Vision & Mission
           </h2>
         </motion.div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-7">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {visionMission.map((item, index) => (
             <motion.div
               key={item.title}
               {...cardInView}
-              whileHover={{ scale: 1.005 }}
+              whileHover={{ scale: 1.02 }}
               transition={{
                 y: {
                   duration: 0.55,
@@ -312,19 +297,19 @@ export default function AboutPage() {
                 },
               }}
             >
-              <Card variant="feature" className="h-full p-6 text-foreground">
-                <CardHeader className="flex flex-row items-start gap-4 space-y-0 p-0">
-                  <span className={cn(cardIconClassNames.brand, "h-10 w-10")}>
+              <Card className="group h-full rounded-2xl border border-border bg-card p-6 text-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <CardHeader className="flex flex-row items-start gap-3 space-y-0 p-0">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
                     <item.icon className="h-5 w-5" aria-hidden />
                   </span>
                   <div className="min-w-0 flex-1 space-y-0">
-                    <CardTitle className="font-heading text-h4 text-ds-text-strong">
+                    <CardTitle className="text-h4 text-ds-text-strong">
                       {item.title}
                     </CardTitle>
                   </div>
                 </CardHeader>
-                <CardContent className="p-0 pt-5">
-                  <p className="text-sm leading-6 text-muted-foreground">
+                <CardContent className="p-0 pt-4">
+                  <p className="text-body text-ds-text-muted">
                     {item.description}
                   </p>
                 </CardContent>
@@ -334,7 +319,7 @@ export default function AboutPage() {
         </div>
 
         
-        <div className="space-y-7 pt-2">
+        <div className="space-y-8">
           <motion.div
             {...headingInView}
             transition={{ duration: 0.5, ease: easePremium }}

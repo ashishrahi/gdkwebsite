@@ -74,7 +74,6 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
   >(DEFAULT_PRODUCT_MEGA_MENU_CATEGORY_KEY);
   const [activeDesktopMenu, setActiveDesktopMenu] = useState<"about" | "products" | null>(null);
   const [activeSection, setActiveSection] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
   const desktopMenuCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -136,21 +135,6 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
     };
   }, []);
 
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(homeVariant ? window.scrollY > 16 : window.scrollY > 0);
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [homeVariant]);
-
   const isRouteActive = (hash: string) => {
     if (pathname.startsWith("/products")) {
       return hash === "#products";
@@ -203,36 +187,27 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
     getMegaMenuCategoryByKey(activeDesktopProductKey) ??
     getMegaMenuCategoryByKey(DEFAULT_PRODUCT_MEGA_MENU_CATEGORY_KEY) ??
     PRODUCT_MEGA_MENU_CATEGORIES[0];
-  const useHomeNavSurface = homeVariant;
-  const logoLinkClassName =
-    "flex items-center";
-  const logoImageClassName =
-    "h-9 w-auto object-contain";
+  const logoLinkClassName = "flex items-center";
+  const logoImageClassName = "h-8 w-auto object-contain sm:h-9";
   const desktopNavLinkClassName = (isActive: boolean) =>
     cn(
-      "relative inline-flex h-10 items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold tracking-[0.01em] transition-all duration-200",
-      "text-[#1f4d2f] hover:bg-white/75 hover:text-[#0f3f24] hover:shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18),0_6px_18px_rgb(20_83_45/0.08)]",
-      isActive &&
-        "bg-white text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.22),0_8px_22px_rgb(20_83_45/0.1)]"
+      "relative inline-flex items-center gap-1 py-2 text-[0.75rem] font-medium uppercase tracking-[0.12em] text-[#24583a] transition-colors duration-200",
+      "after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[#0f3f24] after:transition-transform after:duration-200",
+      "hover:text-[#0f3f24] hover:after:scale-x-100",
+      isActive && "text-[#0f3f24] after:scale-x-100"
     );
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 isolate z-50 w-full shrink-0 border-b bg-[#f2faf3] px-ds-page-x transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
-        homeVariant
-          ? "border-[#cfe8d2] shadow-[0_10px_28px_rgb(20_83_45/0.12)]"
-          : "border-[#d5ead8] shadow-[0_8px_22px_rgb(20_83_45/0.08)]"
-      )}
-    >
-      <nav
+    <>
+      <header
         className={cn(
-          "mx-auto flex h-(--ds-layout-navbar-h) w-full max-w-ds-page items-center justify-between px-0 transition-all duration-200 lg:grid lg:grid-cols-[1fr_auto_1fr]",
-          scrolled
-            ? "shadow-ds-nav"
-            : "shadow-none"
+          "fixed inset-x-0 top-0 isolate z-50 w-full shrink-0 border-b bg-[#f2faf3]/94 px-ds-page-x shadow-none backdrop-blur-md transition-[background-color,border-color] duration-300",
+          homeVariant
+            ? "border-black/5"
+            : "border-[#d5ead8]/70"
         )}
       >
+      <nav className="mx-auto flex h-(--ds-layout-navbar-h) w-full max-w-352 items-center justify-between px-0 lg:grid lg:grid-cols-[1fr_auto_1fr]">
         <div className="hidden items-center justify-start lg:flex">
           <Link href="/#home" className={logoLinkClassName} onClick={closeMobileMenu}>
             <Image
@@ -256,13 +231,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           />
         </Link>
 
-        <div
-          className={cn(
-            "hidden h-11 items-center justify-center gap-1.5 lg:flex",
-            useHomeNavSurface &&
-              "rounded-full border border-[#d5ead8] bg-white/55 px-1.5 shadow-[0_8px_20px_rgb(20_83_45/0.08)]"
-          )}
-        >
+        <div className="hidden items-center justify-center gap-8 lg:flex xl:gap-11">
           {navLinks.map((link) => {
             const isActive = isRouteActive(link.hash);
             const isAboutLink = link.label === "About";
@@ -297,7 +266,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                     </Link>
                     <div
                       className={cn(
-                        "pointer-events-none invisible absolute top-full left-1/2 z-50 mt-4 w-[700px] -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 ease-ds-out",
+                        "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[700px] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
                         activeDesktopMenu === "about" &&
                           "pointer-events-auto opacity-100 visible translate-y-0"
                       )}
@@ -306,7 +275,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                         <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
                         <div className="grid grid-cols-[1fr_1.6fr] gap-8">
                           <div className={cn(cardSurfaceVariants({ variant: "minimal", padding: "lg" }), "bg-ds-surface-muted")}>
-                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-accent">
+                            <p className="text-xs font-medium uppercase tracking-(--ds-type-eyebrow-letter-spacing) text-brand-accent">
                               About GDK
                             </p>
                             <ul className="mt-4 space-y-2.5">
@@ -316,7 +285,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                 </li>
                               ))}
                             </ul>
-                            <p className="mt-4 text-sm leading-relaxed text-ds-text-muted">
+                            <p className="mt-4 text-body-sm text-ds-text-muted">
                               Premium packaging partner delivering precision manufacturing with
                               consistency, compliance, and scale.
                             </p>
@@ -335,8 +304,8 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                   <card.icon className="h-5 w-5" />
                                 </div>
                                 <div>
-                                  <p className="text-sm leading-5 font-semibold text-ds-text-strong">{card.title}</p>
-                                  <p className="mt-1.5 text-xs leading-[1.55] text-ds-text-muted">
+                                  <p className="text-sm leading-5 font-medium text-ds-text-strong">{card.title}</p>
+                                  <p className="mt-1.5 text-caption text-ds-text-muted">
                                     {card.description}
                                   </p>
                                 </div>
@@ -368,7 +337,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                     </Link>
                     <div
                       className={cn(
-                        "pointer-events-none invisible absolute top-full left-1/2 z-50 mt-4 w-[820px] -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 ease-ds-out",
+                        "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[820px] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
                         activeDesktopMenu === "products" &&
                           "pointer-events-auto opacity-100 visible translate-y-0"
                       )}
@@ -402,8 +371,8 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                     <CategoryIcon className="h-6 w-6 text-brand-accent" />
                                   </div>
                                   <div>
-                                    <p className="text-sm leading-5 font-semibold text-ds-text-strong">{category.title}</p>
-                                    <p className="mt-1.5 text-xs leading-[1.55] text-ds-text-muted">
+                                    <p className="text-sm leading-5 font-medium text-ds-text-strong">{category.title}</p>
+                                    <p className="mt-1.5 text-caption text-ds-text-muted">
                                       {category.description}
                                     </p>
                                   </div>
@@ -413,11 +382,11 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                           </div>
                           <div className={cn("group/panel block bg-ds-surface-muted", cardSurfaceVariants({ variant: "minimal", padding: "lg" }))}>
                             <Link href={activeDesktopProductCategory.href}>
-                              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-accent">
+                              <p className="text-xs font-medium uppercase tracking-(--ds-type-eyebrow-letter-spacing) text-brand-accent">
                                 {activeDesktopProductCategory.title}
                               </p>
                             </Link>
-                            <p className="mt-3 text-sm leading-relaxed text-ds-text-muted">
+                            <p className="mt-3 text-body-sm text-ds-text-muted">
                               Product sub-categories crafted for performance, consistency, and scalable
                               manufacturing.
                             </p>
@@ -463,7 +432,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           <Button
             asChild
             size="lg"
-            className="h-11 rounded-full bg-brand-accent px-6 py-2.5 text-sm text-white shadow-(--ds-shadow-button-primary) transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
+            className="h-11 rounded-full bg-brand-accent px-6 py-2.5 text-[0.75rem] font-medium uppercase tracking-[0.12em] text-white shadow-none transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
           >
             <Link href="/#contact" className="text-white! hover:text-white!">
               Get Quote
@@ -517,8 +486,8 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                 <div
                   key={link.href}
                   className={cn(
-                    "rounded-2xl p-1 transition-colors duration-300",
-                    "border border-[#d5ead8] bg-white/55"
+                    "rounded-2xl p-0.5 transition-colors duration-300",
+                    "border border-transparent bg-transparent"
                   )}
                 >
                   {isAboutLink ? (
@@ -527,10 +496,10 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                         type="button"
                         aria-expanded={isMobileAboutOpen}
                         className={cn(
-                          "flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200",
-                          "text-[#1f4d2f] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
+                          "flex w-full items-center justify-between rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
+                          "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
                           isActive &&
-                            "bg-[#edf7ee] text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18)]"
+                            "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
                         )}
                         onClick={() => setIsMobileAboutOpen((previous) => !previous)}
                       >
@@ -580,10 +549,10 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                         type="button"
                         aria-expanded={isMobileProductsOpen}
                         className={cn(
-                          "flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200",
-                          "text-[#1f4d2f] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
+                          "flex w-full items-center justify-between rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
+                          "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
                           isActive &&
-                            "bg-[#edf7ee] text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18)]"
+                            "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
                         )}
                         onClick={() => setIsMobileProductsOpen((previous) => !previous)}
                       >
@@ -622,7 +591,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                   <button
                                     type="button"
                                     className={cn(
-                                      "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-semibold transition-colors duration-200",
+                                      "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-medium transition-colors duration-200",
                                       "text-[#24583a] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
                                       isCategoryOpen && "bg-[#edf7ee] text-[#0f3f24]"
                                     )}
@@ -678,10 +647,10 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                       href={link.href}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
-                        "block rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200",
-                        "text-[#1f4d2f] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
+                        "block rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
+                        "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
                         isActive &&
-                          "bg-[#edf7ee] text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18)]"
+                          "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
                       )}
                       onClick={() => {
                         setActiveSection(link.hash.replace("#", ""));
@@ -713,7 +682,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                   setActiveSection("home");
                   closeMobileMenu();
                 }}
-                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-brand-accent px-7 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
+                className="inline-flex min-h-12.5 flex-1 items-center justify-center rounded-full bg-brand-accent px-7 py-3 text-[0.8125rem] font-medium uppercase tracking-(--ds-type-label-letter-spacing) text-white transition-colors duration-200 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
               >
                 Get Quote
               </Link>
@@ -722,6 +691,8 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           </div>
         </div>
       ) : null}
-    </header>
+      </header>
+      <div className="h-(--ds-layout-navbar-h) shrink-0" aria-hidden="true" />
+    </>
   );
 }

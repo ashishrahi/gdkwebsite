@@ -56,7 +56,7 @@ Text hierarchy:
 
 ## Typography
 
-The current stack uses Inter through `next/font/google` as the primary and heading font, with Geist Mono for monospace content.
+The current stack uses Jost through `next/font/google` for the full typography system, including body, heading, and font utility tokens.
 
 Standard typography scale:
 

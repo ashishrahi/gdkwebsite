@@ -67,7 +67,7 @@ export function AboutJourney() {
         {...headingInView}
         transition={{ duration: 0.5, ease: easePremium }}
       >
-        <h2 className="text-3xl font-semibold tracking-tight text-foreground">
+        <h2 className="text-h2 text-foreground">
           Our Journey of Growth & Innovation
         </h2>
       </motion.div>
@@ -98,7 +98,7 @@ export function AboutJourney() {
                 ) : null}
               </div>
               <div className="min-w-0 flex-1 space-y-4">
-                <p className="text-2xl font-semibold tabular-nums text-primary">
+                <p className="text-h3 tabular-nums text-primary">
                   {entry.year}
                 </p>
                 <motion.div
@@ -107,7 +107,7 @@ export function AboutJourney() {
                 >
                   <Card variant="interactive" className="p-6 sm:p-7 text-foreground">
                     <CardContent className="p-0">
-                      <p className="text-base leading-relaxed text-muted-foreground">
+                      <p className="text-body text-ds-text-muted">
                         {entry.description}
                       </p>
                     </CardContent>

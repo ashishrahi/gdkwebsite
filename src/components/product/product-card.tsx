@@ -42,7 +42,7 @@ type BaseProductCardProps = {
 };
 
 const productCardBadgeClassName =
-  "rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,var(--border))] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-3 py-1.5 text-[11px] font-semibold leading-none text-[var(--brand-accent)]";
+  "rounded-full border border-[color-mix(in_srgb,var(--brand-accent)_25%,var(--border))] bg-[color-mix(in_srgb,var(--brand-accent)_12%,white)] px-3 py-1.5 text-[11px] font-medium leading-none tracking-[0.04em] text-brand-accent";
 
 export function getProductCardIcon(label: string): LucideIcon {
   const matchedCategory = categoryIcons.find((entry) =>
@@ -116,13 +116,13 @@ export function BaseProductCard({
         )}
         <CardFooter className="mt-auto justify-between gap-4">
           {footerLeading ? (
-            <span className="min-w-0 text-sm font-semibold text-foreground sm:text-base">
+            <span className="min-w-0 text-sm font-medium text-foreground sm:text-base">
               {footerLeading}
             </span>
           ) : (
             <span aria-hidden="true" />
           )}
-          <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary">
+          <span className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-primary">
             {ctaLabel}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </span>

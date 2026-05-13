@@ -2,9 +2,9 @@
   color-scheme: light;
 
   /* Font families */
-  --ds-font-sans: var(--font-inter), "Segoe UI", Roboto, Arial, sans-serif;
-  --ds-font-heading: var(--font-playfair), "Cormorant Garamond", Georgia, serif;
-  --ds-font-mono: var(--font-geist-mono), "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --ds-font-sans: var(--font-jost), "Segoe UI", Roboto, Arial, sans-serif;
+  --ds-font-heading: var(--font-jost), "Segoe UI", Roboto, Arial, sans-serif;
+  --ds-font-mono: var(--font-jost), "Segoe UI", Roboto, Arial, sans-serif;
 
   /* Logo-inspired brand palette */
   --brand-green-950: #0d2f1b;
@@ -74,58 +74,62 @@
   --ds-text-inverse: #ffffff;
 
   /* Typography scale */
-  --ds-type-display-size: clamp(2.5rem, 5.2vw, 4.25rem);
-  --ds-type-display-line-height: 1.02;
-  --ds-type-display-letter-spacing: -0.045em;
-  --ds-type-display-weight: 760;
+  --ds-type-display-size: clamp(2.35rem, 4.35vw, 3.7rem);
+  --ds-type-display-line-height: 1.04;
+  --ds-type-display-letter-spacing: -0.034em;
+  --ds-type-display-weight: 640;
 
-  --ds-type-h1-size: clamp(2.125rem, 4vw, 3.25rem);
+  --ds-type-h1-size: clamp(2.05rem, 3.35vw, 3rem);
   --ds-type-h1-line-height: 1.08;
-  --ds-type-h1-letter-spacing: -0.038em;
-  --ds-type-h1-weight: 740;
+  --ds-type-h1-letter-spacing: -0.03em;
+  --ds-type-h1-weight: 640;
 
-  --ds-type-h2-size: clamp(1.75rem, 3vw, 2.4rem);
-  --ds-type-h2-line-height: 1.16;
-  --ds-type-h2-letter-spacing: -0.026em;
-  --ds-type-h2-weight: 680;
+  --ds-type-h2-size: clamp(1.625rem, 2.38vw, 2.15rem);
+  --ds-type-h2-line-height: 1.14;
+  --ds-type-h2-letter-spacing: -0.024em;
+  --ds-type-h2-weight: 620;
 
-  --ds-type-h3-size: clamp(1.25rem, 1.8vw, 1.625rem);
-  --ds-type-h3-line-height: 1.26;
-  --ds-type-h3-letter-spacing: -0.02em;
-  --ds-type-h3-weight: 660;
+  --ds-type-h3-size: clamp(1.1875rem, 1.48vw, 1.45rem);
+  --ds-type-h3-line-height: 1.24;
+  --ds-type-h3-letter-spacing: -0.018em;
+  --ds-type-h3-weight: 600;
 
-  --ds-type-h4-size: clamp(1.125rem, 1.4vw, 1.375rem);
-  --ds-type-h4-line-height: 1.25;
-  --ds-type-h4-letter-spacing: -0.018em;
-  --ds-type-h4-weight: 660;
+  --ds-type-h4-size: clamp(1.0625rem, 1.12vw, 1.2rem);
+  --ds-type-h4-line-height: 1.28;
+  --ds-type-h4-letter-spacing: -0.014em;
+  --ds-type-h4-weight: 600;
 
-  --ds-type-body-lg-size: clamp(1rem, 1vw, 1.125rem);
-  --ds-type-body-lg-line-height: 1.74;
+  --ds-type-body-lg-size: clamp(1rem, 0.92vw, 1.0625rem);
+  --ds-type-body-lg-line-height: 1.64;
   --ds-type-body-size: 1rem;
-  --ds-type-body-line-height: 1.68;
+  --ds-type-body-line-height: 1.62;
+  --ds-type-body-letter-spacing: -0.001em;
+  --ds-type-body-weight: 400;
+  --ds-type-strong-weight: 560;
   --ds-type-body-sm-size: 0.875rem;
-  --ds-type-body-sm-line-height: 1.58;
+  --ds-type-body-sm-line-height: 1.56;
   --ds-type-caption-size: 0.75rem;
   --ds-type-caption-line-height: 1.45;
   --ds-type-label-size: 0.8125rem;
   --ds-type-label-line-height: 1.2;
-  --ds-type-label-letter-spacing: 0.01em;
-  --ds-type-eyebrow-letter-spacing: 0.14em;
+  --ds-type-label-letter-spacing: 0.052em;
+  --ds-type-label-weight: 600;
+  --ds-type-eyebrow-letter-spacing: 0.13em;
 
   /* Spacing rhythm */
-  --ds-space-page-x: clamp(1.25rem, 3vw, 2.5rem);
+  --ds-space-page-x: clamp(1.25rem, 3vw, 3rem);
   --ds-space-page-top: clamp(1.5rem, 2.5vw, 2rem);
-  --ds-space-section-y: clamp(4rem, 7vw, 6.5rem);
-  --ds-space-section-y-sm: clamp(3.25rem, 5.5vw, 5rem);
-  --ds-space-section-y-lg: clamp(5rem, 8vw, 7.5rem);
-  --ds-space-section-gap: clamp(2.25rem, 4.5vw, 4rem);
-  --ds-space-heading-gap: 1.25rem;
-  --ds-space-section-header-badge-title: clamp(1.75rem, 3vw, 2.5rem);
-  --ds-space-section-header-title-description: clamp(1.125rem, 1.8vw, 1.625rem);
-  --ds-space-card: clamp(1.5rem, 2.25vw, 2rem);
-  --ds-space-card-lg: clamp(1.75rem, 3vw, 2.5rem);
-  --ds-space-control-x: 1rem;
-  --ds-space-control-y: 0.875rem;
+  --ds-space-section-y: clamp(5rem, 7.8vw, 8rem);
+  --ds-space-section-y-sm: clamp(4.25rem, 6.4vw, 6rem);
+  --ds-space-section-y-lg: clamp(6.25rem, 9vw, 9.25rem);
+  --ds-space-section-gap: clamp(3rem, 5.2vw, 5.25rem);
+  --ds-space-heading-gap: 1rem;
+  --ds-space-section-header-badge-title: clamp(1.25rem, 2vw, 1.75rem);
+  --ds-space-section-header-title-description: clamp(0.75rem, 1.2vw, 1.125rem);
+  --ds-space-card: clamp(1.75rem, 2.5vw, 2.375rem);
+  --ds-space-card-lg: clamp(2.125rem, 3.1vw, 2.875rem);
+  --ds-space-control-x: 1.125rem;
+  --ds-space-control-y: 0.8125rem;
 
   /* Radius */
   --radius: 0.875rem;
@@ -146,19 +150,19 @@
   --shadow: 0 10px 24px rgb(8 17 31 / 0.08);
   --ds-shadow-xs: 0 1px 2px rgb(8 17 31 / 0.05);
   --ds-shadow-sm: 0 8px 18px rgb(8 17 31 / 0.06);
-  --ds-shadow-card-subtle: 0 4px 14px rgb(8 17 31 / 0.04);
-  --ds-shadow-card-medium: 0 10px 24px rgb(8 17 31 / 0.07);
-  --ds-shadow-card-elevated: 0 12px 30px rgb(8 17 31 / 0.06);
-  --ds-shadow-card-hover-elevation: 0 16px 36px rgb(8 17 31 / 0.1);
-  --ds-shadow-card: 0 10px 24px rgb(8 17 31 / 0.07);
-  --ds-shadow-card-soft: 0 12px 30px rgb(8 17 31 / 0.06);
-  --ds-shadow-card-hover: 0 16px 36px rgb(8 17 31 / 0.1);
-  --ds-shadow-nav: 0 10px 28px color-mix(in srgb, var(--brand-green-950) 10%, transparent);
-  --ds-shadow-mega-menu: 0 24px 56px color-mix(in srgb, var(--brand-green-950) 18%, transparent);
-  --ds-shadow-hero-panel: 0 18px 48px color-mix(in srgb, var(--brand-green-950) 20%, transparent);
+  --ds-shadow-card-subtle: 0 2px 10px rgb(8 17 31 / 0.026);
+  --ds-shadow-card-medium: 0 8px 20px rgb(8 17 31 / 0.045);
+  --ds-shadow-card-elevated: 0 10px 26px rgb(8 17 31 / 0.048);
+  --ds-shadow-card-hover-elevation: 0 12px 28px rgb(8 17 31 / 0.065);
+  --ds-shadow-card: 0 8px 20px rgb(8 17 31 / 0.045);
+  --ds-shadow-card-soft: 0 10px 26px rgb(8 17 31 / 0.045);
+  --ds-shadow-card-hover: 0 12px 28px rgb(8 17 31 / 0.065);
+  --ds-shadow-nav: 0 8px 22px color-mix(in srgb, var(--brand-green-950) 6%, transparent);
+  --ds-shadow-mega-menu: 0 20px 46px color-mix(in srgb, var(--brand-green-950) 13%, transparent);
+  --ds-shadow-hero-panel: 0 14px 36px color-mix(in srgb, var(--brand-green-950) 13%, transparent);
   --ds-shadow-focus: 0 0 0 4px color-mix(in srgb, var(--ring) 24%, transparent);
-  --ds-shadow-button-primary: 0 12px 24px color-mix(in srgb, var(--brand-accent) 28%, transparent);
-  --ds-shadow-button-primary-strong: 0 18px 38px color-mix(in srgb, var(--brand-accent) 34%, transparent);
+  --ds-shadow-button-primary: 0 8px 18px color-mix(in srgb, var(--brand-accent) 18%, transparent);
+  --ds-shadow-button-primary-strong: 0 12px 26px color-mix(in srgb, var(--brand-accent) 24%, transparent);
   --ds-shadow-button-secondary: 0 12px 24px color-mix(in srgb, var(--secondary) 24%, transparent);
   --ds-shadow-submit: 0 10px 24px color-mix(in srgb, var(--brand-accent) 24%, transparent);
   --ds-shadow-submit-hover: 0 14px 30px color-mix(in srgb, var(--brand-accent) 30%, transparent);
@@ -167,13 +171,13 @@
 
   /* Layout */
   --ds-layout-main: 72rem;
-  --ds-layout-page: 76rem;
+  --ds-layout-page: 78rem;
   --ds-layout-hero: 1280px;
   --ds-layout-process: 1280px;
   --ds-layout-copy: 56ch;
   --ds-layout-heading: 48rem;
-  --ds-layout-section-title: 64rem;
-  --ds-layout-section-copy: 62ch;
+  --ds-layout-section-title: 56rem;
+  --ds-layout-section-copy: 58ch;
   --ds-layout-navbar-h: 72px;
 
   /* Motion */

@@ -25,9 +25,9 @@ const sectionDescriptionMeasureClassName =
   "w-full text-pretty";
 
 export const homeGridClassName =
-  "grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7 lg:grid-cols-3 lg:gap-8";
+  "grid grid-cols-1 gap-7 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-10";
 
-export const homeContentSpacingClassName = "mt-10 sm:mt-12 lg:mt-14";
+export const homeContentSpacingClassName = "mt-12 sm:mt-14 lg:mt-16";
 
 export const premiumCardClassName = cn(
   cardSurfaceVariants({ variant: "interactive" }),
@@ -87,8 +87,8 @@ export function SectionHeader({
   const isInverse = tone === "gradient";
   const isRelaxed = spacing === "relaxed";
   const headerGapClassName = isRelaxed
-    ? "gap-7 lg:gap-8"
-    : "gap-6 lg:gap-7";
+    ? "gap-6 lg:gap-7"
+    : "gap-5 lg:gap-6";
   const headerStackClassName =
     align === "center" ? "items-center text-center" : "items-start text-left";
   const eyebrowClassName = align === "center" ? "self-center justify-self-center" : "self-start";
@@ -133,7 +133,7 @@ export function SectionHeader({
       <div className={cn("flex w-full flex-col", headerGapClassName, headerStackClassName)}>
         <span
           className={cn(
-            "ds-eyebrow justify-center shadow-[inset_0_1px_0_rgb(255_255_255/0.55),0_10px_24px_rgb(8_17_31/0.05)]",
+            "ds-eyebrow justify-center shadow-[inset_0_1px_0_rgb(255_255_255/0.55),0_8px_20px_rgb(8_17_31/0.04)]",
             eyebrowClassName,
             isInverse
               ? "border-white/25 bg-white/11 text-white/90 backdrop-blur-md"
@@ -144,7 +144,7 @@ export function SectionHeader({
         </span>
         <div
           className={cn(
-            "ds-section-header-copy flex max-w-3xl flex-col gap-4! lg:gap-5!",
+            "ds-section-header-copy flex max-w-3xl flex-col gap-3.5! lg:gap-4!",
             copyClassName
           )}
         >
@@ -164,7 +164,7 @@ export function PremiumCard({
   className?: string;
 }) {
   return (
-    <article className={cn(premiumCardClassName, "p-6 sm:p-7", className)}>
+    <article className={cn(premiumCardClassName, "p-6 sm:p-8", className)}>
       {children}
     </article>
   );
@@ -185,7 +185,7 @@ export function ServiceCard({
 }) {
   return (
     <article className={cn(premiumCardClassName, "group/service overflow-hidden p-0")}>
-      <div className="relative h-48 w-full overflow-hidden rounded-t-ds-card sm:h-52">
+      <div className="relative h-48 w-full overflow-hidden rounded-t-ds-card sm:h-56">
         <Image
           src={image}
           alt={title}
@@ -193,22 +193,22 @@ export function ServiceCard({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 ease-ds-out group-hover/service:scale-[1.03]"
         />
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[color:color-mix(in_srgb,var(--brand-green-950)_35%,transparent)] via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[color-mix(in_srgb,var(--brand-green-950)_35%,transparent)] via-transparent to-transparent" />
       </div>
 
-      <div className="relative flex flex-1 flex-col p-6 pt-10">
-        <span className="absolute -top-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-ds-border-subtle bg-white text-[var(--brand-accent)] shadow-ds-card-subtle">
+      <div className="relative flex flex-1 flex-col p-6 pt-10 sm:p-7 sm:pt-11">
+        <span className="absolute -top-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-ds-border-subtle bg-white text-brand-accent shadow-ds-card-subtle">
           <Icon className="h-5 w-5" aria-hidden="true" />
         </span>
-        <h3 className="m-0 text-[clamp(1.0625rem,1.45vw,1.25rem)] font-semibold leading-tight tracking-[-0.016em] text-ds-text-strong">
+        <h3 className="m-0 text-h4 text-ds-text-strong">
           {title}
         </h3>
-        <p className="m-0 mt-3.5 max-w-prose text-body-sm leading-6 text-ds-text-body">
+        <p className="m-0 mt-3.5 max-w-prose text-body-sm text-ds-text-body">
           {description}
         </p>
         <Link
           href={href}
-          className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-[var(--brand-accent)] no-underline transition-colors duration-200 ease-ds-out hover:text-[var(--brand-accent-hover)]"
+          className="mt-auto inline-flex items-center gap-2 pt-7 text-[0.8125rem] font-medium uppercase tracking-(--ds-type-label-letter-spacing) text-brand-accent no-underline transition-colors duration-200 ease-ds-out hover:text-brand-accent-hover"
         >
           Learn More
           <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-ds-out group-hover/service:translate-x-1" />
@@ -228,13 +228,13 @@ export function FeatureCard({
   icon: LucideIcon;
 }) {
   return (
-    <article className={cn(premiumCardClassName, "min-h-[232px] gap-5 p-6 sm:p-7")}>
+    <article className={cn(premiumCardClassName, "min-h-[244px] gap-6 p-6 sm:p-8")}>
       <span className={cn(cardIconClassNames.brand, "h-11 w-11 border border-ds-border-subtle")}>
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
       <div className="flex min-w-0 flex-1 flex-col gap-3.5">
         <h3 className="m-0 text-h4 text-ds-text-strong">{title}</h3>
-        <p className="m-0 max-w-prose text-body-sm leading-6 text-ds-text-body">
+        <p className="m-0 max-w-prose text-body-sm text-ds-text-body">
           {description}
         </p>
       </div>
@@ -250,11 +250,11 @@ export function StatCard({
   icon: LucideIcon;
 }) {
   return (
-    <article className={cn(premiumCardClassName, "min-h-24 flex-row items-center gap-4 p-5")}>
+    <article className={cn(premiumCardClassName, "min-h-24 flex-row items-center gap-4 p-5 sm:p-6")}>
       <span className={cn(cardIconClassNames.brand, "h-10 w-10 border border-ds-border-subtle")}>
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
-      <p className="m-0 min-w-0 text-sm font-semibold leading-snug text-ds-text-strong">
+      <p className="m-0 min-w-0 text-sm font-medium leading-snug text-ds-text-strong">
         {label}
       </p>
     </article>
@@ -274,19 +274,19 @@ export function ProcessCard({
 }) {
   return (
     <article className="relative mb-0 flex h-full pt-7">
-      <div className="absolute left-6 top-0 z-10 flex h-14 w-14 items-center justify-center rounded-xl border border-white/45 bg-white text-[var(--brand-accent)] shadow-ds-card-medium">
+      <div className="absolute left-6 top-0 z-10 flex h-14 w-14 items-center justify-center rounded-xl border border-white/45 bg-white text-brand-accent shadow-ds-card-medium">
         <Icon className="h-6 w-6" aria-hidden="true" />
       </div>
 
-      <div className="flex min-h-[230px] w-full flex-col rounded-ds-card border border-white/15 bg-white/8 p-6 pt-14 text-white shadow-ds-card-subtle backdrop-blur-xl transition-[border-color,box-shadow,transform,background-color] duration-200 ease-ds-out hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/12 hover:shadow-ds-card-medium">
-        <p className="m-0 text-xs font-bold uppercase leading-none tracking-[0.18em] text-white/70">
+      <div className="flex min-h-[240px] w-full flex-col rounded-ds-card border border-white/15 bg-white/8 p-6 pt-14 text-white shadow-ds-card-subtle backdrop-blur-xl transition-[border-color,box-shadow,transform,background-color] duration-200 ease-ds-out hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/12 hover:shadow-ds-card-medium">
+        <p className="m-0 text-xs font-medium uppercase leading-none tracking-(--ds-type-eyebrow-letter-spacing) text-white/70">
           Step {step}
         </p>
         <div className="mt-5 flex min-w-0 flex-1 flex-col gap-3.5">
-          <h3 className="m-0 text-[clamp(1rem,1.2vw,1.1875rem)] font-semibold leading-tight text-white">
+          <h3 className="m-0 text-h4 text-white">
             {title}
           </h3>
-          <p className="m-0 max-w-prose text-sm leading-6 text-white/85">
+          <p className="m-0 max-w-prose text-body-sm text-white/85">
             {description}
           </p>
         </div>

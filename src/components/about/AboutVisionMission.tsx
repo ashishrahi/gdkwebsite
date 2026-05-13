@@ -57,7 +57,7 @@ export function AboutVisionMission() {
         {...headingInView}
         transition={{ duration: 0.5, ease: easePremium }}
       >
-        <h2 className="text-3xl font-semibold tracking-tight text-foreground">
+        <h2 className="text-h2 text-foreground">
           Our Vision & Mission
         </h2>
       </motion.div>
@@ -86,13 +86,13 @@ export function AboutVisionMission() {
                   <item.icon className="h-5 w-5" aria-hidden />
                 </span>
                 <div className="min-w-0 flex-1 space-y-0">
-                  <CardTitle className="font-heading text-xl font-semibold leading-snug text-foreground">
+                  <CardTitle className="text-h4 text-foreground">
                     {item.title}
                   </CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="p-0 pt-5">
-                <p className="text-base leading-relaxed text-muted-foreground">
+                <p className="text-body text-ds-text-muted">
                   {item.description}
                 </p>
               </CardContent>

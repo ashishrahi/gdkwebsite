@@ -27,7 +27,7 @@ export function Footer() {
               className="h-10 w-auto object-contain"
             />
           </Link>
-          <p className="max-w-[56ch] text-sm font-medium leading-relaxed text-ds-text-muted sm:text-base">
+          <p className="max-w-[56ch] text-body-sm font-medium text-ds-text-muted sm:text-body">
             From Concept to Solution.{" "}
             <span className="text-(--primary)">With Sustainability Built In.</span>
           </p>
@@ -39,7 +39,7 @@ export function Footer() {
       <div className="relative overflow-hidden bg-[radial-gradient(circle_at_82%_45%,color-mix(in_srgb,var(--brand-blue-500)_16%,transparent),transparent_34%),linear-gradient(135deg,var(--brand-green-950),var(--brand-green-900))] text-white">
 
         {/* GLOW */}
-        <div className="pointer-events-none absolute top-1/2 right-[18%] z-0 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-[color:color-mix(in_srgb,var(--brand-orange-500)_12%,transparent)] blur-[120px]" />
+        <div className="pointer-events-none absolute top-1/2 right-[18%] z-0 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-[color-mix(in_srgb,var(--brand-orange-500)_12%,transparent)] blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-ds-page-x py-10 sm:py-12">
 
@@ -54,9 +54,9 @@ export function Footer() {
                 height={170}
                 className="h-auto w-[180px] object-contain sm:w-[220px] md:w-[250px]"
               />
-              <p className="max-w-[56ch] text-sm font-medium leading-relaxed text-white/72 sm:text-base">
+              <p className="max-w-[56ch] text-body-sm font-medium text-white/72 sm:text-body">
                 From Concept to Solution.{" "}
-                <span className="text-[var(--brand-orange-500)]">With Sustainability Built In.</span>
+                <span className="text-(--brand-orange-500)">With Sustainability Built In.</span>
               </p>
             </div>
 
@@ -83,7 +83,7 @@ export function Footer() {
             <div className="flex items-center gap-6">
               {socialLinks.map(({ href, label, icon: Icon }) => (
                 <a key={label} href={href} target="_blank" rel="noreferrer">
-                  <Icon className="size-5 text-white/90 transition hover:scale-110 hover:text-[var(--brand-orange-500)]" />
+                  <Icon className="size-5 text-white/90 transition hover:scale-110 hover:text-(--brand-orange-500)" />
                 </a>
               ))}
             </div>

@@ -77,9 +77,9 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 const fieldBaseClass =
   "w-full rounded-xl !bg-white text-ds-text-strong placeholder:text-ds-text-subtle border border-input px-5 leading-6 shadow-sm appearance-none focus:!bg-white focus:text-ds-text-strong focus:border-ring focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--ring)_22%,transparent)] outline-none";
 
-const fieldLabelClass = "block text-sm font-semibold leading-5 text-ds-text-muted";
+const fieldLabelClass = "block text-sm font-medium leading-5 tracking-[0.02em] text-ds-text-muted";
 const contactCardTitleClass =
-  "block m-0 max-w-full wrap-break-word text-base font-semibold leading-snug text-ds-text-muted";
+  "block m-0 max-w-full wrap-break-word text-base font-medium leading-snug text-ds-text-muted";
 const contactCardValueClass =
   "block m-0 max-w-full wrap-break-word text-sm leading-6 text-ds-text-strong sm:text-base";
 
@@ -167,7 +167,7 @@ export function ContactSection() {
                           <a
                             key={line.href}
                             href={line.href}
-                            className={cn(contactCardValueClass, "hover:text-[var(--primary)]")}
+                            className={cn(contactCardValueClass, "hover:text-(--primary)")}
                           >
                             {line.text}
                           </a>
@@ -196,7 +196,7 @@ export function ContactSection() {
                       <span className={contactCardTitleClass}>
                         {linkItem.title}
                       </span>
-                      <span className={cn(contactCardValueClass, "group-hover:text-[var(--primary)]")}>
+                      <span className={cn(contactCardValueClass, "group-hover:text-(--primary)")}>
                         {linkItem.value}
                       </span>
                     </span>
@@ -221,7 +221,7 @@ export function ContactSection() {
             <form className="contact-form space-y-6" noValidate onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-2.5">
                 <label htmlFor="contact-name" className={fieldLabelClass}>
-                  Name <span className="text-[var(--brand-red)]">*</span>
+                  Name <span className="text-(--brand-red)">*</span>
                 </label>
                 <input
                   id="contact-name"
@@ -232,13 +232,13 @@ export function ContactSection() {
                   {...register("name")}
                 />
                 {errors.name?.message ? (
-                  <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.name.message}</p>
+                  <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.name.message}</p>
                 ) : null}
               </div>
 
               <div className="space-y-2.5">
                 <label htmlFor="contact-address" className={fieldLabelClass}>
-                  Address <span className="text-[var(--brand-red)]">*</span>
+                  Address <span className="text-(--brand-red)">*</span>
                 </label>
                 <textarea
                   id="contact-address"
@@ -249,14 +249,14 @@ export function ContactSection() {
                   {...register("address")}
                 />
                 {errors.address?.message ? (
-                  <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.address.message}</p>
+                  <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.address.message}</p>
                 ) : null}
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2.5">
                   <label htmlFor="contact-city" className={fieldLabelClass}>
-                    City <span className="text-[var(--brand-red)]">*</span>
+                    City <span className="text-(--brand-red)">*</span>
                   </label>
                   <input
                     id="contact-city"
@@ -267,12 +267,12 @@ export function ContactSection() {
                     {...register("city")}
                   />
                   {errors.city?.message ? (
-                    <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.city.message}</p>
+                    <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.city.message}</p>
                   ) : null}
                 </div>
                 <div className="space-y-2.5">
                   <label htmlFor="contact-zip" className={fieldLabelClass}>
-                    Zip Code <span className="text-[var(--brand-red)]">*</span>
+                    Zip Code <span className="text-(--brand-red)">*</span>
                   </label>
                   <input
                     id="contact-zip"
@@ -283,7 +283,7 @@ export function ContactSection() {
                     {...register("zipCode")}
                   />
                   {errors.zipCode?.message ? (
-                    <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.zipCode.message}</p>
+                    <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.zipCode.message}</p>
                   ) : null}
                 </div>
               </div>
@@ -291,7 +291,7 @@ export function ContactSection() {
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2.5">
                   <label htmlFor="contact-mobile" className={fieldLabelClass}>
-                    Mobile <span className="text-[var(--brand-red)]">*</span>
+                    Mobile <span className="text-(--brand-red)">*</span>
                   </label>
                   <input
                     id="contact-mobile"
@@ -302,12 +302,12 @@ export function ContactSection() {
                     {...register("mobile")}
                   />
                   {errors.mobile?.message ? (
-                    <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.mobile.message}</p>
+                    <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.mobile.message}</p>
                   ) : null}
                 </div>
                 <div className="space-y-2.5">
                   <label htmlFor="contact-email" className={fieldLabelClass}>
-                    Email <span className="text-[var(--brand-red)]">*</span>
+                    Email <span className="text-(--brand-red)">*</span>
                   </label>
                   <input
                     id="contact-email"
@@ -318,14 +318,14 @@ export function ContactSection() {
                     {...register("email")}
                   />
                   {errors.email?.message ? (
-                    <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.email.message}</p>
+                    <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.email.message}</p>
                   ) : null}
                 </div>
               </div>
 
               <div className="space-y-2.5">
                 <label htmlFor="contact-product" className={fieldLabelClass}>
-                  Select Product <span className="text-[var(--brand-red)]">*</span>
+                  Select Product <span className="text-(--brand-red)">*</span>
                 </label>
                 <select
                   id="contact-product"
@@ -346,13 +346,13 @@ export function ContactSection() {
                   <option value="Printed Products">Printed Products</option>
                 </select>
                 {errors.product?.message ? (
-                  <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.product.message}</p>
+                  <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.product.message}</p>
                 ) : null}
               </div>
 
               <div className="space-y-2.5">
                 <label htmlFor="contact-comments" className={fieldLabelClass}>
-                  Comments <span className="text-[var(--brand-red)]">*</span>
+                  Comments <span className="text-(--brand-red)">*</span>
                 </label>
                 <textarea
                   id="contact-comments"
@@ -363,14 +363,14 @@ export function ContactSection() {
                   {...register("comments")}
                 />
                 {errors.comments?.message ? (
-                  <p className="mt-1 text-sm text-[var(--brand-red)] font-medium">{errors.comments.message}</p>
+                  <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.comments.message}</p>
                 ) : null}
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-[var(--brand-accent)] px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[var(--brand-accent-hover)] disabled:cursor-not-allowed disabled:opacity-70"
+                className="inline-flex h-12.5 w-full items-center justify-center rounded-full bg-brand-accent px-8 text-[0.8125rem] font-medium uppercase tracking-(--ds-type-label-letter-spacing) text-white transition-colors duration-200 hover:bg-brand-accent-hover disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
