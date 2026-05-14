@@ -11,9 +11,9 @@ const heroDescription =
 export function HeroSection() {
   return (
     <section className="relative isolate w-full overflow-hidden bg-brand-green-deep">
-      <div className="relative aspect-4/5 w-full overflow-hidden bg-brand-green-deep sm:aspect-video lg:aspect-2/1 lg:min-h-[600px] xl:aspect-21/9">
+      <div className="relative aspect-4/5 min-h-[calc(100svh-var(--ds-layout-navbar-h)-var(--ds-safe-area-top))] w-full overflow-hidden bg-brand-green-deep sm:aspect-video sm:min-h-0 lg:aspect-2/1 lg:min-h-[600px] xl:aspect-21/9">
         <HeroSlider />
-        <div className="relative z-20 mx-auto flex h-full w-full max-w-352 items-center px-ds-page-x py-10 sm:py-12 lg:py-16">
+        <div className="relative z-20 mx-auto flex h-full w-full max-w-352 items-center px-ds-page-x pt-[calc(var(--ds-layout-navbar-h)+1rem+var(--ds-safe-area-top))] pb-10 sm:py-12 lg:py-16">
           <div className="max-w-172 rounded-[1.5rem] border border-white/10 bg-[color-mix(in_srgb,var(--brand-green-950)_18%,transparent)] p-6 text-white sm:p-8 lg:p-9">
             <span className="inline-flex w-fit rounded-full border border-white/18 bg-white/10 px-3.5 py-1.5 text-xs font-medium uppercase tracking-(--ds-type-eyebrow-letter-spacing) text-white/88">
               {heroEyebrow}
