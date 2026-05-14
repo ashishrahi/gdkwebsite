@@ -26,7 +26,11 @@ export function ProductApplications({ applications, description }: ProductApplic
             key={application}
             className={cn(
               cardSurfaceVariants({ variant: "minimal" }),
+<<<<<<< Updated upstream
               "flex min-w-0 gap-4 rounded-xl bg-ds-surface-muted px-5 py-4 text-sm text-ds-text-body"
+=======
+              "flex gap-4 rounded-xl bg-ds-surface-muted px-5 py-4 text-sm text-ds-text-body"
+>>>>>>> Stashed changes
             )}
           >
             <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--secondary)_12%,white)] text-xs font-semibold text-(--secondary)">

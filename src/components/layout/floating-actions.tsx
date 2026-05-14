@@ -47,13 +47,21 @@ export function FloatingActions() {
 </button>
       </div>
 
+<<<<<<< Updated upstream
       <div className="fixed right-[calc(1rem+var(--ds-safe-area-right))] bottom-[calc(1rem+var(--ds-safe-area-bottom))] z-50 md:right-[calc(1.25rem+var(--ds-safe-area-right))] md:bottom-[calc(1.5rem+var(--ds-safe-area-bottom))]">
+=======
+      <div className="fixed right-5 bottom-6 z-50 max-md:right-4 max-md:bottom-4">
+>>>>>>> Stashed changes
         <a
           href={`https://wa.me/${WHATSAPP_NUMBER}`}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
+<<<<<<< Updated upstream
           className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/40 bg-ds-whatsapp text-white shadow-ds-card-medium ring-4 ring-white/80 transition-colors duration-200 hover:bg-(--ds-color-whatsapp-hover) active:bg-ds-primary-hover max-md:h-11 max-md:w-11"
+=======
+          className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/40 bg-[var(--ds-color-whatsapp)] text-white shadow-ds-card-medium ring-4 ring-white/80 transition-colors duration-200 hover:bg-[var(--ds-color-whatsapp-hover)] active:bg-[var(--primary-hover)] max-md:h-11 max-md:w-11"
+>>>>>>> Stashed changes
         >
           <span
             aria-hidden="true"

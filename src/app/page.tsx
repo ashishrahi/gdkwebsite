@@ -8,6 +8,11 @@ export default function Home() {
         <Hero />
       </section>
 
+<<<<<<< Updated upstream
+=======
+      <ClienteleSection />
+
+>>>>>>> Stashed changes
       <main className="w-full max-w-none! bg-background p-0!">
         <HomeSections />
       </main>

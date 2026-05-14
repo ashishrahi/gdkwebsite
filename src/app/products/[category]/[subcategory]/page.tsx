@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 
+<<<<<<< Updated upstream
 import { AddToEnquiryButton } from "@/components/enquiry/add-to-enquiry-button";
+=======
+>>>>>>> Stashed changes
 import { BaseProductCard, getProductCardIcon } from "@/components/product/product-card";
 import {
   cardSurfaceVariants,
@@ -88,6 +91,7 @@ export default async function ProductSubcategoryPage({ params }: ProductSubcateg
       </section>
 
       <section className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:gap-7">
+<<<<<<< Updated upstream
         {products.map((product) => {
           const href = `/products/${categoryItem.key}/${subcategoryItem.slug}/${product.slug}`;
 
@@ -127,6 +131,24 @@ export default async function ProductSubcategoryPage({ params }: ProductSubcateg
             />
           );
         })}
+=======
+        {products.map((product) => (
+          <BaseProductCard
+            key={product.slug}
+            href={`/products/${categoryItem.key}/${subcategoryItem.slug}/${product.slug}`}
+            ariaLabel={`Explore ${product.title}`}
+            title={product.title}
+            description={product.shortDescription}
+            meta={product.category}
+            imageSrc={product.heroImage}
+            imageAlt={product.title}
+            icon={getProductCardIcon(`${product.category} ${product.title}`)}
+            badges={product.badges}
+            footerLeading={product.material}
+            ctaLabel="Explore Product"
+          />
+        ))}
+>>>>>>> Stashed changes
       </section>
     </main>
   );

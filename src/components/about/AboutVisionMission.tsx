@@ -92,7 +92,11 @@ export function AboutVisionMission() {
                 </div>
               </CardHeader>
               <CardContent className="p-0 pt-5">
+<<<<<<< Updated upstream
                 <p className="text-body text-ds-text-muted">
+=======
+                <p className="text-base leading-relaxed text-muted-foreground">
+>>>>>>> Stashed changes
                   {item.description}
                 </p>
               </CardContent>

@@ -37,7 +37,11 @@ export function ProductHero({
       </div>
       <div className="absolute inset-0 bg-linear-to-r from-[color-mix(in_srgb,var(--brand-green-950)_78%,transparent)] via-[color-mix(in_srgb,var(--brand-green-950)_58%,transparent)] to-[color-mix(in_srgb,var(--brand-green-950)_34%,transparent)]" />
       <div className="relative z-10 grid min-h-104 content-center gap-5 p-6 py-12 sm:p-8 sm:py-14 lg:p-10 lg:py-16">
+<<<<<<< Updated upstream
         <div className="flex flex-wrap gap-2.5 text-xs font-medium tracking-(--ds-type-eyebrow-letter-spacing) uppercase">
+=======
+        <div className="flex flex-wrap gap-2.5 text-xs font-semibold tracking-[0.12em] uppercase">
+>>>>>>> Stashed changes
           <span className="rounded-full bg-[color-mix(in_srgb,var(--brand-accent)_22%,transparent)] px-3.5 py-1.5 leading-none text-[color-mix(in_srgb,var(--brand-accent)_78%,white)]">{category}</span>
           <span className="rounded-full bg-white/10 px-3.5 py-1.5 leading-none text-white/82">{material}</span>
         </div>
@@ -56,7 +60,11 @@ export function ProductHero({
           {badges.map((badge) => (
             <span
               key={badge}
+<<<<<<< Updated upstream
               className="rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-medium leading-none tracking-(--ds-type-label-letter-spacing) text-white/90"
+=======
+              className="rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold leading-none text-white/90"
+>>>>>>> Stashed changes
             >
               {badge}
             </span>

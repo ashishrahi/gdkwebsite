@@ -149,7 +149,11 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
         aria-hidden
         className={cn(
           cardSurfaceVariants({ variant: "elevated", padding: "sm" }),
+<<<<<<< Updated upstream
           "pointer-events-none fixed z-50 overflow-visible rounded-xl bg-white shadow-[color-mix(in_srgb,var(--brand-green-950)_20%,transparent)] transition-opacity duration-200 ease-out"
+=======
+          "pointer-events-none fixed z-50 overflow-visible rounded-xl bg-white shadow-[color:color-mix(in_srgb,var(--brand-green-950)_20%,transparent)] transition-opacity duration-200 ease-out"
+>>>>>>> Stashed changes
         )}
         style={{
           ...previewLayout.box,
@@ -186,7 +190,11 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
         rel="noopener noreferrer"
         className={cn(
           cardSurfaceVariants({ variant: "interactive", padding: "sm" }),
+<<<<<<< Updated upstream
           "relative block w-full max-w-full rounded-xl p-4 hover:scale-[1.03] sm:w-fit"
+=======
+          "relative block w-fit rounded-xl p-4 hover:scale-[1.03]"
+>>>>>>> Stashed changes
         )}
         onMouseEnter={showPreview}
         onMouseLeave={hidePreview}
@@ -206,7 +214,11 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
           className="absolute top-2 right-2 z-10 rounded-md bg-white/90 p-1 shadow-sm backdrop-blur"
           aria-label="View Certificate PDF"
         >
+<<<<<<< Updated upstream
           <FaFilePdf  className="h-4 w-4 text-(--brand-red)" aria-hidden />
+=======
+          <FaFilePdf  className="h-4 w-4 text-[var(--brand-red)]" aria-hidden />
+>>>>>>> Stashed changes
         </span>
       </a>
 

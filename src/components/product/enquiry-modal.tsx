@@ -158,6 +158,7 @@ export function EnquiryModal() {
         type: "ENQUIRY",
       });
       toast.success("Enquiry submitted");
+<<<<<<< Updated upstream
       setEnquiryModalOpen(false);
       closeDrawer();
       clearItems();
@@ -166,24 +167,40 @@ export function EnquiryModal() {
         phone: "",
         message: "",
       });
+=======
+      reset();
+>>>>>>> Stashed changes
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : "Something went wrong");
     }
   };
 
   return (
+<<<<<<< Updated upstream
     <Dialog open={isEnquiryModalOpen} onOpenChange={setEnquiryModalOpen}>
       <DialogContent className={cn(cardSurfaceVariants({ variant: "elevated" }), "fixed top-[calc(50dvh+(var(--ds-safe-area-top)-var(--ds-safe-area-bottom))/2)] flex min-h-0 max-h-[calc(100dvh-1rem-var(--ds-safe-area-top)-var(--ds-safe-area-bottom))] w-[calc(100%-1rem)] max-w-152 flex-col gap-0 overflow-hidden rounded-ds-card-lg bg-white/95 p-0 text-base text-ds-text-strong backdrop-blur-sm ring-[color-mix(in_srgb,var(--brand-blue-500)_28%,transparent)] sm:max-h-[calc(100dvh-3rem-var(--ds-safe-area-top)-var(--ds-safe-area-bottom))] sm:w-full sm:max-w-152 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:bg-transparent! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:bg-none! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:shadow-none! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:border-0! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:text-ds-text-muted! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:hover:bg-transparent!")}>
 
         <DialogHeader className="shrink-0 space-y-2 border-b border-ds-border-subtle px-5 pb-4 pt-6 pr-14 text-left sm:px-8 sm:pb-5 sm:pt-8 sm:pr-16">
           <DialogTitle className="text-h3 text-ds-text-strong">
             Enquiry for {enquiryTitle}
+=======
+    <Dialog>
+      <DialogTrigger className="inline-flex h-11 items-center justify-center rounded-lg bg-brand-accent px-5 text-sm font-semibold text-white! transition-colors hover:bg-brand-accent-hover">
+        Enquire Now
+      </DialogTrigger>
+      <DialogContent className={cn(cardSurfaceVariants({ variant: "elevated" }), "min-h-0 max-w-lg gap-0 rounded-ds-card-lg bg-white/95 px-6 py-7 text-base text-ds-text-strong backdrop-blur-sm ring-[color:color-mix(in_srgb,var(--brand-blue-500)_28%,transparent)] sm:max-w-lg sm:px-8 sm:py-8 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!bg-transparent [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!bg-none [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!shadow-none [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!border-0 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:!text-ds-text-muted [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:hover:!bg-transparent")}>
+
+        <DialogHeader className="space-y-2 text-left">
+          <DialogTitle className="text-2xl font-semibold tracking-tight text-ds-text-strong">
+            Enquiry for {productName}
+>>>>>>> Stashed changes
           </DialogTitle>
           <DialogDescription className="text-sm leading-6 text-ds-text-muted">
             Share your details and our team will contact you shortly.
           </DialogDescription>
         </DialogHeader>
 
+<<<<<<< Updated upstream
         <form className="flex min-h-0 flex-1 flex-col overflow-hidden" onSubmit={handleSubmit(onSubmit)}>
           <div className={cn("min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-8 sm:py-6", modalScrollbarClassName)}>
             <div className="space-y-5 sm:space-y-6">
@@ -300,6 +317,68 @@ export function EnquiryModal() {
               type="submit"
               disabled={isSubmitting}
               className="h-12.5 w-full rounded-full px-8 text-[0.8125rem] font-medium uppercase tracking-(--ds-type-label-letter-spacing) shadow-(--ds-shadow-submit) transition-[transform,box-shadow,opacity] duration-200 ease-out hover:shadow-(--ds-shadow-submit-hover) active:translate-y-px disabled:shadow-none"
+=======
+        <form className="mt-6 space-y-5" onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-2">
+            <label htmlFor="enquiry-name" className="block text-sm font-semibold text-ds-text-muted">
+              Name
+            </label>
+            <Input
+              id="enquiry-name"
+              placeholder="Your full name"
+              className={contactInputClassName}
+              aria-invalid={Boolean(errors.name)}
+              {...register("name")}
+            />
+            {errors.name ? (
+              <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+                {errors.name.message}
+              </p>
+            ) : null}
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="enquiry-phone" className="block text-sm font-semibold text-ds-text-muted">
+              Phone
+            </label>
+            <Input
+              id="enquiry-phone"
+              placeholder="+91 98894 71453"
+              className={contactInputClassName}
+              aria-invalid={Boolean(errors.phone)}
+              {...register("phone")}
+            />
+            {errors.phone ? (
+              <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+                {errors.phone.message}
+              </p>
+            ) : null}
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="enquiry-message" className="block text-sm font-semibold text-ds-text-muted">
+              Message
+            </label>
+            <Textarea
+              id="enquiry-message"
+              placeholder="Tell us your quantity, timeline, and packaging requirements."
+              className={contactTextareaClassName}
+              aria-invalid={Boolean(errors.message)}
+              {...register("message")}
+            />
+            {errors.message ? (
+              <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+                {errors.message.message}
+              </p>
+            ) : null}
+          </div>
+
+          <DialogFooter className="mx-0 mb-0 mt-1 flex flex-col gap-0 border-0 bg-transparent p-0 pt-2 shadow-none sm:flex-row sm:justify-end">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="h-12 w-full rounded-xl px-6 text-sm font-semibold shadow-[var(--ds-shadow-submit)] transition-[transform,box-shadow,opacity] duration-200 ease-out hover:shadow-[var(--ds-shadow-submit-hover)] active:translate-y-px disabled:shadow-none"
+>>>>>>> Stashed changes
             >
               {isSubmitting ? "Sending..." : "Send Enquiry"}
             </Button>
