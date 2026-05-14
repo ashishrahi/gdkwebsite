@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 
+import { AddToEnquiryButton } from "@/components/enquiry/add-to-enquiry-button";
 import { BaseProductCard, getProductCardIcon } from "@/components/product/product-card";
 import {
   cardSurfaceVariants,
@@ -87,22 +88,45 @@ export default async function ProductSubcategoryPage({ params }: ProductSubcateg
       </section>
 
       <section className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:gap-7">
-        {products.map((product) => (
-          <BaseProductCard
-            key={product.slug}
-            href={`/products/${categoryItem.key}/${subcategoryItem.slug}/${product.slug}`}
-            ariaLabel={`Explore ${product.title}`}
-            title={product.title}
-            description={product.shortDescription}
-            meta={product.category}
-            imageSrc={product.heroImage}
-            imageAlt={product.title}
-            icon={getProductCardIcon(`${product.category} ${product.title}`)}
-            badges={product.badges}
-            footerLeading={product.material}
-            ctaLabel="Explore Product"
-          />
-        ))}
+        {products.map((product) => {
+          const href = `/products/${categoryItem.key}/${subcategoryItem.slug}/${product.slug}`;
+
+          return (
+            <BaseProductCard
+              key={product.slug}
+              href={href}
+              ariaLabel={`Explore ${product.title}`}
+              title={product.title}
+              description={product.shortDescription}
+              meta={product.category}
+              imageSrc={product.heroImage}
+              imageAlt={product.title}
+              icon={getProductCardIcon(`${product.category} ${product.title}`)}
+              badges={product.badges}
+              footerLeading={product.material}
+              ctaLabel="Explore Product"
+              action={
+                <AddToEnquiryButton
+                  size="card"
+                  item={{
+                    id: product.id,
+                    slug: product.slug,
+                    title: product.title,
+                    category: product.category,
+                    subcategory: product.material,
+                    imageSrc: product.heroImage,
+                    imageAlt: product.title,
+                    href,
+                    variants: product.variants,
+                    variantLabel: product.variants.length
+                      ? `${product.variants.length} variants available`
+                      : "Variant to be confirmed",
+                  }}
+                />
+              }
+            />
+          );
+        })}
       </section>
     </main>
   );

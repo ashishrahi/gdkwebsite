@@ -1,6 +1,5 @@
 "use client";
 
-import { EnquiryModal } from "@/components/product/enquiry-modal";
 import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
 import type { ProductCta } from "@/lib/products-data";
 import { cn } from "@/lib/utils";
@@ -93,7 +92,6 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
             <FaWhatsapp className="size-4 shrink-0" />
             {cta.whatsappLabel}
           </a>
-          <EnquiryModal productName={productTitle} />
         </div>
       </div>
     </section>

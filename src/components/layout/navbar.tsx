@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, ChevronUp, Globe, Menu, Package, Sparkles, Star, X } from "lucide-react";
 
+import { EnquiryNavButton } from "@/components/enquiry/enquiry-nav-button";
 import { Button } from "@/components/ui/button";
 import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
 import {
@@ -486,8 +487,8 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           })}
         </div>
 
-        <div className="hidden h-11 items-center justify-end gap-4 lg:flex">
-         
+        <div className="hidden h-11 items-center justify-end gap-3 lg:flex">
+          <EnquiryNavButton />
           <Button
             asChild
             size="lg"
@@ -499,7 +500,8 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           </Button>
         </div>
 
-        <div className="lg:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
+          <EnquiryNavButton compact />
           <Button
             variant="ghost"
             size="icon-sm"

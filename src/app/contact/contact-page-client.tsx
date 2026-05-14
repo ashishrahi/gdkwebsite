@@ -2,12 +2,13 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { useEnquiry } from "@/components/enquiry/enquiry-provider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -67,11 +68,17 @@ const contactInfoCardClassName = cn(
 
 type ContactPageClientProps = {
   productFromQuery: string;
+  useEnquiryBasket: boolean;
 };
 
-export default function ContactPageClient({ productFromQuery }: ContactPageClientProps) {
+export default function ContactPageClient({
+  productFromQuery,
+  useEnquiryBasket,
+}: ContactPageClientProps) {
   const products = useMemo(() => getAllProducts(), []);
   const { sendLead } = useSendLead();
+  const { items: enquiryItems, hydrated: enquiryHydrated } = useEnquiry();
+  const enquirySyncedRef = useRef(false);
 
   const {
     register,
@@ -100,6 +107,52 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
       products.find((p) => p.title.toLowerCase() === q.toLowerCase());
     if (match) setValue("product", match.slug, { shouldDirty: false, shouldValidate: false });
   }, [productFromQuery, products, setValue]);
+
+  useEffect(() => {
+    if (
+      !useEnquiryBasket ||
+      enquirySyncedRef.current ||
+      !enquiryHydrated ||
+      !enquiryItems.length ||
+      productFromQuery.trim()
+    ) {
+      return;
+    }
+
+    const firstProduct = products.find((product) => product.slug === enquiryItems[0]?.slug);
+    if (firstProduct) {
+      setValue("product", firstProduct.slug, {
+        shouldDirty: false,
+        shouldValidate: false,
+      });
+    }
+
+    const selectedProducts = enquiryItems
+      .map((item) => {
+        const categoryLine = item.subcategory
+          ? `${item.category} / ${item.subcategory}`
+          : item.category;
+        return `- ${item.title} (${categoryLine})`;
+      })
+      .join("\n");
+
+    setValue(
+      "message",
+      `Selected enquiry products:\n${selectedProducts}\n\nRequirement notes:\n`,
+      {
+        shouldDirty: false,
+        shouldValidate: false,
+      },
+    );
+    enquirySyncedRef.current = true;
+  }, [
+    enquiryHydrated,
+    enquiryItems,
+    productFromQuery,
+    products,
+    setValue,
+    useEnquiryBasket,
+  ]);
 
   const onSubmit = async (values: ContactFormValues) => {
     try {

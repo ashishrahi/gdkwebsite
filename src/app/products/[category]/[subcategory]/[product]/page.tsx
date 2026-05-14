@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { AddToEnquiryButton } from "@/components/enquiry/add-to-enquiry-button";
 import { ProductApplications } from "@/components/products/ProductApplications";
 import { ProductCTA } from "@/components/products/ProductCTA";
 import { ProductFeatures } from "@/components/products/ProductFeatures";
@@ -78,6 +79,20 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
   }
 
   const relatedProducts = getRelatedProducts(productData.slug);
+  const enquiryItem = {
+    id: productData.id,
+    slug: productData.slug,
+    title: productData.title,
+    category: productData.category,
+    subcategory: productData.material,
+    imageSrc: productData.heroImage,
+    imageAlt: productData.title,
+    href: `/products/${category}/${subcategory}/${productData.slug}`,
+    variants: productData.variants,
+    variantLabel: productData.variants.length
+      ? `${productData.variants.length} variants available`
+      : "Variant to be confirmed",
+  };
 
   return (
     <main className="flex w-full flex-1 flex-col gap-10 lg:gap-12">
@@ -92,9 +107,16 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
       />
 
       <section aria-labelledby="product-overview" className="space-y-5">
-        <h2 id="product-overview" className="text-h3 text-ds-text-strong">
-          Product Details
-        </h2>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <h2 id="product-overview" className="text-h3 text-ds-text-strong">
+            Product Details
+          </h2>
+          <AddToEnquiryButton
+            size="card"
+            item={enquiryItem}
+            className="w-fit max-w-full px-5"
+          />
+        </div>
         <p className="max-w-4xl text-body text-ds-text-body">{productData.description}</p>
         <div className="flex flex-wrap gap-2.5 pt-1">
           {productData.variants.map((variant) => (

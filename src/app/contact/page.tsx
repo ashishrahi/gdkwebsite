@@ -7,10 +7,15 @@ function productFromSearchParams(product: string | string[] | undefined): string
 }
 
 type ContactPageProps = {
-  searchParams: Promise<{ product?: string | string[] }>;
+  searchParams: Promise<{ product?: string | string[]; enquiry?: string | string[] }>;
 };
 
 export default async function ContactPage({ searchParams }: ContactPageProps) {
   const q = await searchParams;
-  return <ContactPageClient productFromQuery={productFromSearchParams(q.product)} />;
+  return (
+    <ContactPageClient
+      productFromQuery={productFromSearchParams(q.product)}
+      useEnquiryBasket={productFromSearchParams(q.enquiry) === "1"}
+    />
+  );
 }
