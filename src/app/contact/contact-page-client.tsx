@@ -202,11 +202,7 @@ export default function ContactPageClient({
                   <p className="text-base font-semibold text-ds-text-muted">Email</p>
                   <a
                     href="mailto:sales@gdkpackaging.com"
-<<<<<<< Updated upstream
                     className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
-=======
-                    className="block text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-[var(--primary)] sm:text-base"
->>>>>>> Stashed changes
                   >
                     sales@gdkpackaging.com
                   </a>
@@ -222,31 +218,19 @@ export default function ContactPageClient({
                   <div className="flex flex-col gap-1.5">
                     <a
                       href="tel:+919889471453"
-<<<<<<< Updated upstream
                       className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
-=======
-                      className="block text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-[var(--primary)] sm:text-base"
->>>>>>> Stashed changes
                     >
                       +91 98894 71453 (CRM)
                     </a>
                     <a
                       href="tel:+919889471454"
-<<<<<<< Updated upstream
                       className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
-=======
-                      className="block text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-[var(--primary)] sm:text-base"
->>>>>>> Stashed changes
                     >
                       +91 98894 71454 (Sales Executive)
                     </a>
                     <a
                       href="tel:+919889471452"
-<<<<<<< Updated upstream
                       className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
-=======
-                      className="block text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-[var(--primary)] sm:text-base"
->>>>>>> Stashed changes
                     >
                       +91 98894 71452 (Senior Sales Executive)
                     </a>
@@ -280,11 +264,7 @@ export default function ContactPageClient({
                     href="https://wa.me/919889471453"
                     target="_blank"
                     rel="noreferrer"
-<<<<<<< Updated upstream
                     className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
-=======
-                    className="block text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-[var(--primary)] sm:text-base"
->>>>>>> Stashed changes
                   >
                     +91 98894 71453 (CRM)
                   </a>
@@ -323,11 +303,7 @@ export default function ContactPageClient({
                   {...register("name")}
                 />
                 {errors.name ? (
-<<<<<<< Updated upstream
                   <p className="text-sm font-medium text-(--brand-red)" role="alert">
-=======
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
->>>>>>> Stashed changes
                     {errors.name.message}
                   </p>
                 ) : null}
@@ -347,11 +323,7 @@ export default function ContactPageClient({
                   {...register("email")}
                 />
                 {errors.email ? (
-<<<<<<< Updated upstream
                   <p className="text-sm font-medium text-(--brand-red)" role="alert">
-=======
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
->>>>>>> Stashed changes
                     {errors.email.message}
                   </p>
                 ) : null}
@@ -369,11 +341,7 @@ export default function ContactPageClient({
                   {...register("phone")}
                 />
                 {errors.phone ? (
-<<<<<<< Updated upstream
                   <p className="text-sm font-medium text-(--brand-red)" role="alert">
-=======
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
->>>>>>> Stashed changes
                     {errors.phone.message}
                   </p>
                 ) : null}
@@ -391,11 +359,7 @@ export default function ContactPageClient({
                   {...register("company")}
                 />
                 {errors.company ? (
-<<<<<<< Updated upstream
                   <p className="text-sm font-medium text-(--brand-red)" role="alert">
-=======
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
->>>>>>> Stashed changes
                     {errors.company.message}
                   </p>
                 ) : null}
@@ -419,11 +383,7 @@ export default function ContactPageClient({
                   ))}
                 </select>
                 {errors.product ? (
-<<<<<<< Updated upstream
                   <p className="text-sm font-medium text-(--brand-red)" role="alert">
-=======
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
->>>>>>> Stashed changes
                     {errors.product.message}
                   </p>
                 ) : null}
@@ -441,11 +401,7 @@ export default function ContactPageClient({
                   {...register("quantity")}
                 />
                 {errors.quantity ? (
-<<<<<<< Updated upstream
                   <p className="text-sm font-medium text-(--brand-red)" role="alert">
-=======
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
->>>>>>> Stashed changes
                     {errors.quantity.message}
                   </p>
                 ) : null}
@@ -463,11 +419,7 @@ export default function ContactPageClient({
                   {...register("message")}
                 />
                 {errors.message ? (
-<<<<<<< Updated upstream
                   <p className="text-sm font-medium text-(--brand-red)" role="alert">
-=======
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
->>>>>>> Stashed changes
                     {errors.message.message}
                   </p>
                 ) : null}

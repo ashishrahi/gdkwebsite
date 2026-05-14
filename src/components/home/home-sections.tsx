@@ -193,13 +193,8 @@ export function HomeSections() {
     <>
       <HomeSection id="about">
         <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
-<<<<<<< Updated upstream
           <PremiumCard className="h-auto min-h-0 self-start overflow-hidden p-0">
             <div className="relative aspect-16/10 w-full overflow-hidden rounded-ds-card">
-=======
-          <PremiumCard className="overflow-hidden p-0">
-            <div className="relative h-[280px] w-full overflow-hidden rounded-ds-card sm:h-[340px] lg:h-[420px]">
->>>>>>> Stashed changes
               <Image
                 src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80"
                 alt="Industrial packaging warehouse and manufacturing floor"
@@ -208,11 +203,7 @@ export function HomeSections() {
                 className="object-cover transition-transform duration-500 ease-ds-out group-hover/card:scale-[1.03]"
                 priority={false}
               />
-<<<<<<< Updated upstream
               <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[color-mix(in_srgb,var(--brand-green-950)_35%,transparent)] via-transparent to-transparent" />
-=======
-              <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[color:color-mix(in_srgb,var(--brand-green-950)_35%,transparent)] via-transparent to-transparent" />
->>>>>>> Stashed changes
             </div>
           </PremiumCard>
 
@@ -287,7 +278,6 @@ export function HomeSections() {
         </div>
       </HomeSection>
 
-<<<<<<< Updated upstream
       <ClienteleSection />
 
       <HomeSection id="why-choose-us">
@@ -298,16 +288,6 @@ export function HomeSections() {
           spacing="relaxed"
         />
 
-=======
-      <HomeSection id="why-choose-us">
-        <SectionHeader
-          eyebrow="Why Choose Us"
-          title="Your Trusted Packaging Partner"
-          description="Discover what sets us apart in the packaging industry through innovation, quality, and reliability."
-          spacing="relaxed"
-        />
-
->>>>>>> Stashed changes
         <div className={`${homeGridClassName} ${homeContentSpacingClassName}`}>
           {whyChooseUsFeatures.map((feature) => (
             <FeatureCard

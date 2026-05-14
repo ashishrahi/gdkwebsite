@@ -107,7 +107,6 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
       />
 
       <section aria-labelledby="product-overview" className="space-y-5">
-<<<<<<< Updated upstream
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <h2 id="product-overview" className="text-h3 text-ds-text-strong">
             Product Details
@@ -119,21 +118,11 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
           />
         </div>
         <p className="max-w-4xl text-body text-ds-text-body">{productData.description}</p>
-=======
-        <h2 id="product-overview" className="text-h3 text-ds-text-strong">
-          Product Details
-        </h2>
-        <p className="max-w-4xl text-base leading-7 text-ds-text-body">{productData.description}</p>
->>>>>>> Stashed changes
         <div className="flex flex-wrap gap-2.5 pt-1">
           {productData.variants.map((variant) => (
             <span
               key={variant}
-<<<<<<< Updated upstream
               className="rounded-full border border-[color-mix(in_srgb,var(--brand-accent)_25%,var(--border))] bg-[color-mix(in_srgb,var(--brand-accent)_12%,white)] px-3.5 py-1.5 text-xs font-medium leading-none tracking-(--ds-type-label-letter-spacing) text-brand-accent"
-=======
-              className="rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,var(--border))] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-3.5 py-1.5 text-xs font-semibold leading-none text-[var(--brand-accent)]"
->>>>>>> Stashed changes
             >
               {variant}
             </span>
@@ -151,13 +140,8 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
               key={spec.label}
               className={`${cardSurfaceVariants({ variant: "minimal" })} rounded-xl px-5 py-4`}
             >
-<<<<<<< Updated upstream
               <p className="text-xs font-medium tracking-(--ds-type-label-letter-spacing) text-ds-text-subtle uppercase">{spec.label}</p>
               <p className="mt-2 text-body-sm text-ds-text-strong">{spec.value}</p>
-=======
-              <p className="text-xs font-semibold tracking-wide text-ds-text-subtle uppercase">{spec.label}</p>
-              <p className="mt-2 text-sm leading-6 text-ds-text-strong">{spec.value}</p>
->>>>>>> Stashed changes
             </article>
           ))}
         </div>
@@ -178,21 +162,12 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 className={cardSurfaceVariants({ variant: "default", padding: "default" })}
               >
                 <h3 className="text-h4 text-ds-text-strong">{section.title}</h3>
-<<<<<<< Updated upstream
                 <p className="mt-3 text-body-sm text-ds-text-muted">{section.description}</p>
                 {section.points?.length ? (
                   <ul className="mt-5 space-y-3">
                     {section.points.map((point) => (
                       <li key={point} className="flex gap-2 text-body-sm text-ds-text-body">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-accent" />
-=======
-                <p className="mt-3 text-sm leading-7 text-ds-text-muted">{section.description}</p>
-                {section.points?.length ? (
-                  <ul className="mt-5 space-y-3">
-                    {section.points.map((point) => (
-                      <li key={point} className="flex gap-2 text-sm leading-6 text-ds-text-body">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-accent)]" />
->>>>>>> Stashed changes
                         <span>{point}</span>
                       </li>
                     ))}

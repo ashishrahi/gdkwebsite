@@ -98,11 +98,7 @@ export function AboutJourney() {
                 ) : null}
               </div>
               <div className="min-w-0 flex-1 space-y-4">
-<<<<<<< Updated upstream
                 <p className="text-h3 tabular-nums text-primary">
-=======
-                <p className="text-2xl font-semibold tabular-nums text-primary">
->>>>>>> Stashed changes
                   {entry.year}
                 </p>
                 <motion.div

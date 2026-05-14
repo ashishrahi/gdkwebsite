@@ -151,7 +151,6 @@ export default function AboutPage() {
               priority
             />
           </div>
-<<<<<<< Updated upstream
           <div className="space-y-5">
             <h2 className="text-h2 text-ds-text-strong">
               K.B. Ropes Pvt Ltd
@@ -164,20 +163,6 @@ export default function AboutPage() {
               {heroSubtitle}
             </p>
             <div className="space-y-5 text-body-lg text-ds-text-body">
-=======
-          <div className="space-y-6">
-            <h2 className="text-h2 text-ds-text-strong">
-              K.B. Ropes Pvt Ltd
-            </h2>
-            <p className="text-body text-ds-text-muted">
-              From Concept to Solution.{" "}
-              <span className="text-primary">With Sustainability Built In.</span>
-            </p>
-            <p className="text-body text-ds-text-body">
-              {heroSubtitle}
-            </p>
-            <div className="space-y-5 text-body text-ds-text-body">
->>>>>>> Stashed changes
               <p>
                 At our Kanpur facility, we specialize in manufacturing PP UFT containers, glasses, and cups. These products find applications in the food and other industries. Our range includes ice cream cups and glasses, as well as containers in round, octagonal, and rectangular shapes, with capacities ranging from 50 mL to 1000 ML. Not only are our containers refrigerated, but they are also microwave-safe and highly affordable. They are designed to suit a wide range of products.
               </p>
@@ -211,30 +196,17 @@ export default function AboutPage() {
               opacity: { duration: 0.78, ease: easePremium },
             }}
           >
-<<<<<<< Updated upstream
             <div className="space-y-5 md:space-y-6">
               <div className="space-y-1">
                 <p className="text-body-lg font-medium text-ds-text-strong">
                   Mr. Ramesh Kankani
                 </p>
                 <p className="text-body text-ds-text-muted">
-=======
-            <div className="space-y-6 md:space-y-7">
-              <div className="space-y-1.5">
-                <p className="text-base font-semibold text-ds-text-strong">
-                  Mr. Ramesh Kankani
-                </p>
-                <p className="text-sm text-ds-text-muted">
->>>>>>> Stashed changes
                   Managing Director, GDK Solutions
                 </p>
               </div>
 
-<<<<<<< Updated upstream
               <div className="space-y-5 text-body-lg text-ds-text-body">
-=======
-              <div className="space-y-5 text-body text-ds-text-body">
->>>>>>> Stashed changes
                 <p>
                   Ramesh Kankani, a technocrat with decades of experience in packaging manufacturing, has been the driving force behind GDK Solutions’ steady growth and reliability in the industry. His approach has always been grounded in building strong systems, maintaining process discipline, and delivering consistent quality to customers.
                 </p>
@@ -286,13 +258,8 @@ export default function AboutPage() {
                     />
                   ) : null}
                 </div>
-<<<<<<< Updated upstream
                 <div className="min-w-0 flex-1 space-y-3">
                   <p className="text-2xl font-medium tracking-[-0.02em] tabular-nums text-primary">
-=======
-                <div className="min-w-0 flex-1 space-y-4">
-                  <p className="text-xl font-semibold tabular-nums text-primary">
->>>>>>> Stashed changes
                     {entry.year}
                   </p>
                   <motion.div
@@ -301,11 +268,7 @@ export default function AboutPage() {
                   >
                     <Card variant="interactive" className="p-6 text-foreground">
                       <CardContent className="p-0">
-<<<<<<< Updated upstream
                         <p className="text-body text-ds-text-muted">
-=======
-                      <p className="text-sm leading-6 text-muted-foreground">
->>>>>>> Stashed changes
                           {entry.description}
                         </p>
                       </CardContent>
@@ -355,22 +318,13 @@ export default function AboutPage() {
                     <item.icon className="h-5 w-5" aria-hidden />
                   </span>
                   <div className="min-w-0 flex-1 space-y-0">
-<<<<<<< Updated upstream
                     <CardTitle className="text-h4 text-ds-text-strong">
-=======
-                    <CardTitle className="font-heading text-h4 text-ds-text-strong">
->>>>>>> Stashed changes
                       {item.title}
                     </CardTitle>
                   </div>
                 </CardHeader>
-<<<<<<< Updated upstream
                 <CardContent className="p-0 pt-4">
                   <p className="text-body text-ds-text-muted">
-=======
-                <CardContent className="p-0 pt-5">
-                  <p className="text-sm leading-6 text-muted-foreground">
->>>>>>> Stashed changes
                     {item.description}
                   </p>
                 </CardContent>

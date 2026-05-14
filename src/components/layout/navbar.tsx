@@ -137,24 +137,6 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
     };
   }, []);
 
-<<<<<<< Updated upstream
-=======
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(homeVariant ? window.scrollY > 16 : window.scrollY > 0);
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [homeVariant]);
-
->>>>>>> Stashed changes
   const isRouteActive = (hash: string) => {
     if (pathname.startsWith("/products")) {
       return hash === "#products";
@@ -244,7 +226,6 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
     getMegaMenuCategoryByKey(activeDesktopProductKey) ??
     getMegaMenuCategoryByKey(DEFAULT_PRODUCT_MEGA_MENU_CATEGORY_KEY) ??
     PRODUCT_MEGA_MENU_CATEGORIES[0];
-<<<<<<< Updated upstream
   const logoLinkClassName = "flex items-center";
   const logoImageClassName = "h-8 w-auto object-contain sm:h-9";
   const desktopNavLinkClassName = (isActive: boolean) =>
@@ -264,36 +245,6 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           homeVariant
             ? "border-black/5"
             : "border-[#d5ead8]/70"
-=======
-  const useHomeNavSurface = homeVariant;
-  const logoLinkClassName =
-    "flex items-center";
-  const logoImageClassName =
-    "h-9 w-auto object-contain";
-  const desktopNavLinkClassName = (isActive: boolean) =>
-    cn(
-      "relative inline-flex h-10 items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold tracking-[0.01em] transition-all duration-200",
-      "text-[#1f4d2f] hover:bg-white/75 hover:text-[#0f3f24] hover:shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18),0_6px_18px_rgb(20_83_45/0.08)]",
-      isActive &&
-        "bg-white text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.22),0_8px_22px_rgb(20_83_45/0.1)]"
-    );
-
-  return (
-    <header
-      className={cn(
-        "sticky top-0 isolate z-50 w-full shrink-0 border-b bg-[#f2faf3] px-ds-page-x transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
-        homeVariant
-          ? "border-[#cfe8d2] shadow-[0_10px_28px_rgb(20_83_45/0.12)]"
-          : "border-[#d5ead8] shadow-[0_8px_22px_rgb(20_83_45/0.08)]"
-      )}
-    >
-      <nav
-        className={cn(
-          "mx-auto flex h-(--ds-layout-navbar-h) w-full max-w-ds-page items-center justify-between px-0 transition-all duration-200 lg:grid lg:grid-cols-[1fr_auto_1fr]",
-          scrolled
-            ? "shadow-ds-nav"
-            : "shadow-none"
->>>>>>> Stashed changes
         )}
       >
       <nav className="mx-auto flex h-(--ds-layout-navbar-h) w-full max-w-352 items-center justify-between px-0 lg:grid lg:grid-cols-[1fr_auto_1fr]">
@@ -320,17 +271,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           />
         </Link>
 
-<<<<<<< Updated upstream
         <div className="hidden items-center justify-center gap-8 lg:flex xl:gap-11">
-=======
-        <div
-          className={cn(
-            "hidden h-11 items-center justify-center gap-1.5 lg:flex",
-            useHomeNavSurface &&
-              "rounded-full border border-[#d5ead8] bg-white/55 px-1.5 shadow-[0_8px_20px_rgb(20_83_45/0.08)]"
-          )}
-        >
->>>>>>> Stashed changes
           {navLinks.map((link) => {
             const isActive = isRouteActive(link.hash);
             const isAboutLink = link.label === "About";
@@ -369,11 +310,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                     </Link>
                     <div
                       className={cn(
-<<<<<<< Updated upstream
                         "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[min(calc(100vw-2rem),700px)] max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
-=======
-                        "pointer-events-none invisible absolute top-full left-1/2 z-50 mt-4 w-[700px] -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 ease-ds-out",
->>>>>>> Stashed changes
                         activeDesktopMenu === "about" &&
                           "pointer-events-auto opacity-100 visible translate-y-0"
                       )}
@@ -384,19 +321,11 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                         }
                       }}
                     >
-<<<<<<< Updated upstream
                       <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "max-h-[calc(100dvh-var(--ds-layout-navbar-h)-2rem)] overflow-y-auto overscroll-contain rounded-ds-card-lg bg-ds-surface")}>
                         <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
                         <div className="grid grid-cols-[1fr_1.6fr] gap-8">
                           <div className={cn(cardSurfaceVariants({ variant: "minimal", padding: "lg" }), "bg-ds-surface-muted")}>
                             <p className="text-xs font-medium uppercase tracking-(--ds-type-eyebrow-letter-spacing) text-brand-accent">
-=======
-                      <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "rounded-ds-card-lg bg-ds-surface")}>
-                        <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
-                        <div className="grid grid-cols-[1fr_1.6fr] gap-8">
-                          <div className={cn(cardSurfaceVariants({ variant: "minimal", padding: "lg" }), "bg-ds-surface-muted")}>
-                            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-accent">
->>>>>>> Stashed changes
                               About GDK
                             </p>
                             <ul className="mt-4 space-y-2.5">
@@ -406,11 +335,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                 </li>
                               ))}
                             </ul>
-<<<<<<< Updated upstream
                             <p className="mt-4 text-body-sm text-ds-text-muted">
-=======
-                            <p className="mt-4 text-sm leading-relaxed text-ds-text-muted">
->>>>>>> Stashed changes
                               Premium packaging partner delivering precision manufacturing with
                               consistency, compliance, and scale.
                             </p>
@@ -429,13 +354,8 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                   <card.icon className="h-5 w-5" />
                                 </div>
                                 <div>
-<<<<<<< Updated upstream
                                   <p className="text-sm leading-5 font-medium text-ds-text-strong">{card.title}</p>
                                   <p className="mt-1.5 text-caption text-ds-text-muted">
-=======
-                                  <p className="text-sm leading-5 font-semibold text-ds-text-strong">{card.title}</p>
-                                  <p className="mt-1.5 text-xs leading-[1.55] text-ds-text-muted">
->>>>>>> Stashed changes
                                     {card.description}
                                   </p>
                                 </div>
@@ -471,11 +391,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                     </Link>
                     <div
                       className={cn(
-<<<<<<< Updated upstream
                         "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[min(calc(100vw-2rem),820px)] max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
-=======
-                        "pointer-events-none invisible absolute top-full left-1/2 z-50 mt-4 w-[820px] -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 ease-ds-out",
->>>>>>> Stashed changes
                         activeDesktopMenu === "products" &&
                           "pointer-events-auto opacity-100 visible translate-y-0"
                       )}
@@ -486,11 +402,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                         }
                       }}
                     >
-<<<<<<< Updated upstream
                       <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "max-h-[calc(100dvh-var(--ds-layout-navbar-h)-2rem)] overflow-y-auto overscroll-contain rounded-ds-card-lg bg-ds-surface")}>
-=======
-                      <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "rounded-ds-card-lg bg-ds-surface")}>
->>>>>>> Stashed changes
                         <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
                         <div className="grid grid-cols-[1.05fr_1fr] gap-8">
                           <div className="grid grid-cols-1 gap-5">
@@ -519,13 +431,8 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                     <CategoryIcon className="h-6 w-6 text-brand-accent" />
                                   </div>
                                   <div>
-<<<<<<< Updated upstream
                                     <p className="text-sm leading-5 font-medium text-ds-text-strong">{category.title}</p>
                                     <p className="mt-1.5 text-caption text-ds-text-muted">
-=======
-                                    <p className="text-sm leading-5 font-semibold text-ds-text-strong">{category.title}</p>
-                                    <p className="mt-1.5 text-xs leading-[1.55] text-ds-text-muted">
->>>>>>> Stashed changes
                                       {category.description}
                                     </p>
                                   </div>
@@ -535,19 +442,11 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                           </div>
                           <div className={cn("group/panel block bg-ds-surface-muted", cardSurfaceVariants({ variant: "minimal", padding: "lg" }))}>
                             <Link href={activeDesktopProductCategory.href}>
-<<<<<<< Updated upstream
                               <p className="text-xs font-medium uppercase tracking-(--ds-type-eyebrow-letter-spacing) text-brand-accent">
                                 {activeDesktopProductCategory.title}
                               </p>
                             </Link>
                             <p className="mt-3 text-body-sm text-ds-text-muted">
-=======
-                              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-accent">
-                                {activeDesktopProductCategory.title}
-                              </p>
-                            </Link>
-                            <p className="mt-3 text-sm leading-relaxed text-ds-text-muted">
->>>>>>> Stashed changes
                               Product sub-categories crafted for performance, consistency, and scalable
                               manufacturing.
                             </p>
@@ -588,21 +487,12 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           })}
         </div>
 
-<<<<<<< Updated upstream
         <div className="hidden h-11 items-center justify-end gap-3 lg:flex">
           <EnquiryNavButton />
           <Button
             asChild
             size="lg"
             className="h-11 rounded-full bg-brand-accent px-6 py-2.5 text-[0.75rem] font-medium uppercase tracking-[0.12em] text-white shadow-none transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
-=======
-        <div className="hidden h-11 items-center justify-end gap-4 lg:flex">
-         
-          <Button
-            asChild
-            size="lg"
-            className="h-11 rounded-full bg-brand-accent px-6 py-2.5 text-sm text-white shadow-(--ds-shadow-button-primary) transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
->>>>>>> Stashed changes
           >
             <Link href="/#contact" className="text-white! hover:text-white!">
               Get Quote
@@ -610,23 +500,15 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           </Button>
         </div>
 
-<<<<<<< Updated upstream
         <div className="flex items-center gap-2 lg:hidden">
           <EnquiryNavButton compact />
-=======
-        <div className="lg:hidden">
->>>>>>> Stashed changes
           <Button
             variant="ghost"
             size="icon-sm"
             onClick={() => setIsMobileMenuOpen(true)}
             aria-label="Open navigation menu"
             aria-expanded={isMobileMenuOpen}
-<<<<<<< Updated upstream
             className="relative z-10 flex size-10 shrink-0 items-center justify-center overflow-visible rounded-xl bg-[#123c24] p-0 text-white shadow-sm transition-all duration-200 hover:bg-[#0f3f24] hover:text-white active:scale-[0.96] aria-expanded:bg-[#123c24] aria-expanded:text-white [&_svg]:relative [&_svg]:z-10 [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:text-white [&_svg]:stroke-white"
-=======
-            className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#123c24] text-white shadow-sm transition-all duration-200 hover:bg-[#0f3f24] active:scale-[0.96]"
->>>>>>> Stashed changes
           >
             <Menu className="size-5 text-white stroke-white stroke-[2.5]" aria-hidden="true" />
           </Button>
@@ -635,11 +517,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
 
       {isMobileMenuOpen ? (
         <div
-<<<<<<< Updated upstream
           className="absolute top-full left-0 right-0 z-50 w-full max-h-[calc(100dvh-var(--ds-layout-navbar-h)-1rem)] overflow-y-auto overscroll-contain px-ds-page-x pt-3 pb-[calc(1rem+var(--ds-safe-area-bottom))] lg:hidden"
-=======
-          className="absolute top-full left-0 right-0 z-50 w-full px-ds-page-x pt-3 lg:hidden"
->>>>>>> Stashed changes
         >
           <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "w-full rounded-ds-card-lg bg-[#f8fcf8] px-5 py-5")}>
             <div className="flex flex-col gap-3">
@@ -670,13 +548,8 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                 <div
                   key={link.href}
                   className={cn(
-<<<<<<< Updated upstream
                     "rounded-2xl p-0.5 transition-colors duration-300",
                     "border border-transparent bg-transparent"
-=======
-                    "rounded-2xl p-1 transition-colors duration-300",
-                    "border border-[#d5ead8] bg-white/55"
->>>>>>> Stashed changes
                   )}
                 >
                   {isAboutLink ? (
@@ -685,17 +558,10 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                         type="button"
                         aria-expanded={isMobileAboutOpen}
                         className={cn(
-<<<<<<< Updated upstream
                           "flex w-full items-center justify-between rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
                           "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
                           isActive &&
                             "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
-=======
-                          "flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200",
-                          "text-[#1f4d2f] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
-                          isActive &&
-                            "bg-[#edf7ee] text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18)]"
->>>>>>> Stashed changes
                         )}
                         onClick={() => setIsMobileAboutOpen((previous) => !previous)}
                       >
@@ -745,17 +611,10 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                         type="button"
                         aria-expanded={isMobileProductsOpen}
                         className={cn(
-<<<<<<< Updated upstream
                           "flex w-full items-center justify-between rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
                           "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
                           isActive &&
                             "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
-=======
-                          "flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200",
-                          "text-[#1f4d2f] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
-                          isActive &&
-                            "bg-[#edf7ee] text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18)]"
->>>>>>> Stashed changes
                         )}
                         onClick={() => setIsMobileProductsOpen((previous) => !previous)}
                       >
@@ -794,11 +653,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                   <button
                                     type="button"
                                     className={cn(
-<<<<<<< Updated upstream
                                       "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-medium transition-colors duration-200",
-=======
-                                      "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-semibold transition-colors duration-200",
->>>>>>> Stashed changes
                                       "text-[#24583a] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
                                       isCategoryOpen && "bg-[#edf7ee] text-[#0f3f24]"
                                     )}
@@ -854,17 +709,10 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                       href={link.href}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
-<<<<<<< Updated upstream
                         "block rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
                         "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
                         isActive &&
                           "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
-=======
-                        "block rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200",
-                        "text-[#1f4d2f] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
-                        isActive &&
-                          "bg-[#edf7ee] text-[#0f3f24] shadow-[inset_0_0_0_1px_rgb(88_139_96/0.18)]"
->>>>>>> Stashed changes
                       )}
                       onClick={() => {
                         setActiveSection(link.hash.replace("#", ""));
@@ -896,11 +744,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                   setActiveSection("home");
                   closeMobileMenu();
                 }}
-<<<<<<< Updated upstream
                 className="inline-flex min-h-12.5 flex-1 items-center justify-center rounded-full bg-brand-accent px-7 py-3 text-[0.8125rem] font-medium uppercase tracking-(--ds-type-label-letter-spacing) text-white transition-colors duration-200 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
-=======
-                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-brand-accent px-7 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
->>>>>>> Stashed changes
               >
                 Get Quote
               </Link>

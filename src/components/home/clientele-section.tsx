@@ -2,11 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-<<<<<<< Updated upstream
 import { motion, useReducedMotion } from "framer-motion";
-=======
-import { motion } from "framer-motion";
->>>>>>> Stashed changes
 import {
   SectionHeader,
   homeContentSpacingClassName,
@@ -21,11 +17,7 @@ function altFromPath(path: string): string {
 
 function LogoTile({ src }: { src: string }) {
   return (
-<<<<<<< Updated upstream
     <div className={cn("group flex h-20 w-36 shrink-0 items-center justify-center px-4 sm:h-24 sm:w-[176px] sm:px-6", cardSurfaceVariants({ variant: "minimal" }))}>
-=======
-    <div className={cn("group flex h-24 w-[176px] shrink-0 items-center justify-center px-6", cardSurfaceVariants({ variant: "minimal" }))}>
->>>>>>> Stashed changes
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent opacity-0 transition group-hover:opacity-100" />
 
       <Image
@@ -69,7 +61,6 @@ export function ClienteleSection() {
       </div>
 
       <div className={`relative overflow-hidden ${homeContentSpacingClassName}`}>
-<<<<<<< Updated upstream
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-12 bg-linear-to-r from-background via-background/90 to-transparent sm:w-24 lg:w-40" />
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-12 bg-linear-to-l from-background via-background/90 to-transparent sm:w-24 lg:w-40" />
 
@@ -77,15 +68,6 @@ export function ClienteleSection() {
           <motion.div
             className="flex w-max gap-4 sm:gap-6"
             animate={shouldReduceMotion ? undefined : { x: ["0%", "-50%"] }}
-=======
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-40 bg-linear-to-r from-background via-background/90 to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-40 bg-linear-to-l from-background via-background/90 to-transparent" />
-
-        <div className="py-4">
-          <motion.div
-            className="flex w-max gap-6"
-            animate={{ x: ["0%", "-50%"] }}
->>>>>>> Stashed changes
             transition={{
               repeat: Infinity,
               duration: 38,

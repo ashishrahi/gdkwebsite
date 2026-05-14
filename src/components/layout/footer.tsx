@@ -27,11 +27,7 @@ export function Footer() {
               className="h-10 w-auto object-contain"
             />
           </Link>
-<<<<<<< Updated upstream
           <p className="max-w-[56ch] text-body-sm font-medium text-ds-text-muted sm:text-body">
-=======
-          <p className="max-w-[56ch] text-sm font-medium leading-relaxed text-ds-text-muted sm:text-base">
->>>>>>> Stashed changes
             From Concept to Solution.{" "}
             <span className="text-(--primary)">With Sustainability Built In.</span>
           </p>
@@ -43,11 +39,7 @@ export function Footer() {
       <div className="relative overflow-hidden bg-[radial-gradient(circle_at_82%_45%,color-mix(in_srgb,var(--brand-blue-500)_16%,transparent),transparent_34%),linear-gradient(135deg,var(--brand-green-950),var(--brand-green-900))] text-white">
 
         {/* GLOW */}
-<<<<<<< Updated upstream
         <div className="pointer-events-none absolute top-1/2 right-[18%] z-0 size-[min(70vw,420px)] -translate-y-1/2 rounded-full bg-[color-mix(in_srgb,var(--brand-orange-500)_12%,transparent)] blur-[120px]" />
-=======
-        <div className="pointer-events-none absolute top-1/2 right-[18%] z-0 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-[color:color-mix(in_srgb,var(--brand-orange-500)_12%,transparent)] blur-[120px]" />
->>>>>>> Stashed changes
 
         <div className="relative z-10 mx-auto max-w-7xl px-ds-page-x py-10 sm:py-12">
 
@@ -62,25 +54,15 @@ export function Footer() {
                 height={170}
                 className="h-auto w-[180px] object-contain sm:w-[220px] md:w-[250px]"
               />
-<<<<<<< Updated upstream
               <p className="max-w-[56ch] text-body-sm font-medium text-white/72 sm:text-body">
                 From Concept to Solution.{" "}
                 <span className="text-(--brand-orange-500)">With Sustainability Built In.</span>
-=======
-              <p className="max-w-[56ch] text-sm font-medium leading-relaxed text-white/72 sm:text-base">
-                From Concept to Solution.{" "}
-                <span className="text-[var(--brand-orange-500)]">With Sustainability Built In.</span>
->>>>>>> Stashed changes
               </p>
             </div>
 
             {/* TEXT */}
             <div className="flex flex-1 justify-start md:justify-end lg:mt-10">
-<<<<<<< Updated upstream
               <h2 className="relative z-20 text-left font-light text-white drop-shadow-[0_2px_10px_color-mix(in_srgb,white_20%,transparent)] md:text-right">
-=======
-              <h2 className="relative z-20 text-right font-light text-white drop-shadow-[0_2px_10px_color-mix(in_srgb,white_20%,transparent)]">
->>>>>>> Stashed changes
 
                 <span className="block text-[clamp(2rem,10vw,4.5rem)] leading-tight">
                   Sustainable Packaging
@@ -101,11 +83,7 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-5 sm:gap-6">
               {socialLinks.map(({ href, label, icon: Icon }) => (
                 <a key={label} href={href} target="_blank" rel="noreferrer">
-<<<<<<< Updated upstream
                   <Icon className="size-5 text-white/90 transition hover:scale-110 hover:text-(--brand-orange-500)" />
-=======
-                  <Icon className="size-5 text-white/90 transition hover:scale-110 hover:text-[var(--brand-orange-500)]" />
->>>>>>> Stashed changes
                 </a>
               ))}
             </div>

@@ -39,19 +39,12 @@ type BaseProductCardProps = {
   badges?: readonly string[];
   footerLeading?: ReactNode;
   ctaLabel: string;
-<<<<<<< Updated upstream
   action?: ReactNode;
-=======
->>>>>>> Stashed changes
   imageSizes?: string;
 };
 
 const productCardBadgeClassName =
-<<<<<<< Updated upstream
   "rounded-full border border-[color-mix(in_srgb,var(--brand-accent)_20%,var(--border))] bg-[color-mix(in_srgb,var(--brand-accent)_9%,white)] px-2.5 py-1.5 text-[10px] font-semibold leading-none tracking-[0.08em] text-brand-accent";
-=======
-  "rounded-full border border-[color:color-mix(in_srgb,var(--brand-accent)_25%,var(--border))] bg-[color:color-mix(in_srgb,var(--brand-accent)_12%,white)] px-3 py-1.5 text-[11px] font-semibold leading-none text-[var(--brand-accent)]";
->>>>>>> Stashed changes
 
 export function getProductCardIcon(label: string): LucideIcon {
   const matchedCategory = categoryIcons.find((entry) =>
@@ -77,17 +70,13 @@ export function BaseProductCard({
   badges,
   footerLeading,
   ctaLabel,
-<<<<<<< Updated upstream
   action,
-=======
->>>>>>> Stashed changes
   imageSizes = "(max-width: 768px) 100vw, 33vw",
 }: BaseProductCardProps) {
   const ProductIcon = icon ?? DefaultProductIcon;
   const visibleBadges = badges?.slice(0, 2) ?? [];
 
   return (
-<<<<<<< Updated upstream
     <Card
       variant="default"
       className="group/product-card h-full min-h-full rounded-[1.35rem] border-[color-mix(in_srgb,var(--brand-blue-200)_46%,white)] bg-white py-0 shadow-[0_10px_30px_color-mix(in_srgb,var(--brand-green-950)_5%,transparent)] transition-[border-color,box-shadow,background-color] duration-300 ease-ds-out hover:border-[color-mix(in_srgb,var(--brand-accent)_26%,var(--border))] hover:shadow-[0_20px_46px_color-mix(in_srgb,var(--brand-green-950)_10%,transparent)] focus-within:border-[color-mix(in_srgb,var(--brand-accent)_34%,var(--border))] focus-within:shadow-[0_18px_42px_color-mix(in_srgb,var(--brand-green-950)_9%,transparent)]"
@@ -98,29 +87,15 @@ export function BaseProductCard({
         aria-label={ariaLabel}
       >
         <div className="relative m-3 mb-0 h-48 overflow-hidden rounded-[1.05rem] bg-[color-mix(in_srgb,var(--brand-blue-100)_58%,white)] sm:h-52">
-=======
-    <Link
-      href={href}
-      className="group/product-card block h-full rounded-ds-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      aria-label={ariaLabel}
-    >
-      <Card variant="interactive" className="h-full">
-        <div className="relative h-44 w-full overflow-hidden bg-ds-surface-muted">
->>>>>>> Stashed changes
           <Image
             src={imageSrc}
             alt={imageAlt}
             fill
-<<<<<<< Updated upstream
             className="object-cover transition-transform duration-700 ease-ds-out group-hover/product-card:scale-[1.045] group-focus-visible/product-link:scale-[1.045]"
-=======
-            className="object-cover transition-transform duration-500 ease-ds-out group-hover/product-card:scale-[1.03]"
->>>>>>> Stashed changes
             sizes={imageSizes}
           />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-white/42 to-transparent opacity-0 transition-opacity duration-300 group-hover/product-card:opacity-100" />
         </div>
-<<<<<<< Updated upstream
         <CardHeader className="gap-4 px-4 pt-5 pb-0 sm:px-5">
           <div className="flex min-w-0 items-start justify-between gap-3">
             <span
@@ -133,24 +108,11 @@ export function BaseProductCard({
             </span>
             {visibleBadges.length ? (
               <div className="flex max-w-[72%] flex-wrap justify-end gap-1.5">
-=======
-        <CardHeader>
-          <div className="flex items-start justify-between gap-3">
-            <div className="space-y-3">
-              <span className={cn(cardIconClassNames.brand, "h-9 w-9 rounded-lg")}>
-                <ProductIcon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <CardTitle>{title}</CardTitle>
-            </div>
-            {visibleBadges.length ? (
-              <div className="flex max-w-36 flex-wrap justify-end gap-2">
->>>>>>> Stashed changes
                 {visibleBadges.map((badge) => (
                   <ProductCardBadge key={badge}>{badge}</ProductCardBadge>
                 ))}
               </div>
             ) : null}
-<<<<<<< Updated upstream
           </div>
           <div className="min-w-0 space-y-2.5">
             {meta ? (
@@ -173,31 +135,12 @@ export function BaseProductCard({
         <CardFooter className="mt-auto flex-col items-start justify-between gap-3 border-t-0 bg-transparent px-4 pt-5 pb-4 sm:flex-row sm:items-center sm:gap-4 sm:px-5">
           {footerLeading ? (
             <span className="min-w-0 wrap-break-word text-sm font-semibold leading-5 text-ds-text-strong">
-=======
-          </div>
-          {meta ? <CardDescription>{meta}</CardDescription> : null}
-        </CardHeader>
-        {description ? (
-          <CardContent className="flex-1">
-            <p>{description}</p>
-          </CardContent>
-        ) : (
-          <CardContent className="flex-1" />
-        )}
-        <CardFooter className="mt-auto justify-between gap-4">
-          {footerLeading ? (
-            <span className="min-w-0 text-sm font-semibold text-foreground sm:text-base">
->>>>>>> Stashed changes
               {footerLeading}
             </span>
           ) : (
             <span aria-hidden="true" />
           )}
-<<<<<<< Updated upstream
           <span className="inline-flex w-full shrink-0 items-center justify-between gap-1.5 rounded-full text-[0.76rem] font-semibold uppercase tracking-[0.09em] text-primary transition-[color,transform] duration-200 group-hover/product-card:translate-x-0.5 group-hover/product-card:text-brand-accent sm:w-auto sm:justify-start">
-=======
-          <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary">
->>>>>>> Stashed changes
             {ctaLabel}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </span>
@@ -248,22 +191,3 @@ export function ProductCard({ product }: ProductCardProps) {
   );
 }
 
-export function ProductCard({ product }: ProductCardProps) {
-  const productHref = `/products/${product.slug}`;
-
-  return (
-    <BaseProductCard
-      href={productHref}
-      ariaLabel={`View details for ${product.name}`}
-      title={product.name}
-      description={product.description}
-      meta={product.category}
-      imageSrc={product.imageUrl}
-      imageAlt={product.name}
-      icon={getProductCardIcon(product.category)}
-      badges={[product.inStock ? "In stock" : "Out of stock"]}
-      footerLeading={`$${product.price.toFixed(2)}`}
-      ctaLabel="View details"
-    />
-  );
-}
