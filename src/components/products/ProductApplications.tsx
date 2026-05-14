@@ -26,13 +26,13 @@ export function ProductApplications({ applications, description }: ProductApplic
             key={application}
             className={cn(
               cardSurfaceVariants({ variant: "minimal" }),
-              "flex gap-4 rounded-xl bg-ds-surface-muted px-5 py-4 text-sm text-ds-text-body"
+              "flex min-w-0 gap-4 rounded-xl bg-ds-surface-muted px-5 py-4 text-sm text-ds-text-body"
             )}
           >
-            <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[color:color-mix(in_srgb,var(--secondary)_12%,white)] text-xs font-semibold text-[var(--secondary)]">
+            <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--secondary)_12%,white)] text-xs font-semibold text-(--secondary)">
               {index + 1}
             </span>
-            <span className="leading-6">{application}</span>
+            <span className="min-w-0 wrap-break-word leading-6">{application}</span>
           </li>
         ))}
       </ol>

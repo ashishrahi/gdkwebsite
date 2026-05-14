@@ -10,7 +10,7 @@ const heroDescription =
 
 export function HeroSection() {
   return (
-    <section className="relative left-1/2 isolate w-screen -translate-x-1/2 overflow-hidden bg-brand-green-deep">
+    <section className="relative isolate w-full overflow-hidden bg-brand-green-deep">
       <div className="relative aspect-4/5 w-full overflow-hidden bg-brand-green-deep sm:aspect-video lg:aspect-2/1 lg:min-h-[600px] xl:aspect-21/9">
         <HeroSlider />
         <div className="relative z-20 mx-auto flex h-full w-full max-w-352 items-center px-ds-page-x py-10 sm:py-12 lg:py-16">

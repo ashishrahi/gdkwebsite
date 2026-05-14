@@ -75,7 +75,7 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 const fieldBaseClass =
-  "w-full rounded-xl !bg-white text-ds-text-strong placeholder:text-ds-text-subtle border border-input px-5 leading-6 shadow-sm appearance-none focus:!bg-white focus:text-ds-text-strong focus:border-ring focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--ring)_22%,transparent)] outline-none";
+  "w-full rounded-xl !bg-white text-ds-text-strong placeholder:text-ds-text-subtle border border-input px-5 leading-6 shadow-sm focus:!bg-white focus:text-ds-text-strong focus:border-ring focus:ring-4 focus:ring-[color:color-mix(in_srgb,var(--ring)_22%,transparent)] outline-none";
 
 const fieldLabelClass = "block text-sm font-medium leading-5 tracking-[0.02em] text-ds-text-muted";
 const contactCardTitleClass =
@@ -330,7 +330,7 @@ export function ContactSection() {
                 <select
                   id="contact-product"
                   aria-invalid={!!errors.product}
-                  className={getFieldClassName(!!errors.product, "h-[52px]")}
+                  className={getFieldClassName(!!errors.product, "h-[52px] cursor-pointer appearance-auto pr-10")}
                   {...register("product")}
                 >
                   <option value="" disabled>

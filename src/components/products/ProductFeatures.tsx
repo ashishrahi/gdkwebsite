@@ -37,7 +37,7 @@ export function ProductFeatures({ features }: ProductFeaturesProps) {
             key={feature}
             className={cn(
               cardSurfaceVariants({ variant: "minimal" }),
-              "flex items-center gap-4 rounded-xl px-5 py-5 text-sm leading-6 text-ds-text-body"
+              "flex min-w-0 items-center gap-4 rounded-xl px-5 py-5 text-sm leading-6 text-ds-text-body"
             )}
           >
             <span className={cn(cardIconClassNames.brand, "h-9 w-9 rounded-lg")}>
@@ -46,7 +46,7 @@ export function ProductFeatures({ features }: ProductFeaturesProps) {
                 return <Icon className="h-4 w-4" aria-hidden="true" />;
               })()}
             </span>
-            {feature}
+            <span className="min-w-0 wrap-break-word">{feature}</span>
           </li>
         ))}
       </ul>

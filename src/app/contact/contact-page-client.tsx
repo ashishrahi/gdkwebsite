@@ -149,7 +149,7 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
                   <p className="text-base font-semibold text-ds-text-muted">Email</p>
                   <a
                     href="mailto:sales@gdkpackaging.com"
-                    className="block text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-[var(--primary)] sm:text-base"
+                    className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
                   >
                     sales@gdkpackaging.com
                   </a>
@@ -165,19 +165,19 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
                   <div className="flex flex-col gap-1.5">
                     <a
                       href="tel:+919889471453"
-                      className="block text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-[var(--primary)] sm:text-base"
+                      className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
                     >
                       +91 98894 71453 (CRM)
                     </a>
                     <a
                       href="tel:+919889471454"
-                      className="block text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-[var(--primary)] sm:text-base"
+                      className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
                     >
                       +91 98894 71454 (Sales Executive)
                     </a>
                     <a
                       href="tel:+919889471452"
-                      className="block text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-[var(--primary)] sm:text-base"
+                      className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
                     >
                       +91 98894 71452 (Senior Sales Executive)
                     </a>
@@ -211,7 +211,7 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
                     href="https://wa.me/919889471453"
                     target="_blank"
                     rel="noreferrer"
-                    className="block text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-[var(--primary)] sm:text-base"
+                    className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
                   >
                     +91 98894 71453 (CRM)
                   </a>
@@ -250,7 +250,7 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
                   {...register("name")}
                 />
                 {errors.name ? (
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+                  <p className="text-sm font-medium text-(--brand-red)" role="alert">
                     {errors.name.message}
                   </p>
                 ) : null}
@@ -270,7 +270,7 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
                   {...register("email")}
                 />
                 {errors.email ? (
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+                  <p className="text-sm font-medium text-(--brand-red)" role="alert">
                     {errors.email.message}
                   </p>
                 ) : null}
@@ -288,7 +288,7 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
                   {...register("phone")}
                 />
                 {errors.phone ? (
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+                  <p className="text-sm font-medium text-(--brand-red)" role="alert">
                     {errors.phone.message}
                   </p>
                 ) : null}
@@ -306,7 +306,7 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
                   {...register("company")}
                 />
                 {errors.company ? (
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+                  <p className="text-sm font-medium text-(--brand-red)" role="alert">
                     {errors.company.message}
                   </p>
                 ) : null}
@@ -330,7 +330,7 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
                   ))}
                 </select>
                 {errors.product ? (
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+                  <p className="text-sm font-medium text-(--brand-red)" role="alert">
                     {errors.product.message}
                   </p>
                 ) : null}
@@ -348,7 +348,7 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
                   {...register("quantity")}
                 />
                 {errors.quantity ? (
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+                  <p className="text-sm font-medium text-(--brand-red)" role="alert">
                     {errors.quantity.message}
                   </p>
                 ) : null}
@@ -366,7 +366,7 @@ export default function ContactPageClient({ productFromQuery }: ContactPageClien
                   {...register("message")}
                 />
                 {errors.message ? (
-                  <p className="text-sm font-medium text-[var(--brand-red)]" role="alert">
+                  <p className="text-sm font-medium text-(--brand-red)" role="alert">
                     {errors.message.message}
                   </p>
                 ) : null}

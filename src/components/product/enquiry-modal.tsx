@@ -90,7 +90,7 @@ export function EnquiryModal({ productName }: EnquiryModalProps) {
 
   return (
     <Dialog>
-      <DialogTrigger className="inline-flex h-11.5 items-center justify-center rounded-full bg-brand-accent px-6 text-[0.8125rem] font-medium tracking-(--ds-type-label-letter-spacing) text-white! transition-colors hover:bg-brand-accent-hover">
+      <DialogTrigger className="inline-flex min-h-11.5 w-full items-center justify-center rounded-full bg-brand-accent px-6 py-2.5 text-center text-[0.8125rem] font-medium tracking-(--ds-type-label-letter-spacing) text-white! transition-colors hover:bg-brand-accent-hover sm:w-auto">
         Enquire Now
       </DialogTrigger>
       <DialogContent className={cn(cardSurfaceVariants({ variant: "elevated" }), "min-h-0 max-w-lg gap-0 rounded-ds-card-lg bg-white/95 px-6 py-7 text-base text-ds-text-strong backdrop-blur-sm ring-[color-mix(in_srgb,var(--brand-blue-500)_28%,transparent)] sm:max-w-lg sm:px-8 sm:py-8 [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:bg-transparent! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:bg-none! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:shadow-none! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:border-0! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:text-ds-text-muted! [&_[data-radix-dialog-close],&_[data-slot='dialog-close']]:hover:bg-transparent!")}>

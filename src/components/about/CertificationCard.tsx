@@ -149,7 +149,7 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
         aria-hidden
         className={cn(
           cardSurfaceVariants({ variant: "elevated", padding: "sm" }),
-          "pointer-events-none fixed z-50 overflow-visible rounded-xl bg-white shadow-[color:color-mix(in_srgb,var(--brand-green-950)_20%,transparent)] transition-opacity duration-200 ease-out"
+          "pointer-events-none fixed z-50 overflow-visible rounded-xl bg-white shadow-[color-mix(in_srgb,var(--brand-green-950)_20%,transparent)] transition-opacity duration-200 ease-out"
         )}
         style={{
           ...previewLayout.box,
@@ -186,10 +186,12 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
         rel="noopener noreferrer"
         className={cn(
           cardSurfaceVariants({ variant: "interactive", padding: "sm" }),
-          "relative block w-fit rounded-xl p-4 hover:scale-[1.03]"
+          "relative block w-full max-w-full rounded-xl p-4 hover:scale-[1.03] sm:w-fit"
         )}
         onMouseEnter={showPreview}
         onMouseLeave={hidePreview}
+        onFocus={showPreview}
+        onBlur={hidePreview}
       >
         <div className="flex items-center justify-center">
           <Image
@@ -197,14 +199,14 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
             alt={`Certification ${index + 1}`}
             width={280}
             height={80}
-            className="h-auto w-auto max-h-[120px] object-contain"
+            className="h-auto max-h-[120px] w-full max-w-[280px] object-contain sm:w-auto"
           />
         </div>
         <span
           className="absolute top-2 right-2 z-10 rounded-md bg-white/90 p-1 shadow-sm backdrop-blur"
           aria-label="View Certificate PDF"
         >
-          <FaFilePdf  className="h-4 w-4 text-[var(--brand-red)]" aria-hidden />
+          <FaFilePdf  className="h-4 w-4 text-(--brand-red)" aria-hidden />
         </span>
       </a>
 

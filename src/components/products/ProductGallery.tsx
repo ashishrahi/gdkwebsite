@@ -33,9 +33,9 @@ export function ProductGallery({ title, items }: ProductGalleryProps) {
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
             </div>
-            <figcaption className="flex items-center justify-between gap-4 px-5 py-4">
-              <span className="text-sm font-semibold text-ds-text-strong">{item.label}</span>
-              <span className="text-xs text-[var(--color-success)]">Available</span>
+            <figcaption className="flex min-w-0 flex-col items-start gap-2 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <span className="min-w-0 wrap-break-word text-sm font-semibold text-ds-text-strong">{item.label}</span>
+              <span className="shrink-0 text-xs text-(--color-success)">Available</span>
             </figcaption>
           </figure>
         ))}

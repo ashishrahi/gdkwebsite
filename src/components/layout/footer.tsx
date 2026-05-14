@@ -39,7 +39,7 @@ export function Footer() {
       <div className="relative overflow-hidden bg-[radial-gradient(circle_at_82%_45%,color-mix(in_srgb,var(--brand-blue-500)_16%,transparent),transparent_34%),linear-gradient(135deg,var(--brand-green-950),var(--brand-green-900))] text-white">
 
         {/* GLOW */}
-        <div className="pointer-events-none absolute top-1/2 right-[18%] z-0 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-[color-mix(in_srgb,var(--brand-orange-500)_12%,transparent)] blur-[120px]" />
+        <div className="pointer-events-none absolute top-1/2 right-[18%] z-0 size-[min(70vw,420px)] -translate-y-1/2 rounded-full bg-[color-mix(in_srgb,var(--brand-orange-500)_12%,transparent)] blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-ds-page-x py-10 sm:py-12">
 
@@ -62,13 +62,13 @@ export function Footer() {
 
             {/* TEXT */}
             <div className="flex flex-1 justify-start md:justify-end lg:mt-10">
-              <h2 className="relative z-20 text-right font-light text-white drop-shadow-[0_2px_10px_color-mix(in_srgb,white_20%,transparent)]">
+              <h2 className="relative z-20 text-left font-light text-white drop-shadow-[0_2px_10px_color-mix(in_srgb,white_20%,transparent)] md:text-right">
 
-                <span className="block text-[34px] sm:text-[48px] md:text-[72px] lg:text-[72px] leading-tight">
+                <span className="block text-[clamp(2rem,10vw,4.5rem)] leading-tight">
                   Sustainable Packaging
                 </span>
 
-                <span className="block text-[34px] sm:text-[48px] md:text-[72px] lg:text-[72px] leading-tight">
+                <span className="block text-[clamp(2rem,10vw,4.5rem)] leading-tight">
                   Solutions
                 </span>
 
@@ -80,7 +80,7 @@ export function Footer() {
           <div className="mt-12 flex flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 md:flex-row md:items-center">
 
             {/* SOCIAL */}
-            <div className="flex items-center gap-6">
+            <div className="flex flex-wrap items-center gap-5 sm:gap-6">
               {socialLinks.map(({ href, label, icon: Icon }) => (
                 <a key={label} href={href} target="_blank" rel="noreferrer">
                   <Icon className="size-5 text-white/90 transition hover:scale-110 hover:text-(--brand-orange-500)" />

@@ -58,8 +58,11 @@
   --muted-foreground: var(--ds-neutral-600);
   --accent: var(--brand-blue-100);
   --accent-foreground: var(--brand-green-900);
+  --border: #c7dce2;
   --border: color-mix(in srgb, var(--brand-blue-200) 62%, var(--brand-green-900) 10%);
+  --border-subtle: #e3f0f4;
   --border-subtle: color-mix(in srgb, var(--brand-blue-200) 42%, white);
+  --input: #d7edf5;
   --input: color-mix(in srgb, var(--brand-blue-200) 72%, white);
   --ring: var(--brand-blue-500);
   --destructive: var(--brand-red);
@@ -131,6 +134,12 @@
   --ds-space-control-x: 1.125rem;
   --ds-space-control-y: 0.8125rem;
 
+  /* Safe-area insets for iOS notches and browser home indicators */
+  --ds-safe-area-top: env(safe-area-inset-top, 0px);
+  --ds-safe-area-right: env(safe-area-inset-right, 0px);
+  --ds-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --ds-safe-area-left: env(safe-area-inset-left, 0px);
+
   /* Radius */
   --radius: 0.875rem;
   --ds-radius-base: var(--radius);
@@ -157,14 +166,23 @@
   --ds-shadow-card: 0 8px 20px rgb(8 17 31 / 0.045);
   --ds-shadow-card-soft: 0 10px 26px rgb(8 17 31 / 0.045);
   --ds-shadow-card-hover: 0 12px 28px rgb(8 17 31 / 0.065);
+  --ds-shadow-nav: 0 8px 22px rgb(13 47 27 / 0.06);
   --ds-shadow-nav: 0 8px 22px color-mix(in srgb, var(--brand-green-950) 6%, transparent);
+  --ds-shadow-mega-menu: 0 20px 46px rgb(13 47 27 / 0.13);
   --ds-shadow-mega-menu: 0 20px 46px color-mix(in srgb, var(--brand-green-950) 13%, transparent);
+  --ds-shadow-hero-panel: 0 14px 36px rgb(13 47 27 / 0.13);
   --ds-shadow-hero-panel: 0 14px 36px color-mix(in srgb, var(--brand-green-950) 13%, transparent);
+  --ds-shadow-focus: 0 0 0 4px rgb(88 173 210 / 0.24);
   --ds-shadow-focus: 0 0 0 4px color-mix(in srgb, var(--ring) 24%, transparent);
+  --ds-shadow-button-primary: 0 8px 18px rgb(233 120 34 / 0.18);
   --ds-shadow-button-primary: 0 8px 18px color-mix(in srgb, var(--brand-accent) 18%, transparent);
+  --ds-shadow-button-primary-strong: 0 12px 26px rgb(233 120 34 / 0.24);
   --ds-shadow-button-primary-strong: 0 12px 26px color-mix(in srgb, var(--brand-accent) 24%, transparent);
+  --ds-shadow-button-secondary: 0 12px 24px rgb(47 127 165 / 0.24);
   --ds-shadow-button-secondary: 0 12px 24px color-mix(in srgb, var(--secondary) 24%, transparent);
+  --ds-shadow-submit: 0 10px 24px rgb(233 120 34 / 0.24);
   --ds-shadow-submit: 0 10px 24px color-mix(in srgb, var(--brand-accent) 24%, transparent);
+  --ds-shadow-submit-hover: 0 14px 30px rgb(233 120 34 / 0.3);
   --ds-shadow-submit-hover: 0 14px 30px color-mix(in srgb, var(--brand-accent) 30%, transparent);
   --ds-shadow-hero-badge: 0 8px 20px rgb(8 17 31 / 0.12);
   --ds-shadow-floating-action: 0 20px 44px rgb(37 211 102 / 0.38);

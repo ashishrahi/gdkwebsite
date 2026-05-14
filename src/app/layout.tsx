@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Jost } from "next/font/google";
 import { Footer } from "@/components/layout/footer";
 import { FloatingActions } from "@/components/layout/floating-actions";
@@ -22,6 +22,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#f3efe7",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={jost.variable}>
       <body className="scroll-smooth bg-background font-sans text-foreground antialiased">
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-dvh flex-col">
           <div className="flex-1">
             <SiteShell>{children}</SiteShell>
           </div>

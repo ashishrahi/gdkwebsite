@@ -75,6 +75,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
   const [activeDesktopMenu, setActiveDesktopMenu] = useState<"about" | "products" | null>(null);
   const [activeSection, setActiveSection] = useState("home");
   const desktopMenuCloseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const sectionIds = navLinks.map((link) => link.hash.replace("#", ""));
@@ -177,11 +178,48 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
     }, 180);
   };
 
+  const handleDesktopMenuTouchStart = (
+    event: React.PointerEvent<HTMLAnchorElement>,
+    menu: "about" | "products"
+  ) => {
+    if (event.pointerType !== "touch" && event.pointerType !== "pen") {
+      return;
+    }
+
+    if (activeDesktopMenu !== menu) {
+      event.preventDefault();
+      openDesktopMenu(menu);
+    }
+  };
+
   useEffect(() => {
     return () => {
       clearDesktopMenuCloseTimeout();
     };
   }, []);
+
+  useEffect(() => {
+    if (!activeDesktopMenu) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveDesktopMenu(null);
+      }
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (headerRef.current?.contains(event.target as Node)) return;
+      setActiveDesktopMenu(null);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [activeDesktopMenu]);
 
   const activeDesktopProductCategory =
     getMegaMenuCategoryByKey(activeDesktopProductKey) ??
@@ -200,6 +238,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
   return (
     <>
       <header
+        ref={headerRef}
         className={cn(
           "fixed inset-x-0 top-0 isolate z-50 w-full shrink-0 border-b bg-[#f2faf3]/94 px-ds-page-x shadow-none backdrop-blur-md transition-[background-color,border-color] duration-300",
           homeVariant
@@ -249,7 +288,11 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                   <>
                     <Link
                       href={link.href}
+                      aria-haspopup="menu"
+                      aria-expanded={activeDesktopMenu === "about"}
                       aria-current={isActive ? "page" : undefined}
+                      onFocus={() => openDesktopMenu("about")}
+                      onPointerDown={(event) => handleDesktopMenuTouchStart(event, "about")}
                       onClick={() => {
                         setActiveSection(link.hash.replace("#", ""));
                         setActiveDesktopMenu(null);
@@ -266,12 +309,18 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                     </Link>
                     <div
                       className={cn(
-                        "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[700px] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
+                        "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[min(calc(100vw-2rem),700px)] max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
                         activeDesktopMenu === "about" &&
                           "pointer-events-auto opacity-100 visible translate-y-0"
                       )}
+                      onFocus={() => openDesktopMenu("about")}
+                      onBlur={(event) => {
+                        if (!event.currentTarget.contains(event.relatedTarget)) {
+                          closeDesktopMenuWithDelay();
+                        }
+                      }}
                     >
-                      <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "rounded-ds-card-lg bg-ds-surface")}>
+                      <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "max-h-[calc(100dvh-var(--ds-layout-navbar-h)-2rem)] overflow-y-auto overscroll-contain rounded-ds-card-lg bg-ds-surface")}>
                         <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
                         <div className="grid grid-cols-[1fr_1.6fr] gap-8">
                           <div className={cn(cardSurfaceVariants({ variant: "minimal", padding: "lg" }), "bg-ds-surface-muted")}>
@@ -320,7 +369,11 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                   <>
                     <Link
                       href={link.href}
+                      aria-haspopup="menu"
+                      aria-expanded={activeDesktopMenu === "products"}
                       aria-current={isActive ? "page" : undefined}
+                      onFocus={() => openDesktopMenu("products")}
+                      onPointerDown={(event) => handleDesktopMenuTouchStart(event, "products")}
                       onClick={() => {
                         setActiveSection(link.hash.replace("#", ""));
                         setActiveDesktopMenu(null);
@@ -337,12 +390,18 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                     </Link>
                     <div
                       className={cn(
-                        "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[820px] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
+                        "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[min(calc(100vw-2rem),820px)] max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
                         activeDesktopMenu === "products" &&
                           "pointer-events-auto opacity-100 visible translate-y-0"
                       )}
+                      onFocus={() => openDesktopMenu("products")}
+                      onBlur={(event) => {
+                        if (!event.currentTarget.contains(event.relatedTarget)) {
+                          closeDesktopMenuWithDelay();
+                        }
+                      }}
                     >
-                      <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "rounded-ds-card-lg bg-ds-surface")}>
+                      <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "max-h-[calc(100dvh-var(--ds-layout-navbar-h)-2rem)] overflow-y-auto overscroll-contain rounded-ds-card-lg bg-ds-surface")}>
                         <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
                         <div className="grid grid-cols-[1.05fr_1fr] gap-8">
                           <div className="grid grid-cols-1 gap-5">
@@ -443,19 +502,20 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
         <div className="lg:hidden">
           <Button
             variant="ghost"
+            size="icon-sm"
             onClick={() => setIsMobileMenuOpen(true)}
             aria-label="Open navigation menu"
             aria-expanded={isMobileMenuOpen}
-            className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#123c24] text-white shadow-sm transition-all duration-200 hover:bg-[#0f3f24] active:scale-[0.96]"
+            className="relative z-10 flex size-10 shrink-0 items-center justify-center overflow-visible rounded-xl bg-[#123c24] p-0 text-white shadow-sm transition-all duration-200 hover:bg-[#0f3f24] hover:text-white active:scale-[0.96] aria-expanded:bg-[#123c24] aria-expanded:text-white [&_svg]:relative [&_svg]:z-10 [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:text-white [&_svg]:stroke-white"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="size-5 text-white stroke-white stroke-[2.5]" aria-hidden="true" />
           </Button>
         </div>
       </nav>
 
       {isMobileMenuOpen ? (
         <div
-          className="absolute top-full left-0 right-0 z-50 w-full px-ds-page-x pt-3 lg:hidden"
+          className="absolute top-full left-0 right-0 z-50 w-full max-h-[calc(100dvh-var(--ds-layout-navbar-h)-1rem)] overflow-y-auto overscroll-contain px-ds-page-x pt-3 pb-[calc(1rem+var(--ds-safe-area-bottom))] lg:hidden"
         >
           <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "w-full rounded-ds-card-lg bg-[#f8fcf8] px-5 py-5")}>
             <div className="flex flex-col gap-3">

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   SectionHeader,
   homeContentSpacingClassName,
@@ -17,7 +17,7 @@ function altFromPath(path: string): string {
 
 function LogoTile({ src }: { src: string }) {
   return (
-    <div className={cn("group flex h-24 w-[176px] shrink-0 items-center justify-center px-6", cardSurfaceVariants({ variant: "minimal" }))}>
+    <div className={cn("group flex h-20 w-36 shrink-0 items-center justify-center px-4 sm:h-24 sm:w-[176px] sm:px-6", cardSurfaceVariants({ variant: "minimal" }))}>
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-border to-transparent opacity-0 transition group-hover:opacity-100" />
 
       <Image
@@ -33,6 +33,7 @@ function LogoTile({ src }: { src: string }) {
 
 export function ClienteleSection() {
   const [paths, setPaths] = useState<string[]>([]);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     fetch("/api/clients")
@@ -60,13 +61,13 @@ export function ClienteleSection() {
       </div>
 
       <div className={`relative overflow-hidden ${homeContentSpacingClassName}`}>
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-40 bg-linear-to-r from-background via-background/90 to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-40 bg-linear-to-l from-background via-background/90 to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-12 bg-linear-to-r from-background via-background/90 to-transparent sm:w-24 lg:w-40" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-12 bg-linear-to-l from-background via-background/90 to-transparent sm:w-24 lg:w-40" />
 
         <div className="py-4">
           <motion.div
-            className="flex w-max gap-6"
-            animate={{ x: ["0%", "-50%"] }}
+            className="flex w-max gap-4 sm:gap-6"
+            animate={shouldReduceMotion ? undefined : { x: ["0%", "-50%"] }}
             transition={{
               repeat: Infinity,
               duration: 38,

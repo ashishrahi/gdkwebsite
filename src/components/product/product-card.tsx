@@ -80,7 +80,7 @@ export function BaseProductCard({
       aria-label={ariaLabel}
     >
       <Card variant="interactive" className="h-full">
-        <div className="relative h-44 w-full overflow-hidden bg-ds-surface-muted">
+        <div className="relative h-40 w-full overflow-hidden bg-ds-surface-muted sm:h-44">
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -90,15 +90,15 @@ export function BaseProductCard({
           />
         </div>
         <CardHeader>
-          <div className="flex items-start justify-between gap-3">
-            <div className="space-y-3">
+          <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="min-w-0 space-y-3">
               <span className={cn(cardIconClassNames.brand, "h-9 w-9 rounded-lg")}>
                 <ProductIcon className="h-5 w-5" aria-hidden="true" />
               </span>
               <CardTitle>{title}</CardTitle>
             </div>
             {visibleBadges.length ? (
-              <div className="flex max-w-36 flex-wrap justify-end gap-2">
+              <div className="flex max-w-full flex-wrap justify-start gap-2 sm:max-w-36 sm:justify-end">
                 {visibleBadges.map((badge) => (
                   <ProductCardBadge key={badge}>{badge}</ProductCardBadge>
                 ))}
@@ -114,15 +114,15 @@ export function BaseProductCard({
         ) : (
           <CardContent className="flex-1" />
         )}
-        <CardFooter className="mt-auto justify-between gap-4">
+        <CardFooter className="mt-auto flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
           {footerLeading ? (
-            <span className="min-w-0 text-sm font-medium text-foreground sm:text-base">
+            <span className="min-w-0 wrap-break-word text-sm font-medium text-foreground sm:text-base">
               {footerLeading}
             </span>
           ) : (
             <span aria-hidden="true" />
           )}
-          <span className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-primary">
+          <span className="inline-flex w-full items-center justify-between gap-1 text-sm font-medium text-primary sm:w-auto sm:shrink-0 sm:justify-start">
             {ctaLabel}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </span>

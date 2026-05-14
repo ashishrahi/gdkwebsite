@@ -66,7 +66,7 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
             {cta.description}
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap lg:justify-end">
           <Link
             href={CONTACT_PRIMARY_HREF}
             scroll={false}
@@ -74,13 +74,13 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
               if (isModifiedClick(e)) return;
               scheduleScrollToContactForm();
             }}
-            className="inline-flex h-11.5 items-center rounded-full bg-brand-accent px-6 text-[0.8125rem] font-medium tracking-(--ds-type-label-letter-spacing) text-white! transition-colors hover:bg-brand-accent-hover"
+            className="inline-flex min-h-11.5 w-full items-center justify-center rounded-full bg-brand-accent px-6 py-2.5 text-center text-[0.8125rem] font-medium tracking-(--ds-type-label-letter-spacing) text-white! transition-colors hover:bg-brand-accent-hover sm:w-auto"
           >
             {cta.primaryLabel}
           </Link>
           <Link
             href="/contact"
-            className="inline-flex h-11.5 items-center rounded-full border border-[color-mix(in_srgb,var(--brand-blue-500)_34%,var(--border))] bg-white px-6 text-[0.8125rem] font-medium tracking-(--ds-type-label-letter-spacing) text-(--primary) transition-colors hover:border-brand-blue hover:bg-accent"
+            className="inline-flex min-h-11.5 w-full items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--brand-blue-500)_34%,var(--border))] bg-white px-6 py-2.5 text-center text-[0.8125rem] font-medium tracking-(--ds-type-label-letter-spacing) text-(--primary) transition-colors hover:border-brand-blue hover:bg-accent sm:w-auto"
           >
             {cta.secondaryLabel}
           </Link>
@@ -88,7 +88,7 @@ export function ProductCTA({ productTitle, cta }: ProductCTAProps) {
             href={`https://wa.me/?text=${whatsappMessage}`}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-11.5 items-center gap-2 rounded-full border border-ds-whatsapp bg-white px-6 text-[0.8125rem] font-medium tracking-(--ds-type-label-letter-spacing) text-ds-whatsapp transition-colors hover:bg-ds-whatsapp hover:text-white"
+            className="inline-flex min-h-11.5 w-full items-center justify-center gap-2 rounded-full border border-ds-whatsapp bg-white px-6 py-2.5 text-center text-[0.8125rem] font-medium tracking-(--ds-type-label-letter-spacing) text-ds-whatsapp transition-colors hover:bg-ds-whatsapp hover:text-white sm:w-auto"
           >
             <FaWhatsapp className="size-4 shrink-0" />
             {cta.whatsappLabel}
