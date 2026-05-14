@@ -2,6 +2,7 @@
 
 import {
   Award,
+  Quote,
   ShieldCheck,
   Target,
 } from "lucide-react";
@@ -80,6 +81,12 @@ const journey = [
   },
 ] as const;
 
+const kbHighlights = [
+  "PP UFT containers, glasses, and cups",
+  "50 mL to 1000 ML formats",
+  "900 TPA processing capacity",
+] as const;
+
 const heroSubtitle =
   "At our Kanpur facility, we specialize in manufacturing PP UFT containers, glasses, and cups.";
 
@@ -119,102 +126,145 @@ const certifications = [
 
 export default function AboutPage() {
   return (
-    <main className="ds-page-shell flex flex-1 flex-col gap-14 lg:gap-16">
+    <main className="ds-page-shell flex flex-1 flex-col gap-10 lg:gap-12">
       <section className={cn(cardSurfaceVariants({ variant: "gradient", padding: "xl" }), "rounded-ds-card-lg")}>
-        <p className="ds-eyebrow">About GDK Packaging</p>
-        <h1 className="mt-5 max-w-3xl text-h1 text-ds-text-strong">
-          Manufacturing packaging solutions with quality, scale, and consistency.
-        </h1>
-        <p className="mt-5 max-w-3xl text-body-lg text-ds-text-body">
-          We combine disciplined production, practical engineering, and long-term customer partnerships to serve modern packaging needs.
-        </p>
-      </section>
-
-      <div id="kb-ropes" className="scroll-mt-28 h-0 md:scroll-mt-32" />
-
-      <section className={cn(cardSurfaceVariants({ variant: "default" }), "scroll-mt-36 rounded-ds-card-lg md:scroll-mt-40")}>
-        <motion.div
-          className="flex flex-col gap-8 px-6 py-6 text-left md:gap-10 md:px-8 md:py-8 lg:px-10"
-          {...heroMotion}
-          transition={{
-            y: { duration: 0.6, ease: easeHeroY },
-            opacity: { duration: 0.78, ease: easePremium },
-          }}
-        >
-          <div className="relative overflow-hidden rounded-xl">
-            <Image
-              src="/images/hero/kankani.webp"
-              alt="Kankani Manufacturing Facility"
-              width={1400}
-              height={500}
-              className="h-auto w-full object-contain object-center bg-white md:h-72 md:object-cover"
-              priority
-            />
-          </div>
-          <div className="space-y-5">
-            <h2 className="text-h2 text-ds-text-strong">
-              K.B. Ropes Pvt Ltd
-            </h2>
-            <p className="text-body-lg text-ds-text-muted">
+        <div className="relative z-10 flex flex-col gap-6 lg:gap-7">
+          <p className="ds-eyebrow">About GDK Packaging</p>
+          <div className="flex max-w-3xl flex-col gap-4 lg:gap-5">
+            <h1 className="text-h1 text-ds-text-strong">
+              Manufacturing packaging solutions with quality, scale, and consistency.
+            </h1>
+            <p className="text-body-sm font-medium text-ds-text-muted sm:text-body">
               From Concept to Solution.{" "}
               <span className="text-primary">With Sustainability Built In.</span>
             </p>
             <p className="text-body-lg text-ds-text-body">
-              {heroSubtitle}
+              We combine disciplined production, practical engineering, and long-term customer partnerships to serve modern packaging needs.
             </p>
-            <div className="space-y-5 text-body-lg text-ds-text-body">
-              <p>
-                At our Kanpur facility, we specialize in manufacturing PP UFT containers, glasses, and cups. These products find applications in the food and other industries. Our range includes ice cream cups and glasses, as well as containers in round, octagonal, and rectangular shapes, with capacities ranging from 50 mL to 1000 ML. Not only are our containers refrigerated, but they are also microwave-safe and highly affordable. They are designed to suit a wide range of products.
-              </p>
-              <p>
-                Our production unit is equipped with six state-of-the-art TFM machines and a four-color UV printing machine that uses food-grade inks. Additionally, we have an in-house double-barrel extrusion machine for manufacturing sheets compatible with various polymer types. With a processing capacity of 900 TPA, we are well-positioned to meet the demands of our customers.
-              </p>
-            </div>
           </div>
-        </motion.div>
+        </div>
       </section>
 
-      <section
-        id="md-message"
-        className="scroll-mt-36 space-y-7 md:scroll-mt-40"
-      >
-        <motion.div
-          {...headingInView}
-          transition={{ duration: 0.5, ease: easePremium }}
-        >
-          <h2 className="text-h2 text-ds-text-strong">
-            Message from the Managing Director
-          </h2>
-        </motion.div>
+      <div id="kb-ropes" className="scroll-mt-28 h-0 md:scroll-mt-32" />
 
-        <div className={cn(cardSurfaceVariants({ variant: "default" }), "rounded-ds-card-lg")}>
+        <section className={cn(cardSurfaceVariants({ variant: "default" }), "scroll-mt-36 rounded-ds-card-lg md:scroll-mt-40")}>
           <motion.div
-            className="mx-auto flex w-full flex-col gap-8 px-6 py-6 text-left md:gap-10 md:px-8 md:py-8 lg:px-10"
+            className="grid gap-7 px-6 py-6 text-left sm:px-8 sm:py-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10 lg:px-10 lg:py-10"
             {...heroMotion}
             transition={{
               y: { duration: 0.6, ease: easeHeroY },
               opacity: { duration: 0.78, ease: easePremium },
             }}
           >
-            <div className="space-y-5 md:space-y-6">
-              <div className="space-y-1">
+            <div className="flex flex-col gap-8 lg:gap-9">
+              <p className="ds-eyebrow">Group Capability</p>
+              <div className="flex flex-col gap-7 lg:gap-8">
+                <h2 className="text-h3 text-ds-text-strong">
+                  K.B. Ropes Pvt Ltd
+                </h2>
+                <p className="text-body-lg text-ds-text-body">
+                  {heroSubtitle}
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                {kbHighlights.map((item) => (
+                  <div
+                    key={item}
+                    className={cn(
+                      cardSurfaceVariants({ variant: "minimal" }),
+                      "rounded-xl px-4 py-3 text-sm font-medium leading-6 text-ds-text-strong"
+                    )}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-4 text-body text-ds-text-body">
+              <div className="relative aspect-2167/725 overflow-hidden rounded-xl border border-ds-border-subtle bg-white shadow-ds-card-subtle">
+                <Image
+                  src="/images/hero/kankani.webp"
+                  alt="Kankani manufacturing facility"
+                  fill
+                  preload
+                  quality={100}
+                  sizes="(max-width: 1024px) calc(100vw - 3rem), (max-width: 1280px) 56vw, 680px"
+                  className="object-cover object-center"
+                />
+              </div>
+              <article className={cn(cardSurfaceVariants({ variant: "minimal", padding: "default" }), "rounded-xl")}>
+                <p>
+                  At our Kanpur facility, we specialize in manufacturing PP UFT containers, glasses, and cups. These products find applications in the food and other industries. Our range includes ice cream cups and glasses, as well as containers in round, octagonal, and rectangular shapes, with capacities ranging from 50 mL to 1000 ML. Not only are our containers refrigerated, but they are also microwave-safe and highly affordable. They are designed to suit a wide range of products.
+                </p>
+              </article>
+              <article className={cn(cardSurfaceVariants({ variant: "minimal", padding: "default" }), "rounded-xl")}>
+                <p>
+                  Our production unit is equipped with six state-of-the-art TFM machines and a four-color UV printing machine that uses food-grade inks. Additionally, we have an in-house double-barrel extrusion machine for manufacturing sheets compatible with various polymer types. With a processing capacity of 900 TPA, we are well-positioned to meet the demands of our customers.
+                </p>
+              </article>
+            </div>
+          </motion.div>
+        </section>
+
+      <section
+        id="md-message"
+        className="scroll-mt-36 space-y-5 md:scroll-mt-40"
+      >
+        <motion.div
+          {...headingInView}
+          transition={{ duration: 0.5, ease: easePremium }}
+        >
+          <h2 className="text-h3 text-ds-text-strong">
+            Message from the Managing Director
+          </h2>
+        </motion.div>
+
+        <div className={cn(cardSurfaceVariants({ variant: "default" }), "rounded-ds-card-lg")}>
+          <motion.div
+            className="mx-auto grid w-full gap-7 px-6 py-6 text-left sm:px-8 sm:py-8 lg:grid-cols-[280px_1fr] lg:gap-10 lg:px-10 lg:py-10"
+            {...heroMotion}
+            transition={{
+              y: { duration: 0.6, ease: easeHeroY },
+              opacity: { duration: 0.78, ease: easePremium },
+            }}
+          >
+            <aside className="grid gap-4 sm:grid-cols-[180px_1fr] sm:items-end lg:sticky lg:top-28 lg:block lg:space-y-4 lg:self-start">
+              <div className="relative mx-auto aspect-3/4 w-full max-w-[220px] overflow-hidden rounded-[1.35rem] bg-ds-surface-muted sm:mx-0 sm:max-w-none">
+                <Image
+                  src="/images/about/managing-director.jpg"
+                  alt="Mr. Ramesh Kankani"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 280px"
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="rounded-xl border border-ds-border-subtle bg-[color-mix(in_srgb,var(--brand-blue-100)_26%,white)] p-4">
                 <p className="text-body-lg font-medium text-ds-text-strong">
                   Mr. Ramesh Kankani
                 </p>
-                <p className="text-body text-ds-text-muted">
+                <p className="mt-1 text-body-sm text-ds-text-muted">
                   Managing Director, GDK Solutions
                 </p>
               </div>
+            </aside>
 
-              <div className="space-y-5 text-body-lg text-ds-text-body">
+            <div className="space-y-6 md:space-y-7">
+              <div className="flex items-start gap-4 rounded-xl border border-[color-mix(in_srgb,var(--brand-accent)_18%,var(--border))] bg-[color-mix(in_srgb,var(--brand-accent)_7%,white)] p-5 sm:p-6">
+                <span className={cn(cardIconClassNames.brand, "h-10 w-10 rounded-lg")}>
+                  <Quote className="h-5 w-5" aria-hidden />
+                </span>
+                <blockquote className="text-body-lg font-medium leading-8 text-ds-text-strong">
+                  His leadership is centered on execution, ensuring that every commitment made to the customer is delivered with precision and consistency. With a clear focus on continuous improvement and technology adoption, he continues to strengthen GDK’s position as a dependable partner for leading FMCG and dairy brands.
+                </blockquote>
+              </div>
+
+              <div className="space-y-5 text-body leading-8 text-ds-text-body">
                 <p>
                   Ramesh Kankani, a technocrat with decades of experience in packaging manufacturing, has been the driving force behind GDK Solutions’ steady growth and reliability in the industry. His approach has always been grounded in building strong systems, maintaining process discipline, and delivering consistent quality to customers.
                 </p>
                 <p>
                   Over the years, he has guided GDK from a conventional setup to an integrated manufacturing unit with capabilities across extrusion, thermoforming, and an in-house tool room. This has enabled faster development, better control over production, and the ability to meet evolving customer requirements with confidence.
-                </p>
-                <p>
-                  His leadership is centered on execution, ensuring that every commitment made to the customer is delivered with precision and consistency. With a clear focus on continuous improvement and technology adoption, he continues to strengthen GDK’s position as a dependable partner for leading FMCG and dairy brands.
                 </p>
               </div>
             </div>
@@ -223,22 +273,22 @@ export default function AboutPage() {
 
       </section>
 
-      <section className="space-y-7">
+      <section className="space-y-5">
         <motion.div
           {...headingInView}
           transition={{ duration: 0.5, ease: easePremium }}
         >
-          <h2 className="text-h2 text-ds-text-strong">
+          <h2 className="text-h3 text-ds-text-strong">
             Our Journey of Growth & Innovation
           </h2>
         </motion.div>
-        <ul className="space-y-7">
+        <ul className="space-y-5 lg:space-y-6">
           {journey.map((entry, index) => {
             const isLast = index === journey.length - 1;
             return (
               <motion.li
                 key={entry.year}
-                className="flex gap-5 rounded-xl px-1 py-2 transition-colors duration-200 hover:bg-accent md:gap-6"
+                className="flex gap-4 rounded-xl px-1 py-2 transition-colors duration-200 hover:bg-accent sm:gap-5 md:gap-6"
                 {...timelineInView}
                 transition={{
                   duration: 0.6,
@@ -266,7 +316,7 @@ export default function AboutPage() {
                     whileHover={{ scale: 1.005 }}
                     transition={{ duration: 0.2, ease: easePremium }}
                   >
-                    <Card variant="interactive" className="p-6 text-foreground">
+                    <Card variant="interactive" className="p-5 text-foreground sm:p-6">
                       <CardContent className="p-0">
                         <p className="text-body text-ds-text-muted">
                           {entry.description}
@@ -283,17 +333,17 @@ export default function AboutPage() {
 
       <section
         id="vision-mission"
-        className="scroll-mt-28 space-y-7 md:scroll-mt-32"
+        className="scroll-mt-28 space-y-5 md:scroll-mt-32"
       >
         <motion.div
           {...headingInView}
           transition={{ duration: 0.5, ease: easePremium }}
         >
-          <h2 className="text-h2 text-ds-text-strong">
+          <h2 className="text-h3 text-ds-text-strong">
             Our Vision & Mission
           </h2>
         </motion.div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-7">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-5">
           {visionMission.map((item, index) => (
             <motion.div
               key={item.title}
@@ -312,7 +362,7 @@ export default function AboutPage() {
                 },
               }}
             >
-              <Card variant="feature" className="h-full p-6 text-foreground">
+              <Card variant="feature" className="h-full p-5 text-foreground sm:p-6">
                 <CardHeader className="flex flex-row items-start gap-4 space-y-0 p-0">
                   <span className={cn(cardIconClassNames.brand, "h-10 w-10")}>
                     <item.icon className="h-5 w-5" aria-hidden />
@@ -333,26 +383,26 @@ export default function AboutPage() {
           ))}
         </div>
 
-        
-        <div className="space-y-7 pt-2">
-          <motion.div
-            {...headingInView}
-            transition={{ duration: 0.5, ease: easePremium }}
-          >
-            <h2 className="text-h2 text-ds-text-strong">
-              Certifications
-            </h2>
-          </motion.div>
-          <motion.div
-            {...cardInView}
-            transition={{ duration: 0.55, ease: easePremium }}
-            className="w-full"
-          >
-            <div className="w-full flex justify-start">
-              <CertificationsGrid certifications={certifications} />
-            </div>
-          </motion.div>
-        </div>
+      </section>
+
+      <section className="space-y-5">
+        <motion.div
+          {...headingInView}
+          transition={{ duration: 0.5, ease: easePremium }}
+        >
+          <h2 className="text-h3 text-ds-text-strong">
+            Certifications
+          </h2>
+        </motion.div>
+        <motion.div
+          {...cardInView}
+          transition={{ duration: 0.55, ease: easePremium }}
+          className="w-full"
+        >
+          <div className="flex w-full justify-start">
+            <CertificationsGrid certifications={certifications} />
+          </div>
+        </motion.div>
       </section>
 
     </main>

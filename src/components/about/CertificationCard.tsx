@@ -206,8 +206,7 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
           className="absolute top-2 right-2 z-10 rounded-md bg-white/90 p-1 shadow-sm backdrop-blur"
           aria-label="View Certificate PDF"
         >
-          <FaFilePdf  className="h-4 w-4 text-(--brand-red)" aria-hidden />
-          <FaFilePdf  className="h-4 w-4 text-[var(--brand-red)]" aria-hidden />
+          <FaFilePdf className="h-4 w-4 text-(--brand-red)" aria-hidden />
         </span>
       </a>
 
