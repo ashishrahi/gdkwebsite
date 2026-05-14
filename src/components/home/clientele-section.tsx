@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   SectionHeader,
   homeContentSpacingClassName,
@@ -33,7 +33,6 @@ function LogoTile({ src }: { src: string }) {
 
 export function ClienteleSection() {
   const [paths, setPaths] = useState<string[]>([]);
-  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     fetch("/api/clients")
@@ -66,8 +65,8 @@ export function ClienteleSection() {
 
         <div className="py-4">
           <motion.div
-            className="flex w-max gap-4 sm:gap-6"
-            animate={shouldReduceMotion ? undefined : { x: ["0%", "-50%"] }}
+            className="flex w-max gap-4 will-change-transform sm:gap-6"
+            animate={{ x: ["0%", "-50%"] }}
             transition={{
               repeat: Infinity,
               duration: 38,
