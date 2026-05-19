@@ -147,65 +147,65 @@ export default function AboutPage() {
 
       <div id="kb-ropes" className="scroll-mt-28 h-0 md:scroll-mt-32" />
 
-        <section className={cn(cardSurfaceVariants({ variant: "default" }), "scroll-mt-36 rounded-ds-card-lg md:scroll-mt-40")}>
-          <motion.div
-            className="grid gap-7 px-6 py-6 text-left sm:px-8 sm:py-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10 lg:px-10 lg:py-10"
-            {...heroMotion}
-            transition={{
-              y: { duration: 0.6, ease: easeHeroY },
-              opacity: { duration: 0.78, ease: easePremium },
-            }}
-          >
-            <div className="flex flex-col gap-8 lg:gap-9">
-              <p className="ds-eyebrow">Group Capability</p>
-              <div className="flex flex-col gap-7 lg:gap-8">
-                <h2 className="text-h3 text-ds-text-strong">
-                  K.B. Ropes Pvt Ltd
-                </h2>
-                <p className="text-body-lg text-ds-text-body">
-                  {heroSubtitle}
-                </p>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                {kbHighlights.map((item) => (
-                  <div
-                    key={item}
-                    className={cn(
-                      cardSurfaceVariants({ variant: "minimal" }),
-                      "rounded-xl px-4 py-3 text-sm font-medium leading-6 text-ds-text-strong"
-                    )}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
+      <section className={cn(cardSurfaceVariants({ variant: "default" }), "scroll-mt-36 rounded-ds-card-lg md:scroll-mt-40")}>
+        <motion.div
+          className="grid gap-7 px-6 py-6 text-left sm:px-8 sm:py-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10 lg:px-10 lg:py-10"
+          {...heroMotion}
+          transition={{
+            y: { duration: 0.6, ease: easeHeroY },
+            opacity: { duration: 0.78, ease: easePremium },
+          }}
+        >
+          <div className="flex flex-col gap-8 lg:gap-9">
+            <p className="ds-eyebrow">Group Capability</p>
+            <div className="flex flex-col gap-7 lg:gap-8">
+              <h2 className="text-h3 text-ds-text-strong">
+                K.B. Ropes Pvt Ltd
+              </h2>
+              <p className="text-body-lg text-ds-text-body">
+                {heroSubtitle}
+              </p>
             </div>
+            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+              {kbHighlights.map((item) => (
+                <div
+                  key={item}
+                  className={cn(
+                    cardSurfaceVariants({ variant: "minimal" }),
+                    "rounded-xl px-4 py-3 text-sm font-medium leading-6 text-ds-text-strong"
+                  )}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
 
-            <div className="grid gap-4 text-body text-ds-text-body">
-              <div className="relative aspect-2167/725 overflow-hidden rounded-xl border border-ds-border-subtle bg-white shadow-ds-card-subtle">
-                <Image
-                  src="/images/hero/kankani.webp"
-                  alt="Kankani manufacturing facility"
-                  fill
-                  preload
-                  quality={100}
-                  sizes="(max-width: 1024px) calc(100vw - 3rem), (max-width: 1280px) 56vw, 680px"
-                  className="object-cover object-center"
-                />
-              </div>
-              <article className={cn(cardSurfaceVariants({ variant: "minimal", padding: "default" }), "rounded-xl")}>
-                <p>
-                  At our Kanpur facility, we specialize in manufacturing PP UFT containers, glasses, and cups. These products find applications in the food and other industries. Our range includes ice cream cups and glasses, as well as containers in round, octagonal, and rectangular shapes, with capacities ranging from 50 mL to 1000 ML. Not only are our containers refrigerated, but they are also microwave-safe and highly affordable. They are designed to suit a wide range of products.
-                </p>
-              </article>
-              <article className={cn(cardSurfaceVariants({ variant: "minimal", padding: "default" }), "rounded-xl")}>
-                <p>
-                  Our production unit is equipped with six state-of-the-art TFM machines and a four-color UV printing machine that uses food-grade inks. Additionally, we have an in-house double-barrel extrusion machine for manufacturing sheets compatible with various polymer types. With a processing capacity of 900 TPA, we are well-positioned to meet the demands of our customers.
-                </p>
-              </article>
+          <div className="grid gap-4 text-body text-ds-text-body">
+            <div className="relative aspect-2167/725 overflow-hidden rounded-xl border border-ds-border-subtle bg-white shadow-ds-card-subtle">
+              <Image
+                src="/images/hero/kankani.webp"
+                alt="Kankani manufacturing facility"
+                fill
+                preload
+                quality={100}
+                sizes="(max-width: 1024px) calc(100vw - 3rem), (max-width: 1280px) 56vw, 680px"
+                className="object-cover object-center"
+              />
             </div>
-          </motion.div>
-        </section>
+            <article className={cn(cardSurfaceVariants({ variant: "minimal", padding: "default" }), "rounded-xl")}>
+              <p>
+                At our Kanpur facility, we specialize in manufacturing PP UFT containers, glasses, and cups. These products find applications in the food and other industries. Our range includes ice cream cups and glasses, as well as containers in round, octagonal, and rectangular shapes, with capacities ranging from 50 mL to 1000 ML. Not only are our containers refrigerated, but they are also microwave-safe and highly affordable. They are designed to suit a wide range of products.
+              </p>
+            </article>
+            <article className={cn(cardSurfaceVariants({ variant: "minimal", padding: "default" }), "rounded-xl")}>
+              <p>
+                Our production unit is equipped with six state-of-the-art TFM machines and a four-color UV printing machine that uses food-grade inks. Additionally, we have an in-house double-barrel extrusion machine for manufacturing sheets compatible with various polymer types. With a processing capacity of 900 TPA, we are well-positioned to meet the demands of our customers.
+              </p>
+            </article>
+          </div>
+        </motion.div>
+      </section>
 
       <section
         id="md-message"
@@ -230,12 +230,12 @@ export default function AboutPage() {
             }}
           >
             <aside className="grid gap-4 sm:grid-cols-[180px_1fr] sm:items-end lg:sticky lg:top-28 lg:block lg:space-y-4 lg:self-start">
-              <div className="relative mx-auto aspect-3/4 w-full max-w-[220px] overflow-hidden rounded-[1.35rem] bg-ds-surface-muted sm:mx-0 sm:max-w-none">
+              <div className="relative mx-auto h-[220px] w-[220px] overflow-hidden rounded-full bg-ds-surface-muted sm:mx-0">
                 <Image
-                  src="/images/about/managing-director.jpg"
+                  src="/images/about/mdphoto.webp"
                   alt="Mr. Ramesh Kankani"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 280px"
+                  sizes="220px"
                   className="object-cover object-center"
                 />
               </div>
@@ -265,6 +265,10 @@ export default function AboutPage() {
                 </p>
                 <p>
                   Over the years, he has guided GDK from a conventional setup to an integrated manufacturing unit with capabilities across extrusion, thermoforming, and an in-house tool room. This has enabled faster development, better control over production, and the ability to meet evolving customer requirements with confidence.
+                </p>
+                <p>
+                  His leadership is centered on execution, ensuring that every commitment made to the customer is delivered with precision and consistency. With a clear focus on continuous improvement and technology adoption, he continues to strengthen GDK’s position as a dependable partner for leading FMCG and dairy brands.
+
                 </p>
               </div>
             </div>
