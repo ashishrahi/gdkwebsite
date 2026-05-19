@@ -48,11 +48,11 @@ export function Footer() {
             {/* LOGO */}
             <div className="flex flex-col gap-4">
               <Image
-                src="/logo-white1.webp"
+                src="/logo-white1.png"
                 alt="GDK Packaging"
                 width={250}
                 height={170}
-                className="h-auto w-[180px] object-contain sm:w-[220px] md:w-[250px]"
+                className="h-auto w-45 object-contain sm:w-55 md:w-62.5"
               />
               <p className="max-w-[56ch] text-body-sm font-medium text-white/72 sm:text-body">
                 From Concept to Solution.{" "}
