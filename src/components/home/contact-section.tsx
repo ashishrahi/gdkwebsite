@@ -34,8 +34,8 @@ type ContactRow =
 const contactRows: ContactRow[] = [
   {
     title: "Email",
-    value: "sales@gdkpackaging.com",
-    href: "mailto:sales@gdkpackaging.com",
+    value: "sales@gdk.co.in",
+    href: "mailto:sales@gdk.co.in",
     icon: Mail,
   },
   {

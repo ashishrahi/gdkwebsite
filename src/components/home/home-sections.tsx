@@ -1,14 +1,11 @@
-import Image from "next/image";
 import { ClienteleSection } from "@/components/home/clientele-section";
 import { ContactSection } from "@/components/home/contact-section";
 import {
   FeatureCard,
   HomeSection,
-  PremiumCard,
   ProcessCard,
   SectionHeader,
   ServiceCard,
-  StatCard,
   homeContentSpacingClassName,
   homeGridClassName,
 } from "@/components/home/home-card-system";
@@ -19,7 +16,6 @@ import {
   Briefcase,
   CheckCircle2,
   ClipboardList,
-  Clock3,
   Factory,
   Globe,
   Handshake,
@@ -28,15 +24,7 @@ import {
   Sparkles,
   ShieldCheck,
   Truck,
-  Users,
 } from "lucide-react";
-
-const trustStats = [
-  { label: "25+ Years Experience", icon: Clock3 },
-  { label: "500+ Clients Served", icon: Users },
-  { label: "ISO Certified", icon: BadgeCheck },
-  { label: "Bulk Production Ready", icon: Factory },
-];
 
 const homeProducts = [
   {
@@ -191,53 +179,7 @@ const manufacturingProcessSteps = [
 export function HomeSections() {
   return (
     <>
-      <HomeSection id="about">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
-          <PremiumCard className="h-auto min-h-0 self-start overflow-hidden p-0">
-            <div className="relative aspect-16/10 w-full overflow-hidden rounded-ds-card">
-              <Image
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80"
-                alt="Industrial packaging warehouse and manufacturing floor"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition-transform duration-500 ease-ds-out group-hover/card:scale-[1.03]"
-                priority={false}
-              />
-              <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[color-mix(in_srgb,var(--brand-green-950)_35%,transparent)] via-transparent to-transparent" />
-            </div>
-          </PremiumCard>
-
-          <div className="space-y-7">
-            <SectionHeader
-              eyebrow="About GDK Packaging"
-              title="Engineering Reliable Packaging Solutions for Modern Industries"
-              description="Precision-built packaging systems backed by disciplined manufacturing, custom engineering, and dependable bulk supply."
-              align="left"
-            />
-
-            <div className="space-y-5 text-body leading-8 text-ds-text-body">
-              <p>
-                GDK Packaging brings decades of manufacturing expertise to deliver
-                precision-built packaging systems for high-demand industrial operations.
-                Our teams combine process discipline with practical engineering to support
-                complex production environments.
-              </p>
-              <p>
-                From custom packaging solutions to stringent quality control, we help
-                procurement and operations leaders reduce risk while maintaining consistent
-                output. With reliable bulk supply timelines and sustainability-focused
-                material choices, we are built to scale with your business.
-              </p>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              {trustStats.map((item) => (
-                <StatCard key={item.label} label={item.label} icon={item.icon} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </HomeSection>
+     
 
       <HomeSection id="products">
         <SectionHeader

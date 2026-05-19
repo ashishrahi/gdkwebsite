@@ -204,7 +204,7 @@ export default function ContactPageClient({
                     href="mailto:sales@gdkpackaging.com"
                     className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
                   >
-                    sales@gdkpackaging.com
+                      sales@gdk.co.in
                   </a>
                 </div>
               </div>

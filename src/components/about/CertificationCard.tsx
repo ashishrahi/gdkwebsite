@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FaFilePdf } from "react-icons/fa6"
+import { FaFilePdf } from "react-icons/fa6";
 import { createPortal } from "react-dom";
 import {
   useCallback,
@@ -10,6 +10,7 @@ import {
   useState,
   type CSSProperties,
 } from "react";
+
 import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
 import { cn } from "@/lib/utils";
 
@@ -23,9 +24,9 @@ type CertificationCardProps = {
   index: number;
 };
 
-/** Target width range ~350–450px; clamped to viewport */
-const PREVIEW_MAX_W = 420;
-const PREVIEW_MIN_W = 350;
+/** Bigger & clearer preview */
+const PREVIEW_MAX_W = 560;
+const PREVIEW_MIN_W = 420;
 const PREVIEW_PAD = 16;
 const PREVIEW_GAP = 16;
 const PREVIEW_MARGIN = 12;
@@ -40,13 +41,17 @@ function computePreviewLayout(rect: DOMRect): PreviewLayout {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
   const available = vw - PREVIEW_MARGIN * 2;
+
   let previewW = Math.min(PREVIEW_MAX_W, available);
+
   if (available >= PREVIEW_MIN_W) {
     previewW = Math.max(PREVIEW_MIN_W, previewW);
   }
 
   const maxInnerByVh = vh - PREVIEW_MARGIN * 2 - PREVIEW_PAD * 2;
-  const idealInner = Math.max(160, Math.round(previewW * 0.52));
+
+  /** Bigger height for better clarity */
+  const idealInner = Math.max(240, Math.round(previewW * 0.7));
   const innerH = Math.min(idealInner, Math.max(0, maxInnerByVh));
   const previewH = innerH + PREVIEW_PAD * 2;
   const isLg = vw >= LG_MIN;
@@ -61,29 +66,36 @@ function computePreviewLayout(rect: DOMRect): PreviewLayout {
     if (left + previewW > vw - PREVIEW_MARGIN) {
       left = rect.left - previewW - PREVIEW_GAP;
     }
+
     if (left < PREVIEW_MARGIN) {
       left = Math.max(
         PREVIEW_MARGIN,
         Math.min(
           rect.left + rect.width / 2 - previewW / 2,
-          vw - previewW - PREVIEW_MARGIN,
-        ),
+          vw - previewW - PREVIEW_MARGIN
+        )
       );
+
       top = rect.top - previewH - PREVIEW_GAP;
+
       if (top < PREVIEW_MARGIN) {
         top = rect.bottom + PREVIEW_GAP;
       }
     }
   } else {
     left = rect.left + rect.width / 2 - previewW / 2;
+
     left = Math.max(
       PREVIEW_MARGIN,
-      Math.min(left, vw - previewW - PREVIEW_MARGIN),
+      Math.min(left, vw - previewW - PREVIEW_MARGIN)
     );
+
     top = rect.top - previewH - PREVIEW_GAP;
+
     if (top < PREVIEW_MARGIN) {
       top = rect.bottom + PREVIEW_GAP;
     }
+
     if (top + previewH > vh - PREVIEW_MARGIN) {
       top = Math.max(PREVIEW_MARGIN, vh - previewH - PREVIEW_MARGIN);
     }
@@ -91,7 +103,7 @@ function computePreviewLayout(rect: DOMRect): PreviewLayout {
 
   top = Math.max(
     PREVIEW_MARGIN,
-    Math.min(top, vh - previewH - PREVIEW_MARGIN),
+    Math.min(top, vh - previewH - PREVIEW_MARGIN)
   );
 
   return {
@@ -105,24 +117,31 @@ function computePreviewLayout(rect: DOMRect): PreviewLayout {
   };
 }
 
-export function CertificationCard({ item, index }: CertificationCardProps) {
+export function CertificationCard({
+  item,
+  index,
+}: CertificationCardProps) {
   const { image, pdf } = item;
+
   const rootRef = useRef<HTMLDivElement>(null);
   const [renderPreview, setRenderPreview] = useState(false);
   const [previewOpaque, setPreviewOpaque] = useState(false);
-  const [previewLayout, setPreviewLayout] = useState<PreviewLayout | null>(
-    null,
-  );
+  const [previewLayout, setPreviewLayout] =
+    useState<PreviewLayout | null>(null);
 
   const updatePreviewPosition = useCallback(() => {
     const el = rootRef.current;
     if (!el) return;
-    setPreviewLayout(computePreviewLayout(el.getBoundingClientRect()));
+
+    setPreviewLayout(
+      computePreviewLayout(el.getBoundingClientRect())
+    );
   }, []);
 
   const showPreview = useCallback(() => {
     updatePreviewPosition();
     setRenderPreview(true);
+
     requestAnimationFrame(() => {
       requestAnimationFrame(() => setPreviewOpaque(true));
     });
@@ -134,21 +153,38 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
 
   useEffect(() => {
     if (!renderPreview || !previewOpaque) return;
+
     const onViewportChange = () => updatePreviewPosition();
+
     window.addEventListener("scroll", onViewportChange, true);
     window.addEventListener("resize", onViewportChange);
+
     return () => {
-      window.removeEventListener("scroll", onViewportChange, true);
-      window.removeEventListener("resize", onViewportChange);
+      window.removeEventListener(
+        "scroll",
+        onViewportChange,
+        true
+      );
+      window.removeEventListener(
+        "resize",
+        onViewportChange
+      );
     };
-  }, [renderPreview, previewOpaque, updatePreviewPosition]);
+  }, [
+    renderPreview,
+    previewOpaque,
+    updatePreviewPosition,
+  ]);
 
   const previewNode =
     renderPreview && previewLayout ? (
       <div
         aria-hidden
         className={cn(
-          cardSurfaceVariants({ variant: "elevated", padding: "sm" }),
+          cardSurfaceVariants({
+            variant: "elevated",
+            padding: "sm",
+          }),
           "pointer-events-none fixed z-50 overflow-visible rounded-xl bg-white shadow-[color-mix(in_srgb,var(--brand-green-950)_20%,transparent)] transition-opacity duration-200 ease-out"
         )}
         style={{
@@ -156,7 +192,10 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
           opacity: previewOpaque ? 1 : 0,
         }}
         onTransitionEnd={(e) => {
-          if (e.propertyName === "opacity" && !previewOpaque) {
+          if (
+            e.propertyName === "opacity" &&
+            !previewOpaque
+          ) {
             setRenderPreview(false);
             setPreviewLayout(null);
           }
@@ -164,14 +203,16 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
       >
         <div
           className="flex w-full items-center justify-center overflow-visible"
-          style={{ height: previewLayout.innerHeight }}
+          style={{
+            height: previewLayout.innerHeight,
+          }}
         >
           <Image
             src={image}
             alt=""
-            width={840}
-            height={320}
-            sizes="(min-width: 1024px) 420px, 90vw"
+            width={1000}
+            height={500}
+            sizes="(min-width: 1024px) 560px, 95vw"
             className="max-h-full max-w-full object-contain"
           />
         </div>
@@ -179,13 +220,19 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
     ) : null;
 
   return (
-    <div ref={rootRef} className="relative min-w-0 overflow-visible">
+    <div
+      ref={rootRef}
+      className="relative min-w-0 overflow-visible"
+    >
       <a
         href={pdf}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          cardSurfaceVariants({ variant: "interactive", padding: "sm" }),
+          cardSurfaceVariants({
+            variant: "interactive",
+            padding: "sm",
+          }),
           "relative block w-full max-w-full rounded-xl p-4 hover:scale-[1.03] sm:w-fit"
         )}
         onMouseEnter={showPreview}
@@ -197,17 +244,13 @@ export function CertificationCard({ item, index }: CertificationCardProps) {
           <Image
             src={image}
             alt={`Certification ${index + 1}`}
-            width={280}
-            height={80}
-            className="h-auto max-h-[120px] w-full max-w-[280px] object-contain sm:w-auto"
+            width={340}
+            height={110}
+            className="h-auto max-h-37.5 w-full max-w-85 object-contain sm:w-auto"
           />
         </div>
-        <span
-          className="absolute top-2 right-2 z-10 rounded-md bg-white/90 p-1 shadow-sm backdrop-blur"
-          aria-label="View Certificate PDF"
-        >
-          <FaFilePdf className="h-4 w-4 text-(--brand-red)" aria-hidden />
-        </span>
+
+      
       </a>
 
       {typeof document !== "undefined" && previewNode

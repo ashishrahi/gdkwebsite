@@ -228,7 +228,7 @@ export function FeatureCard({
   icon: LucideIcon;
 }) {
   return (
-    <article className={cn(premiumCardClassName, "min-h-[244px] gap-6 p-6 sm:p-8")}>
+    <article className={cn(premiumCardClassName, "min-h-61 gap-6 p-6 sm:p-8")}>
       <span className={cn(cardIconClassNames.brand, "h-11 w-11 border border-ds-border-subtle")}>
         <Icon className="h-5 w-5" aria-hidden="true" />
       </span>
@@ -278,7 +278,7 @@ export function ProcessCard({
         <Icon className="h-6 w-6" aria-hidden="true" />
       </div>
 
-      <div className="flex min-h-[240px] w-full flex-col rounded-ds-card border border-white/15 bg-white/8 p-6 pt-14 text-white shadow-ds-card-subtle backdrop-blur-xl transition-[border-color,box-shadow,transform,background-color] duration-200 ease-ds-out hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/12 hover:shadow-ds-card-medium">
+      <div className="flex min-h-60 w-full flex-col rounded-ds-card border border-white/15 bg-white/8 p-6 pt-14 text-white shadow-ds-card-subtle backdrop-blur-xl transition-[border-color,box-shadow,transform,background-color] duration-200 ease-ds-out hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/12 hover:shadow-ds-card-medium">
         <p className="m-0 text-xs font-medium uppercase leading-none tracking-(--ds-type-eyebrow-letter-spacing) text-white/70">
           Step {step}
         </p>

@@ -26,13 +26,13 @@ const visionMission = [
   {
     title: "Vision",
     description:
-      "Build a future-ready packaging ecosystem with long-term customer partnerships.",
+      "To be a benchmark in packaging innovation by delivering high-quality, sustainable, and customer-focused solutions.",
     icon: Award,
   },
   {
     title: "Mission",
     description:
-      "Deliver dependable packaging systems that improve safety and operational speed.",
+      "At GDK Solutions, packaging is not just a product—it is a promise of quality, protection, and trust.",
     icon: Target,
   },
   {
@@ -81,11 +81,7 @@ const journey = [
   },
 ] as const;
 
-const kbHighlights = [
-  "PP UFT containers, glasses, and cups",
-  "50 mL to 1000 ML formats",
-  "900 TPA processing capacity",
-] as const;
+
 
 const heroSubtitle =
   "At our Kanpur facility, we specialize in manufacturing PP UFT containers, glasses, and cups.";
@@ -166,19 +162,7 @@ export default function AboutPage() {
                 {heroSubtitle}
               </p>
             </div>
-            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-              {kbHighlights.map((item) => (
-                <div
-                  key={item}
-                  className={cn(
-                    cardSurfaceVariants({ variant: "minimal" }),
-                    "rounded-xl px-4 py-3 text-sm font-medium leading-6 text-ds-text-strong"
-                  )}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
+            
           </div>
 
           <div className="grid gap-4 text-body text-ds-text-body">
@@ -230,7 +214,7 @@ export default function AboutPage() {
             }}
           >
             <aside className="grid gap-4 sm:grid-cols-[180px_1fr] sm:items-end lg:sticky lg:top-28 lg:block lg:space-y-4 lg:self-start">
-              <div className="relative mx-auto h-[220px] w-[220px] overflow-hidden rounded-full bg-ds-surface-muted sm:mx-0">
+              <div className="relative mx-auto h-55 w-55 overflow-hidden rounded-full bg-ds-surface-muted sm:mx-0">
                 <Image
                   src="/images/about/mdphoto.webp"
                   alt="Mr. Ramesh Kankani"

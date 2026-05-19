@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, ChevronUp, Globe, Menu, Package, Sparkles, Star, X } from "lucide-react";
+import { ChevronDown, ChevronUp, Globe, Menu, Package, Sparkles, X } from "lucide-react";
 
 import { EnquiryNavButton } from "@/components/enquiry/enquiry-nav-button";
 import { Button } from "@/components/ui/button";
@@ -25,32 +25,16 @@ const navLinks = [
   { href: "/#why-choose-us", hash: "#why-choose-us", label: "Why Us" },
 ];
 
-const aboutHighlights = [
-  "About GDK Packaging",
-  "Trusted manufacturer",
-  "25+ Years Experience",
-  "ISO Standards",
-];
+
 
 const aboutMegaCards = [
   {
     href: "/about",
     title: "GDK Solution",
-    description: "Discover our complete packaging capabilities and engineered product line.",
+    description: "From Concept to Solution. With Sustainability Built In",
     icon: Sparkles,
   },
-  {
-    href: "/about#kb-ropes",
-    title: "K.B. Ropes Pvt Ltd",
-    description: "Explore our group strength and the extended manufacturing ecosystem.",
-    icon: Globe,
-  },
-  {
-    href: "/about#vision-mission",
-    title: "Vision & Mission",
-    description: "Read the principles guiding quality, innovation, and long-term partnerships.",
-    icon: Star,
-  },
+
 ];
 
 const productMegaCategoryIcons = {
@@ -252,9 +236,20 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
             : "border-[#d5ead8]/70"
         )}
       >
-      <nav className="mx-auto flex h-(--ds-layout-navbar-h) w-full max-w-352 items-center justify-between px-0 lg:grid lg:grid-cols-[1fr_auto_1fr]">
-        <div className="hidden items-center justify-start lg:flex">
-          <Link href="/#home" className={logoLinkClassName} onClick={closeMobileMenu}>
+        <nav className="mx-auto flex h-(--ds-layout-navbar-h) w-full max-w-352 items-center justify-between px-0 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+          <div className="hidden items-center justify-start lg:flex">
+            <Link href="/#home" className={logoLinkClassName} onClick={closeMobileMenu}>
+              <Image
+                src="/logo-white.png"
+                alt="GDK Packaging"
+                width={220}
+                height={60}
+                className={logoImageClassName}
+                priority
+              />
+            </Link>
+          </div>
+          <Link href="/#home" className={cn(logoLinkClassName, "justify-start lg:hidden")} onClick={closeMobileMenu}>
             <Image
               src="/logo-white.png"
               alt="GDK Packaging"
@@ -264,287 +259,8 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
               priority
             />
           </Link>
-        </div>
-        <Link href="/#home" className={cn(logoLinkClassName, "justify-start lg:hidden")} onClick={closeMobileMenu}>
-          <Image
-            src="/logo-white.png"
-            alt="GDK Packaging"
-            width={220}
-            height={60}
-            className={logoImageClassName}
-            priority
-          />
-        </Link>
 
-        <div className="hidden items-center justify-center gap-8 lg:flex xl:gap-11">
-          {navLinks.map((link) => {
-            const isActive = isRouteActive(link.hash);
-            const isAboutLink = link.label === "About";
-            const isProductsLink = link.label === "Products";
-            return (
-              <div
-                key={link.href}
-                className="group relative"
-                onMouseEnter={
-                  isAboutLink ? () => openDesktopMenu("about") : isProductsLink ? () => openDesktopMenu("products") : undefined
-                }
-                onMouseLeave={isAboutLink || isProductsLink ? closeDesktopMenuWithDelay : undefined}
-              >
-                {isAboutLink ? (
-                  <>
-                    <Link
-                      href={link.href}
-                      aria-haspopup="menu"
-                      aria-expanded={activeDesktopMenu === "about"}
-                      aria-current={isActive ? "page" : undefined}
-                      onFocus={() => openDesktopMenu("about")}
-                      onPointerDown={(event) => handleDesktopMenuTouchStart(event, "about")}
-                      onClick={() => {
-                        setActiveSection(link.hash.replace("#", ""));
-                        setActiveDesktopMenu(null);
-                        closeMobileMenu();
-                      }}
-                      className={desktopNavLinkClassName(isActive)}
-                    >
-                      {link.label}
-                      {activeDesktopMenu === "about" ? (
-                        <ChevronUp className="size-3.5" />
-                      ) : (
-                        <ChevronDown className="size-3.5" />
-                      )}
-                    </Link>
-                    <div
-                      className={cn(
-                        "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[min(calc(100vw-2rem),700px)] max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
-                        activeDesktopMenu === "about" &&
-                          "pointer-events-auto opacity-100 visible translate-y-0"
-                      )}
-                      onFocus={() => openDesktopMenu("about")}
-                      onBlur={(event) => {
-                        if (!event.currentTarget.contains(event.relatedTarget)) {
-                          closeDesktopMenuWithDelay();
-                        }
-                      }}
-                    >
-                      <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "max-h-[calc(100dvh-var(--ds-layout-navbar-h)-2rem)] overflow-y-auto overscroll-contain rounded-ds-card-lg bg-ds-surface")}>
-                        <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
-                        <div className="grid grid-cols-[1fr_1.6fr] gap-8">
-                          <div className={cn(cardSurfaceVariants({ variant: "minimal", padding: "lg" }), "bg-ds-surface-muted")}>
-                            <p className="text-xs font-medium uppercase tracking-(--ds-type-eyebrow-letter-spacing) text-brand-accent">
-                              About GDK
-                            </p>
-                            <ul className="mt-4 space-y-2.5">
-                              {aboutHighlights.map((item) => (
-                                <li key={item} className="text-sm font-medium text-ds-text-strong">
-                                  {item}
-                                </li>
-                              ))}
-                            </ul>
-                            <p className="mt-4 text-body-sm text-ds-text-muted">
-                              Premium packaging partner delivering precision manufacturing with
-                              consistency, compliance, and scale.
-                            </p>
-                          </div>
-                          <div className="grid grid-cols-1 gap-5">
-                            {aboutMegaCards.map((card) => (
-                              <Link
-                                key={card.title}
-                                href={card.href}
-                                className={cn(
-                                  "flex items-start gap-4",
-                                  cardSurfaceVariants({ variant: "interactive", padding: "sm" })
-                                )}
-                              >
-                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-accent text-white">
-                                  <card.icon className="h-5 w-5" />
-                                </div>
-                                <div>
-                                  <p className="text-sm leading-5 font-medium text-ds-text-strong">{card.title}</p>
-                                  <p className="mt-1.5 text-caption text-ds-text-muted">
-                                    {card.description}
-                                  </p>
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                ) : isProductsLink ? (
-                  <>
-                    <Link
-                      href={link.href}
-                      aria-haspopup="menu"
-                      aria-expanded={activeDesktopMenu === "products"}
-                      aria-current={isActive ? "page" : undefined}
-                      onFocus={() => openDesktopMenu("products")}
-                      onPointerDown={(event) => handleDesktopMenuTouchStart(event, "products")}
-                      onClick={() => {
-                        setActiveSection(link.hash.replace("#", ""));
-                        setActiveDesktopMenu(null);
-                        closeMobileMenu();
-                      }}
-                      className={desktopNavLinkClassName(isActive)}
-                    >
-                      {link.label}
-                      {activeDesktopMenu === "products" ? (
-                        <ChevronUp className="size-3.5" />
-                      ) : (
-                        <ChevronDown className="size-3.5" />
-                      )}
-                    </Link>
-                    <div
-                      className={cn(
-                        "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[min(calc(100vw-2rem),820px)] max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
-                        activeDesktopMenu === "products" &&
-                          "pointer-events-auto opacity-100 visible translate-y-0"
-                      )}
-                      onFocus={() => openDesktopMenu("products")}
-                      onBlur={(event) => {
-                        if (!event.currentTarget.contains(event.relatedTarget)) {
-                          closeDesktopMenuWithDelay();
-                        }
-                      }}
-                    >
-                      <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "max-h-[calc(100dvh-var(--ds-layout-navbar-h)-2rem)] overflow-y-auto overscroll-contain rounded-ds-card-lg bg-ds-surface")}>
-                        <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
-                        <div className="grid grid-cols-[1.05fr_1fr] gap-8">
-                          <div className="grid grid-cols-1 gap-5">
-                            {PRODUCT_MEGA_MENU_CATEGORIES.map((category) => {
-                              const isCategoryActive = activeDesktopProductKey === category.key;
-                              const CategoryIcon =
-                                productMegaCategoryIcons[
-                                  category.key as keyof typeof productMegaCategoryIcons
-                                ] ?? Package;
-                              return (
-                                <button
-                                  key={category.key}
-                                  type="button"
-                                  onMouseEnter={() => setActiveDesktopProductKey(category.key)}
-                                  onFocus={() => setActiveDesktopProductKey(category.key)}
-                                  onClick={() => setActiveDesktopProductKey(category.key)}
-                                  className={cn(
-                                    "group/category flex items-start gap-4 text-left",
-                                    cardSurfaceVariants({ variant: "interactive", padding: "sm" }),
-                                    isCategoryActive
-                                      ? "border-brand-accent shadow-[0_10px_24px_color-mix(in_srgb,var(--brand-accent)_24%,transparent)]"
-                                      : "hover:border-[color-mix(in_srgb,var(--brand-accent)_70%,transparent)]"
-                                  )}
-                                >
-                                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-accent">
-                                    <CategoryIcon className="h-6 w-6 text-brand-accent" />
-                                  </div>
-                                  <div>
-                                    <p className="text-sm leading-5 font-medium text-ds-text-strong">{category.title}</p>
-                                    <p className="mt-1.5 text-caption text-ds-text-muted">
-                                      {category.description}
-                                    </p>
-                                  </div>
-                                </button>
-                              );
-                            })}
-                          </div>
-                          <div className={cn("group/panel block bg-ds-surface-muted", cardSurfaceVariants({ variant: "minimal", padding: "lg" }))}>
-                            <Link href={activeDesktopProductCategory.href}>
-                              <p className="text-xs font-medium uppercase tracking-(--ds-type-eyebrow-letter-spacing) text-brand-accent">
-                                {activeDesktopProductCategory.title}
-                              </p>
-                            </Link>
-                            <p className="mt-3 text-body-sm text-ds-text-muted">
-                              Product sub-categories crafted for performance, consistency, and scalable
-                              manufacturing.
-                            </p>
-                            <div className="mt-5 grid grid-cols-1 gap-3">
-                            {activeDesktopProductCategory.subcategories.map((product) => (
-                                <Link
-                                  href={product.href}
-                                  key={product.slug}
-                                  className={cn(
-                                    "block rounded-xl px-4 py-2.5 text-sm font-medium text-ds-text-body hover:text-brand-accent",
-                                    cardSurfaceVariants({ variant: "bordered" })
-                                  )}
-                                >
-                                  {product.title}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <Link
-                    href={link.href}
-                    aria-current={isActive ? "page" : undefined}
-                    onClick={() => {
-                      setActiveSection(link.hash.replace("#", ""));
-                      closeMobileMenu();
-                    }}
-                    className={desktopNavLinkClassName(isActive)}
-                  >
-                    {link.label}
-                  </Link>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="hidden h-11 items-center justify-end gap-3 lg:flex">
-          <EnquiryNavButton />
-          <Button
-            asChild
-            size="lg"
-            className="h-11 rounded-full bg-brand-accent px-6 py-2.5 text-[0.75rem] font-medium uppercase tracking-[0.12em] text-white shadow-none transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
-          >
-            <Link href="/#contact" className="text-white! hover:text-white!">
-              Get Quote
-            </Link>
-          </Button>
-        </div>
-
-        <div className="flex items-center gap-2 lg:hidden">
-          <EnquiryNavButton compact />
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            onClick={() => setIsMobileMenuOpen(true)}
-            aria-label="Open navigation menu"
-            aria-expanded={isMobileMenuOpen}
-            className="relative z-10 flex size-10 shrink-0 items-center justify-center overflow-visible rounded-xl bg-[#123c24] p-0 text-white shadow-sm transition-all duration-200 hover:bg-[#0f3f24] hover:text-white active:scale-[0.96] aria-expanded:bg-[#123c24] aria-expanded:text-white [&_svg]:relative [&_svg]:z-10 [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:text-white [&_svg]:stroke-white"
-          >
-            <Menu className="size-5 text-white stroke-white stroke-[2.5]" aria-hidden="true" />
-          </Button>
-        </div>
-      </nav>
-
-      {isMobileMenuOpen ? (
-        <div
-          className="absolute top-full left-0 right-0 z-50 w-full max-h-[calc(100dvh-var(--ds-layout-navbar-h)-1rem)] overflow-y-auto overscroll-contain px-ds-page-x pt-3 pb-[calc(1rem+var(--ds-safe-area-bottom))] lg:hidden"
-        >
-          <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "w-full rounded-ds-card-lg bg-[#f8fcf8] px-5 py-5")}>
-            <div className="flex flex-col gap-3">
-            <div className="mb-1 flex items-center justify-between px-1">
-              <Link href="/#home" className={logoLinkClassName} onClick={closeMobileMenu}>
-                <Image
-                  src="/logo-white.png"
-                  alt="GDK Packaging"
-                  width={220}
-                  height={60}
-                  className={logoImageClassName}
-                />
-              </Link>
-              <button
-                type="button"
-                onClick={closeMobileMenu}
-                aria-label="Close menu"
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#123c24] shadow-sm hover:bg-[#0f3f24]"
-              >
-                <X className="h-5 w-5 text-white stroke-[2.5]" />
-              </button>
-            </div>
+          <div className="hidden items-center justify-center gap-8 lg:flex xl:gap-11">
             {navLinks.map((link) => {
               const isActive = isRouteActive(link.hash);
               const isAboutLink = link.label === "About";
@@ -552,177 +268,208 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
               return (
                 <div
                   key={link.href}
-                  className={cn(
-                    "rounded-2xl p-0.5 transition-colors duration-300",
-                    "border border-transparent bg-transparent"
-                  )}
+                  className="group relative"
+                  onMouseEnter={
+                    isAboutLink ? () => openDesktopMenu("about") : isProductsLink ? () => openDesktopMenu("products") : undefined
+                  }
+                  onMouseLeave={isAboutLink || isProductsLink ? closeDesktopMenuWithDelay : undefined}
                 >
                   {isAboutLink ? (
-                    <div>
-                      <button
-                        type="button"
-                        aria-expanded={isMobileAboutOpen}
-                        className={cn(
-                          "flex w-full items-center justify-between rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
-                          "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
-                          isActive &&
-                            "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
-                        )}
-                        onClick={() => setIsMobileAboutOpen((previous) => !previous)}
+                    <>
+                      <Link
+                        href={link.href}
+                        aria-haspopup="menu"
+                        aria-expanded={activeDesktopMenu === "about"}
+                        aria-current={isActive ? "page" : undefined}
+                        onFocus={() => openDesktopMenu("about")}
+                        onPointerDown={(event) => handleDesktopMenuTouchStart(event, "about")}
+                        onClick={() => {
+                          setActiveSection(link.hash.replace("#", ""));
+                          setActiveDesktopMenu(null);
+                          closeMobileMenu();
+                        }}
+                        className={desktopNavLinkClassName(isActive)}
                       >
-                        <span>About</span>
-                        {isMobileAboutOpen ? (
-                          <ChevronUp className="size-4" />
+                        {link.label}
+                        {activeDesktopMenu === "about" ? (
+                          <ChevronUp className="size-3.5" />
                         ) : (
-                          <ChevronDown className="size-4" />
+                          <ChevronDown className="size-3.5" />
                         )}
-                      </button>
+                      </Link>
                       <div
                         className={cn(
-                          "grid overflow-hidden px-2 transition-all duration-300",
-                          isMobileAboutOpen ? "mt-2 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                          "pointer-events-none invisible absolute top-full left-1/2 z-50 w-85 max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-3 pt-6 opacity-0 transition-all duration-200 ease-ds-out",
+                          activeDesktopMenu === "about" &&
+                          "pointer-events-auto visible translate-y-0 opacity-100"
                         )}
+                        onFocus={() => openDesktopMenu("about")}
+                        onBlur={(event) => {
+                          if (!event.currentTarget.contains(event.relatedTarget)) {
+                            closeDesktopMenuWithDelay();
+                          }
+                        }}
                       >
-                        <div className="min-h-0">
-                          <div
-                            className={cn(
-                              "space-y-1.5 rounded-xl border p-2.5",
-                              "border-[#d5ead8] bg-[#f2faf3]"
-                            )}
-                          >
-                            {aboutMegaCards.map((card) => (
-                              <Link
-                                key={card.title}
-                                href={card.href}
-                                className={cn(
-                                  "block rounded-lg px-3 py-2.5 text-xs font-medium transition-colors duration-200",
-                                  "text-[#24583a] hover:bg-white hover:text-[#0f3f24]"
-                                )}
-                                onClick={() => {
-                                  setActiveSection("about");
-                                  closeMobileMenu();
-                                }}
-                              >
-                                {card.title}
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ) : isProductsLink ? (
-                    <div>
-                      <button
-                        type="button"
-                        aria-expanded={isMobileProductsOpen}
-                        className={cn(
-                          "flex w-full items-center justify-between rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
-                          "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
-                          isActive &&
-                            "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
-                        )}
-                        onClick={() => setIsMobileProductsOpen((previous) => !previous)}
-                      >
-                        <span>Products</span>
-                        {isMobileProductsOpen ? (
-                          <ChevronUp className="size-4" />
-                        ) : (
-                          <ChevronDown className="size-4" />
-                        )}
-                      </button>
-                      <div
-                        className={cn(
-                          "grid overflow-hidden px-2 transition-all duration-300",
-                          isMobileProductsOpen
-                            ? "mt-2 grid-rows-[1fr] opacity-100"
-                            : "grid-rows-[0fr] opacity-0"
-                        )}
-                      >
-                        <div className="min-h-0">
-                          <div
-                            className={cn(
-                              "space-y-2.5 rounded-xl border p-2.5",
-                              "border-[#d5ead8] bg-[#f2faf3]"
-                            )}
-                          >
-                            {PRODUCT_MEGA_MENU_CATEGORIES.map((category) => {
-                              const isCategoryOpen = activeMobileProductKey === category.key;
-                              return (
-                                <div
-                                  key={category.key}
+                        <div
+                          className={cn(
+                            cardSurfaceVariants({
+                              variant: "elevated",
+                              padding: "sm",
+                            }),
+                            "max-h-[calc(100dvh-var(--ds-layout-navbar-h)-2rem)] overflow-y-auto overscroll-contain rounded-ds-card-lg bg-ds-surface"
+                          )}
+                        >
+                          {/* Arrow */}
+                          <div className="absolute -top-2.25 left-10 z-10 h-5 w-5 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
+
+                          {/* Single card layout */}
+                          <div className="flex flex-col">
+                            <div className="grid grid-cols-1 gap-4">
+                              {aboutMegaCards.map((card) => (
+                                <Link
+                                  key={card.title}
+                                  href={card.href}
                                   className={cn(
-                                    "rounded-lg border transition-colors duration-200",
-                                    "border-[#d5ead8] bg-white"
+                                    "flex min-h-27.5 items-center gap-4 rounded-xl",
+                                    cardSurfaceVariants({
+                                      variant: "interactive",
+                                      padding: "sm",
+                                    })
                                   )}
                                 >
-                                  <button
-                                    type="button"
-                                    className={cn(
-                                      "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-medium transition-colors duration-200",
-                                      "text-[#24583a] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
-                                      isCategoryOpen && "bg-[#edf7ee] text-[#0f3f24]"
-                                    )}
-                                    onClick={() =>
-                                      setActiveMobileProductKey((previous) =>
-                                        previous === category.key ? null : category.key
-                                      )
-                                    }
-                                  >
-                                    <span>{category.title}</span>
-                                    {isCategoryOpen ? (
-                                      <ChevronUp className="size-3.5" />
-                                    ) : (
-                                      <ChevronDown className="size-3.5" />
-                                    )}
-                                  </button>
-                                  <div
-                                    className={cn(
-                                      "grid overflow-hidden px-2 transition-all duration-300",
-                                      isCategoryOpen
-                                        ? "pb-2 grid-rows-[1fr] opacity-100"
-                                        : "grid-rows-[0fr] opacity-0"
-                                    )}
-                                  >
-                                    <div className="min-h-0 space-y-1.5">
-                                      {category.subcategories.map((product) => (
-                                        <Link
-                                          key={product.slug}
-                                          href={product.href}
-                                          className={cn(
-                                            "block rounded-md px-2.5 py-2 text-xs font-medium transition-colors duration-200",
-                                            "text-[#406f51] hover:bg-[#edf7ee] hover:text-[#0f3f24]"
-                                          )}
-                                          onClick={() => {
-                                            setActiveSection("products");
-                                            closeMobileMenu();
-                                          }}
-                                        >
-                                          {product.title}
-                                        </Link>
-                                      ))}
-                                    </div>
+                                  {/* Icon */}
+                                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-accent text-white">
+                                    <card.icon className="h-5 w-5" />
                                   </div>
-                                </div>
-                              );
-                            })}
+
+                                  {/* Text */}
+                                  <div className="flex-1">
+                                    <p className="text-sm font-medium leading-5 text-ds-text-strong">
+                                      {card.title}
+                                    </p>
+                                    <p className="mt-2 text-caption leading-6 text-ds-text-muted">
+                                      {card.description}
+                                    </p>
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </>
+                  ) : isProductsLink ? (
+                    <>
+                      <Link
+                        href={link.href}
+                        aria-haspopup="menu"
+                        aria-expanded={activeDesktopMenu === "products"}
+                        aria-current={isActive ? "page" : undefined}
+                        onFocus={() => openDesktopMenu("products")}
+                        onPointerDown={(event) => handleDesktopMenuTouchStart(event, "products")}
+                        onClick={() => {
+                          setActiveSection(link.hash.replace("#", ""));
+                          setActiveDesktopMenu(null);
+                          closeMobileMenu();
+                        }}
+                        className={desktopNavLinkClassName(isActive)}
+                      >
+                        {link.label}
+                        {activeDesktopMenu === "products" ? (
+                          <ChevronUp className="size-3.5" />
+                        ) : (
+                          <ChevronDown className="size-3.5" />
+                        )}
+                      </Link>
+                      <div
+                        className={cn(
+                          "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[min(calc(100vw-2rem),820px)] max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
+                          activeDesktopMenu === "products" &&
+                          "pointer-events-auto opacity-100 visible translate-y-0"
+                        )}
+                        onFocus={() => openDesktopMenu("products")}
+                        onBlur={(event) => {
+                          if (!event.currentTarget.contains(event.relatedTarget)) {
+                            closeDesktopMenuWithDelay();
+                          }
+                        }}
+                      >
+                        <div className={cn(cardSurfaceVariants({ variant: "elevated", padding: "lg" }), "max-h-[calc(100dvh-var(--ds-layout-navbar-h)-2rem)] overflow-y-auto overscroll-contain rounded-ds-card-lg bg-ds-surface")}>
+                          <div className="absolute -top-2.75 left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
+                          <div className="grid grid-cols-[1.05fr_1fr] gap-8">
+                            <div className="grid grid-cols-1 gap-5">
+                              {PRODUCT_MEGA_MENU_CATEGORIES.map((category) => {
+                                const isCategoryActive = activeDesktopProductKey === category.key;
+                                const CategoryIcon =
+                                  productMegaCategoryIcons[
+                                  category.key as keyof typeof productMegaCategoryIcons
+                                  ] ?? Package;
+                                return (
+                                  <button
+                                    key={category.key}
+                                    type="button"
+                                    onMouseEnter={() => setActiveDesktopProductKey(category.key)}
+                                    onFocus={() => setActiveDesktopProductKey(category.key)}
+                                    onClick={() => setActiveDesktopProductKey(category.key)}
+                                    className={cn(
+                                      "group/category flex items-start gap-4 text-left",
+                                      cardSurfaceVariants({ variant: "interactive", padding: "sm" }),
+                                      isCategoryActive
+                                        ? "border-brand-accent shadow-[0_10px_24px_color-mix(in_srgb,var(--brand-accent)_24%,transparent)]"
+                                        : "hover:border-[color-mix(in_srgb,var(--brand-accent)_70%,transparent)]"
+                                    )}
+                                  >
+                                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-accent">
+                                      <CategoryIcon className="h-6 w-6 text-brand-accent" />
+                                    </div>
+                                    <div>
+                                      <p className="text-sm leading-5 font-medium text-ds-text-strong">{category.title}</p>
+                                      <p className="mt-1.5 text-caption text-ds-text-muted">
+                                        {category.description}
+                                      </p>
+                                    </div>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                            <div className={cn("group/panel block bg-ds-surface-muted", cardSurfaceVariants({ variant: "minimal", padding: "lg" }))}>
+                              <Link href={activeDesktopProductCategory.href}>
+                                <p className="text-xs font-medium uppercase tracking-(--ds-type-eyebrow-letter-spacing) text-brand-accent">
+                                  {activeDesktopProductCategory.title}
+                                </p>
+                              </Link>
+                              <p className="mt-3 text-body-sm text-ds-text-muted">
+                                Product sub-categories crafted for performance, consistency, and scalable
+                                manufacturing.
+                              </p>
+                              <div className="mt-5 grid grid-cols-1 gap-3">
+                                {activeDesktopProductCategory.subcategories.map((product) => (
+                                  <Link
+                                    href={product.href}
+                                    key={product.slug}
+                                    className={cn(
+                                      "block rounded-xl px-4 py-2.5 text-sm font-medium text-ds-text-body hover:text-brand-accent",
+                                      cardSurfaceVariants({ variant: "bordered" })
+                                    )}
+                                  >
+                                    {product.title}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
                   ) : (
                     <Link
                       href={link.href}
                       aria-current={isActive ? "page" : undefined}
-                      className={cn(
-                        "block rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
-                        "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
-                        isActive &&
-                          "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
-                      )}
                       onClick={() => {
                         setActiveSection(link.hash.replace("#", ""));
                         closeMobileMenu();
                       }}
+                      className={desktopNavLinkClassName(isActive)}
                     >
                       {link.label}
                     </Link>
@@ -730,8 +477,248 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                 </div>
               );
             })}
-            <div className="mt-4 flex items-center gap-3">
-              {/* <button
+          </div>
+
+          <div className="hidden h-11 items-center justify-end gap-3 lg:flex">
+            <EnquiryNavButton />
+            <Button
+              asChild
+              size="lg"
+              className="h-11 rounded-full bg-brand-accent px-6 py-2.5 text-[0.75rem] font-medium uppercase tracking-[0.12em] text-white shadow-none transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
+            >
+              <Link href="/#contact" className="text-white! hover:text-white!">
+                Get Quote
+              </Link>
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-2 lg:hidden">
+            <EnquiryNavButton compact />
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open navigation menu"
+              aria-expanded={isMobileMenuOpen}
+              className="relative z-10 flex size-10 shrink-0 items-center justify-center overflow-visible rounded-xl bg-[#123c24] p-0 text-white shadow-sm transition-all duration-200 hover:bg-[#0f3f24] hover:text-white active:scale-[0.96] aria-expanded:bg-[#123c24] aria-expanded:text-white [&_svg]:relative [&_svg]:z-10 [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:text-white [&_svg]:stroke-white"
+            >
+              <Menu className="size-5 text-white stroke-white stroke-[2.5]" aria-hidden="true" />
+            </Button>
+          </div>
+        </nav>
+
+        {isMobileMenuOpen ? (
+          <div
+            className="absolute top-full left-0 right-0 z-50 w-full max-h-[calc(100dvh-var(--ds-layout-navbar-h)-1rem)] overflow-y-auto overscroll-contain px-ds-page-x pt-3 pb-[calc(1rem+var(--ds-safe-area-bottom))] lg:hidden"
+          >
+            <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "w-full rounded-ds-card-lg bg-[#f8fcf8] px-5 py-5")}>
+              <div className="flex flex-col gap-3">
+                <div className="mb-1 flex items-center justify-between px-1">
+                  <Link href="/#home" className={logoLinkClassName} onClick={closeMobileMenu}>
+                    <Image
+                      src="/logo-white.png"
+                      alt="GDK Packaging"
+                      width={220}
+                      height={60}
+                      className={logoImageClassName}
+                    />
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={closeMobileMenu}
+                    aria-label="Close menu"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#123c24] shadow-sm hover:bg-[#0f3f24]"
+                  >
+                    <X className="h-5 w-5 text-white stroke-[2.5]" />
+                  </button>
+                </div>
+                {navLinks.map((link) => {
+                  const isActive = isRouteActive(link.hash);
+                  const isAboutLink = link.label === "About";
+                  const isProductsLink = link.label === "Products";
+                  return (
+                    <div
+                      key={link.href}
+                      className={cn(
+                        "rounded-2xl p-0.5 transition-colors duration-300",
+                        "border border-transparent bg-transparent"
+                      )}
+                    >
+                      {isAboutLink ? (
+                        <div>
+                          <button
+                            type="button"
+                            aria-expanded={isMobileAboutOpen}
+                            className={cn(
+                              "flex w-full items-center justify-between rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
+                              "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
+                              isActive &&
+                              "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
+                            )}
+                            onClick={() => setIsMobileAboutOpen((previous) => !previous)}
+                          >
+                            <span>About</span>
+                            {isMobileAboutOpen ? (
+                              <ChevronUp className="size-4" />
+                            ) : (
+                              <ChevronDown className="size-4" />
+                            )}
+                          </button>
+                          <div
+                            className={cn(
+                              "grid overflow-hidden px-2 transition-all duration-300",
+                              isMobileAboutOpen ? "mt-2 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                            )}
+                          >
+                            <div className="min-h-0">
+                              <div
+                                className={cn(
+                                  "space-y-1.5 rounded-xl border p-2.5",
+                                  "border-[#d5ead8] bg-[#f2faf3]"
+                                )}
+                              >
+                                {aboutMegaCards.map((card) => (
+                                  <Link
+                                    key={card.title}
+                                    href={card.href}
+                                    className={cn(
+                                      "block rounded-lg px-3 py-2.5 text-xs font-medium transition-colors duration-200",
+                                      "text-[#24583a] hover:bg-white hover:text-[#0f3f24]"
+                                    )}
+                                    onClick={() => {
+                                      setActiveSection("about");
+                                      closeMobileMenu();
+                                    }}
+                                  >
+                                    {card.title}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : isProductsLink ? (
+                        <div>
+                          <button
+                            type="button"
+                            aria-expanded={isMobileProductsOpen}
+                            className={cn(
+                              "flex w-full items-center justify-between rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
+                              "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
+                              isActive &&
+                              "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
+                            )}
+                            onClick={() => setIsMobileProductsOpen((previous) => !previous)}
+                          >
+                            <span>Products</span>
+                            {isMobileProductsOpen ? (
+                              <ChevronUp className="size-4" />
+                            ) : (
+                              <ChevronDown className="size-4" />
+                            )}
+                          </button>
+                          <div
+                            className={cn(
+                              "grid overflow-hidden px-2 transition-all duration-300",
+                              isMobileProductsOpen
+                                ? "mt-2 grid-rows-[1fr] opacity-100"
+                                : "grid-rows-[0fr] opacity-0"
+                            )}
+                          >
+                            <div className="min-h-0">
+                              <div
+                                className={cn(
+                                  "space-y-2.5 rounded-xl border p-2.5",
+                                  "border-[#d5ead8] bg-[#f2faf3]"
+                                )}
+                              >
+                                {PRODUCT_MEGA_MENU_CATEGORIES.map((category) => {
+                                  const isCategoryOpen = activeMobileProductKey === category.key;
+                                  return (
+                                    <div
+                                      key={category.key}
+                                      className={cn(
+                                        "rounded-lg border transition-colors duration-200",
+                                        "border-[#d5ead8] bg-white"
+                                      )}
+                                    >
+                                      <button
+                                        type="button"
+                                        className={cn(
+                                          "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-medium transition-colors duration-200",
+                                          "text-[#24583a] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
+                                          isCategoryOpen && "bg-[#edf7ee] text-[#0f3f24]"
+                                        )}
+                                        onClick={() =>
+                                          setActiveMobileProductKey((previous) =>
+                                            previous === category.key ? null : category.key
+                                          )
+                                        }
+                                      >
+                                        <span>{category.title}</span>
+                                        {isCategoryOpen ? (
+                                          <ChevronUp className="size-3.5" />
+                                        ) : (
+                                          <ChevronDown className="size-3.5" />
+                                        )}
+                                      </button>
+                                      <div
+                                        className={cn(
+                                          "grid overflow-hidden px-2 transition-all duration-300",
+                                          isCategoryOpen
+                                            ? "pb-2 grid-rows-[1fr] opacity-100"
+                                            : "grid-rows-[0fr] opacity-0"
+                                        )}
+                                      >
+                                        <div className="min-h-0 space-y-1.5">
+                                          {category.subcategories.map((product) => (
+                                            <Link
+                                              key={product.slug}
+                                              href={product.href}
+                                              className={cn(
+                                                "block rounded-md px-2.5 py-2 text-xs font-medium transition-colors duration-200",
+                                                "text-[#406f51] hover:bg-[#edf7ee] hover:text-[#0f3f24]"
+                                              )}
+                                              onClick={() => {
+                                                setActiveSection("products");
+                                                closeMobileMenu();
+                                              }}
+                                            >
+                                              {product.title}
+                                            </Link>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          aria-current={isActive ? "page" : undefined}
+                          className={cn(
+                            "block rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
+                            "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
+                            isActive &&
+                            "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
+                          )}
+                          onClick={() => {
+                            setActiveSection(link.hash.replace("#", ""));
+                            closeMobileMenu();
+                          }}
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </div>
+                  );
+                })}
+                <div className="mt-4 flex items-center gap-3">
+                  {/* <button
                 type="button"
                 aria-label="Wishlist"
                 className={cn(
@@ -743,21 +730,21 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
               >
                 <Star className="size-4" />
               </button> */}
-              <Link
-                href="/#contact"
-                onClick={() => {
-                  setActiveSection("home");
-                  closeMobileMenu();
-                }}
-                className="inline-flex min-h-12.5 flex-1 items-center justify-center rounded-full bg-brand-accent px-7 py-3 text-[0.8125rem] font-medium uppercase tracking-(--ds-type-label-letter-spacing) text-white transition-colors duration-200 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
-              >
-                Get Quote
-              </Link>
+                  <Link
+                    href="/#contact"
+                    onClick={() => {
+                      setActiveSection("home");
+                      closeMobileMenu();
+                    }}
+                    className="inline-flex min-h-12.5 flex-1 items-center justify-center rounded-full bg-brand-accent px-7 py-3 text-[0.8125rem] font-medium uppercase tracking-(--ds-type-label-letter-spacing) text-white transition-colors duration-200 hover:bg-brand-accent-hover hover:text-white [&_svg]:stroke-white [&_svg]:text-white"
+                  >
+                    Get Quote
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-          </div>
-        </div>
-      ) : null}
+        ) : null}
       </header>
       <div className="h-(--ds-layout-navbar-h) shrink-0" aria-hidden="true" />
     </>

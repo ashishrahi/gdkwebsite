@@ -65,11 +65,11 @@ export function Footer() {
               <h2 className="relative z-20 text-left font-light text-white drop-shadow-[0_2px_10px_color-mix(in_srgb,white_20%,transparent)] md:text-right">
 
                 <span className="block text-[clamp(2rem,10vw,4.5rem)] leading-tight">
-                  Sustainable Packaging
+                  EXECUTIVE EXCELLENCE
                 </span>
 
                 <span className="block text-[clamp(2rem,10vw,4.5rem)] leading-tight">
-                  Solutions
+                  IN PACKAGING
                 </span>
 
               </h2>
