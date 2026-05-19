@@ -68,7 +68,9 @@ const contactSchema = z.object({
   zipCode: z.string().min(4, "Zip Code is required").max(10, "Invalid Zip Code"),
   mobile: z.string().min(10, "Mobile number must be at least 10 digits"),
   email: z.string().email("Enter valid email"),
-  product: z.string().min(1, "Please select a product"),
+  resume: z
+    .any()
+    .refine((file) => file?.length > 0, "Resume is required"),
   comments: z.string().min(5, "Comments are required"),
 });
 
@@ -99,7 +101,7 @@ export function ContactSection() {
       zipCode: "",
       mobile: "",
       email: "",
-      product: "",
+      resume: undefined,
       comments: "",
     },
   });
@@ -324,29 +326,19 @@ export function ContactSection() {
               </div>
 
               <div className="space-y-2.5">
-                <label htmlFor="contact-product" className={fieldLabelClass}>
-                  Select Product <span className="text-(--brand-red)">*</span>
+                <label htmlFor="contact-resume" className={fieldLabelClass}>
+                  Resume Upload <span className="text-(--brand-red)">*</span>
                 </label>
-                <select
-                  id="contact-product"
-                  aria-invalid={!!errors.product}
-                  className={getFieldClassName(!!errors.product, "h-[52px] cursor-pointer appearance-auto pr-10")}
-                  {...register("product")}
-                >
-                  <option value="" disabled>
-                    Select Product*
-                  </option>
-                  <option value="PET Hinged Box">PET Hinged Box</option>
-                  <option value="PET Container">PET Container</option>
-                  <option value="PET Sauce Container">PET Sauce Container</option>
-                  <option value="PP Sweet Box">PP Sweet Box</option>
-                  <option value="PP Meal Box">PP Meal Box</option>
-                  <option value="PP Container">PP Container</option>
-                  <option value="PP Cookies Tray">PP Cookies Tray</option>
-                  <option value="Printed Products">Printed Products</option>
-                </select>
-                {errors.product?.message ? (
-                  <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.product.message}</p>
+                <input
+                  id="contact-resume"
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  aria-invalid={!!errors.resume}
+                  className={getFieldClassName(!!errors.resume, "h-[52px]")}
+                  {...register("resume")}
+                />
+                {errors.resume?.message ? (
+                  <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.resume.message}</p>
                 ) : null}
               </div>
 
