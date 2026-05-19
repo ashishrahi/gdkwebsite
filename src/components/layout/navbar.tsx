@@ -21,6 +21,7 @@ const navLinks = [
   { href: "/#about", hash: "#about", label: "About" },
   { href: "/#products", hash: "#products", label: "Products" },
   { href: "/#industries", hash: "#industries", label: "Industries" },
+  { href: "/career", hash: "#career", label: "Career" },
   { href: "/#why-choose-us", hash: "#why-choose-us", label: "Why Us" },
 ];
 
@@ -144,6 +145,10 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
 
     if (pathname.startsWith("/about")) {
       return hash === "#about";
+    }
+
+    if (pathname.startsWith("/career")) {
+      return hash === "#career";
     }
 
     if (pathname !== "/") {

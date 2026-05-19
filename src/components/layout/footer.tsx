@@ -27,10 +27,10 @@ export function Footer() {
               className="h-10 w-auto object-contain"
             />
           </Link>
-          <p className="max-w-[56ch] text-body-sm font-medium text-ds-text-muted sm:text-body">
-            From Concept to Solution.{" "}
-            <span className="text-(--primary)">With Sustainability Built In.</span>
-          </p>
+           <p className="max-w-[56ch] text-body-sm font-medium text-white/72 sm:text-body">
+                From Concept to Solution.{" "}
+                <span className="text-(--brand-orange-500)">With Sustainability Built In.</span>
+              </p>
         </div>
       </div>
 
