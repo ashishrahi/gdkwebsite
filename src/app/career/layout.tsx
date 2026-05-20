@@ -9,9 +9,9 @@ const careerBreadcrumbCrumbs = [
 
 export default function CareerLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="ds-page-shell flex flex-col gap-10 lg:gap-12">
-      <GlobalBreadcrumb crumbs={[...careerBreadcrumbCrumbs]} contained={false} />
+    <>
+      <GlobalBreadcrumb crumbs={[...careerBreadcrumbCrumbs]} />
       {children}
-    </div>
+    </>
   );
 }

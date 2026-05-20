@@ -18,12 +18,21 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+const BUSINESS_ADDRESS =
+  "J-18,19, Panki Site 3, Industrial Estate, Uttar Pradesh 208022";
+const MAPS_QUERY = encodeURIComponent(BUSINESS_ADDRESS);
+
 type ContactRow =
   | {
       title: string;
       value: string;
       href: string;
       icon: LucideIcon | typeof FaWhatsapp;
+    }
+  | {
+      title: "Email";
+      emailLines: { href: string; text: string }[];
+      icon: typeof Mail;
     }
   | {
       title: "Phone";
@@ -34,29 +43,30 @@ type ContactRow =
 const contactRows: ContactRow[] = [
   {
     title: "Email",
-    value: "sales@gdk.co.in",
-    href: "mailto:sales@gdk.co.in",
+    emailLines: [
+      { href: "mailto:kbropes@gdk.co.in", text: "kbropes@gdk.co.in" },
+      { href: "mailto:info@gdk.co.in", text: "info@gdk.co.in" },
+    ],
     icon: Mail,
   },
   {
     title: "Phone",
     phoneLines: [
-      { href: "tel:+919889471453", text: "+91 98894 71453 (CRM)" },
-      { href: "tel:+919889471454", text: "+91 98894 71454 (Sales Executive)" },
-      { href: "tel:+919889471452", text: "+91 98894 71452 (Senior Sales Executive)" },
+      { href: "tel:+919889271007", text: "+91 98892 71007" },
+      { href: "tel:+919889982333", text: "+91 98899 82333" },
     ],
     icon: Phone,
   },
   {
     title: "Address",
-    value: "26/59 Birhana Road, Kanpur - 208001",
-    href: "https://maps.google.com/?q=26/59%20Birhana%20Road,%20Kanpur%20-%20208001",
+    value: BUSINESS_ADDRESS,
+    href: `https://maps.google.com/?q=${MAPS_QUERY}`,
     icon: MapPin,
   },
   {
     title: "WhatsApp",
-    value: "+91 98894 71453 (CRM)",
-    href: "https://wa.me/919889471453",
+    value: "+91 98892 71007",
+    href: "https://wa.me/919889271007",
     icon: FaWhatsapp,
   },
 ];
@@ -68,9 +78,7 @@ const contactSchema = z.object({
   zipCode: z.string().min(4, "Zip Code is required").max(10, "Invalid Zip Code"),
   mobile: z.string().min(10, "Mobile number must be at least 10 digits"),
   email: z.string().email("Enter valid email"),
-  resume: z
-    .any()
-    .refine((file) => file?.length > 0, "Resume is required"),
+  product: z.string().min(1, "Please select a product"),
   comments: z.string().min(5, "Comments are required"),
 });
 
@@ -101,7 +109,7 @@ export function ContactSection() {
       zipCode: "",
       mobile: "",
       email: "",
-      resume: undefined,
+      product: "",
       comments: "",
     },
   });
@@ -149,7 +157,8 @@ export function ContactSection() {
               {contactRows.map((item) => {
                 const Icon = item.icon;
 
-                if ("phoneLines" in item) {
+                if ("phoneLines" in item || "emailLines" in item) {
+                  const lines = "phoneLines" in item ? item.phoneLines : item.emailLines;
                   return (
                     <div
                       key={item.title}
@@ -165,7 +174,7 @@ export function ContactSection() {
                         <span className={contactCardTitleClass}>
                           {item.title}
                         </span>
-                        {item.phoneLines.map((line) => (
+                        {lines.map((line) => (
                           <a
                             key={line.href}
                             href={line.href}
@@ -210,7 +219,7 @@ export function ContactSection() {
             <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "rounded-ds-card-lg bg-white")}>
               <iframe
                 title="GDK Packaging location map"
-                src="https://www.google.com/maps?q=26/59%20Birhana%20Road,%20Kanpur%20-%20208001&output=embed"
+                src={`https://www.google.com/maps?q=${MAPS_QUERY}&output=embed`}
                 className="h-64 w-full border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -326,19 +335,29 @@ export function ContactSection() {
               </div>
 
               <div className="space-y-2.5">
-                <label htmlFor="contact-resume" className={fieldLabelClass}>
-                  Resume Upload <span className="text-(--brand-red)">*</span>
+                <label htmlFor="contact-product" className={fieldLabelClass}>
+                  Select Product <span className="text-(--brand-red)">*</span>
                 </label>
-                <input
-                  id="contact-resume"
-                  type="file"
-                  accept=".pdf,.doc,.docx"
-                  aria-invalid={!!errors.resume}
-                  className={getFieldClassName(!!errors.resume, "h-[52px]")}
-                  {...register("resume")}
-                />
-                {errors.resume?.message ? (
-                  <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.resume.message}</p>
+                <select
+                  id="contact-product"
+                  aria-invalid={!!errors.product}
+                  className={getFieldClassName(!!errors.product, "h-[52px] cursor-pointer appearance-auto pr-10")}
+                  {...register("product")}
+                >
+                  <option value="" disabled>
+                    Select Product*
+                  </option>
+                  <option value="PET Hinged Box">PET Hinged Box</option>
+                  <option value="PET Container">PET Container</option>
+                  <option value="PET Sauce Container">PET Sauce Container</option>
+                  <option value="PP Sweet Box">PP Sweet Box</option>
+                  <option value="PP Meal Box">PP Meal Box</option>
+                  <option value="PP Container">PP Container</option>
+                  <option value="PP Cookies Tray">PP Cookies Tray</option>
+                  <option value="Printed Products">Printed Products</option>
+                </select>
+                {errors.product?.message ? (
+                  <p className="mt-1 text-sm text-(--brand-red) font-medium">{errors.product.message}</p>
                 ) : null}
               </div>
 

@@ -25,17 +25,35 @@ const navLinks = [
   { href: "/#why-choose-us", hash: "#why-choose-us", label: "Why Us" },
 ];
 
+const homeSectionIds = new Set(
+  navLinks.filter((link) => link.href.startsWith("/#")).map((link) => link.hash.replace("#", ""))
+);
 
+
+
+const aboutAtAGlance = {
+  heading: "GDK At A Glance",
+  subtext: "Create premium animated counters.",
+  bullets: [
+    "30+ Years of Manufacturing Excellence",
+    "100+ Packaging SKUs",
+    "Trusted by Leading FMCG & Dairy Brands",
+    "In-house Tool Room & R&D Center",
+    "Advanced European Printing Technology",
+    "PET, HIPS & PP Extrusion Capabilities",
+    "Corporate Supply Network Across India",
+    "Rapid Product Development & Sampling",
+  ],
+} as const;
 
 const aboutMegaCards = [
   {
     href: "/about",
     title: "GDK Solution",
-    description: "From Concept to Solution. With Sustainability Built In",
+    description: "Discover our complete packaging capabilities and engineered product line.",
     icon: Sparkles,
   },
-
-];
+] as const;
 
 const productMegaCategoryIcons = {
   "esd-trays": Package,
@@ -64,15 +82,45 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const sectionIds = navLinks.map((link) => link.hash.replace("#", ""));
-    const visibleRatios = new Map<string, number>();
-
-    const updateFromHash = () => {
-      const next = (window.location.hash || "#home").replace("#", "");
-      if (sectionIds.includes(next)) {
-        setActiveSection(next);
+    const syncActiveSectionFromRoute = () => {
+      if (pathname.startsWith("/products")) {
+        setActiveSection("products");
+        return;
       }
+
+      if (pathname.startsWith("/about")) {
+        setActiveSection("about");
+        return;
+      }
+
+      if (pathname.startsWith("/career")) {
+        setActiveSection("career");
+        return;
+      }
+
+      if (pathname !== "/") {
+        return;
+      }
+
+      const next = (window.location.hash || "#home").replace("#", "");
+      setActiveSection(homeSectionIds.has(next) ? next : "home");
     };
+
+    syncActiveSectionFromRoute();
+    window.addEventListener("hashchange", syncActiveSectionFromRoute);
+
+    return () => {
+      window.removeEventListener("hashchange", syncActiveSectionFromRoute);
+    };
+  }, [pathname]);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      return;
+    }
+
+    const homeSectionIdList = [...homeSectionIds];
+    const visibleRatios = new Map<string, number>();
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -89,7 +137,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
         let nextSection = "home";
         let bestRatio = 0;
 
-        for (const id of sectionIds) {
+        for (const id of homeSectionIdList) {
           const ratio = visibleRatios.get(id) ?? 0;
           if (ratio > bestRatio) {
             bestRatio = ratio;
@@ -106,21 +154,17 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
       }
     );
 
-    for (const id of sectionIds) {
+    for (const id of homeSectionIdList) {
       const section = document.getElementById(id);
       if (section) {
         observer.observe(section);
       }
     }
 
-    updateFromHash();
-    window.addEventListener("hashchange", updateFromHash);
-
     return () => {
-      window.removeEventListener("hashchange", updateFromHash);
       observer.disconnect();
     };
-  }, []);
+  }, [pathname]);
 
   const isRouteActive = (hash: string) => {
     if (pathname.startsWith("/products")) {
@@ -139,6 +183,10 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
       return false;
     }
 
+    if (hash === "#career") {
+      return false;
+    }
+
     return activeSection === hash.replace("#", "");
   };
 
@@ -147,6 +195,11 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
     setIsMobileAboutOpen(false);
     setIsMobileProductsOpen(false);
     setActiveMobileProductKey(null);
+  };
+
+  const handleLogoClick = () => {
+    setActiveSection("home");
+    closeMobileMenu();
   };
 
   const clearDesktopMenuCloseTimeout = () => {
@@ -238,7 +291,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
       >
         <nav className="mx-auto flex h-(--ds-layout-navbar-h) w-full max-w-352 items-center justify-between px-0 lg:grid lg:grid-cols-[1fr_auto_1fr]">
           <div className="hidden items-center justify-start lg:flex">
-            <Link href="/#home" className={logoLinkClassName} onClick={closeMobileMenu}>
+            <Link href="/#home" className={logoLinkClassName} onClick={handleLogoClick}>
               <Image
                 src="/logo-white.png"
                 alt="GDK Packaging"
@@ -249,7 +302,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
               />
             </Link>
           </div>
-          <Link href="/#home" className={cn(logoLinkClassName, "justify-start lg:hidden")} onClick={closeMobileMenu}>
+          <Link href="/#home" className={cn(logoLinkClassName, "justify-start lg:hidden")} onClick={handleLogoClick}>
             <Image
               src="/logo-white.png"
               alt="GDK Packaging"
@@ -299,9 +352,9 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                       </Link>
                       <div
                         className={cn(
-                          "pointer-events-none invisible absolute top-full left-1/2 z-50 w-85 max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-3 pt-6 opacity-0 transition-all duration-200 ease-ds-out",
+                          "pointer-events-none invisible absolute top-full left-1/2 z-50 w-[min(calc(100vw-2rem),440px)] max-w-[calc(100vw-2rem)] -translate-x-1/2 translate-y-2 pt-8 opacity-0 transition-all duration-200 ease-ds-out",
                           activeDesktopMenu === "about" &&
-                          "pointer-events-auto visible translate-y-0 opacity-100"
+                            "pointer-events-auto visible translate-y-0 opacity-100"
                         )}
                         onFocus={() => openDesktopMenu("about")}
                         onBlur={(event) => {
@@ -314,45 +367,68 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                           className={cn(
                             cardSurfaceVariants({
                               variant: "elevated",
-                              padding: "sm",
+                              padding: "none",
                             }),
-                            "max-h-[calc(100dvh-var(--ds-layout-navbar-h)-2rem)] overflow-y-auto overscroll-contain rounded-ds-card-lg bg-ds-surface"
+                            "max-h-[calc(100dvh-var(--ds-layout-navbar-h)-2rem)] overflow-y-auto overscroll-contain rounded-ds-card-lg bg-ds-surface p-3.5 shadow-ds-card-medium sm:p-4"
                           )}
                         >
-                          {/* Arrow */}
-                          <div className="absolute -top-2.25 left-10 z-10 h-5 w-5 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
-
-                          {/* Single card layout */}
-                          <div className="flex flex-col">
-                            <div className="grid grid-cols-1 gap-4">
-                              {aboutMegaCards.map((card) => (
-                                <Link
-                                  key={card.title}
-                                  href={card.href}
-                                  className={cn(
-                                    "flex min-h-27.5 items-center gap-4 rounded-xl",
-                                    cardSurfaceVariants({
-                                      variant: "interactive",
-                                      padding: "sm",
-                                    })
-                                  )}
-                                >
-                                  {/* Icon */}
-                                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-accent text-white">
-                                    <card.icon className="h-5 w-5" />
-                                  </div>
-
-                                  {/* Text */}
-                                  <div className="flex-1">
-                                    <p className="text-sm font-medium leading-5 text-ds-text-strong">
-                                      {card.title}
-                                    </p>
-                                    <p className="mt-2 text-caption leading-6 text-ds-text-muted">
-                                      {card.description}
-                                    </p>
-                                  </div>
-                                </Link>
-                              ))}
+                          <div className="absolute top-[-11px] left-1/2 z-10 h-5 w-5 -translate-x-1/2 rotate-45 border-t border-l border-ds-border-subtle bg-ds-surface shadow-ds-card-subtle" />
+                          <div className="flex min-w-0 flex-col gap-3.5">
+                            {aboutMegaCards.map((card) => (
+                              <Link
+                                key={card.title}
+                                href={card.href}
+                                className={cn(
+                                  "flex items-center gap-3",
+                                  cardSurfaceVariants({
+                                    variant: "interactive",
+                                    padding: "none",
+                                  }),
+                                  "px-3.5 py-3 transition-[border-color,box-shadow] duration-200 ease-ds-out"
+                                )}
+                              >
+                                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-brand-accent text-white">
+                                  <card.icon className="size-4" aria-hidden />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <p className="text-sm font-medium leading-snug text-ds-text-strong">
+                                    {card.title}
+                                  </p>
+                                  <p className="mt-0.5 text-caption leading-relaxed text-ds-text-muted">
+                                    {card.description}
+                                  </p>
+                                </div>
+                              </Link>
+                            ))}
+                            <div
+                              className={cn(
+                                cardSurfaceVariants({
+                                  variant: "minimal",
+                                  padding: "none",
+                                }),
+                                "flex flex-col bg-ds-surface-muted p-3.5 sm:p-4"
+                              )}
+                            >
+                              <p className="text-sm font-semibold leading-tight tracking-[-0.01em] text-ds-text-strong">
+                                {aboutAtAGlance.heading}
+                              </p>
+                              <p className="mt-1.5 text-body-sm leading-relaxed text-ds-text-muted">
+                                {aboutAtAGlance.subtext}
+                              </p>
+                              <ul className="mt-3 space-y-2">
+                                {aboutAtAGlance.bullets.map((item) => (
+                                  <li
+                                    key={item}
+                                    className="flex gap-2.5 text-sm font-medium leading-normal text-ds-text-strong"
+                                  >
+                                    <span
+                                      className="mt-[0.4em] h-1 w-1 shrink-0 rounded-full bg-ds-text-strong"
+                                      aria-hidden
+                                    />
+                                    <span className="min-w-0 flex-1">{item}</span>
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
                           </div>
                         </div>
@@ -514,7 +590,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
             <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "w-full rounded-ds-card-lg bg-[#f8fcf8] px-5 py-5")}>
               <div className="flex flex-col gap-3">
                 <div className="mb-1 flex items-center justify-between px-1">
-                  <Link href="/#home" className={logoLinkClassName} onClick={closeMobileMenu}>
+                  <Link href="/#home" className={logoLinkClassName} onClick={handleLogoClick}>
                     <Image
                       src="/logo-white.png"
                       alt="GDK Packaging"

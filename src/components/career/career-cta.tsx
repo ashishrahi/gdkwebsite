@@ -1,43 +1,26 @@
-import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
-import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
+import { CareerApplyButton } from "@/components/career/career-apply-button";
+import { HomeSection, SectionHeader } from "@/components/home/home-card-system";
 import { cn } from "@/lib/utils";
-import { SectionHeader } from "@/components/home/home-card-system";
+
+const primaryCtaClassName =
+  "inline-flex min-h-12.5 shrink-0 items-center justify-center rounded-full bg-brand-accent px-8 py-3 text-[0.8125rem] font-medium uppercase tracking-(--ds-type-label-letter-spacing) text-white no-underline shadow-(--ds-shadow-button-primary) transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-accent-hover hover:text-white";
 
 export function CareerCTA() {
   return (
-    <section aria-labelledby="career-cta-title">
-      <div
-        className={cn(
-          cardSurfaceVariants({
-            variant: "gradient",
-            padding: "xl",
-          }),
-          "rounded-ds-card-lg p-6 sm:p-8 lg:p-10"
-        )}
-      >
-        <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-          {/* Stronger readable text */}
-          <div className="max-w-3xl">
-            <SectionHeader
-              eyebrow="Ready to apply?"
-              title="Take the next step with GDK Packaging."
-              description="Send us a message with your resume and a short summary of the role you are targeting. We will respond with the next step within two business days."
-              titleLevel="h3"
-              align="left"
-            />
-          </div>
+    <HomeSection id="career-cta" tone="gradient" className="mb-0!">
+      <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-10">
+        <SectionHeader
+          eyebrow="Ready to apply?"
+          title="Take the next step with GDK Packaging."
+          description="Send us a message with your resume and a short summary of the role you are targeting. We will respond with the next step within two business days."
+          tone="gradient"
+          align="left"
+        />
 
-          <Button
-            asChild
-            size="lg"
-            className="bg-brand-accent text-white shadow-none"
-          >
-            <Link href="/#contact">Send your interest</Link>
-          </Button>
-        </div>
+        <CareerApplyButton className={cn(primaryCtaClassName, "w-full lg:w-auto")}>
+          Send your interest
+        </CareerApplyButton>
       </div>
-    </section>
+    </HomeSection>
   );
 }

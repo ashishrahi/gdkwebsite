@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
-const WHATSAPP_NUMBER = "919889471453";
+const WHATSAPP_NUMBER = "919889271007";
 const SCROLL_THRESHOLD = 250;
 
 export function FloatingActions() {

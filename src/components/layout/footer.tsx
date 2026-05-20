@@ -1,14 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp, FaYoutube } from "react-icons/fa";
-
-const socialLinks = [
-  { href: "https://www.facebook.com", label: "Facebook", icon: FaFacebookF },
-  { href: "https://www.instagram.com", label: "Instagram", icon: FaInstagram },
-  { href: "https://www.linkedin.com", label: "LinkedIn", icon: FaLinkedinIn },
-  { href: "https://www.youtube.com", label: "YouTube", icon: FaYoutube },
-  { href: "https://wa.me/919889471453", label: "WhatsApp", icon: FaWhatsapp },
-];
 
 export function Footer() {
   return (
@@ -79,14 +70,11 @@ export function Footer() {
           {/* BOTTOM */}
           <div className="mt-12 flex flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 md:flex-row md:items-center">
 
-            {/* SOCIAL */}
-            <div className="flex flex-wrap items-center gap-5 sm:gap-6">
-              {socialLinks.map(({ href, label, icon: Icon }) => (
-                <a key={label} href={href} target="_blank" rel="noreferrer">
-                  <Icon className="size-5 text-white/90 transition hover:scale-110 hover:text-(--brand-orange-500)" />
-                </a>
-              ))}
-            </div>
+            {/* SOCIAL — links hidden; spacing preserved */}
+            <div
+              className="flex min-h-5 flex-wrap items-center gap-5 sm:gap-6"
+              aria-hidden="true"
+            />
 
             {/* COPYRIGHT */}
             <div className="text-sm text-white/80">

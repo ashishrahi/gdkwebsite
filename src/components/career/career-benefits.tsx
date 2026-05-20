@@ -1,7 +1,13 @@
 import { Check } from "lucide-react";
 
-import { SectionHeader } from "@/components/home/home-card-system";
-import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
+import {
+  HomeSection,
+  SectionHeader,
+  homeContentSpacingClassName,
+  homeGridClassName,
+  premiumCardClassName,
+} from "@/components/home/home-card-system";
+import { cardIconClassNames } from "@/design-system/shadcn/card.variants";
 import { cn } from "@/lib/utils";
 
 const benefits = [
@@ -14,50 +20,42 @@ const benefits = [
 
 export function CareerBenefits() {
   return (
-    <section
-      className="ds-section"
-      aria-labelledby="career-benefits-title"
-    >
-      <div className="space-y-10">
-        {/* Center aligned header */}
-        <SectionHeader
-          eyebrow="Benefits"
-          title="Benefits built for long-term manufacturing careers."
-          description="We support our people with training, stability, and a culture that values quality and continuous improvement."
-          titleLevel="h3"
-          align="center"
-        />
+    <HomeSection id="benefits">
+      <SectionHeader
+        eyebrow="Benefits"
+        title="Benefits built for long-term manufacturing careers."
+        description="We support our people with training, stability, and a culture that values quality and continuous improvement."
+      />
 
-        {/* Center aligned grid */}
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 sm:grid-cols-2">
-            {benefits.map((benefit) => (
-              <div
-                key={benefit}
-                className={cn(
-                  cardSurfaceVariants({
-                    variant: "minimal",
-                    padding: "lg",
-                  }),
-                  "h-full rounded-ds-card-lg"
-                )}
-              >
-                <div className="flex items-start gap-5">
-                  {/* Icon */}
-                  <span className="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-accent/10 text-brand-accent">
-                    <Check className="size-4" aria-hidden="true" />
-                  </span>
-
-                  {/* Text */}
-                  <p className="text-body leading-7 text-ds-text-body">
-                    {benefit}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div
+        className={cn(
+          homeGridClassName,
+          homeContentSpacingClassName,
+          "sm:grid-cols-2 lg:grid-cols-2"
+        )}
+      >
+        {benefits.map((benefit) => (
+          <article
+            key={benefit}
+            className={cn(
+              premiumCardClassName,
+              "flex min-h-24 flex-row items-center gap-4 p-6 sm:p-8"
+            )}
+          >
+            <span
+              className={cn(
+                cardIconClassNames.brand,
+                "h-10 w-10 shrink-0 border border-ds-border-subtle"
+              )}
+            >
+              <Check className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <p className="m-0 min-w-0 text-sm font-medium leading-snug text-ds-text-strong">
+              {benefit}
+            </p>
+          </article>
+        ))}
       </div>
-    </section>
+    </HomeSection>
   );
 }

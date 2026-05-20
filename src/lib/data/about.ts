@@ -122,7 +122,7 @@ export const aboutData = {
       "+91 98892 71007",
       "+91 98899 82333",
     ],
-    salesNumber: "+91 XXXXX XXXXX",
+    salesNumber: "+91 98892 71007",
     emails: [
       "kbropes@gdk.co.in",
       "info@gdk.co.in",

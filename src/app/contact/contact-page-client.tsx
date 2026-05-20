@@ -41,6 +41,10 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
+const BUSINESS_ADDRESS =
+  "J-18,19, Panki Site 3, Industrial Estate, Uttar Pradesh 208022";
+const MAPS_QUERY = encodeURIComponent(BUSINESS_ADDRESS);
+
 const contactFieldBase = cn(
   "w-full rounded-xl border border-input bg-white px-4 text-base text-ds-text-strong shadow-sm",
   "placeholder:text-ds-text-subtle md:px-5 md:text-sm",
@@ -200,12 +204,20 @@ export default function ContactPageClient({
                 </span>
                 <div className="flex min-w-0 flex-col gap-1.5">
                   <p className="text-base font-semibold text-ds-text-muted">Email</p>
-                  <a
-                    href="mailto:sales@gdkpackaging.com"
-                    className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
-                  >
-                      sales@gdk.co.in
-                  </a>
+                  <div className="flex flex-col gap-1.5">
+                    <a
+                      href="mailto:kbropes@gdk.co.in"
+                      className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
+                    >
+                      kbropes@gdk.co.in
+                    </a>
+                    <a
+                      href="mailto:info@gdk.co.in"
+                      className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
+                    >
+                      info@gdk.co.in
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -217,22 +229,16 @@ export default function ContactPageClient({
                   <p className="text-base font-semibold text-ds-text-muted">Phone</p>
                   <div className="flex flex-col gap-1.5">
                     <a
-                      href="tel:+919889471453"
+                      href="tel:+919889271007"
                       className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
                     >
-                      +91 98894 71453 (CRM)
+                      +91 98892 71007
                     </a>
                     <a
-                      href="tel:+919889471454"
+                      href="tel:+919889982333"
                       className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
                     >
-                      +91 98894 71454 (Sales Executive)
-                    </a>
-                    <a
-                      href="tel:+919889471452"
-                      className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
-                    >
-                      +91 98894 71452 (Senior Sales Executive)
+                      +91 98899 82333
                     </a>
                   </div>
                 </div>
@@ -244,13 +250,16 @@ export default function ContactPageClient({
                 </span>
                 <div className="flex min-w-0 flex-col gap-1.5">
                   <p className="text-base font-semibold text-ds-text-muted">Address</p>
-                  <p className="text-sm leading-6 text-ds-text-strong sm:text-base">
+                  <a
+                    href={`https://maps.google.com/?q=${MAPS_QUERY}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
+                  >
                     GDK Packaging Pvt. Ltd.
                     <br />
-                    26/59 Birhana Road
-                    <br />
-                    Kanpur - 208001
-                  </p>
+                    {BUSINESS_ADDRESS}
+                  </a>
                 </div>
               </div>
 
@@ -261,12 +270,12 @@ export default function ContactPageClient({
                 <div className="flex min-w-0 flex-col gap-1.5">
                   <p className="text-base font-semibold text-ds-text-muted">WhatsApp</p>
                   <a
-                    href="https://wa.me/919889471453"
+                    href="https://wa.me/919889271007"
                     target="_blank"
                     rel="noreferrer"
                     className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
                   >
-                    +91 98894 71453 (CRM)
+                    +91 98892 71007
                   </a>
                 </div>
               </div>
@@ -274,7 +283,7 @@ export default function ContactPageClient({
 
             <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "rounded-ds-card-lg")}>
               <iframe
-                src="https://www.google.com/maps?q=26/59%20Birhana%20Road%20Kanpur%20208001&output=embed"
+                src={`https://www.google.com/maps?q=${MAPS_QUERY}&output=embed`}
                 className="h-64 w-full border-0 sm:h-72"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -335,7 +344,7 @@ export default function ContactPageClient({
                 </label>
                 <Input
                   id="contact-phone"
-                  placeholder="+91 98894 71453"
+                  placeholder="+91 98892 71007"
                   className={contactInputClassName}
                   aria-invalid={Boolean(errors.phone)}
                   {...register("phone")}
