@@ -41,13 +41,7 @@ const homeProducts = [
     image:
       "https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=1600&q=80",
   },
-  {
-    name: "Laminated Packaging",
-    description: "Multi-layer laminated formats for superior barrier protection needs.",
-    icon: Package,
-    image:
-      "https://images.unsplash.com/photo-1635865165118-917ed9e20936?auto=format&fit=crop&w=1600&q=80",
-  },
+ 
   {
     name: "Dairy & Yogurt Containers",
     description: "Precision-molded dairy containers for clean filling and shelf appeal.",

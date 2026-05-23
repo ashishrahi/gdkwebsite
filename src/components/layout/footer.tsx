@@ -10,7 +10,7 @@ export function Footer() {
         <div className="mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-4 px-ds-page-x py-5 sm:flex-row sm:items-center lg:gap-8">
           <Link href="/" className="inline-flex items-center">
             <Image
-              src="/logo-white.png"
+              src="/GDK_LOGO.jpg"
               alt="GDK Packaging"
               width={190}
               height={52}
@@ -38,13 +38,17 @@ export function Footer() {
 
             {/* LOGO */}
             <div className="flex flex-col gap-4">
-              <Image
-                src="/logo-white1.png"
-                alt="GDK Packaging"
-                width={250}
-                height={170}
-                className="h-auto w-45 object-contain sm:w-55 md:w-62.5"
-              />
+              <div className="inline-flex w-fit overflow-hidden rounded-ds-card border border-ds-border-subtle bg-white shadow-ds-card-subtle">
+                <div className="overflow-hidden rounded-ds-card [&_img]:block [&_img]:rounded-ds-card [&_img]:object-contain [&_span]:block [&_span]:overflow-hidden [&_span]:rounded-ds-card">
+                  <Image
+                    src="/GDK_LOGO.jpg"   
+                    alt="GDK Packaging"
+                    width={250}
+                    height={170}
+                    className="h-auto w-45 sm:w-55 md:w-62.5"
+                  />
+                </div>
+              </div>
               <p className="max-w-[56ch] text-body-sm font-medium text-white/72 sm:text-body">
                 From Concept to Solution.{" "}
                 <span className="text-(--brand-orange-500)">With Sustainability Built In.</span>

@@ -10,6 +10,7 @@ import {
   getProductRouteBySlug,
   NAVIGATION_CATEGORIES,
 } from "@/lib/catalog";
+import { ProductDimensionCatalog } from "@/components/products/ProductDimensionCatalog";
 import { getProductsBySlugs } from "@/lib/products-data";
 
 type ProductDetailsPageProps = {
@@ -74,6 +75,10 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
           </div>
         </div>
       </section>
+
+      {categoryItem.key === "thermoforming" ? (
+        <ProductDimensionCatalog />
+      ) : null}
 
       <section className="space-y-7 lg:space-y-8">
         <h2 className="text-h3 text-ds-text-strong">Subcategories</h2>

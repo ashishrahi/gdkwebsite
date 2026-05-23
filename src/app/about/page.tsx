@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 import { CertificationsGrid } from "@/components/about/CertificationsGrid";
+import { ProductDimensionCatalog } from "@/components/products/ProductDimensionCatalog";
 import {
   Card,
   CardContent,
@@ -156,7 +157,7 @@ export default function AboutPage() {
             <p className="ds-eyebrow">Group Capability</p>
             <div className="flex flex-col gap-7 lg:gap-8">
               <h2 className="text-h3 text-ds-text-strong">
-                K.B. Ropes Pvt Ltd
+              GDK Solutions
               </h2>
               <p className="text-body-lg text-ds-text-body">
                 {heroSubtitle}
@@ -189,6 +190,7 @@ export default function AboutPage() {
             </article>
           </div>
         </motion.div>
+       
       </section>
 
       <section

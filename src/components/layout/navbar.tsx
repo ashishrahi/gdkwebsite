@@ -269,13 +269,13 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
     getMegaMenuCategoryByKey(DEFAULT_PRODUCT_MEGA_MENU_CATEGORY_KEY) ??
     PRODUCT_MEGA_MENU_CATEGORIES[0];
   const logoLinkClassName = "flex items-center";
-  const logoImageClassName = "h-8 w-auto object-contain sm:h-9";
+  const logoImageClassName = "h-10 w-auto object-contain sm:h-12";
   const desktopNavLinkClassName = (isActive: boolean) =>
     cn(
-      "relative inline-flex items-center gap-1 py-2 text-[0.75rem] font-medium uppercase tracking-[0.12em] text-[#24583a] transition-colors duration-200",
-      "after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[#0f3f24] after:transition-transform after:duration-200",
-      "hover:text-[#0f3f24] hover:after:scale-x-100",
-      isActive && "text-[#0f3f24] after:scale-x-100"
+      "relative inline-flex items-center gap-1 py-2 text-[0.75rem] font-medium uppercase tracking-[0.12em] text-ds-text-muted transition-colors duration-200",
+      "after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-brand-accent after:transition-transform after:duration-200",
+      "hover:text-brand-accent hover:after:scale-x-100",
+      isActive && "text-brand-accent after:scale-x-100"
     );
 
   return (
@@ -283,17 +283,17 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
       <header
         ref={headerRef}
         className={cn(
-          "fixed inset-x-0 top-0 isolate z-50 w-full shrink-0 border-b bg-[#f2faf3]/94 px-ds-page-x shadow-none backdrop-blur-md transition-[background-color,border-color] duration-300",
+          "fixed inset-x-0 top-0 isolate z-50 w-full shrink-0 border-b bg-white/94 px-ds-page-x shadow-none backdrop-blur-md transition-[background-color,border-color] duration-300",
           homeVariant
             ? "border-black/5"
-            : "border-[#d5ead8]/70"
+            : "border-ds-border-subtle"
         )}
       >
         <nav className="mx-auto flex h-(--ds-layout-navbar-h) w-full max-w-352 items-center justify-between px-0 lg:grid lg:grid-cols-[1fr_auto_1fr]">
           <div className="hidden items-center justify-start lg:flex">
             <Link href="/#home" className={logoLinkClassName} onClick={handleLogoClick}>
               <Image
-                src="/logo-white.png"
+                src="/GDK_LOGO.jpg"
                 alt="GDK Packaging"
                 width={220}
                 height={60}
@@ -304,7 +304,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           </div>
           <Link href="/#home" className={cn(logoLinkClassName, "justify-start lg:hidden")} onClick={handleLogoClick}>
             <Image
-              src="/logo-white.png"
+              src="/GDK_LOGO.jpg"
               alt="GDK Packaging"
               width={220}
               height={60}
@@ -556,7 +556,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           </div>
 
           <div className="hidden h-11 items-center justify-end gap-3 lg:flex">
-            <EnquiryNavButton />
+            <EnquiryNavButton className="text-brand-charcoal [&>span]:ring-white" />
             <Button
               asChild
               size="lg"
@@ -569,14 +569,14 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">
-            <EnquiryNavButton compact />
+            <EnquiryNavButton compact className="text-brand-charcoal [&>span]:ring-white" />
             <Button
               variant="ghost"
               size="icon-sm"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open navigation menu"
               aria-expanded={isMobileMenuOpen}
-              className="relative z-10 flex size-10 shrink-0 items-center justify-center overflow-visible rounded-xl bg-[#123c24] p-0 text-white shadow-sm transition-all duration-200 hover:bg-[#0f3f24] hover:text-white active:scale-[0.96] aria-expanded:bg-[#123c24] aria-expanded:text-white [&_svg]:relative [&_svg]:z-10 [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:text-white [&_svg]:stroke-white"
+              className="relative z-10 flex size-10 shrink-0 items-center justify-center overflow-visible rounded-xl bg-brand-charcoal p-0 text-white shadow-sm transition-all duration-200 hover:bg-brand-charcoal-deep hover:text-white active:scale-[0.96] aria-expanded:bg-brand-charcoal aria-expanded:text-white [&_svg]:relative [&_svg]:z-10 [&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:text-white [&_svg]:stroke-white"
             >
               <Menu className="size-5 text-white stroke-white stroke-[2.5]" aria-hidden="true" />
             </Button>
@@ -587,12 +587,12 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
           <div
             className="absolute top-full left-0 right-0 z-50 w-full max-h-[calc(100dvh-var(--ds-layout-navbar-h)-1rem)] overflow-y-auto overscroll-contain px-ds-page-x pt-3 pb-[calc(1rem+var(--ds-safe-area-bottom))] lg:hidden"
           >
-            <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "w-full rounded-ds-card-lg bg-[#f8fcf8] px-5 py-5")}>
+            <div className={cn(cardSurfaceVariants({ variant: "elevated" }), "w-full rounded-ds-card-lg bg-white px-5 py-5")}>
               <div className="flex flex-col gap-3">
                 <div className="mb-1 flex items-center justify-between px-1">
                   <Link href="/#home" className={logoLinkClassName} onClick={handleLogoClick}>
                     <Image
-                      src="/logo-white.png"
+                      src="/GDK_LOGO.jpg"
                       alt="GDK Packaging"
                       width={220}
                       height={60}
@@ -603,7 +603,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                     type="button"
                     onClick={closeMobileMenu}
                     aria-label="Close menu"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#123c24] shadow-sm hover:bg-[#0f3f24]"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-charcoal shadow-sm hover:bg-brand-charcoal-deep"
                   >
                     <X className="h-5 w-5 text-white stroke-[2.5]" />
                   </button>
@@ -627,9 +627,9 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                             aria-expanded={isMobileAboutOpen}
                             className={cn(
                               "flex w-full items-center justify-between rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
-                              "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
+                              "text-ds-text-muted hover:border-ds-border-subtle hover:bg-[color-mix(in_srgb,var(--brand-accent)_8%,white)] hover:text-brand-accent",
                               isActive &&
-                              "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
+                              "border-ds-border-subtle bg-[color-mix(in_srgb,var(--brand-accent)_12%,white)] text-brand-accent shadow-sm"
                             )}
                             onClick={() => setIsMobileAboutOpen((previous) => !previous)}
                           >
@@ -650,7 +650,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                               <div
                                 className={cn(
                                   "space-y-1.5 rounded-xl border p-2.5",
-                                  "border-[#d5ead8] bg-[#f2faf3]"
+                                  "border-ds-border-subtle bg-muted"
                                 )}
                               >
                                 {aboutMegaCards.map((card) => (
@@ -659,7 +659,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                     href={card.href}
                                     className={cn(
                                       "block rounded-lg px-3 py-2.5 text-xs font-medium transition-colors duration-200",
-                                      "text-[#24583a] hover:bg-white hover:text-[#0f3f24]"
+                                      "text-ds-text-muted hover:bg-white hover:text-brand-accent"
                                     )}
                                     onClick={() => {
                                       setActiveSection("about");
@@ -680,9 +680,9 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                             aria-expanded={isMobileProductsOpen}
                             className={cn(
                               "flex w-full items-center justify-between rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
-                              "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
+                              "text-ds-text-muted hover:border-ds-border-subtle hover:bg-[color-mix(in_srgb,var(--brand-accent)_8%,white)] hover:text-brand-accent",
                               isActive &&
-                              "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
+                              "border-ds-border-subtle bg-[color-mix(in_srgb,var(--brand-accent)_12%,white)] text-brand-accent shadow-sm"
                             )}
                             onClick={() => setIsMobileProductsOpen((previous) => !previous)}
                           >
@@ -705,7 +705,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                               <div
                                 className={cn(
                                   "space-y-2.5 rounded-xl border p-2.5",
-                                  "border-[#d5ead8] bg-[#f2faf3]"
+                                  "border-ds-border-subtle bg-muted"
                                 )}
                               >
                                 {PRODUCT_MEGA_MENU_CATEGORIES.map((category) => {
@@ -715,15 +715,15 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                       key={category.key}
                                       className={cn(
                                         "rounded-lg border transition-colors duration-200",
-                                        "border-[#d5ead8] bg-white"
+                                        "border-ds-border-subtle bg-white"
                                       )}
                                     >
                                       <button
                                         type="button"
                                         className={cn(
                                           "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-xs font-medium transition-colors duration-200",
-                                          "text-[#24583a] hover:bg-[#edf7ee] hover:text-[#0f3f24]",
-                                          isCategoryOpen && "bg-[#edf7ee] text-[#0f3f24]"
+                                          "text-ds-text-muted hover:bg-accent hover:text-brand-accent",
+                                          isCategoryOpen && "bg-accent text-brand-accent"
                                         )}
                                         onClick={() =>
                                           setActiveMobileProductKey((previous) =>
@@ -753,7 +753,7 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                                               href={product.href}
                                               className={cn(
                                                 "block rounded-md px-2.5 py-2 text-xs font-medium transition-colors duration-200",
-                                                "text-[#406f51] hover:bg-[#edf7ee] hover:text-[#0f3f24]"
+                                                "text-ds-text-muted hover:bg-accent hover:text-brand-accent"
                                               )}
                                               onClick={() => {
                                                 setActiveSection("products");
@@ -778,9 +778,9 @@ export function Navbar({ homeVariant = false }: NavbarProps) {
                           aria-current={isActive ? "page" : undefined}
                           className={cn(
                             "block rounded-full border border-transparent px-4 py-2.5 text-sm font-medium tracking-[0.02em] transition-[background-color,border-color,box-shadow,color] duration-200",
-                            "text-[#24583a] hover:border-white/40 hover:bg-white/55 hover:text-[#0f3f24]",
+                            "text-ds-text-muted hover:border-ds-border-subtle hover:bg-[color-mix(in_srgb,var(--brand-accent)_8%,white)] hover:text-brand-accent",
                             isActive &&
-                            "border-white/40 bg-white/70 text-[#0f3f24] shadow-sm"
+                            "border-ds-border-subtle bg-[color-mix(in_srgb,var(--brand-accent)_12%,white)] text-brand-accent shadow-sm"
                           )}
                           onClick={() => {
                             setActiveSection(link.hash.replace("#", ""));

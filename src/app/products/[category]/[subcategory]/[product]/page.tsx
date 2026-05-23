@@ -10,6 +10,8 @@ import { ProductHero } from "@/components/products/ProductHero";
 import { RelatedProducts } from "@/components/products/RelatedProducts";
 import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
 import { getNavigationProductDetailMatch, NAVIGATION_CATEGORIES } from "@/lib/catalog";
+import { ProductDimensionCatalog } from "@/components/products/ProductDimensionCatalog";
+import { getCatalogCategoriesForProductSlug } from "@/lib/data/product-catalog";
 import { getProductBySlug, getRelatedProducts } from "@/lib/products-data";
 
 type ProductDetailsPageProps = {
@@ -79,6 +81,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
   }
 
   const relatedProducts = getRelatedProducts(productData.slug);
+  const catalogCategories = getCatalogCategoriesForProductSlug(productData.slug);
   const enquiryItem = {
     id: productData.id,
     slug: productData.slug,
@@ -129,6 +132,14 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
           ))}
         </div>
       </section>
+
+      {catalogCategories.length > 0 ? (
+        <ProductDimensionCatalog
+          categories={catalogCategories}
+          title="Available sizes"
+          description="Standard dimensions for this product line. Share your volume and application for MOQ and custom options."
+        />
+      ) : null}
 
       <section aria-labelledby="product-specifications" className="space-y-5">
         <h2 id="product-specifications" className="text-h3 text-ds-text-strong">

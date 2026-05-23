@@ -19,7 +19,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const BUSINESS_ADDRESS =
-  "J-18,19, Panki Site 3, Industrial Estate, Uttar Pradesh 208022";
+  "Plot 3 & 4, Block E, Ispat Nagar, Kanpur, Uttar Pradesh 208020";
 const MAPS_QUERY = encodeURIComponent(BUSINESS_ADDRESS);
 
 type ContactRow =
@@ -44,7 +44,6 @@ const contactRows: ContactRow[] = [
   {
     title: "Email",
     emailLines: [
-      { href: "mailto:kbropes@gdk.co.in", text: "kbropes@gdk.co.in" },
       { href: "mailto:info@gdk.co.in", text: "info@gdk.co.in" },
     ],
     icon: Mail,
@@ -52,7 +51,6 @@ const contactRows: ContactRow[] = [
   {
     title: "Phone",
     phoneLines: [
-      { href: "tel:+919889271007", text: "+91 98892 71007" },
       { href: "tel:+919889982333", text: "+91 98899 82333" },
     ],
     icon: Phone,
