@@ -42,7 +42,7 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 const BUSINESS_ADDRESS =
-  "J-18,19, Panki Site 3, Industrial Estate, Uttar Pradesh 208022";
+  "Plot 3 & 4, Block E, Ispat Nagar, Kanpur, Uttar Pradesh 208020";
 const MAPS_QUERY = encodeURIComponent(BUSINESS_ADDRESS);
 
 const contactFieldBase = cn(
@@ -205,12 +205,7 @@ export default function ContactPageClient({
                 <div className="flex min-w-0 flex-col gap-1.5">
                   <p className="text-base font-semibold text-ds-text-muted">Email</p>
                   <div className="flex flex-col gap-1.5">
-                    <a
-                      href="mailto:kbropes@gdk.co.in"
-                      className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
-                    >
-                      kbropes@gdk.co.in
-                    </a>
+                 
                     <a
                       href="mailto:info@gdk.co.in"
                       className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
@@ -228,12 +223,7 @@ export default function ContactPageClient({
                 <div className="flex min-w-0 flex-col gap-1.5">
                   <p className="text-base font-semibold text-ds-text-muted">Phone</p>
                   <div className="flex flex-col gap-1.5">
-                    <a
-                      href="tel:+919889271007"
-                      className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
-                    >
-                      +91 98892 71007
-                    </a>
+                   
                     <a
                       href="tel:+919889982333"
                       className="block wrap-break-word text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
@@ -256,7 +246,6 @@ export default function ContactPageClient({
                     rel="noreferrer"
                     className="text-sm leading-6 text-ds-text-strong transition-colors duration-200 ease-out hover:text-(--primary) sm:text-base"
                   >
-                    GDK Packaging Pvt. Ltd.
                     <br />
                     {BUSINESS_ADDRESS}
                   </a>
