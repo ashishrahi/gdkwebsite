@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer id="site-footer" className="w-full shrink-0 bg-brand-green-deep">
+    <footer id="site-footer" className="w-full shrink-0 bg-[#1F1F1F]">
 
       {/* TOP STRIP */}
       <div className="border-y border-ds-border-subtle bg-background text-foreground">
@@ -27,10 +27,10 @@ export function Footer() {
 
 
       {/* BLACK HERO SECTION */}
-      <div className="relative overflow-hidden bg-[radial-gradient(circle_at_82%_45%,color-mix(in_srgb,var(--brand-blue-500)_16%,transparent),transparent_34%),linear-gradient(135deg,var(--brand-green-950),var(--brand-green-900))] text-white">
+      <div className="relative overflow-hidden bg-[#1F1F1F] text-white">
 
-        {/* GLOW */}
-        <div className="pointer-events-none absolute top-1/2 right-[18%] z-0 size-[min(70vw,420px)] -translate-y-1/2 rounded-full bg-[color-mix(in_srgb,var(--brand-orange-500)_12%,transparent)] blur-[120px]" />
+        {/* GLOW — subtle cyan only, behind heading area */}
+        <div className="pointer-events-none absolute top-1/2 right-[18%] z-0 size-[min(70vw,420px)] -translate-y-1/2 rounded-full bg-[rgba(0,173,239,0.08)] blur-[120px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-ds-page-x py-10 sm:py-12">
 
@@ -38,26 +38,26 @@ export function Footer() {
 
             {/* LOGO */}
             <div className="flex flex-col gap-4">
-              <div className="inline-flex w-fit overflow-hidden rounded-ds-card border border-ds-border-subtle bg-white shadow-ds-card-subtle">
+              <div className="inline-flex w-fit overflow-hidden rounded-ds-card border border-[rgba(0,173,239,0.14)]  shadow-[0_2px_10px_rgb(31_31_31/0.14)]">
                 <div className="overflow-hidden rounded-ds-card [&_img]:block [&_img]:rounded-ds-card [&_img]:object-contain [&_span]:block [&_span]:overflow-hidden [&_span]:rounded-ds-card">
                   <Image
-                    src="/GDK_LOGO.jpg"   
-                    alt="GDK Packaging"
-                    width={250}
-                    height={170}
+                    src="/GDK_LOGO-Footer.png"   
+                    alt="GDK Solutions"
+                    width={350}
+                    height={245}
                     className="h-auto w-45 sm:w-55 md:w-62.5"
                   />
                 </div>
               </div>
-              <p className="max-w-[56ch] text-body-sm font-medium text-white/72 sm:text-body">
+              <p className="max-w-[56ch] text-body-sm font-medium text-[#D9D9D9] sm:text-body">
                 From Concept to Solution.{" "}
-                <span className="text-(--brand-orange-500)">With Sustainability Built In.</span>
+                <span className="text-[#F58220]">With Sustainability Built In.</span>
               </p>
             </div>
 
             {/* TEXT */}
             <div className="flex flex-1 justify-start md:justify-end lg:mt-10">
-              <h2 className="relative z-20 text-left font-light text-white drop-shadow-[0_2px_10px_color-mix(in_srgb,white_20%,transparent)] md:text-right">
+              <h2 className="relative z-20 text-left font-light text-white drop-shadow-[0_2px_10px_rgb(31_31_31/0.35)] md:text-right">
 
                 <span className="block text-[clamp(2rem,10vw,4.5rem)] leading-tight">
                   EXECUTIVE EXCELLENCE
@@ -72,7 +72,7 @@ export function Footer() {
           </div>
 
           {/* BOTTOM */}
-          <div className="mt-12 flex flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 md:flex-row md:items-center">
+          <div className="mt-12 flex flex-col items-start justify-between gap-6 border-t border-[rgba(0,173,239,0.14)] pt-8 md:flex-row md:items-center">
 
             {/* SOCIAL — links hidden; spacing preserved */}
             <div
@@ -81,8 +81,8 @@ export function Footer() {
             />
 
             {/* COPYRIGHT */}
-            <div className="text-sm text-white/80">
-              © 2026 GDK Packaging Pvt. Ltd.
+            <div className="text-sm text-[#A3A3A3]">
+              © 2026 GDK Solutions.
             </div>
 
           </div>
