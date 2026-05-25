@@ -10,6 +10,11 @@ import {
 import { cardSurfaceVariants } from "@/design-system/shadcn/card.variants";
 import { cn } from "@/lib/utils";
 
+const CLIENT_LOGO_EXTRA_PATHS = [
+  "/images/client/topntown.webp",
+  "/images/client/gyan.webp",
+] as const;
+
 function altFromPath(path: string): string {
   const base = path.split("/").pop()?.replace(/\.[^.]+$/, "") ?? "";
   return base.replace(/[-_]/g, " ").trim() || "Client logo";
@@ -19,7 +24,7 @@ function LogoTile({ src }: { src: string }) {
   return (
     <div
       className={cn(
-        "group flex h-30 w-56 shrink-0 items-center justify-center px-7 sm:h-34 sm:w-64 sm:px-9",
+        "group flex h-40 w-72 shrink-0 items-center justify-center px-8 sm:h-44 sm:w-80 sm:px-10 lg:h-48 lg:w-88 lg:px-12",
         cardSurfaceVariants({ variant: "minimal" }),
         "rounded-ds-card-lg"
       )}
@@ -29,9 +34,9 @@ function LogoTile({ src }: { src: string }) {
       <Image
         src={src}
         alt={altFromPath(src)}
-        width={180}
-        height={80}
-        className="max-h-16 w-auto object-contain opacity-80 transition-all duration-200 group-hover:opacity-100 sm:max-h-18"
+        width={288}
+        height={128}
+        className="max-h-24 w-auto object-contain opacity-80 transition-all duration-200 group-hover:opacity-100 sm:max-h-28 lg:max-h-32"
       />
     </div>
   );
@@ -49,7 +54,13 @@ export function ClienteleSection() {
       .catch(() => setPaths([]));
   }, []);
 
-  const loop = useMemo(() => [...paths, ...paths], [paths]);
+  const loop = useMemo(() => {
+    const merged = [
+      ...paths,
+      ...CLIENT_LOGO_EXTRA_PATHS.filter((p) => !paths.includes(p)),
+    ];
+    return [...merged, ...merged];
+  }, [paths]);
 
   if (loop.length === 0) return null;
 
