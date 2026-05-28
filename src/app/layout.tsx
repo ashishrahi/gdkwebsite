@@ -7,6 +7,7 @@ import { FloatingActions } from "@/components/layout/floating-actions";
 import { EnquiryModal } from "@/components/product/enquiry-modal";
 import { SiteShell } from "@/components/layout/site-shell";
 import { Toaster } from "@/components/ui/sonner";
+import Script from "next/script";
 import "./globals.css";
 
 const jost = Jost({
@@ -40,6 +41,31 @@ export default function RootLayout({
   return (
     <html lang="en" className={jost.variable}>
       <body className="scroll-smooth bg-background font-sans text-foreground antialiased">
+
+        <Script
+          id="attrackxn-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+      (function() {
+        window.ATX_CONFIG = {
+          apiKey: "atx_bWoBSVjSSMBA8lF-GT1b_U3nR3lOZg4qBJ_UsLqJOus",
+          pageId: "6a17fa5df2a47433bbb18b23",
+          apiUrl: "https://api.attrackxn.online"
+        };
+
+        var s = document.createElement('script');
+        s.src = "https://cdn.attrackxn.online/atx.js";
+        s.async = true;
+        document.head.appendChild(s);
+      })();
+    `,
+          }}
+        />
+
+
+
+
         <EnquiryProvider>
           <div className="flex min-h-dvh flex-col">
             <div className="flex-1">
